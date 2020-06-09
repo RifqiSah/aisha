@@ -1,0 +1,29 @@
+{
+  "name": "aisha",
+  "version": "3.0.0",
+  "description": "Aisha, Informate Community Private Discord BOT",
+  "main": "bot.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/bot.js"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "aisha",
+    "dragon",
+    "nest",
+    "informate"
+  ],
+  "author": "RifqiSah",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^14.0.12",
+    "@types/ws": "^7.2.5",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "discord.js": "^12.2.0"
+  }
+}
