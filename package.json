@@ -30,6 +30,7 @@
   "dependencies": {
     "apiai": "^4.0.3",
     "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
     "gh.js": "^3.1.0",
     "moment": "^2.26.0",
