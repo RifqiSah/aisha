@@ -1,4 +1,4 @@
-import { resolve } from "path";
+import { resolve } from 'path';
 import { readFileSync } from 'fs';
 
 function loadData(file: String) {

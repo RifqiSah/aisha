@@ -1,4 +1,4 @@
-import { resolve } from "path";
+import { resolve } from 'path';
 import { readdirSync } from 'fs';
 
 module.exports = (client: any) => {
