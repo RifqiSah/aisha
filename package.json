@@ -2,6 +2,9 @@
   "name": "aisha",
   "version": "3.0.0",
   "description": "Aisha, Informate Community Private Discord BOT",
+  "repository": {
+    "url": "https://github.com/RifqiSah/Aisha"
+  },
   "main": "bot.js",
   "scripts": {
     "build": "tsc",
