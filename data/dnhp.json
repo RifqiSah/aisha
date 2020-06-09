@@ -1,0 +1,70 @@
+[
+    {
+        "key": ["gdn", "green"],
+        "name": "Green Dragon Nest Time Attack",
+        "data": [
+            "Golem Morgon: __**372,104,320,000**__",
+            "White-eyed Krakes: __**996,708,000,000**__",
+            "Swam Queen Zabel: __**916,971,360,000**__",
+            "Sorcerer Karahan: __**2,392,099,200,000**__",
+            "Green Dragon Karahan (79%): __**8,970,372,000,000**__"
+        ]
+    },
+    {
+        "key": ["fdn", "forest"],
+        "name": "Forest Dragon Nest",
+        "data": [
+            "Grandmother Merigirion: __**3.55 Trillion**__",
+            "Hirendel's Young Tree Tourte: __**3.55 Trillion**__",
+            "Hirendel's Pet Mushroom Kayampa: __**3.55 Trillion**__",
+            "Vine Aux Monster: __**18.11 Trillion**__",
+            "Hireldel's Dancer Lamina: __**888 Billion**__",
+            "Hireldel's Dancer Laguna: __**889 Billion**__",
+            "Action Leader Wakanu: __**1.33 Trillion**__",
+            "Hirendel's Fallen Dediqus: __**1.01 Trillion**__",
+            "Ancient City Guardian Midir: __**1.99 Trillion**__",
+            "Forest Dragon Boss: __**36.23 Trillion**__\n",
+
+            "Total: __**71.13 Trillion**__"
+        ]
+    },
+    {
+        "key": ["bdn", "black"],
+        "name": "Black Dragon Nest Time Attack",
+        "data": [
+            "Centurion Ogre Baopar: __**2.9 Trillion**__",
+            "Engata General Umbala: __**7.67 Trillion**__",
+            "Black Ring Punisher Meluka: __**13.43 Trillion**__",
+            "Chiliarch Titanion: __**19.59 Trillion**__",
+            "Black Dragon Feder: __**69.98 Billion**__\n",
+
+            "Total: __**113 Trillion**__"
+        ]
+    },
+    {
+        "key": ["stg", "sunset"],
+        "name": "Sunset Training Ground",
+        "data": [
+            "Easy: Boss HP is **[399.708.160]** and minimum DPS is **[1.332.361]**",
+            "Normal: Boss HP is **[600.487.488]** and minimum DPS is **[2.001.625]**",
+            "Hard: Boss HP is **[800.341.568]** and minimum DPS is **[2.667.805]**",
+            "Master: Boss HP is **[1.000.194.648]** and minimum DPS is **[3.333.985]**",
+            "Abyss: Boss HP is **[1.200.049.792]** and minimum DPS is **[4.000.166]**",
+            "1F: Boss HP is **[2.035.550.848]** and minimum DPS is **[6.785.169]**",
+            "2F: Boss HP is **[3.377.163.776]** and minimum DPS is **[11.257.213]**",
+            "3F: Boss HP is **[6.358.320.642]** and minimum DPS is **[21.194.402]**",
+            "4F: Boss HP is **[11.972.739.072]** and minimum DPS is **[39.909.130]**",
+            "5F: Boss HP is **[22.547.425.280]** and minimum DPS is **[75.158.084]**",
+            "6F: Boss HP is **[42.464.366.592]** and minimum DPS is **[141.547.889]**",
+            "7F: Boss HP is **[79.980.494.848]** and minimum DPS is **[266.601.649]**",
+            "8F: Boss HP is **[150.643.703.909]** and minimum DPS is **[502.145.678]**",
+            "9F: Boss HP is **[283.742.797.824]** and minimum DPS is **[945.809.326]**",
+            "10F: Boss HP is **[534.442.213.376]** and minimum DPS is **[1.781.474.045]**",
+            "11F: Boss HP is **[1.006.649.212.928]** and minimum DPS is **[3.355.497.376]**",
+            "12F: Boss HP is **[1.895.519.617.026]** and minimum DPS is **[6.318.398.723]**",
+            "13F: Boss HP is **[3.569.263.050.752]** and minimum DPS is **[11.897.543.503]**",
+            "14F: Boss HP is **[6.720.922.320.896]** and minimum DPS is **[22.403.074.403]**",
+            "15F: Boss HP is **[12.655.496.527.872]** and minimum DPS is **[42.184.988.426]**"
+        ]
+    }
+]

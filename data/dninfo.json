@@ -1,0 +1,120 @@
+[
+    {
+        "key": ["mq", "main quest", "cp"],
+        "name": "Main Quest / Crystal Point",
+        "data": [
+            "https://cdn.discordapp.com/attachments/432903741029613569/560061874406686721/unknown.png"
+        ]
+    },
+    {
+        "key": ["sunset", "cloister"],
+        "name": "Sunset Cloister Drop",
+        "data": [
+            "https://i.imgur.com/pJYQs7j.png"
+        ]
+    },
+    {
+        "key": ["hero talisman", "epic talisman"],
+        "name": "Epic Hero Talisman Stats + Reroll Chance",
+        "data": [
+            "Sealed Hero Talisman from Nightmare Labyrinth will give Random lv1 to lv10 Stat",
+            "2nd Stat is Not Possible for Epic Hero Talisman",
+            "\nhttps://i.imgur.com/JxaRyuC.png",
+            "\nFor Nightmare Box rate, see `.rate nm box` command."
+        ]
+    },
+    {
+        "key": ["goddess heraldry"],
+        "name": "Goddess Heraldry",
+        "data": [
+            "`Warrior`: https://cdn.discordapp.com/attachments/690593970891259935/690595171871490098/unknown.png",
+            "`Archer`: https://cdn.discordapp.com/attachments/690593970891259935/690595462545145886/unknown.png",
+            "`Sorceress`: https://cdn.discordapp.com/attachments/690593970891259935/690595569156227112/unknown.png",
+            "`Cleric`: https://cdn.discordapp.com/attachments/690593970891259935/690595636898299934/unknown.png",
+            "`Academic`: https://cdn.discordapp.com/attachments/690593970891259935/690595781723291688/unknown.png",
+            "`Kali`: https://cdn.discordapp.com/attachments/690593970891259935/690595899721646140/unknown.png",
+            "`Assassin`: https://cdn.discordapp.com/attachments/690593970891259935/690596141368082462/unknown.png",
+            "`Lancea`: https://cdn.discordapp.com/attachments/690593970891259935/690596304023322744/unknown.png",
+            "`Machina`: https://cdn.discordapp.com/attachments/690593970891259935/690596367525085204/unknown.png",
+
+            "\nDamage Increase and chance rate for classes with three (3) types of heraldry",
+            "<https://media.discordapp.net/attachments/690593970891259935/690596760447352882/unknown.png>",
+
+            "\nDamage Increase and chance rate for classes with four (4) types of heraldry",
+            "<https://media.discordapp.net/attachments/690593970891259935/690596907319427112/unknown.png>",
+
+            "\nDamage Increase and chance rate for classes with five (5) types of heraldry",
+            "<https://media.discordapp.net/attachments/690593970891259935/690597010859884544/unknown.png>"
+        ]
+    },
+    {
+        "key": ["nest debuff"],
+        "name": "Nest Debuff",
+        "data": [
+            "https://media.discordapp.net/attachments/580444014218838041/713316309936504862/unknown_2.png"
+        ]
+    },
+    {
+        "key": ["raid recom", "raid recommendation"],
+        "name": "Rekomendasi Raid",
+        "data": [
+            "https://cdn.discordapp.com/attachments/580444014218838041/713034595553116241/unknown_1.png"
+        ]
+    },
+    {
+        "key": ["hero skill"],
+        "name": "Hero Skill",
+        "data": [
+            "Hero Skills akan diperkenalkan untuk semua class pada update bulan Juni Dragon Nest Korea",
+            "Pemain yang mencapai **hero level 2000** akan mendapatkan **quest baru untuk membuka Hero Skill**.",
+            "Info selanjutnya akan tersedia minggu depan\n",
+
+            "Preview untuk Hero Skill dan gaugenya",
+            "_Didapatkan dari video Anniversary ke-10 Dragon Nest China_",
+            "https://media.discordapp.net/attachments/717286245960515675/717287548359147530/unknown.png",
+
+            "\nWarrior Hero Skills",
+            "https://i.imgur.com/MiI27M4.png",
+
+            "\nArcher Hero Skills",
+            "https://i.imgur.com/3hgcMsg.png",
+
+            "\nSorceress Hero Skills",
+            "https://i.imgur.com/OHOp1mo.png",
+
+            "\nCleric Hero Skills",
+            "https://i.imgur.com/Fw9JcHe.png",
+
+            "\nAcademic Hero Skills",
+            "https://i.imgur.com/3JarsHT.png",
+
+            "\nKali Hero Skills",
+            "https://i.imgur.com/F7dweJN.png",
+
+            "\nAssassin Hero Skills",
+            "https://i.imgur.com/uuAHkO5.png",
+
+            "\nLancea Hero Skills",
+            "https://i.imgur.com/jBOErcj.png",
+
+            "\nMachina Hero Skills",
+            "https://i.imgur.com/c23Fmnv.png"
+        ]
+    },
+    {
+        "key": ["battlefield", "fb"],
+        "name": "Fierce Battle Heraldry - Additional Stats ",
+        "data": [
+            "Tier 1 Stats",
+            "https://i.imgur.com/rhdrAyz.png",
+
+            "\nTier 2 Stats",
+            "https://i.imgur.com/QYkcclQ.png",
+
+            "\nTier 3 Stats",
+            "https://i.imgur.com/43ReFRa.png",
+
+            "\nFor enhance rate, see `.rate battlefield` command!"
+        ]
+    }
+]

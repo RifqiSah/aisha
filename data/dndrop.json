@@ -1,0 +1,143 @@
+[
+    {
+        "key": ["lapis"],
+        "name": "Lapis",
+        "data": [
+            "__**Lapis drop pada Nightmare**__",
+            "**F1** = 3-4 items",
+            "**F2** = 3-4 items",
+            "**F3** = 3-4 items",
+            "**F4** = 3-4 items",
+            "**F5** = 3-4 items",
+            "**F6** = 3-4 items",
+            "**F7** = 4-5 items",
+            "**F8** = 4-5 items",
+            "**F9** = 5-6 items",
+            "**F10** = 5-6 items",
+            "**F11** = 6-7 items",
+            "**F12** = 7-8 items",
+            "**F13** = 8-9 items",
+            "**F14** = 9-10 items",
+            "**F15** = 10-11 items",
+            "**F16** = 11-12 items",
+            "**F17** = 12-13 items"
+        ]
+    },
+    {
+        "key": ["fishing", "mancing"],
+        "name": "Mancing",
+        "data": [
+            "Red Bass = 7.7%",
+            "Hermalte Trout = 7.7%",
+            "Brown Striped Salmon = 7.7%",
+            "Rough Rock Grouper = 7.7%",
+            "Freshwater Sweet fish = 7.7%",
+            "Black Swamp Snake head = 7.7%",
+            "Gizzard Shard = 7.7%\n",
+
+            "Golden Carp = 5.91%",
+            "Rainbow Trout = 5.91%",
+            "Rosy Bitterling = 5.91%",
+            "Catfish = 5.91%",
+            "Mudskipper = 5.91%\n",
+
+            "Lamprey = 0.04%",
+            "Arowana = 0.04%\n",
+
+            "Antique Common Pouch = 17% ",
+            "Magical Rainbow Goldfish = 0.0044%"
+        ]
+    },
+    {
+        "key": ["seafishing", "eventmancing"],
+        "name": "Sea Fishing",
+        "data": [
+            "Shrimp = 22.5%",
+            "Webfoot Octopus = 22.5%",
+            "Lobster = 3.75%",
+            "Anemone Fish = 11.8%",
+            "Butterfly Fish = 11.8%",
+            "Fugu = 11.3%",
+            "Octopus = 3%",
+            "Turtle = 3%",
+            "Stingray = 2.6%",
+            "Halibut = 2.6%",
+            "Snapper = 2.6%",
+            "Deep sea Fish = 1.1%",
+            "Tuna = 0.8% ",
+            "Whale = 0.2%",
+            "Shark = 0.25%",
+            "Sea Fishing Pouch = 3%",
+            "Rare Top Mimi Octopus = 3%\n",
+
+            "Shrimp up to Deep Sea Fish have 10 Different Sizes",
+            "Tune, Whale and Shark have 20 Different Sizes"
+        ]
+    },
+    {
+        "key": ["nm", "nightmare", "epic talisman", "hero talisman"],
+        "name": "Nightmare",
+        "data": [
+            "`Nightmare Silver & Gold Chest Selection`: https://media.discordapp.net/attachments/580444014218838041/713316510214520832/unknown_1.png"
+        ]
+    },
+    {
+        "key": ["mino", "minos"],
+        "name": "Minos Equipment",
+        "data": [
+            "**F14**: 2% => 0.5% for each part",
+            "**F15**: 4% => 0.8% for each part",
+            "**F16**: 8% => 1.6% for each part",
+            "**F17**: 16% => 3.2% for each part",
+            "\n__**For Minos Fragments and enhance rate using `.rate minos`.**__"
+        ]
+    },
+    {
+        "key": ["bmj", "mj", "blood moon"],
+        "name": "Blood Moon Jade",
+        "data": [
+            "https://i.imgur.com/DQlUDfG.png"
+        ]
+    },
+    {
+        "key": ["fdn"],
+        "name": "Forest Dragon Nest Normal",
+        "data": [
+            "https://i.imgur.com/oOwNCAl.png"
+        ]
+    },
+    {
+        "key": ["bdn", "bdnta"],
+        "name": "Black Dragon Nest Time Attack",
+        "data": [
+            "https://i.imgur.com/57MMeqD.png"
+        ]
+    },
+    {
+        "key": ["gust", "gudn"],
+        "name": "Gust Dragon Nest",
+        "data": [
+            "https://i.imgur.com/ecBaCoc.png"
+        ]
+    },
+    {
+        "key": ["fdn hc"],
+        "name": "Forest Dragon Nest Hardcore",
+        "data": [
+            "https://i.imgur.com/gGiR2iu.png"
+        ]
+    },
+    {
+        "key": ["ddn", "ddnta"],
+        "name": "Desert Dragon Nest Time Attack",
+        "data": [
+            "- No FFA loots / No Accessory Drops",
+            "- Use Sandstone to Buy Accessory or Get lucky Accessory box from Gold Chest",
+            "https://i.imgur.com/9PKtjRC.png",
+            "\nDDN Accessories & Stats ",
+            "https://i.imgur.com/084top6.png",
+            "\nDDN Shop at Riverwort Wharf",
+            "https://i.imgur.com/EAFq7g2.jpg"
+        ]
+    }
+]

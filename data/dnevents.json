@@ -1,0 +1,27 @@
+[
+    {
+        "dates": ["01/01/2020"],
+        "times": ["12:00:00"],
+        "activity": [
+            "TODO"
+        ],
+        "reward_1": [
+            "TODO (1pc)"
+        ],
+        "reward_2": [
+            "TODO (1pc)"
+        ],
+        "reward_3": [
+            "TODO (1pc)"
+        ],
+        "reward_4": [
+            "TODO (1pc)"
+        ],
+        "reward_5": [
+            "TODO (1pc)"
+        ],
+        "reward_6": [
+            "TODO (1pc)"
+        ]
+    }
+]
