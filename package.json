@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/bot.js",
-    "bot": "npm run build && npm run start"
+    "bot": "npm run build && npm run start",
+    "log": "heroku logs -a aisha-bot -t"
   },
   "keywords": [
     "discord",
