@@ -2,7 +2,7 @@ import './env';
 
 export default class Config {
     static ENABLE: Boolean = true;
-    static VERSION: String = 'v2.0.4';
+    static VERSION: String = 'v2.1.6';
     static PREFIX: String = '.';
     static OWNER: String = '306616861456465924';
 
