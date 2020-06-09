@@ -1,25 +1,49 @@
-import "./lib/env";
-import { Client } from 'discord.js';
+import { Client, Collection, MessageEmbed } from 'discord.js';
+import apiai from 'apiai';
 
-const client = new Client();
+import config from './lib/config';
+import db from './lib/database';
 
-const prefix = '%';
-const token = process.env.TOKEN;
+// public init
+console.log('[-] Initialize varible');
+const client = {
+    // General
+    bot: new Client({ partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'] }),
+    embed: new MessageEmbed(),
+    apiai: apiai(`${config.TOKEN_APIAI}`),
+    config: config,
 
-client.on('ready', () => {
-  client.user?.setActivity('Typescript BOT');
+    // Services
+    chsvc: require('./database/services/channel.service'),
+
+    // Params
+    cmdcd: new Set(),
+    cmds: new Collection(),
+    cmdsalias: new Collection(),
+    cmdsregex: new Collection(),
+};
+
+// Connect ke database
+db.connect();
+console.info('[V] Done!');
+
+// cek status bot
+console.log('[-] Checking Bot status');
+if (!client.config.ENABLE) {
+    console.error('[X] Bot is disabled!');
+    process.exit(1);
+} else {
+    client.bot.login(client.config.TOKEN); // Loginkan!
+}
+
+console.info('[V] Bot active!');
+
+// init event handler
+console.log('[-] Initialize handler');
+['commands', 'events', 'console'].forEach((x) => {
+    console.log(` [O] ${x} handler`);
+    require(`./handlers/${x}`)(client);
 });
 
-client.on('message', async (message) => {
-  if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
-
-  const args = message.content.slice(prefix.length).trim().split(/ +/g);
-  const command = args.shift()?.toLowerCase();
-
-  if (command === 'ping') {
-    message.channel.send('Pong from Typescript!');
-  }
-});
-
-client.login(token);
+console.log('[V] Done!');
+console.log('[V] Aisha is ready to start!');
