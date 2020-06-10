@@ -10,7 +10,6 @@ module.exports = {
     aliases: ['h'],
     usage: '[nama command]',
     cooldown: 0,
-    // eslint-disable-next-line consistent-return
     func: (client: any, message: any, args: any) => {
         const data = [];
         const dev = funct.isDeveloper(message.member) && (args.length ? args[0].toLowerCase().match('dev') : false);
@@ -24,9 +23,8 @@ module.exports = {
             data.push(`\nAnda dapat menggunakan \`${client.config.PREFIX}help [nama command]\` untuk mendapatkan informasi dari command tersebut.`);
         } else {
             const name = args[0].toLowerCase();
-
-            // eslint-disable-next-line max-len
             const command = client.cmds.get(name) || client.cmds.get(client.cmdsalias.get(name));
+            
             if (!command) return message.reply('Command tidak valid!');
 
             data.push(`Informasi mengenai command \`${command.name}\`:\n`);

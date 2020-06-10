@@ -16,7 +16,6 @@ module.exports = async (client: any, message: any) => {
         });
 
         // Error listener
-        // eslint-disable-next-line no-unused-vars
         request.on('error', (error: any) => {
             message.reply('Oops! Aku pusing :(');
         });
@@ -33,7 +32,6 @@ module.exports = async (client: any, message: any) => {
         if (user.presence.status === 'dnd') return `**${user.tag}** sedang tidak dapat diganggu.`;
     });
 
-    // eslint-disable-next-line max-len
     if (users.length > 0) message.channel.send(users).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch();
     // == Akhir pengecekan user ==
 
@@ -56,7 +54,6 @@ module.exports = async (client: any, message: any) => {
     if (message.content.indexOf(client.config.PREFIX) !== 0) {
         // Apakah ada di regex?
         regex = message.content.match(client.regexList);
-        // eslint-disable-next-line prefer-destructuring
         if (regex) command = regex[0]; // Isi command dengan hasil regexnya
         else return; // Jika tidak selesaikan
     } else {
@@ -72,13 +69,11 @@ module.exports = async (client: any, message: any) => {
     }
 
     // == Awal command manager ==
-    // eslint-disable-next-line max-len
     const commandfile = client.cmds.get(command) || client.cmds.get(client.cmdsalias.get(command)); // Cari file command yang ditunjuk
     if (commandfile) {
         // Cek apakah command ada cooldownnya
         if (commandfile.cooldown > 0) {
             // Cek dulu apakah user sudah menjalankan command sebelumnya?
-            // eslint-disable-next-line consistent-return
             if (client.cmdcd.has(message.author.id)) return message.reply(`Anda harus menunggu selama \`${commandfile.cooldown} detik\` sebelum menggunakan command \`${commandfile.name}\` kembali!`).then((msg: any) => { msg.delete({ timeout: 10000 }); }).catch();
 
             // Kalau tidak

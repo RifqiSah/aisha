@@ -33,7 +33,6 @@ module.exports = {
             socket.destroy();
         });
 
-        // eslint-disable-next-line no-unused-vars
         socket.on('error', (err) => {
             ret.push(`${dns.name} server is DOWN!`);
         });

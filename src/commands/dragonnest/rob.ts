@@ -14,7 +14,6 @@ module.exports = {
     aliases: [],
     usage: '',
     cooldown: 0,
-    // eslint-disable-next-line no-unused-vars
     func: async (client: any, message: any, args: any) => {
         const data: any = [];
         const msgs = await message.channel.send('Megambil data ...');

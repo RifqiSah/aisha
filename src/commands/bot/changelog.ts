@@ -12,11 +12,10 @@ module.exports = {
     cooldown: 0,
     func: async (client: any, message: any, args: any) => {
         const data = [];
+        const gh = new Github('');
 
         data.push(`__**Version ${client.config.VERSION} Changelog**__\n`);
-
-        const gh = new Github('');
-        // eslint-disable-next-line consistent-return
+        
         await gh.get('repos/RifqiSah/Aisha/commits?per_page=10', (err: any, res: any) => {
             if (err) { return data.push(err); }
 

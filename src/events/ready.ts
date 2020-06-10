@@ -19,7 +19,6 @@ module.exports = (client: any) => {
 
     setInterval(() => {
         // bot.user.setStatus('dnd');
-        // eslint-disable-next-line max-len
         client.bot.user.setActivity(activitiesList[Math.floor(Math.random() * activitiesList.length)]/* , { type: "WATCHING" } */);
     }, 10000);
 

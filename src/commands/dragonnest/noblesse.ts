@@ -21,7 +21,6 @@ module.exports = {
         const msgs = await message.channel.send('Megambil data ...');
 
         await get('https://alriftech.com/api/v2/bot/aisha/nb')
-            // eslint-disable-next-line consistent-return
             .then((res) => {
                 const nbdata = JSON.parse(res.text);
 

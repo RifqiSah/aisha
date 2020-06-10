@@ -10,7 +10,6 @@ module.exports = {
     aliases: [],
     usage: '',
     cooldown: 0,
-    // eslint-disable-next-line consistent-return
     func: (client: any, message: any, args: any) => {
         if (!args.length) return message.reply('Kamu tidak memasukan nama role!');
 
