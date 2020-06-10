@@ -6,7 +6,7 @@ module.exports = async (client: any, message: any) => {
         const text = message.content;
 
         // Parse text ke DialogFlow
-        const request = client.apiAI.textRequest(text, {
+        const request = client.apiai.textRequest(text, {
             sessionId: 'aisha-api-ai-session',
         });
 
