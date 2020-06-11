@@ -8,15 +8,23 @@ on:
 
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Code format check
+        run: cd $GITHUB_WORKSPACE
+        run: npm install
+        run: npm run lint
+
   build:
+    needs: ['lint']
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Run build script
-      run: |
-        cd $GITHUB_WORKSPACE
-        npm install
-        npm run lint
-        npm run build
+    - name: Start build
+      run: npm run build
