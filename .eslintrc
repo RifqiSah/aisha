@@ -62,7 +62,7 @@
         "max-len": [
             "error",
             {
-                "code": 150
+                "code": 300
             }
         ],
         "object-curly-spacing": [
@@ -83,6 +83,8 @@
             "error",
             "single",
             "avoid-escape"
-        ]
+        ],
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-var-requires": "off"
     }
 }
