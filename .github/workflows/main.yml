@@ -1,4 +1,4 @@
-name: CI
+name: Aisha CI
 
 on:
   push:
@@ -28,4 +28,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Start build
-      run: npm run build
+      run: |
+        cd $GITHUB_WORKSPACE
+        npm install
+        npm run build
