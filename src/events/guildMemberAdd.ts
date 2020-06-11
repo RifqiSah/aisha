@@ -1,7 +1,7 @@
 import funct from '../lib/function';
 
 module.exports = (client: any, member: any) => {
-    const channel = member.guild.channels.find((ch: any) => ch.id === '337424516362010625'); // Out-Off Topic
+    const channel = member.guild.channels.cache.find((ch: any) => ch.id === '337424516362010625'); // Out-Off Topic
     if (!channel) return;
 
     member.user.send('Terima kasih telah bergabung kedalam Discord milik Informate Squad 😃\nSilahkan membaca channel ``#peraturan`` terlebih dahulu sebelum memulai aktifitas didalam server Discord milik Informate Squad.\n\nTerima kasih 😃');
@@ -18,5 +18,5 @@ module.exports = (client: any, member: any) => {
     data.push(`\`${member.user.id}\` ${member.user.tag}`);
     data.push(`<${member.user.avatarURL()}>`);
 
-    member.guild.channels.find((ch: any) => ch.id === '496220491988729856').send(data, { split: true }); // member-log-1
+    member.guild.channels.cache.find((ch: any) => ch.id === '496220491988729856').send(data, { split: true }); // log-aisha
 };

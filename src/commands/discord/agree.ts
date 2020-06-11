@@ -9,7 +9,7 @@ module.exports = {
     usage: '',
     cooldown: 0,
     func: (client: any, message: any, args: any) => {
-        const channel = message.guild.channels.find((ch: any) => ch.id === '652149362423627787'); // member-agreement
+        const channel = message.guild.channels.cache.find((ch: any) => ch.id === '652149362423627787'); // member-agreement
         if (!channel) return;
 
         channel.send(`\`${message.author.tag}\` telah menyetujui peraturan!`);
