@@ -1,10 +1,10 @@
-import { resolve } from 'path';
 import { readdirSync } from 'fs';
+import { resolve } from 'path';
 
 module.exports = (client: any) => {
     console.log('  [-] Initialize events');
     const load = () => {
-        const events = readdirSync(resolve(__dirname, "../events")).filter((f) => f.endsWith('.js'));
+        const events = readdirSync(resolve(__dirname, '../events')).filter((f) => f.endsWith('.js'));
         
         for (const file of events) {
             const evt = require(resolve(__dirname, `../events/${file}`));

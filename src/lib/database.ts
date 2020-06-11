@@ -11,7 +11,7 @@ if (!config.MONGODB) {
 
 // Connect
 export default class Database {
-    static connect() {
+    static connect(): void {
         mongoose.connect(`${config.MONGODB}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
             .then(() => {
                 console.log('[V] Database connected!');
@@ -19,5 +19,5 @@ export default class Database {
                 console.log(`[X] Database error with: ${err}!`);
                 process.exit();
             });
-    };
-};
+    }
+}

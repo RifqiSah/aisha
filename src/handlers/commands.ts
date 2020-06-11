@@ -1,9 +1,9 @@
-import { resolve } from 'path';
 import { readdirSync } from 'fs';
+import { resolve } from 'path';
 
 module.exports = (client: any) => {
     console.log('  [-] Initialize commands');
-    const load = (dirs: String) => {
+    const load = (dirs: string) => {
         const commands = readdirSync(resolve(__dirname, `../commands/${dirs}`)).filter((f) => f.endsWith('.js'));
         
         for (const file of commands) {
@@ -13,13 +13,13 @@ module.exports = (client: any) => {
             console.log(`    + '${key}' added.`);
 
             client.cmds.set(key, cmdfile);
-            cmdfile.aliases.forEach((alias: String) => {
+            cmdfile.aliases.forEach((alias: string) => {
                 client.cmdsalias.set(alias, key);
             });
 
             if (cmdfile.regex) {
                 client.cmdsregex.set(key, `\\${cmdfile.name}\\`);
-                cmdfile.aliases.forEach((alias: String) => {
+                cmdfile.aliases.forEach((alias: string) => {
                     client.cmdsregex.set(alias, `\\${key}\\`);
                 });
             }

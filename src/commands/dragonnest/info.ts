@@ -19,7 +19,7 @@ module.exports = {
         if (!data) msg.push(`Info untuk \`${info}\` tidak ditemukan!`);
         else {
             msg.push(`__**Info untuk ${data.name}**__\n`);
-            data.data.map((id: String) => {
+            data.data.map((id: string) => {
                 msg.push(id);
             });
         }

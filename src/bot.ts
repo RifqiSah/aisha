@@ -1,5 +1,5 @@
-import { Client, Collection, MessageEmbed } from 'discord.js';
 import apiai from 'apiai';
+import { Client, Collection, MessageEmbed } from 'discord.js';
 
 import config from './lib/config';
 import db from './lib/database';

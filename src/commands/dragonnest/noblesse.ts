@@ -1,5 +1,5 @@
-import { get } from 'superagent';
 import moment from 'moment';
+import { get } from 'superagent';
 
 module.exports = {
     name: 'noblesse',

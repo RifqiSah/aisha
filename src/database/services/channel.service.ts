@@ -10,12 +10,12 @@ module.exports = {
         });
     },
 
-    getChannel(ID: String) {
+    getChannel(ID: string) {
         return Channel.findOne({ id: ID });
     },
 
     // Add data
-    addChannel(ID: String) {
+    addChannel(ID: string) {
         const channel = new Channel({ id: ID, status: true });
         channel.save((e, ch) => {
             if (e) return console.log(e);
@@ -25,7 +25,7 @@ module.exports = {
     },
 
     // Delete data
-    deleteChannel(ID: String) {
+    deleteChannel(ID: string) {
         Channel.findOneAndDelete({ id: ID }, (e, deleted) => {
             if (e) return console.log(e);
 
@@ -35,7 +35,7 @@ module.exports = {
     },
 
     // Update data
-    updateChannel(ID: String, data: any) {
+    updateChannel(ID: string, data: any) {
         Channel.findOneAndUpdate({ id: ID }, data, (e, ch) => {
             if (e) return console.log(e);
 

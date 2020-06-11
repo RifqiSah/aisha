@@ -19,7 +19,7 @@ module.exports = {
         if (!data) msg.push(`HP untuk \`${nest}\` tidak ditemukan!`);
         else {
             msg.push(`__**HP untuk ${data.name}**__\n`);
-            data.data.map((id: String) => {
+            data.data.map((id: string) => {
                 msg.push(id);
             });
         }

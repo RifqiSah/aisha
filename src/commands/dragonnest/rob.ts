@@ -1,8 +1,5 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable guard-for-in */
-/* eslint-disable no-plusplus */
-import { get } from 'superagent';
 import moment from 'moment';
+import { get } from 'superagent';
 
 module.exports = {
     name: 'rob',

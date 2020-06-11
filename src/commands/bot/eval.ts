@@ -1,4 +1,4 @@
-const { inspect } = require('util');
+import { inspect } from 'util';
 
 module.exports = {
     name: 'eval',
@@ -14,7 +14,7 @@ module.exports = {
         if (message.author.id !== client.config.OWNER) return message.channel.send('Anda bukan pemilik hati aku!');
 
         const toEval = args.join(' ');
-        const evaluated = inspect(eval(toEval));
+        const evaluated = inspect(eval(toEval), { depth: 0 });
 
         try {
             if (toEval) {

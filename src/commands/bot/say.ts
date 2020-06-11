@@ -22,6 +22,7 @@ module.exports = {
             return;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
         message.delete().catch(() => {});
         channel.send(sayMessage);
     },

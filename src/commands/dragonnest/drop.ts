@@ -19,7 +19,7 @@ module.exports = {
         if (!data) msg.push(`Drop rate untuk item \`${item}\` tidak ditemukan!`);
         else {
             msg.push(`__**Drop rate untuk ${data.name}**__\n`);
-            data.data.map((id: String) => {
+            data.data.map((id: string) => {
                 msg.push(id);
             });
         }

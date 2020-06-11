@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable guard-for-in */
 module.exports = {
     name: 'alert',
     desc: 'Mengirim pesan **Penting** kepada para Organizer. Command ini digunakan jika ada pesan **penting** yang ingin segera disampaikan!.',
@@ -24,6 +22,7 @@ module.exports = {
                         text: message.author.tag,
                     },
                 },
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
             }).catch(() => {});
         }
 
