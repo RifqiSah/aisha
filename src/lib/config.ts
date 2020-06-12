@@ -6,7 +6,6 @@ export default class Config {
     static TOKEN = process.env.APP_DISCORD_TOKEN;
     static TOKEN_APIAI = process.env.APP_APIAI_TOKEN;
 
-    static ENABLE = true;
     static BOT_VERSION = 'v2.1.8';
     static BOT_NAME = process.env.BOT_NAME;
     static BOT_OWNER = process.env.BOT_OWNERS;

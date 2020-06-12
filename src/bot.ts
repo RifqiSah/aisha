@@ -28,14 +28,8 @@ db.connect();
 console.info('[V] Done!');
 
 // cek status bot
-console.log('[-] Checking Bot status');
-if (!client.config.ENABLE) {
-    console.error('[X] Bot is disabled!');
-    process.exit(1);
-} else {
-    client.bot.login(client.config.TOKEN); // Loginkan!
-}
-
+console.log('[-] Login');
+client.bot.login(client.config.TOKEN);
 console.info('[V] Bot active!');
 
 // init event handler
