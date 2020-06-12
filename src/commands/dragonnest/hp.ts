@@ -24,7 +24,7 @@ module.exports = {
             });
         }
 
-        msg.push(`\nGunakan \`${client.config.PREFIX}help hp\` untuk melihat info yang tersedia.`);
+        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help hp\` untuk melihat info yang tersedia.`);
         message.channel.send(msg, { split: true });
     },
 };

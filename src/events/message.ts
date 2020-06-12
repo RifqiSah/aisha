@@ -51,14 +51,14 @@ module.exports = async (client: any, message: any) => {
 
     // == Awal regex checker ==
     // Cek apakah diawali prefix
-    if (message.content.indexOf(client.config.PREFIX) !== 0) {
+    if (message.content.indexOf(client.config.BOT_PREFIX) !== 0) {
         // Apakah ada di regex?
         regex = message.content.match(client.regexList);
         if (regex) command = regex[0]; // Isi command dengan hasil regexnya
         else return; // Jika tidak selesaikan
     } else {
         // Jika ya
-        args = message.content.slice(client.config.PREFIX.length).trim().split(/ +/g); // Mensplit string dengan " " agar didapatkan argumen
+        args = message.content.slice(client.config.BOT_PREFIX.length).trim().split(/ +/g); // Mensplit string dengan " " agar didapatkan argumen
         command = args.shift().toLowerCase(); // Mengambil command
     }
     // == Akhir regex checker ==

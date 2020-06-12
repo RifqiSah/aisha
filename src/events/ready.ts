@@ -1,18 +1,12 @@
 module.exports = (client: any) => {
-    if (client.config.ENV === 'production') {
-        client.bot.user.setUsername('Aisha');
-    } else {
-        client.bot.user.setUsername('Aisha [Test]');
-        client.config.PREFIX = '%';
-    }
-
+    client.bot.user.setUsername(client.config.BOT_NAME);
     // bot.user.setAvatar("");
 
     console.log(`[V] Bot has started, with ${client.bot.users.cache.size} users, in ${client.bot.channels.cache.size} channels of ${client.bot.guilds.cache.size} guilds.`);
 
     const activitiesList = [
-        `${client.config.PREFIX}h for command.`,
-        `${client.config.VERSION} is running.`,
+        `${client.config.BOT_PREFIX}h for command.`,
+        `${client.config.BOT_VERSION} is running.`,
         "Informate's Bot.",
         `Serving ${client.bot.users.cache.size} users in ${client.bot.guilds.cache.size} guilds.`,
     ];

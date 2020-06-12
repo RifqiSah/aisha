@@ -10,7 +10,7 @@ module.exports = {
     usage: '',
     cooldown: 60,
     func: async (client: any, message: any, args: any) => {
-        if (message.author.id !== client.config.OWNER) return message.channel.send('Anda bukan pemilik hati aku!');
+        if (message.author.id !== client.config.BOT_OWNER) return message.channel.send('Anda bukan pemilik hati aku!');
         try {
             await message.channel.send('Aisha pergi dulu ya! Bye bye ~');
             process.exit();

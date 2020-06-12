@@ -24,7 +24,7 @@ module.exports = {
             });
         }
 
-        msg.push(`\nGunakan \`${client.config.PREFIX}help rate\` untuk melihat rate yang tersedia.`);
+        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help rate\` untuk melihat rate yang tersedia.`);
         message.channel.send(msg, { split: true });
     },
 };

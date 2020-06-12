@@ -7,8 +7,8 @@ export default class Config {
     static TOKEN_APIAI = process.env.APP_APIAI_TOKEN;
 
     static ENABLE = true;
-    static VERSION = 'v2.1.8';
-    static NAME = process.env.BOT_NAME;
-    static OWNER = process.env.BOT_OWNERS;
-    static PREFIX = process.env.BOT_PREFIX;
+    static BOT_VERSION = 'v2.1.8';
+    static BOT_NAME = process.env.BOT_NAME;
+    static BOT_OWNER = process.env.BOT_OWNERS;
+    static BOT_PREFIX = process.env.BOT_PREFIX;
 }
