@@ -5,7 +5,7 @@ import config from './lib/config';
 import db from './lib/database';
 
 // public init
-console.log('[-] Initialize varible');
+console.log('[-] Initialize variable');
 const client = {
     // General
     bot: new Client({ partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'] }),
@@ -27,17 +27,14 @@ const client = {
 db.connect();
 console.info('[V] Done!');
 
-// cek status bot
-console.log('[-] Login');
-client.bot.login(client.config.TOKEN);
-console.info('[V] Bot active!');
-
 // init event handler
 console.log('[-] Initialize handler');
 ['commands', 'events', 'console'].forEach((x) => {
     console.log(` [O] ${x} handler`);
     require(`./handlers/${x}`)(client);
 });
+
+client.bot.login(client.config.TOKEN);
 
 console.log('[V] Done!');
 console.log('[V] Aisha is ready to start!');
