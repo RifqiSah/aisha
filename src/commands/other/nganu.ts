@@ -9,6 +9,9 @@ module.exports = {
     usage: '',
     cooldown: 0,
     func: (client: any, message: any, args: any) => {
+        const emot = ['uwu', 'hahaha'];
+        const wkwkwk = emot[Math.floor(Math.random() * emot.length)];
+        
         message.channel.send('( ͡° ͜ʖ ͡°)');
     },
 };
