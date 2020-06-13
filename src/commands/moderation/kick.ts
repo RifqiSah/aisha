@@ -13,8 +13,11 @@ module.exports = {
         args.shift();
 
         const member = message.mentions.members.first();
+        if (!member) return message.channel.send('Mohon mention user yang akan dikick!').then((msg: any) => msg.delete({ timeout: 5000 })).catch();
+
         const alasan = args.join(' ');
         const channel = message.guild.channels.cache.find((ch: any) => ch.id === '337424516362010625'); // out-off-topic
+        if (!channel) return message.channel.send('Channel tidak ditemukan!').then((msg: any) => msg.delete({ timeout: 5000 })).catch();
         
         member.kick().then((member: any) => {
             channel.send(`${member.displayName} telah dikick oleh Aisha! Alasan:\n\`\`\`${alasan}!\`\`\``);
