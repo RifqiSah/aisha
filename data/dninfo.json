@@ -116,5 +116,23 @@
 
             "\nFor enhance rate, see `.rate battlefield` command!"
         ]
+    },
+    {
+        "key": ["insight minos"],
+        "name": "New Minos Armor of Insight",
+        "data": [
+            "+10 Minos Armor can be Evolved to Minos Soul of Insight",
+            "Same stats of +10 Minos and Same Set Bonus",
+            "New Skill Effect is Applied to Insight Minos Armor",
+            "---",
+            "Skill Effect = 10% Additional Damage to Critical Hits on Each Insight Minos Part",
+            "Total 5 parts = 50% Additional Damage",
+            "Skill Effect is Applied to level 50 EX skill from Each class (example: Finish Attack, Moon Blade Dance, Umbra, Sunshine Spark, etc)",
+            "---",
+            "Insight Minos Armor Crafting",
+            "https://i.imgur.com/h7UxLYj.png",
+            "\nInsight Minos Cube Crafting",
+            "https://i.imgur.com/SHf2QYH.png"
+        ]
     }
 ]
