@@ -189,5 +189,21 @@
             "\nhttps://i.imgur.com/6FPGxoy.png",
             "\nFor additional stats info, see `.info battlefield` command!"
         ]
+    },
+    {
+        "key": ["full bloom", "vibrant"],
+        "name": "Full Bloom Jade / Vibrant Dragon Jade",
+        "data": [
+            "https://i.imgur.com/sDKAmH7.png",
+            "__**Materials**__",
+            "`Dark Crystal` = Silver & Gold chest selection from Nests / Higher Floor gives more",
+            "`Condensed Dark Crystal` = Craft at Blacksmith -> 50 Dark Crystal to 1 Condensed Dark Crystal",
+            
+            "\n`Platinum Stone` =  Nest Missions / Merchant April -> 500g each / Crystal Points Shop -> 1875 Points each",
+            "`Platinum Ingot` = Craft at Blacksmith -> 50 Platinum Stone to 1 Platinum Ingot",
+            
+            "\n`Red Dragon Jade Spirit Powder` = Disassemble Full Bloom Attack Jades",
+            "`Blue Dragon Jade Spirit Powder` = Disassemble Full Bloom Defense Jades"
+        ]
     }
 ]

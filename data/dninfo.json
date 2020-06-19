@@ -124,15 +124,53 @@
             "+10 Minos Armor can be Evolved to Minos Soul of Insight",
             "Same stats of +10 Minos and Same Set Bonus",
             "New Skill Effect is Applied to Insight Minos Armor",
-            "",
-            "Skill Effect = **10% Additional Damage to Critical Hits** on Each Insight Minos Part",
+            
+            "\nSkill Effect = **10% Additional Damage to Critical Hits** on Each Insight Minos Part",
             "Total 5 parts = **50% Additional Damage**",
             "**Skill Effect is Applied to level 50 EX skill from Each class** (example: Finish Attack, Moon Blade Dance, Umbra, Sunshine Spark, etc)",
-            "",
-            "Insight Minos Armor Crafting",
+            
+            "\nInsight Minos Armor Crafting",
             "https://i.imgur.com/h7UxLYj.png",
+            
             "\nInsight Minos Cube Crafting",
             "https://i.imgur.com/SHf2QYH.png"
+        ]
+    },
+    {
+        "key": ["full bloom", "vibrant"],
+        "name": "Full Bloom Jade / Vibrant Dragon Jade",
+        "data": [
+            "Full Bloom Jades will be **New Stronger Jades**",
+            "Full Bloom Jade can be Enhanced +1 to +20 with **100% success rate**",
+            "Old Victory Unique Jades & Jade Powder will be removed from Nest Loot",
+            "Victory Legend Exchange & Flawless Converter is still available (it might be removed in next update)",
+            
+            "\nBase Stats",
+            "https://i.imgur.com/teYdJPf.png",
+
+            "\n__**Full Bloom Attack Jade has 6 Different Versions [Also applies to ECJ]**__",
+            "Fatal = Critical",
+            "Limit = Critical Damage",
+            "Battle = Attack Power ",
+            "Ultimate Fatal = Critical + FD",
+            "Ultimate Limit = Critical Damage + FD",
+            "Ultimate Battle = Attack Power + FD",
+            
+            "\nhttps://i.imgur.com/zCGg7iZ.png",
+            
+            "\n__**Full Bloom Defense Jade has 6 Different Versions**__",
+            "Life Vit = Max HP",
+            "Iron Wall = Defence",
+            "Tent = Magic Defence",
+            "Ultimate Life Vit = Max HP + FD",
+            "Ultimate Iron Wall = Defence + FD",
+            "Ultimate Tent = Magic Defence + FD",
+            
+            "\nhttps://i.imgur.com/FL1HadF.png",
+            
+            "\n__**How to get?**__",
+            "Weekly Task: Complete any Nest 7 Times = 1x Red Gem",
+            "Exchange Any Attack or Defence or ECJ with 1 Red Gem from Nest Points Shop (Ultimate Version is Not Purchasable)"
         ]
     }
 ]
