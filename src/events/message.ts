@@ -1,5 +1,10 @@
 module.exports = async (client: any, message: any) => {
-    if (message.author.bot || message.channel.type === 'dm') return; // Jangan hiraukan chat dari sesama bot dan pastikan chat berasal dari guild
+    // Jangan hiraukan chat dari sesama bot dan pastikan chat berasal dari guild
+    if (message.author.bot || message.channel.type === 'dm') return;
+    
+    // Jangan hiraukan chat dari member tanpa developer role
+    if (client.config.ENV === 'local')
+        if (!message.member.roles.cache.has('433870492378595329')) return;
 
     // == Awal pengecekan mention BOT ==
     if (message.mentions.has(client.bot.user)) {
@@ -20,7 +25,8 @@ module.exports = async (client: any, message: any) => {
             message.reply('Oops! Aku pusing :(');
         });
 
-        request.end(); // Akhiri request untuk menghemat memory
+        // Akhiri request untuk menghemat memory
+        request.end();
         return;
     }
     // == Akhir pengecekan mention BOT ==
@@ -76,8 +82,8 @@ module.exports = async (client: any, message: any) => {
             // Cek dulu apakah user sudah menjalankan command sebelumnya?
             if (client.cmdcd.has(message.author.id)) return message.reply(`Anda harus menunggu selama \`${commandfile.cooldown} detik\` sebelum menggunakan command \`${commandfile.name}\` kembali!`).then((msg: any) => { msg.delete({ timeout: 10000 }); }).catch();
 
-            // Kalau tidak
-            client.cmdcd.add(message.author.id); // Tambahkan user kedalam list cooldown
+            // Kalau tidak, tambahkan user kedalam list cooldown
+            client.cmdcd.add(message.author.id);
 
             // Hapus user setelah timeout habis
             setTimeout(() => {
