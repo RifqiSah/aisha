@@ -3,7 +3,7 @@ const list = func.formatData('dnhp');
 
 module.exports = {
     name: 'hp',
-    desc: `Informasi mengenai jumlah HP dari nest. HP yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
+    desc: `Informasi mengenai jumlah HP dari nest. Nest yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
     enable: true,
     regex: false,
     help: true,
@@ -24,7 +24,7 @@ module.exports = {
             });
         }
 
-        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help hp\` untuk melihat info yang tersedia.`);
+        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help hp\` untuk melihat daftar info HP yang tersedia.\n`);
         message.channel.send(msg, { split: true });
     },
 };

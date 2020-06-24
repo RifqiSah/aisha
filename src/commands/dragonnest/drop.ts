@@ -3,7 +3,7 @@ const list = func.formatData('dndrop');
 
 module.exports = {
     name: 'drop',
-    desc: `Melihat info drop rate dari sebuah item pada Dragon Nest. Item yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
+    desc: `Melihat info drop rate dari sebuah item pada Dragon Nest. Drop yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
     enable: true,
     regex: false,
     help: true,
@@ -24,7 +24,7 @@ module.exports = {
             });
         }
 
-        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help drop\` untuk melihat daftar item yang tersedia.`);
+        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help drop\` untuk melihat daftar drop yang tersedia.\n`);
         message.channel.send(msg, { split: true });
     },
 };
