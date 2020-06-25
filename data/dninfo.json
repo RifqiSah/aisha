@@ -183,5 +183,13 @@
             "Weekly Task: Complete any Nest 7 Times = 1x Red Gem",
             "Exchange Any Attack or Defence or ECJ with 1 Red Gem from Nest Points Shop (Ultimate Version is Not Purchasable)"
         ]
+    },
+    {
+        "key": ["hero level"],
+        "name": "Hero Level Stats",
+        "data": [
+            "1 to 1500 is very fast so Skipped most of it",
+            "https://i.imgur.com/pesGFeP.png"
+        ]
     }
 ]
