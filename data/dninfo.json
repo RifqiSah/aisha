@@ -105,6 +105,14 @@
         ]
     },
     {
+        "key": ["celestone"],
+        "name": "Celestone",
+        "data": [
+            "Diassemble Skila to obtain Celestones",
+            "https://i.imgur.com/y1QsmhK.png"
+        ]
+    },
+    {
         "key": ["battlefield", "fb"],
         "name": "Fierce Battle Heraldry - Additional Stats ",
         "data": [
