@@ -1,12 +1,16 @@
 import { Schema, model } from 'mongoose';
 
 const channelSchema = new Schema({
-    id: {
+    guildId: {
         type: String,
         required: true,
     },
-    status: {
-        type: Boolean,
+    channelId: {
+        type: String,
+        required: true,
+    },
+    channelName: {
+        type: String,
         required: true,
     },
 });

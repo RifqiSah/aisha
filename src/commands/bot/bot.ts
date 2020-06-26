@@ -11,18 +11,20 @@ module.exports = {
     func: (client: any, message: any, args: any) => {
         message.delete();
 
+        if (!args.length) return message.channel.send('Harap masukkan parameter!').then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch(console.error);
+
         const data = [];
         const chid = message.channel.id;
-
-        if (!args.length) return message.channel.send('Harap masukkan parameter!').then((msg: any) => { msg.delete({ timeout: 5000 }); });
+        const chname = client.bot.channels.cache.get(chid).name;
+        
         switch (args[0]) {
             case 'dch':
-                client.chsvc.addChannel(chid);
+                client.chsvc.addChannel('306617555332628480', chid, chname);
                 data.push(`Channel <#${chid}> telah dimatikan!`);
                 break;
 
             case 'ech':
-                client.chsvc.deleteChannel(chid);
+                client.chsvc.deleteChannel('306617555332628480', chid, chname);
                 data.push(`Channel <#${chid}> telah diaktifkan`);
                 break;
 
@@ -30,6 +32,6 @@ module.exports = {
                 data.push(`Pengaturan untuk \`${args[0]}\` tidak ditemukan!`);
         }
 
-        message.channel.send(data, { split: true }).then((msg: any) => { msg.delete({ timeout: 5000 }); });
+        message.channel.send(data, { split: true }).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch(console.error);
     },
 };

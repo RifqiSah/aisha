@@ -1,7 +1,6 @@
 import { Channel } from '../models/channel-model';
 
 module.exports = {
-    // Get all data
     getAllChannel() {
         Channel.find({}, (e, ch) => {
             if (e) return console.log(e);
@@ -10,37 +9,35 @@ module.exports = {
         });
     },
 
-    getChannel(ID: string) {
-        return Channel.findOne({ id: ID });
+    getChannel(chId: string) {
+        return Channel.findOne({ channelId: chId });
     },
 
     // Add data
-    addChannel(ID: string) {
-        const channel = new Channel({ id: ID, status: true });
+    addChannel(gId: string, chId: string, name: string) {
+        const channel = new Channel({ guildId: gId, channelId: chId, channelName: name });
         channel.save((e, ch) => {
             if (e) return console.log(e);
 
-            console.log(`${ID} saved!`);
+            console.log(`#${name}(${chId}) in ${gId} saved!`);
         });
     },
 
-    // Delete data
-    deleteChannel(ID: string) {
-        Channel.findOneAndDelete({ id: ID }, (e, deleted) => {
+    deleteChannel(gId: string, chId: string) {
+        Channel.findOneAndDelete({ guildId: gId, channelId: chId }, (e, deleted) => {
             if (e) return console.log(e);
 
             const msg = deleted ? 'deleted!' : 'not found!';
-            console.log(`${ID} ${msg}`);
+            console.log(`${chId} in ${gId} ${msg}`);
         });
     },
 
-    // Update data
-    updateChannel(ID: string, data: any) {
-        Channel.findOneAndUpdate({ id: ID }, data, (e, ch) => {
+    updateChannel(gId: string, chId: string, data: any) {
+        Channel.findOneAndUpdate({ guildId: gId, channelId: chId }, data, (e, ch) => {
             if (e) return console.log(e);
 
-            const msg = ch ? 'deleted!' : 'not found!';
-            console.log(`${ID} ${msg}`);
+            const msg = ch ? 'updated!' : 'not found!';
+            console.log(`${chId} in ${gId} ${msg}`);
         });
     },
 };
