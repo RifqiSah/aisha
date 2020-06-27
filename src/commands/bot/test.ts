@@ -1,3 +1,5 @@
+import func from '../../lib/function';
+
 module.exports = {
     name: 'test',
     desc: 'Menguji coba fitur baru pada Aisha.',
