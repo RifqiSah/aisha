@@ -16,8 +16,12 @@ module.exports = {
         const msg = [];
 
         const data = func.getDNDropData(item);
-        if (!data) msg.push(`Drop rate untuk item \`${item}\` tidak ditemukan!`);
-        else {
+        if (!data) {
+            msg.push(`Drop rate untuk item \`${item}\` tidak ditemukan!`);
+
+            const recom = func.commandRecom('dndrop', item);
+            msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
+        } else {
             msg.push(`__**Drop rate untuk ${data.name}**__\n`);
             data.data.map((id: string) => {
                 msg.push(id);

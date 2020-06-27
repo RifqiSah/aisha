@@ -16,8 +16,12 @@ module.exports = {
         const msg = [];
 
         const data = func.getDNInfoData(info);
-        if (!data) msg.push(`Info untuk \`${info}\` tidak ditemukan!`);
-        else {
+        if (!data) {
+            msg.push(`Info untuk \`${info}\` tidak ditemukan!`);
+
+            const recom = func.commandRecom('dninfo', info);
+            msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
+        } else {
             msg.push(`__**Info untuk ${data.name}**__\n`);
             data.data.map((id: string) => {
                 msg.push(id);

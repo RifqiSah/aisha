@@ -16,8 +16,12 @@ module.exports = {
         const msg = [];
 
         const data = func.getDNHpData(nest);
-        if (!data) msg.push(`HP untuk \`${nest}\` tidak ditemukan!`);
-        else {
+        if (!data) {
+            msg.push(`HP untuk \`${nest}\` tidak ditemukan!`);
+
+            const recom = func.commandRecom('dnhp', nest);
+            msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
+        } else {
             msg.push(`__**HP untuk ${data.name}**__\n`);
             data.data.map((id: string) => {
                 msg.push(id);

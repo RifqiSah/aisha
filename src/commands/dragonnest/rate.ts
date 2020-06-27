@@ -16,8 +16,12 @@ module.exports = {
         const msg = [];
 
         const data = func.getDNRateData(rate);
-        if (!data) msg.push(`Rate untuk \`${rate}\` tidak ditemukan!`);
-        else {
+        if (!data) {
+            msg.push(`Rate untuk \`${rate}\` tidak ditemukan!`);
+
+            const recom = func.commandRecom('dnrate', rate);
+            msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
+        } else {
             msg.push(`__**Rate untuk ${data.name}**__\n`);
             data.data.map((id: string) => {
                 msg.push(id);
