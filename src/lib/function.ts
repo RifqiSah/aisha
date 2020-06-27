@@ -36,6 +36,38 @@ export default class Function {
         return member.roles.cache.some((role: any) => role.id === '433870492378595329');
     }
 
+    static commandRecom(key: string, subkey: string): string {
+        let commands: string|undefined;
+
+        switch (key) {
+            case 'dndrop':
+                commands = dndrop.map((item: any) => item.key.join(','));
+                break;
+
+            case 'dnhp':
+                commands = dnhp.map((item: any) => item.key.join(','));
+                break;
+
+            case 'dninfo':
+                commands = dninfo.map((item: any) => item.key.join(','));
+                break;
+
+            case 'dnrate':
+                commands = dnrate.map((item: any) => item.key.join(','));
+                break;
+
+            default:
+                commands = undefined;
+        }
+
+        if (!commands) return 'undefined';
+
+        commands = `,${commands},`.toString();
+        const match = commands.match(new RegExp(`[^,?!]*(?<=[,?\\s!])${subkey}(?=[\\s,?!])[^,?!]*`, 'igm'));
+
+        return match ? match.join(', ') : 'undefined';
+    }
+
     static formatData(key: string): any {
         let fmt: string;
 
