@@ -20,7 +20,7 @@ module.exports = {
             msg.push(`HP untuk \`${nest}\` tidak ditemukan!`);
 
             const recom = func.commandRecom('dnhp', nest);
-            msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
+            if (recom) msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
         } else {
             msg.push(`__**HP untuk ${data.name}**__\n`);
             data.data.map((id: string) => {

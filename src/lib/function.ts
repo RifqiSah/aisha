@@ -36,7 +36,7 @@ export default class Function {
         return member.roles.cache.some((role: any) => role.id === '433870492378595329');
     }
 
-    static commandRecom(key: string, subkey: string): string {
+    static commandRecom(key: string, subkey: string): string|undefined {
         let commands: string|undefined;
 
         switch (key) {
@@ -60,12 +60,12 @@ export default class Function {
                 commands = undefined;
         }
 
-        if (!commands) return 'undefined';
+        if (!commands) return undefined;
 
         commands = `,${commands},`.toString();
         const match = commands.match(new RegExp(`[^,?!]*(?<=[,?\\s!])${subkey}(?=[\\s,?!])[^,?!]*`, 'igm'));
 
-        return match ? match.join(', ') : 'undefined';
+        return match ? match.join(', ') : undefined;
     }
 
     static formatData(key: string): any {

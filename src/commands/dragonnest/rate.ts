@@ -20,7 +20,7 @@ module.exports = {
             msg.push(`Rate untuk \`${rate}\` tidak ditemukan!`);
 
             const recom = func.commandRecom('dnrate', rate);
-            msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
+            if (recom) msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
         } else {
             msg.push(`__**Rate untuk ${data.name}**__\n`);
             data.data.map((id: string) => {

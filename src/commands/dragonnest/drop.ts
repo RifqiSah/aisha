@@ -20,7 +20,7 @@ module.exports = {
             msg.push(`Drop rate untuk item \`${item}\` tidak ditemukan!`);
 
             const recom = func.commandRecom('dndrop', item);
-            msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
+            if (recom) msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
         } else {
             msg.push(`__**Drop rate untuk ${data.name}**__\n`);
             data.data.map((id: string) => {

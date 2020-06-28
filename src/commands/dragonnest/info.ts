@@ -20,7 +20,7 @@ module.exports = {
             msg.push(`Info untuk \`${info}\` tidak ditemukan!`);
 
             const recom = func.commandRecom('dninfo', info);
-            msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
+            if (recom) msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
         } else {
             msg.push(`__**Info untuk ${data.name}**__\n`);
             data.data.map((id: string) => {
