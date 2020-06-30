@@ -1,3 +1,10 @@
+# Package directory
 node_modules
+
+# Compiled scripts
 dist
+
+# Environtment files
 .env
+.env.prod
+.env.staging
