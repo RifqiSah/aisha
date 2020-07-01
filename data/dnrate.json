@@ -44,7 +44,7 @@
         ]
     },
     {
-        "key": ["guardian talis", "guardian talisman"],
+        "key": ["guardian talisman"],
         "name": "Guardian Talisman / Epic Talisman",
         "data": [
             "https://media.discordapp.net/attachments/519116465908219904/519116489362505729/guardian_talisman.png"
@@ -62,7 +62,7 @@
         ]
     },
     {
-        "key": ["jade" ,"jewel"],
+        "key": ["jade", "jewel"],
         "name": "Jade / Jewel",
         "data": [
             "`Champion`: https://cdn.discordapp.com/attachments/597969449340895247/597978448622911501/2019070717144963454.png",
@@ -84,7 +84,7 @@
         ]
     },
     {
-        "key": ["dj", "ddj", "mj", "bmj"],
+        "key": ["dj", "ddj", "dream dagon jade", "mj", "bmj", "blood moon jade"],
         "name": "Dream Dragon Jade / Blood Moon Jade",
         "data": [
             "Dreamy Jade Enhance",
@@ -148,7 +148,7 @@
         ]
     },
     {
-        "key": ["jade powder", "powder", "bubuk"],
+        "key": ["powder", "bubuk"],
         "name": "Jade Powder",
         "data": [
             "https://cdn.discordapp.com/attachments/432903741029613569/673810283289903114/IMG_20191231_162056.png"
