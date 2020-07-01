@@ -17,7 +17,7 @@ module.exports = {
         if (args > 100) return message.channel.send('Maksimal pesan yang dihapus adalah 100!').then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch();
         if (args < 1) return message.channel.send('Minimal pesan yang dihapus adalah 1!').then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch();
 
-        await message.channel.fetchMessages({ limit: args }).then((messages: any) => {
+        await message.channel.messages.fetch({ limit: args }).then((messages: any) => {
             message.channel.bulkDelete(messages);
         });
 
