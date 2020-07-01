@@ -34,32 +34,35 @@ module.exports = {
                     }
                     
                     // storage and trading info
-                    data.push('**[Storage and Trading Info]**');
-                    data.push(`\`Trade\`: ${item.canTrade ? 'yes' : 'no'}`);
-                    data.push(`\`Cash Item\`: ${item.cashItem ? 'yes' : 'no'}`);
-                    data.push(`\`Server Storage\`: ${item.canServerStorage ? 'yes' : 'no'}`);
-                    data.push(`\`Stamp Count\`: ${item.unstampCount ? item.unstampCount : 0}\n`);
+                    data.push('**[Storage and Trading Info]**```');
+                    data.push(`Trade: ${item.canTrade ? 'yes' : 'no'}`);
+                    data.push(`Cash Item: ${item.cashItem ? 'yes' : 'no'}`);
+                    data.push(`Server Storage: ${item.canServerStorage ? 'yes' : 'no'}`);
+                    data.push(`Stamp Count: ${item.unstampCount ? item.unstampCount : 0}\n`);
+                    data.push('```');
 
                     // general info
-                    data.push('**[General Info]**');
-                    data.push(`\`Gear Score\`: ${item.gearScore ? item.gearScore : 0}`);
-                    data.push(`\`Minimum Level\`: ${item.level}`);
-                    data.push(`\`Rarity\`: ${item.rank.charAt(0).toUpperCase() + item.rank.slice(1).toLowerCase()}`);
+                    data.push('**[General Info]**```');
+                    data.push(`Gear Score: ${item.gearScore ? item.gearScore : 0}`);
+                    data.push(`Minimum Level: ${item.level}`);
+                    data.push(`Rarity: ${item.rank.charAt(0).toUpperCase() + item.rank.slice(1).toLowerCase()}`);
 
                     // class
                     if (item.needClass?.length) {
                         const classes = item.needClass;
 
                         for (const i in classes) {
-                            data.push(`\`Class\`: ${classes[i].displayName}`);
+                            data.push(`Class: ${classes[i].displayName}`);
                         }
                     }
 
                     // category
                     if (item.category) {
-                        data.push(`\`Category\`: ${item.category.name}`);
+                        data.push(`Category: ${item.category.name}`);
                     }
-                    
+
+                    data.push('```');
+
                     // item stats
                     if (item.stats?.length) {
                         const stats = item.stats;
@@ -89,9 +92,10 @@ module.exports = {
 
                         for (const i in potentials) {
                             const states = potentials[i].states;
+                            
                             for (const j in states) {
-                                const name = states[i].state;
-                                let num = states[i].value;
+                                const name = states[j].state;
+                                let num = states[j].value;
                                 
                                 if (name.includes('PERCENT')) num = func.formatPercent(num);
                                 else num = func.formatNumber(num);
@@ -107,11 +111,13 @@ module.exports = {
 
                     // dragon jewel slots
                     if (item.gemslots) {
-                        data.push('**[Dragon Jewel]**');
+                        data.push('**[Dragon Jewel]**```');
 
-                        data.push(`\`Attack\`: ${item.gemslots.offensive ? 'yes' : 'no'}`);
-                        data.push(`\`Defense\`: ${item.gemslots.defensive ? 'yes' : 'no'}`);
-                        data.push(`\`Skill\`: ${item.gemslots.skill ? 'yes' : 'no'}`);
+                        data.push(`Attack: ${item.gemslots.offensive ? 'yes' : 'no'}`);
+                        data.push(`Defense: ${item.gemslots.defensive ? 'yes' : 'no'}`);
+                        data.push(`Skill: ${item.gemslots.skill ? 'yes' : 'no'}`);
+
+                        data.push('```');
                     }
 
                     msgs.edit(data).catch();
