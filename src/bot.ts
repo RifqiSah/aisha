@@ -15,7 +15,8 @@ const client = {
 
     // Services
     chsvc: require('./database/services/channel.service'),
-
+    guildsvc: require('./database/services/guild.service'),
+    
     // Variables
     cmdcd: new Set(),
     cmds: new Collection(),
