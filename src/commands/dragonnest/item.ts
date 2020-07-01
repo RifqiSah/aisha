@@ -84,7 +84,7 @@ module.exports = {
                     if (item.potentials?.length) {
                         const potentials = item.potentials;
 
-                        data.push('\n**[Potentials]**');
+                        data.push('**[Potentials]**');
                         data.push('```');
 
                         for (const i in potentials) {
@@ -103,6 +103,15 @@ module.exports = {
                         }
 
                         data.push('```');
+                    }
+
+                    // dragon jewel slots
+                    if (item.gemslots) {
+                        data.push('**[Dragon Jewel]**');
+
+                        data.push(`\`Attack\`: ${item.gemslots.offensive ? 'yes' : 'no'}`);
+                        data.push(`\`Defense\`: ${item.gemslots.defensive ? 'yes' : 'no'}`);
+                        data.push(`\`Skill\`: ${item.gemslots.skill ? 'yes' : 'no'}`);
                     }
 
                     msgs.edit(data).catch();
