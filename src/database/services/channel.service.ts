@@ -1,4 +1,4 @@
-import { Channel } from '../models/channel-model';
+import { Channel } from '../models/channel.model';
 
 module.exports = {
     getAllChannel() {
@@ -13,13 +13,12 @@ module.exports = {
         return Channel.findOne({ channelId: chId });
     },
 
-    // Add data
     addChannel(gId: string, chId: string, name: string) {
         const channel = new Channel({ guildId: gId, channelId: chId, channelName: name });
         channel.save((e, ch) => {
             if (e) return console.log(e);
 
-            console.log(`#${name}(${chId}) in ${gId} saved!`);
+            console.log(`[DB]: #${name}(${chId}) in ${gId} saved!`);
         });
     },
 
@@ -28,7 +27,7 @@ module.exports = {
             if (e) return console.log(e);
 
             const msg = deleted ? 'deleted!' : 'not found!';
-            console.log(`${chId} in ${gId} ${msg}`);
+            console.log(`[DB]: ${chId} in ${gId} ${msg}`);
         });
     },
 
@@ -37,7 +36,7 @@ module.exports = {
             if (e) return console.log(e);
 
             const msg = ch ? 'updated!' : 'not found!';
-            console.log(`${chId} in ${gId} ${msg}`);
+            console.log(`[DB]: ${chId} in ${gId} ${msg}`);
         });
     },
 };
