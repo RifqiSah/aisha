@@ -142,4 +142,9 @@ export default class Function {
         if (!d) return null;
         return d;
     }
+
+    static formatPercent(number: number) {
+        const ret = number * 100;
+        return `${ret.toFixed(2)}%`;
+    }
 }

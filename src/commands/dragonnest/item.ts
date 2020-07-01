@@ -1,4 +1,5 @@
 import { get } from 'superagent';
+import func from '../../lib/function';
 
 const dv_endpoint   = 'https://reference.dn.divinitor.com/api/server/sea/items';
 
@@ -60,7 +61,11 @@ module.exports = {
                         data.push('```');
                         
                         for (const i in stats) {
-                            data.push(`${stats[i].state}: ${stats[i].min}`);
+                            const name = stats[i].state;
+                            let num = stats[i].min;
+
+                            if (name.includes('PERCENT')) num = func.formatPercent(num);
+                            data.push(`${name}: ${num}`);
                         }
                         
                         data.push('```');
@@ -75,7 +80,11 @@ module.exports = {
                         for (const i in potentials) {
                             const states = potentials[i].states;
                             for (const j in states) {
-                                data.push(`${states[j].state}: ${states[j].value}`);
+                                const name = states[i].state;
+                                let num = states[i].value;
+                                
+                                if (name.includes('PERCENT')) num = func.formatPercent(num);
+                                data.push(`${name}: ${num}`);
                             }
                             
                             data.push(' ');
