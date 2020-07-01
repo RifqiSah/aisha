@@ -4,10 +4,10 @@ const dv_endpoint   = 'https://reference.dn.divinitor.com/api/server/sea/items';
 
 module.exports = {
     name: 'item',
-    desc: 'Untuk memudahakan dalam mencari item yang terdapat pada Dragon Nest.\n\nNama item harus spesifik, tidak boleh sangat umum.\nBenar: `Conversion Helmet`\nSalah: `Conversion\n\nPenggunaan:',
+    desc: 'Untuk memudahakan dalam mencari item yang terdapat pada Dragon Nest.\n\nNama item harus spesifik, tidak boleh umum.\nBenar: `Conversion Helmet`\nSalah: `Conversion\n\nCara melihat:\n1. Cari nama item untuk mendapatkan ID item.\n2. Jalankan kembali command ini dengan parameter ID item.',
     enable: true,
     regex: false,
-    help: false,
+    help: true,
     role: ['489292018628165633'],
     aliases: ['it'],
     usage: '[item ID]',
