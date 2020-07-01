@@ -38,10 +38,10 @@ module.exports = {
 
                     data.push('**[General Info]**');
                     data.push(`\`Gear Score\`: ${item.gearScore ? item.gearScore : 0}`);
-                    data.push(`\`Level\`: ${item.level}`);
+                    data.push(`\`Minimum Level\`: ${item.level}`);
                     data.push(`\`Rarity\`: ${item.rank}`);
 
-                    if (item.needClass.length > 0) {
+                    if (item.needClass?.length) {
                         const classes = item.needClass;
 
                         for (const i in classes) {
@@ -53,7 +53,7 @@ module.exports = {
                         data.push(`\`Category\`: ${item.category.name}`);
                     }
                     
-                    if (item.stats.length > 0) {
+                    if (item.stats?.length) {
                         const stats = item.stats;
 
                         data.push('\n**[Stats]**');
@@ -66,7 +66,7 @@ module.exports = {
                         data.push('```');
                     }
 
-                    if (item.potentials.length > 0) {
+                    if (item.potentials?.length) {
                         const potentials = item.potentials;
 
                         data.push('\n**[Potentials]**');
