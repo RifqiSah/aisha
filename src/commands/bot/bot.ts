@@ -15,16 +15,17 @@ module.exports = {
 
         const data = [];
         const chid = message.channel.id;
+        const guildid = message.guild.id;
         const chname = client.bot.channels.cache.get(chid).name;
         
         switch (args[0]) {
             case 'dch':
-                client.chsvc.addChannel('306617555332628480', chid, chname);
+                client.chsvc.addChannel(guildid, chid, chname);
                 data.push(`Channel <#${chid}> telah dimatikan!`);
                 break;
 
             case 'ech':
-                client.chsvc.deleteChannel('306617555332628480', chid, chname);
+                client.chsvc.deleteChannel(guildid, chid, chname);
                 data.push(`Channel <#${chid}> telah diaktifkan`);
                 break;
 
