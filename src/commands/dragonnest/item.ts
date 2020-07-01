@@ -39,7 +39,7 @@ module.exports = {
                     data.push('**[General Info]**');
                     data.push(`\`Gear Score\`: ${item.gearScore ? item.gearScore : 0}`);
                     data.push(`\`Minimum Level\`: ${item.level}`);
-                    data.push(`\`Rarity\`: ${item.rank}`);
+                    data.push(`\`Rarity\`: ${item.rank.charAt(0).toUpperCase() + item.rank.slice(1).toLowerCase()}`);
 
                     if (item.needClass?.length) {
                         const classes = item.needClass;
