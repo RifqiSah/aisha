@@ -29,19 +29,24 @@ module.exports = {
                     data.push(`__**${item.name.name}**__\n`);
 
                     // item description
-                    data.push(`${item.desc.desc.replace(/<br\/>/g, '\n').replace(/<(.|\n)*?>/g, '').replace(/\[/g, '**[').replace(/\]/g, ']**')}\n`);
+                    if (item.desc) {
+                        data.push(`${item.desc.desc.replace(/<br\/>/g, '\n').replace(/<(.|\n)*?>/g, '').replace(/\[/g, '**[').replace(/\]/g, ']**')}\n`);
+                    }
                     
+                    // storage and trading info
                     data.push('**[Storage and Trading Info]**');
                     data.push(`\`Trade\`: ${item.canTrade ? 'yes' : 'no'}`);
                     data.push(`\`Cash Item\`: ${item.cashItem ? 'yes' : 'no'}`);
                     data.push(`\`Server Storage\`: ${item.canServerStorage ? 'yes' : 'no'}`);
                     data.push(`\`Stamp Count\`: ${item.unstampCount ? item.unstampCount : 0}\n`);
 
+                    // general info
                     data.push('**[General Info]**');
                     data.push(`\`Gear Score\`: ${item.gearScore ? item.gearScore : 0}`);
                     data.push(`\`Minimum Level\`: ${item.level}`);
                     data.push(`\`Rarity\`: ${item.rank.charAt(0).toUpperCase() + item.rank.slice(1).toLowerCase()}`);
 
+                    // class
                     if (item.needClass?.length) {
                         const classes = item.needClass;
 
@@ -50,10 +55,12 @@ module.exports = {
                         }
                     }
 
+                    // category
                     if (item.category) {
                         data.push(`\`Category\`: ${item.category.name}`);
                     }
                     
+                    // item stats
                     if (item.stats?.length) {
                         const stats = item.stats;
 
@@ -65,12 +72,15 @@ module.exports = {
                             let num = stats[i].min;
 
                             if (name.includes('PERCENT')) num = func.formatPercent(num);
+                            else num = func.formatNumber(num);
+
                             data.push(`${name}: ${num}`);
                         }
                         
                         data.push('```');
                     }
 
+                    // item potentials
                     if (item.potentials?.length) {
                         const potentials = item.potentials;
 
@@ -84,6 +94,8 @@ module.exports = {
                                 let num = states[i].value;
                                 
                                 if (name.includes('PERCENT')) num = func.formatPercent(num);
+                                else num = func.formatNumber(num);
+                                
                                 data.push(`${name}: ${num}`);
                             }
                             
@@ -110,6 +122,11 @@ module.exports = {
                         const item = items[i];
 
                         data.push(`[${item.id}]: ${item.name.name}`);
+
+                        if (parseInt(i) === 24) {
+                            data.push(`\n*) Data yang ditampilkan hanya 25 dari ${items.length}.`);
+                            break;
+                        }
                     }
 
                     data.push('```');

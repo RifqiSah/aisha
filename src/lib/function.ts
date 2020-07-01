@@ -147,4 +147,8 @@ export default class Function {
         const ret = number * 100;
         return `${ret.toFixed(2)}%`;
     }
+
+    static formatNumber(number: number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
 }
