@@ -73,19 +73,19 @@ export default class Function {
 
         switch (key) {
             case 'dndrop':
-                fmt = dndrop.map((item: any) => '> '.concat(item.key.join(', '))).join('\n');
+                fmt = dndrop.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
                 break;
 
             case 'dnhp':
-                fmt = dnhp.map((item: any) => '> '.concat(item.key.join(', '))).join('\n');
+                fmt = dnhp.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
                 break;
 
             case 'dninfo':
-                fmt = dninfo.map((item: any) => '> '.concat(item.key.join(', '))).join('\n');
+                fmt = dninfo.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
                 break;
 
             case 'dnrate':
-                fmt = dnrate.map((item: any) => '> '.concat(item.key.join(', '))).join('\n');
+                fmt = dnrate.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
                 break;
 
             default:
@@ -97,7 +97,7 @@ export default class Function {
 
     static getDNDropData(key: string) {
         const d: any = dndrop.find((item: any) => {
-            const itemReg = new RegExp(item.key.join('|'), 'g');
+            const itemReg = new RegExp(`\\b${item.key.join('|')}\\b`, 'g');
             if (!key.match(itemReg)) return null;
 
             return item;
@@ -109,7 +109,7 @@ export default class Function {
 
     static getDNHpData(key: string) {
         const d: any = dnhp.find((item: any) => {
-            const itemReg = new RegExp(item.key.join('|'), 'g');
+            const itemReg = new RegExp(`\\b${item.key.join('|')}\\b`, 'g');
             if (!key.match(itemReg)) return null;
 
             return item;
@@ -121,7 +121,7 @@ export default class Function {
 
     static getDNInfoData(key: string) {
         const d: any = dninfo.find((item: any) => {
-            const itemReg = new RegExp(item.key.join('|'), 'g');
+            const itemReg = new RegExp(`\\b${item.key.join('|')}\\b`, 'g');
             if (!key.match(itemReg)) return null;
 
             return item;
@@ -133,7 +133,7 @@ export default class Function {
 
     static getDNRateData(key: string) {
         const d: any = dnrate.find((item: any) => {
-            const itemReg = new RegExp(item.key.join('|'), 'g');
+            const itemReg = new RegExp(`\\b${item.key.join('|')}\\b`, 'g');
             if (!key.match(itemReg)) return null;
 
             return item;
