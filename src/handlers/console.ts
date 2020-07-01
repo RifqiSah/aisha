@@ -1,5 +1,5 @@
 module.exports = (client: any) => {
-    console.log('  [-] Initialize console');
+    client.logger.info('  [-] Initialize console');
 
     const promp = process.openStdin();
     promp.addListener('data', (res) => {
@@ -7,5 +7,5 @@ module.exports = (client: any) => {
         client.bot.channels.cache.get('713324629967634502').send(x.join(' ')); // bot-console
     });
 
-    console.log('  [V] Done!');
+    client.logger.info('  [V] Done!');
 };

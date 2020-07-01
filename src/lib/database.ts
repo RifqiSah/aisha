@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 import config from './config';
+import { logger } from '../lib/logger';
 
 mongoose.Promise = global.Promise;
 
 // Cek apakah envnya ada atau tidak
 if (!config.MONGODB) {
-    console.log('[X] DB configuration error!');
+    logger.error('[X] DB configuration error!');
     process.exit();
 }
 
@@ -14,9 +15,9 @@ export default class Database {
     static connect(): void {
         mongoose.connect(`${config.MONGODB}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
             .then(() => {
-                console.log('[V] Database connected!');
+                logger.info('[V] Database connected!');
             }).catch((err: any) => {
-                console.log(`[X] Database error with: ${err}!`);
+                logger.error(`[X] Database error with: ${err}!`);
                 process.exit();
             });
     }

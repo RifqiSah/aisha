@@ -2,7 +2,7 @@ module.exports = (client: any) => {
     client.bot.user.setUsername(client.config.BOT_NAME);
     // bot.user.setAvatar("");
 
-    console.log(`[V] Bot has started, with ${client.bot.users.cache.size} users, in ${client.bot.channels.cache.size} channels of ${client.bot.guilds.cache.size} guilds.`);
+    client.logger.info(`[V] Bot has started, with ${client.bot.users.cache.size} users, in ${client.bot.channels.cache.size} channels of ${client.bot.guilds.cache.size} guilds.`);
 
     const activitiesList = [
         `${client.config.BOT_PREFIX}h for command.`,

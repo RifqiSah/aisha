@@ -43,6 +43,7 @@
     "moment": "^2.26.0",
     "mongoose": "^5.9.18",
     "net": "^1.0.2",
-    "superagent": "^5.2.2"
+    "superagent": "^5.2.2",
+    "winston": "^3.3.3"
   }
 }

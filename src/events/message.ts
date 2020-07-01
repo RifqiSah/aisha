@@ -48,7 +48,7 @@ module.exports = async (client: any, message: any) => {
     // == Monitor main channel ==
     if (message.channel.id === '372926591849988096') { // peraturan
         if (!message.content.startsWith('.setuju')) {
-            console.log('-> Pesan baru terdeteksi pada channel #peraturan dan akan segera dihapus!');
+            client.logger.info('-> Pesan baru terdeteksi pada channel #peraturan dan akan segera dihapus!');
 
             message.delete();
         }
@@ -91,7 +91,7 @@ module.exports = async (client: any, message: any) => {
             }, commandfile.cooldown * 1000);
         }
 
-        console.log(`-> Command '${commandfile.name}' executed! (Regex: ${(regex ? 'YES' : 'NO')})`);
+        client.logger.info(`-> Command '${commandfile.name}' executed! (Regex: ${(regex ? 'YES' : 'NO')})`);
 
         // Cek apakah command sedang aktif atau tidak
         if (commandfile.enable) {

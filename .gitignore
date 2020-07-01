@@ -8,3 +8,9 @@ dist
 .env
 .env.prod
 .env.staging
+
+# Aisha logs
+logs/*
+
+# Skip ignore
+!.gitkeep

@@ -2,7 +2,7 @@ import { readdirSync } from 'fs';
 import { resolve } from 'path';
 
 module.exports = (client: any) => {
-    console.log('  [-] Initialize commands');
+    client.logger.info('  [-] Initialize commands');
     const load = (dirs: string) => {
         const commands = readdirSync(resolve(__dirname, `../commands/${dirs}`)).filter((f) => f.endsWith('.js'));
         
@@ -10,7 +10,7 @@ module.exports = (client: any) => {
             const cmdfile = require(resolve(__dirname, `../commands/${dirs}/${file}`));
             const key = file.slice(0, -3);
 
-            console.log(`    + '${key}' added.`);
+            client.logger.info(`    + '${key}' added.`);
 
             client.cmds.set(key, cmdfile);
             cmdfile.aliases.forEach((alias: string) => {
@@ -28,5 +28,5 @@ module.exports = (client: any) => {
 
     ['bot', 'discord', 'dragonnest', 'moderation', 'other'].forEach((x) => load(x));
     client.regexList = new RegExp(client.cmdsregex.map((key: any, item: any) => item).join('|'));
-    console.log('  [V] Done!');
+    client.logger.info('  [V] Done!');
 };

@@ -1,5 +1,5 @@
 module.exports = async (client: any, reaction: any, user: any) => {
-    console.log(`-> Pesan dari ${reaction.message.author.tag} dengan id '${reaction.message.id}' kehilangan reaction!`);
+    client.logger.info(`-> Pesan dari ${reaction.message.author.tag} dengan id '${reaction.message.id}' kehilangan reaction!`);
 
     // Ketika menerima reaction, cek jika pesan sebagian atau tidak
     if (reaction.message.partial) {
@@ -7,7 +7,7 @@ module.exports = async (client: any, reaction: any, user: any) => {
         try {
             await reaction.message.fetch();
         } catch (error) {
-            console.log('Terjadi error saat fetch pesan: ', error);
+            client.logger.error('Terjadi error saat fetch pesan: ', error);
         }
     }
 
@@ -16,7 +16,7 @@ module.exports = async (client: any, reaction: any, user: any) => {
         try {
             await reaction.fetch();
         } catch (error) {
-            console.log('Terjadi error saat fetch reaction: ', error);
+            client.logger.error('Terjadi error saat fetch reaction: ', error);
         }
     }
 

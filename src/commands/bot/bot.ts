@@ -11,7 +11,9 @@ module.exports = {
     func: (client: any, message: any, args: any) => {
         message.delete();
 
-        if (!args.length) return message.channel.send('Harap masukkan parameter!').then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch(console.error);
+        if (!args.length) return message.channel.send('Harap masukkan parameter!').then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch((err: any) => {
+            client.logger.error(err);
+        });
 
         const data = [];
         const chid = message.channel.id;
@@ -33,6 +35,8 @@ module.exports = {
                 data.push(`Pengaturan untuk \`${args[0]}\` tidak ditemukan!`);
         }
 
-        message.channel.send(data, { split: true }).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch(console.error);
+        message.channel.send(data, { split: true }).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch((err: any) => {
+            client.logger.error(err);
+        });
     },
 };
