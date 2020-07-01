@@ -95,7 +95,7 @@ module.exports = {
                                 
                                 if (name.includes('PERCENT')) num = func.formatPercent(num);
                                 else num = func.formatNumber(num);
-                                
+
                                 data.push(`${name}: ${num}`);
                             }
                             
@@ -124,7 +124,7 @@ module.exports = {
                         data.push(`[${item.id}]: ${item.name.name}`);
 
                         if (parseInt(i) === 24) {
-                            data.push(`\n*) Data yang ditampilkan hanya 25 dari ${items.length}.`);
+                            data.push(`\n*) Data yang ditampilkan hanya 25 dari ${items.length}. Dimohon untuk menggunakan nama item yang spesifik.`);
                             break;
                         }
                     }
