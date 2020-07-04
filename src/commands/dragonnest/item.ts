@@ -71,11 +71,13 @@ module.exports = {
                         data.push('```');
                         
                         for (const i in stats) {
-                            const name = stats[i].state;
+                            let name = stats[i].state;
                             let num = stats[i].min;
 
                             if (name.includes('PERCENT')) num = func.formatPercent(num);
                             else num = func.formatNumber(num);
+
+                            name = func.formatState(name).name;
 
                             data.push(`${name}: ${num}`);
                         }
@@ -94,11 +96,13 @@ module.exports = {
                             const states = potentials[i].states;
                             
                             for (const j in states) {
-                                const name = states[j].state;
+                                let name = states[j].state;
                                 let num = states[j].value;
                                 
                                 if (name.includes('PERCENT')) num = func.formatPercent(num);
                                 else num = func.formatNumber(num);
+                                
+                                name = func.formatState(name).name;
 
                                 data.push(`${name}: ${num}`);
                             }
