@@ -12,5 +12,9 @@ dist
 # Aisha logs
 logs/*
 
+# Docker
+docker-compose.yml
+Dockerfile
+
 # Skip ignore
 !.gitkeep
