@@ -1,3 +1,5 @@
+import func from '../../lib/function';
+
 module.exports = {
     name: 'patch',
     desc: 'Untuk memudahakan dalam menulis patchnote.',
@@ -6,7 +8,7 @@ module.exports = {
     help: false,
     role: ['433870492378595329'],
     aliases: ['pn'],
-    usage: '[bulan] [nomor]',
+    usage: '[nomor]',
     cooldown: 0,
     func: (client: any, message: any, args: any) => {
         message.delete();
@@ -15,9 +17,12 @@ module.exports = {
         const channel = message.guild.channels.cache.find((ch: any) => ch.id === '381495270241730561'); // dn-sea
         if (!channel) return;
 
+        const month = func.getMonthName();
+        const newsNumber = args[0];
+
         data.push('<@&489292018628165633>\n');
-        data.push(`__**[Patchnote] ${args[0]} Patchnote**__`);
-        data.push(`https://sea.dragonnest.com/news/notice/all/${args[1]}`);
+        data.push(`__**[Patchnote] ${month} Patchnote**__`);
+        data.push(`https://sea.dragonnest.com/news/notice/all/${newsNumber}`);
 
         channel.send(data);
     },
