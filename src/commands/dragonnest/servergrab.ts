@@ -1,4 +1,5 @@
 import { get } from 'superagent';
+import values from '../../lib/values';
 
 module.exports = {
     name: 'servergrab',
@@ -14,7 +15,7 @@ module.exports = {
         message.delete();
         const msgs = await message.channel.send(`Menunggu \`${args}\` ...`);
 
-        await get(`https://alriftech.com/api/v2/bot/aisha/server_update/${args}`)
+        await get(`${values.aisha_api}/server_update/${args}`)
             .then((res) => {
                 msgs.edit(`Sukses \`${args}\`! Respon:\`\`\`${res.text}\`\`\``).then((msg: any) => { msg.delete({ timeout: 50000 }); });
             })

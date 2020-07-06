@@ -1,7 +1,6 @@
 import { get } from 'superagent';
 import func from '../../lib/function';
-
-const dv_endpoint   = 'https://reference.dn.divinitor.com/api/server/sea/items';
+import values from '../../lib/values';
 
 module.exports = {
     name: 'item',
@@ -20,7 +19,7 @@ module.exports = {
         const isItemID = !isNaN(itemID);
 
         if (isItemID) {
-            await get(`${dv_endpoint}/${itemID}`)
+            await get(`${values.divinitor_api}/items/${itemID}`)
                 .then((res) => {
                     const item = JSON.parse(res.text);
                     if (!item) return msgs.edit(`Item \`${itemID}\` tidak ditemukan!`);
@@ -130,7 +129,7 @@ module.exports = {
                     msgs.edit(`Uh oh, error tidak terduga:\`\`\`${err.status}: ${err.message}\`\`\``).then((msg: any) => { msg.delete({ timeout: 10000 }); });
                 });
         } else {
-            await get(`${dv_endpoint}/search?p=0&sz=50&name=${itemID}`)
+            await get(`${values.divinitor_api}/items/search?p=0&sz=50&name=${itemID}`)
                 .then((res) => {
                     data.push('```');
 

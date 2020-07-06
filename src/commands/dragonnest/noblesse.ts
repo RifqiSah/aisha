@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { get } from 'superagent';
+import values from '../../lib/values';
 
 module.exports = {
     name: 'noblesse',
@@ -20,7 +21,7 @@ module.exports = {
 
         const msgs = await message.channel.send('Megambil data ...');
 
-        await get('https://alriftech.com/api/v2/bot/aisha/nb')
+        await get(`${values.aisha_api}/nb`)
             .then((res) => {
                 const nbdata = JSON.parse(res.text);
 
