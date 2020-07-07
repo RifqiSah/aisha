@@ -210,5 +210,13 @@
             "1 to 1500 is very fast so Skipped most of it",
             "https://i.imgur.com/pesGFeP.png"
         ]
+    },
+    {
+        "key": ["invader"],
+        "name": "Blood Moon Invader Drop Rate",
+        "data": [
+            "(Invader **Spawn Chance is Unknown**)",
+            "https://i.imgur.com/DQlUDfG.png"
+        ]
     }
 ]
