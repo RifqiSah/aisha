@@ -3,9 +3,14 @@
         "key": ["callypse", "calip", "calypse", "calipse", "kelip"],
         "name": "Calypse Equipment",
         "data": [
-            "`Tier 1`: https://i.imgur.com/CMLeTwt.png",
-            "`Tier 2`: https://i.imgur.com/dXNPCON.png",
-            "`Tier 3`: https://i.imgur.com/TVTHPfm.png"
+            "Tier 1",
+            "https://i.imgur.com/CMLeTwt.png",
+
+            "\nTier 2",
+            "https://i.imgur.com/dXNPCON.png",
+
+            "\nTier 3",
+            "https://i.imgur.com/TVTHPfm.png"
         ]
     },
     {

@@ -19,7 +19,7 @@
         "data": [
             "Sealed Hero Talisman from Nightmare Labyrinth will give Random lv1 to lv10 Stat",
             "2nd Stat is Not Possible for Epic Hero Talisman",
-            
+
             "\nhttps://i.imgur.com/JxaRyuC.png",
 
             "\nFor Nightmare Box rate, see `.rate nm box` command."
@@ -29,15 +29,32 @@
         "key": ["goddess heraldry"],
         "name": "Goddess Heraldry",
         "data": [
-            "`Warrior`: https://cdn.discordapp.com/attachments/690593970891259935/690595171871490098/unknown.png",
-            "`Archer`: https://cdn.discordapp.com/attachments/690593970891259935/690595462545145886/unknown.png",
-            "`Sorceress`: https://cdn.discordapp.com/attachments/690593970891259935/690595569156227112/unknown.png",
-            "`Cleric`: https://cdn.discordapp.com/attachments/690593970891259935/690595636898299934/unknown.png",
-            "`Academic`: https://cdn.discordapp.com/attachments/690593970891259935/690595781723291688/unknown.png",
-            "`Kali`: https://cdn.discordapp.com/attachments/690593970891259935/690595899721646140/unknown.png",
-            "`Assassin`: https://cdn.discordapp.com/attachments/690593970891259935/690596141368082462/unknown.png",
-            "`Lancea`: https://cdn.discordapp.com/attachments/690593970891259935/690596304023322744/unknown.png",
-            "`Machina`: https://cdn.discordapp.com/attachments/690593970891259935/690596367525085204/unknown.png",
+            "Warrior",
+            "https://cdn.discordapp.com/attachments/690593970891259935/690595171871490098/unknown.png",
+            
+            "\nArcher",
+            "https://cdn.discordapp.com/attachments/690593970891259935/690595462545145886/unknown.png",
+            
+            "\nSorceress",
+            "https://cdn.discordapp.com/attachments/690593970891259935/690595569156227112/unknown.png",
+            
+            "\nCleric",
+            "https://cdn.discordapp.com/attachments/690593970891259935/690595636898299934/unknown.png",
+            
+            "\nAcademic",
+            "https://cdn.discordapp.com/attachments/690593970891259935/690595781723291688/unknown.png",
+            
+            "\nKali",
+            "https://cdn.discordapp.com/attachments/690593970891259935/690595899721646140/unknown.png",
+            
+            "\nAssassin",
+            "https://cdn.discordapp.com/attachments/690593970891259935/690596141368082462/unknown.png",
+            
+            "\nLancea",
+            "https://cdn.discordapp.com/attachments/690593970891259935/690596304023322744/unknown.png",
+            
+            "\nMachina",
+            "https://cdn.discordapp.com/attachments/690593970891259935/690596367525085204/unknown.png",
 
             "\nDamage Increase and chance rate for classes with three (3) types of heraldry",
             "<https://media.discordapp.net/attachments/690593970891259935/690596760447352882/unknown.png>",
