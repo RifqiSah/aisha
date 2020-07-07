@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { GuildAuditLogsEntry } from 'discord.js';
 
 function loadData(file: string) {
     const rawdata: Buffer = readFileSync(resolve(__dirname, `../../data/${file}`));
