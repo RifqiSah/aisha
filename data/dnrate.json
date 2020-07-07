@@ -207,5 +207,20 @@
             "\n`Red Dragon Jade Spirit Powder` = Disassemble Full Bloom Attack Jades",
             "`Blue Dragon Jade Spirit Powder` = Disassemble Full Bloom Defense Jades"
         ]
+    },
+    {
+        "key": ["engraving pouch"],
+        "name": "Engraving Scroll Collection from Red Lotus Maze",
+        "data": [
+            "Total Rare Armor Engraving = 50.76%",
+            "Total Epic Armor Engraving = 19.3%",
+            "Total Unique Armor Engraving = 1.14%",
+            "Total High Grade Unique Armor Engraving = 0.28%",
+            
+            "\nTotal Rare Weapon Engraving = 20.23%",
+            "Total Epic Weapon Engraving = 7.69%",
+            "Total Unique Weapon Engraving = 0.45%",
+            "Total High Grade Unique Weapon Engraving = 0.11%"
+        ]
     }
 ]
