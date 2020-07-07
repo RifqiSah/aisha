@@ -33,18 +33,18 @@
             "Rough Rock Grouper = 7.7%",
             "Freshwater Sweet fish = 7.7%",
             "Black Swamp Snake head = 7.7%",
-            "Gizzard Shard = 7.7%\n",
+            "Gizzard Shard = 7.7%",
 
-            "Golden Carp = 5.91%",
+            "\nGolden Carp = 5.91%",
             "Rainbow Trout = 5.91%",
             "Rosy Bitterling = 5.91%",
             "Catfish = 5.91%",
-            "Mudskipper = 5.91%\n",
+            "Mudskipper = 5.91%",
 
-            "Lamprey = 0.04%",
-            "Arowana = 0.04%\n",
+            "\nLamprey = 0.04%",
+            "Arowana = 0.04%",
 
-            "Antique Common Pouch = 17% ",
+            "\nAntique Common Pouch = 17% ",
             "Magical Rainbow Goldfish = 0.0044%"
         ]
     },
@@ -68,27 +68,25 @@
             "Whale = 0.2%",
             "Shark = 0.25%",
             "Sea Fishing Pouch = 3%",
-            "Rare Top Mimi Octopus = 3%\n",
+            "Rare Top Mimi Octopus = 3%",
 
-            "Shrimp up to Deep Sea Fish have 10 Different Sizes",
+            "\nShrimp up to Deep Sea Fish have 10 Different Sizes",
             "Tune, Whale and Shark have 20 Different Sizes"
         ]
     },
     {
         "key": ["nm", "nightmare", "epic talisman", "hero talisman"],
-        "name": "Nightmare",
+        "name": "Nightmare Silver & Gold Chest Selection",
         "data": [
-            "`Nightmare Silver & Gold Chest Selection`: https://media.discordapp.net/attachments/580444014218838041/713316510214520832/unknown_1.png"
+            "https://media.discordapp.net/attachments/580444014218838041/713316510214520832/unknown_1.png"
         ]
     },
     {
         "key": ["mino", "minos"],
         "name": "Minos Equipment",
         "data": [
-            "**F14**: 2% => 0.5% for each part",
-            "**F15**: 4% => 0.8% for each part",
-            "**F16**: 8% => 1.6% for each part",
-            "**F17**: 16% => 3.2% for each part",
+            "https://media.discordapp.net/attachments/522366699257987072/729037127295303721/unknown.png",
+
             "\n__**For Minos Fragments and enhance rate using `.rate minos`.**__"
         ]
     },
@@ -134,8 +132,10 @@
             "- No FFA loots / No Accessory Drops",
             "- Use Sandstone to Buy Accessory or Get lucky Accessory box from Gold Chest",
             "https://i.imgur.com/9PKtjRC.png",
+            
             "\nDDN Accessories & Stats ",
             "https://i.imgur.com/084top6.png",
+
             "\nDDN Shop at Riverwort Wharf",
             "https://i.imgur.com/EAFq7g2.jpg"
         ]
@@ -147,10 +147,12 @@
             "__**Nest Gold & Silver Chest Loot**__",
             "Jade Evolver = Evolve Magic Grade to Rare Grade / Rare Grade to Epic Grade",
             "All Full Bloom Jades can be Evolved",
-            "Rare Full Bloom Jade adds 1% All Element stat",
+            
+            "\nRare Full Bloom Jade adds 1% All Element stat",
             "Epic Full Bloom Jade adds 2% All Element stat",
             "Full Bloom ECJ = Magic Grade -15% Element / Rare -14% Element / Epic -13% Element",
-            "Jade Evolver Can be Traded",
+
+            "\nJade Evolver Can be Traded",
             "https://i.imgur.com/sye9gFm.png",
 
             "\n__**Nest Drop rate for Full Bloom Jade**__",

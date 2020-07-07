@@ -55,9 +55,12 @@
         "name": "Nightmare Box",
         "data": [
             "Craft using Rare Fragment / Rare Essence / Epic Fragment",
+
             "\nUltimate Talisman can only be obtained from this box",
             "Kilos Breath is used for Reroll Level ( Kilos Breath is Tradeable )",
+
             "\nhttps://i.imgur.com/LETQNMB.png",
+
             "\nfor Epic Hero Talisman Stats + Reroll Chance, see `.info hero talisman` command."
         ]
     },
@@ -67,6 +70,7 @@
         "data": [
             "Champion Attack Jade Enhance Chart",
             "https://i.imgur.com/4N65J5L.png",
+
             "\nFlawless Victory Attack Jade Enhance Chart",
             "https://i.imgur.com/K9w0tao.png"
         ]
@@ -91,6 +95,7 @@
         "data": [
             "Dreamy Jade Enhance",
             "https://i.imgur.com/Wz1ITXF.png",
+            
             "\nBlood Moon Jade Enhance",
             "https://i.imgur.com/R3lo2Tg.png"
         ]
@@ -163,12 +168,15 @@
             "__**Fragments**__",
             "**F11**: 1pc (60%), 2pcs (30%), 3pcs(10%) fragments",
             "**F12**: 2pc (60%), 3pcs (30%), 4pcs(10%) fragments",
-            "**F13**: 3pc (60%), 4pcs (30%), 5pcs(10%) fragments\n",
-            "**F14**: 5pcs (98%) fragments",
+            "**F13**: 3pc (60%), 4pcs (30%), 5pcs(10%) fragments",
+
+            "\n**F14**: 5pcs (98%) fragments",
             "**F15**: 5pcs (96%) fragments",
             "**F16**: 5pcs (92%) fragments",
             "**F17**: 5pcs (84%) fragments",
+
             "\n__**For F14 - F17, see Minos Gear drop rate using `.drop minos`.**__",
+
             "\n__**Enhance rate**__",
             "https://i.imgur.com/CRKzJO0.png"
         ]
@@ -189,6 +197,7 @@
             "- High Grade Evolver Can be Traded & Sold in TH",
 
             "\nhttps://i.imgur.com/6FPGxoy.png",
+
             "\nFor additional stats info, see `.info battlefield` command!"
         ]
     },
