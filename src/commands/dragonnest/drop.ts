@@ -15,7 +15,7 @@ module.exports = {
         const item = (args.length ? args.join(' ').toLowerCase() : 'null');
         const msg = [];
 
-        const data = func.getDNDropData(item);
+        const data = func.getExternalData('dragonnest.dndrop', item);
         if (!data) {
             msg.push(`Drop rate untuk item \`${item}\` tidak ditemukan!`);
 

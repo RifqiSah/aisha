@@ -15,7 +15,7 @@ module.exports = {
         const info = (args.length ? args.join(' ').toLowerCase() : 'null');
         const msg = [];
 
-        const data = func.getDNInfoData(info);
+        const data = func.getExternalData('dragonnest.dninfo', info);
         if (!data) {
             msg.push(`Info untuk \`${info}\` tidak ditemukan!`);
 

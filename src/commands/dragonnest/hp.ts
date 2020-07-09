@@ -15,7 +15,7 @@ module.exports = {
         const nest = (args.length ? args.join(' ').toLowerCase() : 'null');
         const msg = [];
 
-        const data = func.getDNHpData(nest);
+        const data = func.getExternalData('dragonnest.dnhp', nest);
         if (!data) {
             msg.push(`HP untuk \`${nest}\` tidak ditemukan!`);
 

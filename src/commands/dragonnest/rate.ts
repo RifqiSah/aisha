@@ -15,7 +15,7 @@ module.exports = {
         const rate = (args.length ? args.join(' ').toLowerCase() : 'null');
         const msg = [];
 
-        const data = func.getDNRateData(rate);
+        const data = func.getExternalData('dragonnest.dnrate', rate);
         if (!data) {
             msg.push(`Rate untuk \`${rate}\` tidak ditemukan!`);
 
