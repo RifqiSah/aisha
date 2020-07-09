@@ -32,7 +32,7 @@ logger.info('[V] Done!');
 
 // init event handler
 logger.info('[-] Initialize handler');
-['commands', 'events', 'console'].forEach((x) => {
+['commands', 'events'].forEach((x) => {
     logger.info(` [O] ${x} handler`);
     require(`./handlers/${x}`)(client);
 });
