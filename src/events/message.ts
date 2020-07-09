@@ -80,7 +80,9 @@ module.exports = async (client: any, message: any) => {
         // Cek apakah command ada cooldownnya
         if (commandfile.cooldown > 0) {
             // Cek dulu apakah user sudah menjalankan command sebelumnya?
-            if (client.cmdcd.has(message.author.id)) return message.reply(`Anda harus menunggu selama \`${commandfile.cooldown} detik\` sebelum menggunakan command \`${commandfile.name}\` kembali!`).then((msg: any) => { msg.delete({ timeout: 10000 }); }).catch((err: any) => client.logger.error(err));
+            if (client.cmdcd.has(message.author.id)) {
+                return message.reply(`Anda harus menunggu selama \`${commandfile.cooldown} detik\` sebelum menggunakan command \`${commandfile.name}\` kembali!`).then((msg: any) => { msg.delete({ timeout: 10000 }); }).catch((err: any) => client.logger.error(err));
+            }
 
             // Kalau tidak, tambahkan user kedalam list cooldown
             client.cmdcd.add(message.author.id);
