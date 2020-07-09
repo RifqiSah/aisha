@@ -152,11 +152,12 @@
         "key": ["robot pet"],
         "name": "Exchange Legend Robot Pet",
         "data": [
-            "How to Get Accessory =>",
+            "__How to Get Accessory__",
             "Step 1 - Exchange Legend Robot to get [Heart Pounding Pet Accessory Pouch]",
             "Step 2 - Open Pouch",
-            "Step 3 - Get Love of Friend or Costume RNG from Pouch\n",
-            "https://i.imgur.com/o4NRzCV.png"
+            "Step 3 - Get Love of Friend or Costume RNG from Pouch",
+            
+            "\nhttps://i.imgur.com/o4NRzCV.png"
         ]
     },
     {
