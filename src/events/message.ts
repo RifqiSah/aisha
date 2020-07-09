@@ -38,7 +38,7 @@ module.exports = async (client: any, message: any) => {
         if (user.presence.status === 'dnd') return `**${user.tag}** sedang tidak dapat diganggu.`;
     });
 
-    if (users.length > 0) message.channel.send(users).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch();
+    if (users.length > 0) message.channel.send(users).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch((err: any) => client.logger.error(err));
     // == Akhir pengecekan user ==
 
     let regex = null;
@@ -80,7 +80,7 @@ module.exports = async (client: any, message: any) => {
         // Cek apakah command ada cooldownnya
         if (commandfile.cooldown > 0) {
             // Cek dulu apakah user sudah menjalankan command sebelumnya?
-            if (client.cmdcd.has(message.author.id)) return message.reply(`Anda harus menunggu selama \`${commandfile.cooldown} detik\` sebelum menggunakan command \`${commandfile.name}\` kembali!`).then((msg: any) => { msg.delete({ timeout: 10000 }); }).catch();
+            if (client.cmdcd.has(message.author.id)) return message.reply(`Anda harus menunggu selama \`${commandfile.cooldown} detik\` sebelum menggunakan command \`${commandfile.name}\` kembali!`).then((msg: any) => { msg.delete({ timeout: 10000 }); }).catch((err: any) => client.logger.error(err));
 
             // Kalau tidak, tambahkan user kedalam list cooldown
             client.cmdcd.add(message.author.id);
@@ -104,8 +104,8 @@ module.exports = async (client: any, message: any) => {
                 } else {
                     // Tidak ada? Tampilkan pesan error
                     // eslint-disable-next-line @typescript-eslint/no-empty-function
-                    message.delete().catch(() => {});
-                    message.channel.send(`Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch();
+                    message.delete().catch((err: any) => client.logger.error(err));
+                    message.channel.send(`Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch((err: any) => client.logger.error(err));
                 }
             // Jika role tidak ada jalankan saja
             } else {
@@ -114,8 +114,8 @@ module.exports = async (client: any, message: any) => {
         } else {
             // Command tidak aktif
             // eslint-disable-next-line @typescript-eslint/no-empty-function
-            message.delete().catch(() => {});
-            message.channel.send(`Command \`${commandfile.name}\` sedang tidak aktif!`).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch();
+            message.delete().catch((err: any) => client.logger.error(err));
+            message.channel.send(`Command \`${commandfile.name}\` sedang tidak aktif!`).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch((err: any) => client.logger.error(err));
         }
     }
     // == Akhir command manager ==

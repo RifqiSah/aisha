@@ -123,9 +123,10 @@ module.exports = {
                         data.push('```');
                     }
 
-                    msgs.edit(data).catch();
+                    msgs.edit(data).catch((err: any) => client.logger.error(err));
                 })
                 .catch((err) => {
+                    client.logger.error(err);
                     msgs.edit(`Uh oh, error tidak terduga:\`\`\`${err.status}: ${err.message}\`\`\``).then((msg: any) => { msg.delete({ timeout: 10000 }); });
                 });
         } else {
@@ -149,9 +150,10 @@ module.exports = {
 
                     data.push('```');
 
-                    msgs.edit(data).catch();
+                    msgs.edit(data).catch((err: any) => client.logger.error(err));
                 })
                 .catch((err) => {
+                    client.logger.error(err);
                     msgs.edit(`Uh oh, error tidak terduga:\`\`\`${err.status}: ${err.message}\`\`\``).then((msg: any) => { msg.delete({ timeout: 10000 }); });
                 });
         }

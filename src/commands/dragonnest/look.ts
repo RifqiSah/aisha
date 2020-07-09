@@ -19,6 +19,7 @@ module.exports = {
                 msgs.edit(`Respon:\`\`\`${res.text.slice(635, 1000)}\`\`\``).then((msg: any) => { msg.delete({ timeout: 60000 }); });
             })
             .catch((err) => {
+                client.logger.error(err);
                 msgs.edit(`Uh oh, error tidak terduga:\`\`\`${err.status}: ${err.message}\`\`\``).then((msg: any) => { msg.delete({ timeout: 10000 }); });
             });
     },

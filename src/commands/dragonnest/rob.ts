@@ -35,6 +35,7 @@ module.exports = {
                 msgs.edit(data);
             })
             .catch((err) => {
+                client.logger.error(err);
                 msgs.edit(`Uh oh, error tidak terduga:\`\`\`${err.status}: ${err.message}\`\`\``).then((msg: any) => { msg.delete({ timeout: 10000 }); });
             });
     },

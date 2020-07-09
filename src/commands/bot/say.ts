@@ -22,8 +22,7 @@ module.exports = {
             return;
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        message.delete().catch(() => {});
+        message.delete().catch((err: any) => client.logger.error(err));
         channel.send(sayMessage);
     },
 };

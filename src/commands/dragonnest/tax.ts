@@ -23,7 +23,7 @@ module.exports = {
             });
 
         if (!taxes) {
-            return message.channel.send('Terjadi kesalahan dalam mengambil data!').then((msg: any) => msg.delete({ timeout: 10000 })).catch();
+            return message.channel.send('Terjadi kesalahan dalam mengambil data!').then((msg: any) => msg.delete({ timeout: 10000 })).catch((err: any) => client.logger.error(err));
         }
 
         let tax = null;

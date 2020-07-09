@@ -23,7 +23,7 @@ module.exports = {
                     },
                 },
             // eslint-disable-next-line @typescript-eslint/no-empty-function
-            }).catch(() => {});
+            }).catch((err: any) => client.logger.error(err));
         }
 
         message.reply('Sukses mengirim pesan kepada para Organizer!');
