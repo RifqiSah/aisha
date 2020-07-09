@@ -1,16 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { readFileSync } from 'fs';
+import { readFileSync, readdirSync } from 'fs';
 import { resolve } from 'path';
-
-function loadData(file: string) {
-    const rawdata: Buffer = readFileSync(resolve(__dirname, `../../data/${file}`));
-    return JSON.parse(rawdata.toString());
-}
-
-const dndrop = loadData('dndrop.json');
-const dnhp = loadData('dnhp.json');
-const dninfo = loadData('dninfo.json');
-const dnrate = loadData('dnrate.json');
+import { Collection } from 'discord.js';
+import { logger } from './logger';
 
 const STATES = {
     STRENGTH: {
@@ -390,7 +382,31 @@ const STATES = {
     },
 };
 
+const externalDatas: Collection<string, any> = new Collection();
+
+function loadDataFiles(dirs: string): void {
+    const files = readdirSync(resolve(__dirname, `../../data/${dirs}`)).filter((f) => f.endsWith('.json'));
+    for (const file of files) {
+        const key = file.slice(0, -5);
+        const rawdata: Buffer = readFileSync(resolve(__dirname, `../../data/${dirs}/${file}`));
+        const parsed = JSON.parse(rawdata.toString());
+
+        logger.info(`  + '${dirs}/${key}' readed and parsed.`);
+        externalDatas.set(`${dirs}.${key}`, parsed);
+    }
+}
+
 export default class Function {
+    static loadData(): void {
+        logger.info('[-] Reading external data');
+        
+        ['dragonnest'].forEach((x) => {
+            loadDataFiles(x);
+        });
+
+        logger.info('[V] Done!');
+    }
+
     static getDate(): string {
         return new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
     }
@@ -421,27 +437,7 @@ export default class Function {
     static commandRecom(key: string, subkey: string): string|undefined {
         let commands: string|undefined;
 
-        switch (key) {
-            case 'dndrop':
-                commands = dndrop.map((item: any) => item.key.join(','));
-                break;
-
-            case 'dnhp':
-                commands = dnhp.map((item: any) => item.key.join(','));
-                break;
-
-            case 'dninfo':
-                commands = dninfo.map((item: any) => item.key.join(','));
-                break;
-
-            case 'dnrate':
-                commands = dnrate.map((item: any) => item.key.join(','));
-                break;
-
-            default:
-                commands = undefined;
-        }
-
+        commands = externalDatas?.get(`dragonnest.${key}`)?.map((item: any) => item.key.join(','));
         if (!commands) return undefined;
 
         commands = `,${commands},`.toString();
@@ -451,78 +447,19 @@ export default class Function {
     }
 
     static formatData(key: string): any {
-        let fmt: string;
-
-        switch (key) {
-            case 'dndrop':
-                fmt = dndrop.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
-                break;
-
-            case 'dnhp':
-                fmt = dnhp.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
-                break;
-
-            case 'dninfo':
-                fmt = dninfo.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
-                break;
-
-            case 'dnrate':
-                fmt = dnrate.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
-                break;
-
-            default:
-                return null;
-        }
-
-        return fmt;
+        return externalDatas?.get(`dragonnest.${key}`)?.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
     }
 
-    static getDNDropData(key: string) {
-        const d: any = dndrop.find((item: any) => {
+    static getExternalData(dataKey: string, key: string) {
+        const data = externalDatas?.get(dataKey)?.find((item: any) => {
             const itemReg = new RegExp(`\\b${item.key.join('|')}\\b`, 'g');
             if (!key.match(itemReg)) return null;
 
             return item;
         });
 
-        if (!d) return null;
-        return d;
-    }
-
-    static getDNHpData(key: string) {
-        const d: any = dnhp.find((item: any) => {
-            const itemReg = new RegExp(`\\b${item.key.join('|')}\\b`, 'g');
-            if (!key.match(itemReg)) return null;
-
-            return item;
-        });
-
-        if (!d) return null;
-        return d;
-    }
-
-    static getDNInfoData(key: string) {
-        const d: any = dninfo.find((item: any) => {
-            const itemReg = new RegExp(`\\b${item.key.join('|')}\\b`, 'g');
-            if (!key.match(itemReg)) return null;
-
-            return item;
-        });
-
-        if (!d) return null;
-        return d;
-    }
-
-    static getDNRateData(key: string) {
-        const d: any = dnrate.find((item: any) => {
-            const itemReg = new RegExp(`\\b${item.key.join('|')}\\b`, 'g');
-            if (!key.match(itemReg)) return null;
-
-            return item;
-        });
-
-        if (!d) return null;
-        return d;
+        if (!data) return null;
+        return data;
     }
 
     static formatPercent(number: number) {

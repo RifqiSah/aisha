@@ -3,6 +3,7 @@ import { Client, Collection, MessageEmbed } from 'discord.js';
 
 import config from './lib/config';
 import db from './lib/database';
+import func from './lib/function';
 import { logger } from './lib/logger';
 
 // public init
@@ -26,9 +27,10 @@ const client = {
     cmdsregex: new Collection(),
 };
 
-// Connect ke database
-db.connect();
 logger.info('[V] Done!');
+
+db.connect(); // Connect ke database
+func.loadData(); // Load external data
 
 // init event handler
 logger.info('[-] Initialize handler');
