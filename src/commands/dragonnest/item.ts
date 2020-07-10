@@ -2,6 +2,23 @@ import { get } from 'superagent';
 import func from '../../lib/function';
 import values from '../../lib/values';
 
+function getIconCoordinates(itemIconIndex: number) {
+    const page = Math.floor(Number(itemIconIndex) / 200) + 1;
+    const pageIdx = itemIconIndex % 200;
+    const row = Math.floor(pageIdx / 10);
+    const column = pageIdx % 10;
+    const UNIT_SIZE = 50;
+
+    const ret = {
+        page: page,
+        x: Math.max(UNIT_SIZE * column, 0),
+        y: UNIT_SIZE * row,
+        size: UNIT_SIZE
+    };
+
+    return ret;
+}
+
 async function getItemDatas(client: any, message: any, itemID: number) {
     const data: any = [];
 
@@ -56,7 +73,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
             if (item.stats?.length) {
                 const stats = item.stats;
 
-                data.push('\n**[Stats]**');
+                data.push('**[Stats]**');
                 data.push('```');
                         
                 for (const i in stats) {
@@ -112,6 +129,11 @@ async function getItemDatas(client: any, message: any, itemID: number) {
 
                 data.push('```');
             }
+
+            // if (item.iconIndex) {
+            const test = getIconCoordinates(item.iconIndex);
+            console.log(test);
+            // }
 
             message.edit(data).catch((err: any) => client.logger.error(err));
         })
