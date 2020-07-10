@@ -129,7 +129,6 @@ module.exports = {
                 })
                 .catch((err) => {
                     client.logger.error(err);
-                    msgs.edit(`Uh oh, error tidak terduga:\`\`\`${err.status}: ${err.message}\`\`\``).then((msg: any) => { msg.delete({ timeout: 10000 }); });
                 });
         } else {
             await get(`${values.divinitor_api}/items/search?p=0&sz=50&name=${itemID}`)
@@ -158,7 +157,6 @@ module.exports = {
                 })
                 .catch((err) => {
                     client.logger.error(err);
-                    msgs.edit(`Uh oh, error tidak terduga:\`\`\`${err.status}: ${err.message}\`\`\``).then((msg: any) => { msg.delete({ timeout: 10000 }); });
                 });
         }
     },
