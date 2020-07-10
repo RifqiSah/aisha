@@ -25,7 +25,9 @@ module.exports = {
             const name = args[0].toLowerCase();
             const command = client.cmds.get(name) || client.cmds.get(client.cmdsalias.get(name));
             
-            if (!command) return message.reply('Command tidak valid!');
+            if (!command) {
+                return message.reply('Command tidak valid!');
+            }
 
             data.push(`Informasi mengenai command \`${command.name}\`:\n`);
 

@@ -1,10 +1,15 @@
 module.exports = async (client: any, message: any) => {
     // Jangan hiraukan chat dari sesama bot dan pastikan chat berasal dari guild
-    if (message.author.bot || message.channel.type === 'dm') return;
+    if (message.author.bot || message.channel.type === 'dm') {
+        return;
+    }
     
     // Jangan hiraukan chat dari member tanpa developer role
-    if (client.config.ENV === 'local')
-        if (!message.member.roles.cache.has('433870492378595329')) return;
+    if (client.config.ENV === 'local') {
+        if (!message.member.roles.cache.has('433870492378595329')) {
+            return;
+        }
+    }
 
     // == Awal pengecekan mention BOT ==
     if (message.mentions.has(client.bot.user)) {
@@ -33,9 +38,9 @@ module.exports = async (client: any, message: any) => {
 
     // == Awal pengecekan user ==
     const users = message.mentions.users.map((user: any) => {
-        if (user.presence.status === 'offline') return `**${user.tag}** sedang offline.`;
-        if (user.presence.status === 'idle') return `**${user.tag}** sedang away.`;
-        if (user.presence.status === 'dnd') return `**${user.tag}** sedang tidak dapat diganggu.`;
+        if (user.presence.status === 'offline') { return `**${user.tag}** sedang offline.`; }
+        if (user.presence.status === 'idle') { return `**${user.tag}** sedang away.`; }
+        if (user.presence.status === 'dnd') { return `**${user.tag}** sedang tidak dapat diganggu.`; }
     });
 
     if (users.length > 0) message.channel.send(users).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch((err: any) => client.logger.error(err));
@@ -71,7 +76,9 @@ module.exports = async (client: any, message: any) => {
 
     if (command !== 'bot') {
         const isexist = await client.chsvc.getChannel(message.channel.id);
-        if (isexist) return;
+        if (isexist) {
+            return;
+        }
     }
 
     // == Awal command manager ==

@@ -5,7 +5,9 @@ module.exports = {
     addGuild(gId: string, gName: string) {
         const guild = new Guild({ guildId: gId, guildName: gName });
         guild.save((e, ch) => {
-            if (e) return logger.error(e);
+            if (e) {
+                return logger.error(e);
+            }
 
             logger.info(`[DB]: ${gId} saved!`);
         });
@@ -13,7 +15,9 @@ module.exports = {
 
     deleteGuild(gId: string) {
         Guild.findOneAndDelete({ guildId: gId }, (e, deleted) => {
-            if (e) return logger.error(e);
+            if (e) {
+                return logger.error(e);
+            }
 
             const msg = deleted ? 'deleted!' : 'not found!';
             logger.info(`[DB]: ${gId} ${msg}`);

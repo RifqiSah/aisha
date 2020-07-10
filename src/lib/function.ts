@@ -438,7 +438,9 @@ export default class Function {
         let commands: string|undefined;
 
         commands = externalDatas?.get(`dragonnest.${key}`)?.map((item: any) => item.key.join(','));
-        if (!commands) return undefined;
+        if (!commands) {
+            return undefined;
+        }
 
         commands = `,${commands},`.toString();
         const match = commands.match(new RegExp(`[^,?!]*(?<=[,?\\s!])${subkey}(?=[\\s,?!])[^,?!]*`, 'igm'));
@@ -453,12 +455,17 @@ export default class Function {
     static getExternalData(dataKey: string, key: string) {
         const data = externalDatas?.get(dataKey)?.find((item: any) => {
             const itemReg = new RegExp(`\\b${item.key.join('|')}\\b`, 'g');
-            if (!key.match(itemReg)) return null;
+            if (!key.match(itemReg)) {
+                return null;
+            }
 
             return item;
         });
 
-        if (!data) return null;
+        if (!data) {
+            return null;
+        }
+        
         return data;
     }
 

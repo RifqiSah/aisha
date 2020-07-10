@@ -22,7 +22,9 @@ module.exports = {
             await get(`${values.divinitor_api}/items/${itemID}`)
                 .then((res) => {
                     const item = JSON.parse(res.text);
-                    if (!item) return msgs.edit(`Item \`${itemID}\` tidak ditemukan!`);
+                    if (!item) {
+                        return msgs.edit(`Item \`${itemID}\` tidak ditemukan!`);
+                    }
 
                     // item name
                     data.push(`__**${item.name.name}**__\n`);
@@ -135,7 +137,9 @@ module.exports = {
                     data.push('```');
 
                     const items = JSON.parse(res.text).items;
-                    if (items.length <= 0) return msgs.edit(`Item \`${itemID}\` tidak ditemukan!`);
+                    if (items.length <= 0) {
+                        return msgs.edit(`Item \`${itemID}\` tidak ditemukan!`);
+                    }
 
                     for (const i in items) {
                         const item = items[i];

@@ -11,7 +11,9 @@ module.exports = {
     usage: '',
     cooldown: 0,
     func: (client: any, message: any, args: any) => {
-        if (!args.length) return message.reply('Kamu tidak memasukan nama role!');
+        if (!args.length) {
+            return message.reply('Kamu tidak memasukan nama role!');
+        }
 
         let role = args.join(' ').toLowerCase();
         role = role.replace(/\b\w/g, (l: any) => l.toUpperCase());

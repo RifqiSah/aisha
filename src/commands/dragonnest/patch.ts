@@ -15,7 +15,9 @@ module.exports = {
 
         const data = [];
         const channel = message.guild.channels.cache.find((ch: any) => ch.id === '381495270241730561'); // dn-sea
-        if (!channel) return;
+        if (!channel) {
+            return;
+        }
 
         const month = func.getMonthName();
         const newsNumber = args[0];

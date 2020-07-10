@@ -11,7 +11,9 @@ module.exports = {
     usage: '[input]',
     cooldown: 0,
     func: async (client: any, message: any, args: any) => {
-        if (message.author.id !== client.config.BOT_OWNER) return message.channel.send('Anda bukan pemilik hati aku!');
+        if (message.author.id !== client.config.BOT_OWNER) {
+            return message.channel.send('Anda bukan pemilik hati aku!');
+        }
 
         const toEval = args.join(' ');
         const evaluated = inspect(eval(toEval), { depth: 0 });

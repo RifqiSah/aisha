@@ -17,7 +17,9 @@ module.exports = {
 
         const data: any = [];
         const channel = message.guild.channels.cache.find((ch: any) => ch.id === '678739777700233216'); // noblesse info
-        if (!channel) return;
+        if (!channel) {
+            return;
+        }
 
         const msgs = await message.channel.send('Megambil data ...');
 
@@ -25,7 +27,9 @@ module.exports = {
             .then((res) => {
                 const nbdata = JSON.parse(res.text);
 
-                if (Array.isArray(nbdata) && nbdata.length === 0) return msgs.edit('Belum ada informasi untuk Noblesse Buff!').then((msg: any) => { msg.delete({ timeout: 10000 }); });
+                if (Array.isArray(nbdata) && nbdata.length === 0) {
+                    return msgs.edit('Belum ada informasi untuk Noblesse Buff!').then((msg: any) => { msg.delete({ timeout: 10000 }); });
+                }
 
                 for (const nbh in nbdata) {
                     const item = nbdata[nbh];
