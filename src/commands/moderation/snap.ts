@@ -28,7 +28,7 @@ module.exports = {
         }
 
         await message.channel.messages.fetch({ limit: args }).then((messages: any) => {
-            message.channel.bulkDelete(messages);
+            message.channel.bulkDelete(messages).catch((err: any) => client.logger.error(err));
         });
 
         message.channel.send(`${args} pesan telah dihapus!`).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch((err: any) => client.logger.error(err));
