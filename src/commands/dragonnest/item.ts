@@ -49,7 +49,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
 
             // item stats
             if (item.stats?.length) {
-                const stats = item.stats;
+                const stats = func.combineState(item.stats);
 
                 data.push('**[Stats]**');
                 data.push('```');
@@ -67,7 +67,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
 
             // item potentials
             if (item.potentials?.length) {
-                const potentials = item.potentials;
+                const potentials = func.combineState(item.potentials, 'value');
 
                 data.push('**[Additional Stat Options]**');
 
@@ -122,7 +122,8 @@ async function getItemDatas(client: any, message: any, itemID: number) {
             message.edit(data).catch((err: any) => client.logger.error(err));
         })
         .catch((err) => {
-            client.logger.error(err);
+            // client.logger.error(err);
+            console.error(err);
         });
 }
 

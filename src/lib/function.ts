@@ -218,12 +218,97 @@ export default class Function {
         return `${ret.toFixed(2).replace('.', ',')}%`;
     }
 
-    static formatNumber(number: number) {
+    static formatNumber(number: any) {
+        if (typeof number == 'string') {
+            const isArray = number.match(new RegExp('-', 'g'));
+            if (isArray) {
+                return this.formatNumberArray(number);
+            }
+        }
+
+        return this.formatNumberReal(number);
+    }
+
+    static formatNumberReal(number: number) {
         return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+    
+    static formatNumberArray(number: any) {
+        const num = new RegExp('(:?^|\\s)(?=.)((?:0|(?:[1-9](?:\\d*|\\d{0,2}(?:,\\d{3})*)))?(?:\\.\\d*[1-9])?)(?!\\S)', 'g');
+        const numbers = number.match(num)?.map((x: number) => this.formatNumber(x));
+
+        return numbers.join(' - ');
     }
 
     static formatState(state: string) {
         return this.getKeyValue(state)(values.STATES);
+    }
+
+    static combineState(states: any, stateKey?: any) {
+        const combined: any = [];
+        let obj: any = {};
+        
+        if (!stateKey) {
+            stateKey = 'min';
+        }
+
+        for (const i in states) {
+            const state = states[i];
+            const val = state[stateKey];
+
+            if (state.state === 'PHYSICAL_DAMAGE_MIN') {
+                obj = {};
+
+                obj.state = 'PHYSICAL_DAMAGE_MINMAX';
+                obj.min = val;
+            } else if (state.state === 'PHYSICAL_DAMAGE_MAX') {
+                if (obj.state === 'PHYSICAL_DAMAGE_MINMAX') {
+                    obj.min = obj.min + ' - ' + val;
+                }
+
+                combined.push(obj);
+            } else if (state.state === 'MAGICAL_DAMAGE_MIN') {
+                obj = {};
+
+                obj.state = 'MAGICAL_DAMAGE_MINMAX';
+                obj.min = val;
+            } else if (state.state === 'MAGICAL_DAMAGE_MAX') {
+                if (obj.state === 'MAGICAL_DAMAGE_MINMAX') {
+                    obj.min = obj.min + ' - ' + val;
+                }
+
+                combined.push(obj);
+            } else if (state.state === 'PHYSICAL_DAMAGE_MIN_PERCENT') {
+                obj = {};
+
+                obj.state = 'PHYSICAL_DAMAGE_MINMAX_PERCENT';
+                obj.min = val;
+            } else if (state.state === 'PHYSICAL_DAMAGE_MAX_PERCENT') {
+                if (obj.state === 'PHYSICAL_DAMAGE_MINMAX_PERCENT') {
+                    obj.min = obj.min + ' - ' + val;
+                }
+
+                combined.push(obj);
+            } else if (state.state === 'MAGICAL_DAMAGE_MIN_PERCENT') {
+                obj = {};
+
+                obj.state = 'MAGICAL_DAMAGE_MINMAX_PERCENT';
+                obj.min = val;
+            } else if (state.state === 'MAGICAL_DAMAGE_MAX_PERCENT') {
+                if (obj.state === 'MAGICAL_DAMAGE_MINMAX_PERCENT') {
+                    obj.min = obj.min + ' - ' + val;
+                }
+
+                combined.push(obj);
+            } else {
+                combined.push(state);
+            }
+        }
+
+        // console.log(states);
+        // console.log(combined);
+        
+        return combined;
     }
 
     static formatTitleCase(str: string) {
