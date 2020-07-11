@@ -209,18 +209,21 @@ export default class Function {
         return ret;
     }
     
+    static getKeyValue(key: string) {
+        return (obj: Record<string, any>) => obj[key];
+    }
+
     static formatPercent(number: number) {
         const ret = number * 100;
-        return `${ret.toFixed(2)}%`;
+        return `${ret.toFixed(2).replace('.', ',')}%`;
     }
 
     static formatNumber(number: number) {
-        return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
 
     static formatState(state: string) {
-        const _getKeyValue_ = (key: string) => (obj: Record<string, any>) => obj[key];
-        return _getKeyValue_(state)(values.STATES);
+        return this.getKeyValue(state)(values.STATES);
     }
 
     static formatTitleCase(str: string) {

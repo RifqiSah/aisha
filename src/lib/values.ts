@@ -389,4 +389,10 @@ export default class Values {
             type: 'stat'
         }
     };
+
+    static UnknownStateMap = {
+        88: 'ELE',
+        37: 'STAT',
+        87: 'STAT_PERCENT',
+    };
 }

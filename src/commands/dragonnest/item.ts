@@ -15,9 +15,8 @@ async function getItemDatas(client: any, message: any, itemID: number) {
                 return message.edit(`Item \`${itemID}\` tidak ditemukan!`);
             }
 
-            // item name and ID
-            data.push(`__**${item.name.name}**__`);
-            data.push(`#${item.id} / ${item.ownerTable}\n`);
+            // item name
+            data.push(`__**${item.name.name}**__\n`);
 
             // item description
             if (item.desc) {
@@ -26,6 +25,8 @@ async function getItemDatas(client: any, message: any, itemID: number) {
 
             // general info
             data.push('**[General Info]**```');
+            data.push(`Item ID: ${item.id}`);
+            data.push(`Source Table: ${item.ownerTable}`);
             data.push(`Gear Score: ${func.formatNumber(item.gearScore ?? 0)}`);
             data.push(`Item Level: ${item.level}`);
             data.push(`Item Rarity: ${func.formatTitleCase(item.rank)}`);
@@ -52,13 +53,11 @@ async function getItemDatas(client: any, message: any, itemID: number) {
 
                 data.push('**[Stats]**');
                 data.push('```');
-                        
-                for (const i in stats) {
-                    let name = stats[i].state;
-                    let num = stats[i].min;
 
-                    num = (name.includes('PERCENT') ? func.formatPercent(num) : func.formatNumber(num));
-                    name = func.formatState(name).name;
+                for (const i in stats) {
+                    const statName = stats[i].state;
+                    const name = func.formatState(statName).name;
+                    const num = statName.includes('PERCENT') ? func.formatPercent(stats[i].min) : func.formatNumber(stats[i].min);
 
                     data.push(`${name}: ${num}`);
                 }
@@ -71,29 +70,22 @@ async function getItemDatas(client: any, message: any, itemID: number) {
                 const potentials = item.potentials;
 
                 data.push('**[Additional Stat Options]**');
-                data.push('```');
 
                 for (const i in potentials) {
                     const states = potentials[i].states;
                             
-                    data.push(`Potential No. ${parseInt(i) + 1}: ${func.formatPercent(potentials[i].rate)}\n--`);
+                    data.push(`\`\`\`Potential No. ${parseInt(i) + 1} - Rate ${func.formatPercent(potentials[i].rate)}\n`);
 
                     for (const j in states) {
-                        let name = states[j].state;
-                        let num = states[j].value;
-                                
-                        num = (name.includes('PERCENT') ? func.formatPercent(num) : func.formatNumber(num));
-                        name = func.formatState(name).name;
+                        const statName = states[j].state;
+                        const name = func.formatState(statName).name;
+                        const num = statName.includes('PERCENT') ? func.formatPercent(states[j].value) : func.formatNumber(states[j].value);
 
                         data.push(`${name}: ${num}`);
                     }
                             
-                    if (parseInt(i) + 1 < potentials.length) {
-                        data.push(' ');
-                    }
+                    data.push('```');
                 }
-
-                data.push('```');
             }
 
             // dragon jewel slots
@@ -115,15 +107,15 @@ async function getItemDatas(client: any, message: any, itemID: number) {
             data.push(`Unstamp Count: ${item.unstampCount ? item.unstampCount : 0}\n`);
             data.push('```');
             
-            if (item.iconIndex) {
-                const itemOverlayData = func.getSlotOverlay(item.rank, item.type.type);
-                const itemIconData = func.getIconCoordinates(item.iconIndex);
-                const imageOverlay = await image.renderImage(itemOverlayData.url, itemOverlayData.x, itemOverlayData.y, 51, 51);
-                const imageItem = await image.renderImage(func.getItemIconPageUrl(itemIconData.page), itemIconData.x, itemIconData.y, 51, 51);
-                const itemIconOverlay = await image.renderImageComposite(imageOverlay, imageItem);
+            // if (item.iconIndex) {
+            //     const itemOverlayData = func.getSlotOverlay(item.rank, item.type.type);
+            //     const itemIconData = func.getIconCoordinates(item.iconIndex);
+            //     const imageOverlay = await image.renderImage(itemOverlayData.url, itemOverlayData.x, itemOverlayData.y, 51, 51);
+            //     const imageItem = await image.renderImage(func.getItemIconPageUrl(itemIconData.page), itemIconData.x, itemIconData.y, 51, 51);
+            //     const itemIconOverlay = await image.renderImageComposite(imageOverlay, imageItem);
 
-                message.channel.send('__**[Icon]**__', { files: [itemIconOverlay] }).catch((err: any) => client.logger.error(err));
-            }
+            //     message.channel.send('__**[Icon]**__', { files: [itemIconOverlay] }).catch((err: any) => client.logger.error(err));
+            // }
 
             message.edit(data).catch((err: any) => client.logger.error(err));
         })
