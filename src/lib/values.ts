@@ -383,5 +383,10 @@ export default class Values {
                 'VITALITY_PERCENT'
             ]
         },
+        UNKNOWN: {
+            name: 'Unknown',
+            abbv: 'Unknown',
+            type: 'stat'
+        }
     };
 }
