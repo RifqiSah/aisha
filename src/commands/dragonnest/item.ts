@@ -122,8 +122,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
             message.edit(data).catch((err: any) => client.logger.error(err));
         })
         .catch((err) => {
-            // client.logger.error(err);
-            console.error(err);
+            client.logger.error(err);
         });
 }
 
