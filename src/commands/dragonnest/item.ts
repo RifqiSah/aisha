@@ -107,15 +107,17 @@ async function getItemDatas(client: any, message: any, itemID: number) {
             data.push(`Unstamp Count: ${item.unstampCount ? item.unstampCount : 0}\n`);
             data.push('```');
             
-            // if (item.iconIndex) {
-            //     const itemOverlayData = func.getSlotOverlay(item.rank, item.type.type);
-            //     const itemIconData = func.getIconCoordinates(item.iconIndex);
-            //     const imageOverlay = await image.renderImage(itemOverlayData.url, itemOverlayData.x, itemOverlayData.y, 51, 51);
-            //     const imageItem = await image.renderImage(func.getItemIconPageUrl(itemIconData.page), itemIconData.x, itemIconData.y, 51, 51);
-            //     const itemIconOverlay = await image.renderImageComposite(imageOverlay, imageItem);
+            /*
+            if (item.iconIndex) {
+                const itemOverlayData = func.getSlotOverlay(item.rank, item.type.type);
+                const itemIconData = func.getIconCoordinates(item.iconIndex);
+                const imageOverlay = await image.renderImage(itemOverlayData.url, itemOverlayData.x, itemOverlayData.y, 51, 51);
+                const imageItem = await image.renderImage(func.getItemIconPageUrl(itemIconData.page), itemIconData.x, itemIconData.y, 51, 51);
+                const itemIconOverlay = await image.renderImageComposite(imageOverlay, imageItem);
 
-            //     message.channel.send('__**[Icon]**__', { files: [itemIconOverlay] }).catch((err: any) => client.logger.error(err));
-            // }
+                message.channel.send('__**[Icon]**__', { files: [itemIconOverlay] }).catch((err: any) => client.logger.error(err));
+            }
+            */
 
             message.edit(data).catch((err: any) => client.logger.error(err));
         })
