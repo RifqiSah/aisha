@@ -76,7 +76,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
                 for (const i in potentials) {
                     const states = potentials[i].states;
                             
-                    data.push(`Potential Number ${parseInt(i) + 1}: ${func.formatPercent(potentials[i].rate)}\n--`);
+                    data.push(`Potential No. ${parseInt(i) + 1}: ${func.formatPercent(potentials[i].rate)}\n--`);
 
                     for (const j in states) {
                         let name = states[j].state;
