@@ -137,12 +137,12 @@ export default class Values {
             type: 'percent',
         },
         HP: {
-            name: 'HEALTH',
+            name: 'Health',
             abbv: 'HP',
             type: 'stat',
         },
         MANA: {
-            name: 'MANA',
+            name: 'Mana',
             abbv: 'MP',
             type: 'stat',
         },
