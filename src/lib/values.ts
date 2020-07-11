@@ -1,5 +1,5 @@
 export default class Values {
-    static bot_version      = 'v2.3.01';
+    static bot_version      = 'v2.3.05';
 
     static aisha_api        = 'https://alriftech.com/api/v2/bot/aisha';
     static divinitor_api    = 'https://reference.dn.divinitor.com/api/server/sea';
