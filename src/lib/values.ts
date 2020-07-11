@@ -344,6 +344,12 @@ export default class Values {
             abbv: '% CRIT DMG',
             type: 'percent',
         },
+        ONE_HUNDRED: {
+            name: '100',
+            abbv: '100',
+            type: 'stat',
+            obsolete: true
+        },
         ONE_HUNDRED_SEVEN: {
             name: '107',
             abbv: '107',
