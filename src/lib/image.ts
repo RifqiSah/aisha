@@ -1,10 +1,10 @@
 import Jimp from 'jimp';
 
 export default class Image {
-    static async renderImage(url: string, x = 0, y = 0, height = 0, width = 0): Promise<Jimp> {
+    static async renderImage(url: string, x?: number, y?: number, height?: number, width?: number): Promise<Jimp> {
         const image = await Jimp.read(url);
 
-        if (x && y && height && width) {
+        if (x !== undefined && y !== undefined && height !== undefined && width !== undefined) {
             image.crop(x, y, height, width);
         }
 
