@@ -222,4 +222,8 @@ export default class Function {
         const _getKeyValue_ = (key: string) => (obj: Record<string, any>) => obj[key];
         return _getKeyValue_(state)(values.STATES);
     }
+
+    static formatTitleCase(str: string) {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
 }

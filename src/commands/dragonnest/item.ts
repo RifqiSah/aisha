@@ -15,27 +15,20 @@ async function getItemDatas(client: any, message: any, itemID: number) {
                 return message.edit(`Item \`${itemID}\` tidak ditemukan!`);
             }
 
-            // item name
-            data.push(`__**[${item.id}] - ${item.name.name}**__\n`);
+            // item name and ID
+            data.push(`__**${item.name.name}**__`);
+            data.push(`#${item.id} / ${item.ownerTable}\n`);
 
             // item description
             if (item.desc) {
                 data.push(`${item.desc.desc.replace(/<br\/>/g, '\n').replace(/<(.|\n)*?>/g, '').replace(/\[/g, '**[').replace(/\]/g, ']**')}\n`);
             }
-                    
-            // storage and trading info
-            data.push('**[Storage and Trading Info]**```');
-            data.push(`Trade: ${item.canTrade ? 'yes' : 'no'}`);
-            data.push(`Cash Item: ${item.cashItem ? 'yes' : 'no'}`);
-            data.push(`Server Storage: ${item.canServerStorage ? 'yes' : 'no'}`);
-            data.push(`Stamp Count: ${item.unstampCount ? item.unstampCount : 0}\n`);
-            data.push('```');
 
             // general info
             data.push('**[General Info]**```');
-            data.push(`Gear Score: ${item.gearScore ? item.gearScore : 0}`);
-            data.push(`Minimum Level: ${item.level}`);
-            data.push(`Rarity: ${item.rank.charAt(0).toUpperCase() + item.rank.slice(1).toLowerCase()}`);
+            data.push(`Gear Score: ${func.formatNumber(item.gearScore ?? 0)}`);
+            data.push(`Item Level: ${item.level}`);
+            data.push(`Item Rarity: ${func.formatTitleCase(item.rank)}`);
 
             // class
             if (item.needClass?.length) {
@@ -77,7 +70,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
             if (item.potentials?.length) {
                 const potentials = item.potentials;
 
-                data.push('**[Potentials]**');
+                data.push('**[Additional Stat Options]**');
                 data.push('```');
 
                 for (const i in potentials) {
@@ -93,7 +86,9 @@ async function getItemDatas(client: any, message: any, itemID: number) {
                         data.push(`${name}: ${num}`);
                     }
                             
-                    data.push(' ');
+                    if (parseInt(i) + 1 < potentials.length) {
+                        data.push(' ');
+                    }
                 }
 
                 data.push('```');
@@ -103,13 +98,21 @@ async function getItemDatas(client: any, message: any, itemID: number) {
             if (item.gemslots) {
                 data.push('**[Dragon Jewel]**```');
 
-                data.push(`Attack: ${item.gemslots.offensive ? 'yes' : 'no'}`);
-                data.push(`Defense: ${item.gemslots.defensive ? 'yes' : 'no'}`);
-                data.push(`Skill: ${item.gemslots.skill ? 'yes' : 'no'}`);
+                data.push(`Can Use Offensive Jade? ${item.gemslots.offensive ? 'Yes' : 'No'}`);
+                data.push(`Can Use Defensive Jde? ${item.gemslots.defensive ? 'Yes' : 'No'}`);
+                data.push(`Can Use Skill Jade? ${item.gemslots.skill ? 'Yes' : 'No'}`);
 
                 data.push('```');
             }
 
+            // storage and trading info
+            data.push('**[Storage and Trading Info]**```');
+            data.push(`Can Trade? ${item.canTrade ? 'Yes' : 'No'}`);
+            data.push(`Cash Item? ${item.cashItem ? 'Yes' : 'No'}`);
+            data.push(`Can Use Server Storage? ${item.canServerStorage ? 'Yes' : 'No'}`);
+            data.push(`Unstamp Count: ${item.unstampCount ? item.unstampCount : 0}\n`);
+            data.push('```');
+            
             if (item.iconIndex) {
                 const itemOverlayData = func.getSlotOverlay(item.rank, item.type.type);
                 const itemIconData = func.getIconCoordinates(item.iconIndex);
@@ -158,7 +161,7 @@ module.exports = {
                 for (const i in items) {
                     const item = items[i];
 
-                    data.push(`${parseInt(i) + 1}: ${item.name.name}`);
+                    data.push(`${parseInt(i) + 1}: ${item.name.name} [${func.formatTitleCase(item.rank)}]`);
 
                     if (parseInt(i) === 24) {
                         data.push(`\n*) Data yang ditampilkan hanya 25 dari ${items.length}. Dimohon untuk menggunakan nama item yang spesifik.`);
