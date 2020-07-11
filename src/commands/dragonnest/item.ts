@@ -76,6 +76,8 @@ async function getItemDatas(client: any, message: any, itemID: number) {
                 for (const i in potentials) {
                     const states = potentials[i].states;
                             
+                    data.push(`Potential Number ${parseInt(i) + 1}: ${func.formatPercent(potentials[i].rate)}\n--`);
+
                     for (const j in states) {
                         let name = states[j].state;
                         let num = states[j].value;
@@ -96,7 +98,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
 
             // dragon jewel slots
             if (item.gemslots) {
-                data.push('**[Dragon Jewel]**```');
+                data.push('**[Dragon Jewel Slots]**```');
 
                 data.push(`Can Use Offensive Jade? ${item.gemslots.offensive ? 'Yes' : 'No'}`);
                 data.push(`Can Use Defensive Jde? ${item.gemslots.defensive ? 'Yes' : 'No'}`);
@@ -144,6 +146,10 @@ module.exports = {
         const data: any = [];
         const itemName = args.join(' ');
         const msgs = await message.channel.send(`Mencari item \`${itemName}\` ...`);
+
+        if (!isNaN(itemName)) {
+            return getItemDatas(client, msgs, itemName);
+        }
 
         await get(`${values.divinitor_api}/items/search?p=0&sz=50&name=${itemName}`)
             .then((res) => {
