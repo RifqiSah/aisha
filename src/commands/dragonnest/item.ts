@@ -1,136 +1,7 @@
-import Jimp from 'jimp';
 import { get } from 'superagent';
 import func from '../../lib/function';
+import image from '../../lib/image';
 import values from '../../lib/values';
-
-function getIconCoordinates(itemIconIndex: number) {
-    const page = Math.floor(Number(itemIconIndex) / 200) + 1;
-    const pageIdx = itemIconIndex % 200;
-    const row = Math.floor(pageIdx / 10);
-    const column = pageIdx % 10;
-    const UNIT_SIZE = 50;
-
-    const ret = {
-        page: page,
-        x: Math.max(UNIT_SIZE * column, 0),
-        y: UNIT_SIZE * row,
-        size: UNIT_SIZE
-    };
-
-    return ret;
-}
-
-function getItemIconPageUrl(page: number) {
-    let pageStr;
-    if (page < 10) {
-        pageStr = '0' + page;
-    } else {
-        pageStr = page;
-    }
-
-    return `${values.divinitor_api}/dds/itemicon${pageStr}/png`;
-}
-
-function getSlotOverlay(rank: any, type: string) {
-    const UNIT_SIZE = 52;
-    const ret = {
-        url: `${values.divinitor_api}/dds/uit_itemslotbutton_o.dds/png`,
-        x: 0,
-        y: 0,
-    };
-
-    const isWeap = type === 'WEAPON' || type === 'PARTS';
-
-    if (rank === 'NORMAL' || rank === 0) {
-        if (isWeap) {
-            ret.x = 0 * UNIT_SIZE;
-            ret.y = 0 * UNIT_SIZE;
-        } else {
-            ret.x = 2 * UNIT_SIZE;
-            ret.y = 2 * UNIT_SIZE;
-        }
-    }
-    
-    if (rank === 'MAGIC' || rank === 1) {
-        if (isWeap) {
-            ret.x = 6 * UNIT_SIZE;
-            ret.y = 1 * UNIT_SIZE;
-        } else {
-            ret.x = 0 * UNIT_SIZE;
-            ret.y = 1 * UNIT_SIZE;
-        }
-    }
-    
-    if (rank === 'RARE' || rank === 2) {
-        if (isWeap) {
-            ret.x = 6 * UNIT_SIZE;
-            ret.y = 2 * UNIT_SIZE;
-        } else {
-            ret.x = 6 * UNIT_SIZE;
-            ret.y = 0 * UNIT_SIZE;
-        }
-    }
-
-    if (rank === 'EPIC' || rank === 3) {
-        if (isWeap) {
-            ret.x = 7 * UNIT_SIZE;
-            ret.y = 2 * UNIT_SIZE;
-        } else {
-            ret.x = 8 * UNIT_SIZE;
-            ret.y = 3 * UNIT_SIZE;
-        }
-    }
-
-    if (rank === 'UNIQUE' || rank === 4) {
-        if (isWeap) {
-            ret.x = 7 * UNIT_SIZE;
-            ret.y = 3 * UNIT_SIZE;
-        } else {
-            ret.x = 0 * UNIT_SIZE;
-            ret.y = 2 * UNIT_SIZE;
-        }
-    }
-
-    if (rank === 'LEGENDARY' || rank === 5) {
-        ret.x = 5 * UNIT_SIZE;
-        ret.y = 3 * UNIT_SIZE;
-    }
-
-    if (rank === 'DIVINE' || rank === 6) {
-        if (isWeap) {
-            ret.x = 4 * UNIT_SIZE;
-            ret.y = 1 * UNIT_SIZE;
-        } else {
-            ret.x = 1 * UNIT_SIZE;
-            ret.y = 2 * UNIT_SIZE;
-        }
-    }
-
-    if (rank === 'ANCIENT' || rank === 7) {
-        ret.url = `${values.divinitor_api}/dds/uit_itemslotbutton.dds/png`;
-        if (isWeap) {
-            ret.x = 1 * UNIT_SIZE;
-            ret.y = 3 * UNIT_SIZE;
-        } else {
-            ret.x = 0 * UNIT_SIZE;
-            ret.y = 3 * UNIT_SIZE;
-        }
-    }
-
-    return ret;
-}
-
-async function renderImage(overlayUrl: string, overlayX: number, overlayY: number, iconUrl: string, iconX: number, iconY: number) {
-    const overlayImage = await Jimp.read(overlayUrl);
-    overlayImage.crop(overlayX, overlayY, 51, 51);
-
-    const iconImage = await Jimp.read(iconUrl);
-    iconImage.crop(iconX, iconY, 51, 51);
-
-    iconImage.composite(overlayImage, 0, 0);
-    
-    return await iconImage.getBufferAsync(Jimp.MIME_PNG);
-}
 
 async function getItemDatas(client: any, message: any, itemID: number) {
     const data: any = [];
@@ -193,9 +64,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
                     let name = stats[i].state;
                     let num = stats[i].min;
 
-                    if (name.includes('PERCENT')) num = func.formatPercent(num);
-                    else num = func.formatNumber(num);
-
+                    num = (name.includes('PERCENT') ? func.formatPercent(num) : func.formatNumber(num));
                     name = func.formatState(name).name;
 
                     data.push(`${name}: ${num}`);
@@ -218,9 +87,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
                         let name = states[j].state;
                         let num = states[j].value;
                                 
-                        if (name.includes('PERCENT')) num = func.formatPercent(num);
-                        else num = func.formatNumber(num);
-                                
+                        num = (name.includes('PERCENT') ? func.formatPercent(num) : func.formatNumber(num));
                         name = func.formatState(name).name;
 
                         data.push(`${name}: ${num}`);
@@ -244,10 +111,11 @@ async function getItemDatas(client: any, message: any, itemID: number) {
             }
 
             if (item.iconIndex) {
-                const itemIconCordinate = getIconCoordinates(item.iconIndex);
-                const itemIconPage = getItemIconPageUrl(itemIconCordinate.page);
-                const itemOverlayData = getSlotOverlay(item.rank, item.type.type);
-                const itemIconOverlay = await renderImage(itemOverlayData.url, itemOverlayData.x, itemOverlayData.y, itemIconPage, itemIconCordinate.x, itemIconCordinate.y);
+                const itemOverlayData = func.getSlotOverlay(item.rank, item.type.type);
+                const itemIconData = func.getIconCoordinates(item.iconIndex);
+                const imageOverlay = await image.renderImage(itemOverlayData.url, itemOverlayData.x, itemOverlayData.y, 51, 51);
+                const imageItem = await image.renderImage(func.getItemIconPageUrl(itemIconData.page), itemIconData.x, itemIconData.y, 51, 51);
+                const itemIconOverlay = await image.renderImageComposite(imageOverlay, imageItem);
 
                 message.channel.send('__**[Icon]**__', { files: [itemIconOverlay] }).catch((err: any) => client.logger.error(err));
             }

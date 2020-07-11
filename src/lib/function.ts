@@ -92,6 +92,123 @@ export default class Function {
         return data;
     }
 
+    static getIconCoordinates(itemIconIndex: number) {
+        const page = Math.floor(Number(itemIconIndex) / 200) + 1;
+        const pageIdx = itemIconIndex % 200;
+        const row = Math.floor(pageIdx / 10);
+        const column = pageIdx % 10;
+        const UNIT_SIZE = 50;
+    
+        const ret = {
+            page: page,
+            x: Math.max(UNIT_SIZE * column, 0),
+            y: UNIT_SIZE * row,
+            size: UNIT_SIZE
+        };
+    
+        return ret;
+    }
+    
+    static getItemIconPageUrl(page: number) {
+        let pageStr;
+        if (page < 10) {
+            pageStr = '0' + page;
+        } else {
+            pageStr = page;
+        }
+    
+        return `${values.divinitor_api}/dds/itemicon${pageStr}/png`;
+    }
+    
+    static getSlotOverlay(rank: any, type: string) {
+        const UNIT_SIZE = 52;
+        const ret = {
+            url: `${values.divinitor_api}/dds/uit_itemslotbutton_o.dds/png`,
+            x: 0,
+            y: 0,
+        };
+    
+        const isWeap = type === 'WEAPON' || type === 'PARTS';
+    
+        if (rank === 'NORMAL' || rank === 0) {
+            if (isWeap) {
+                ret.x = 0 * UNIT_SIZE;
+                ret.y = 0 * UNIT_SIZE;
+            } else {
+                ret.x = 2 * UNIT_SIZE;
+                ret.y = 2 * UNIT_SIZE;
+            }
+        }
+        
+        if (rank === 'MAGIC' || rank === 1) {
+            if (isWeap) {
+                ret.x = 6 * UNIT_SIZE;
+                ret.y = 1 * UNIT_SIZE;
+            } else {
+                ret.x = 0 * UNIT_SIZE;
+                ret.y = 1 * UNIT_SIZE;
+            }
+        }
+        
+        if (rank === 'RARE' || rank === 2) {
+            if (isWeap) {
+                ret.x = 6 * UNIT_SIZE;
+                ret.y = 2 * UNIT_SIZE;
+            } else {
+                ret.x = 6 * UNIT_SIZE;
+                ret.y = 0 * UNIT_SIZE;
+            }
+        }
+    
+        if (rank === 'EPIC' || rank === 3) {
+            if (isWeap) {
+                ret.x = 7 * UNIT_SIZE;
+                ret.y = 2 * UNIT_SIZE;
+            } else {
+                ret.x = 8 * UNIT_SIZE;
+                ret.y = 3 * UNIT_SIZE;
+            }
+        }
+    
+        if (rank === 'UNIQUE' || rank === 4) {
+            if (isWeap) {
+                ret.x = 7 * UNIT_SIZE;
+                ret.y = 3 * UNIT_SIZE;
+            } else {
+                ret.x = 0 * UNIT_SIZE;
+                ret.y = 2 * UNIT_SIZE;
+            }
+        }
+    
+        if (rank === 'LEGENDARY' || rank === 5) {
+            ret.x = 5 * UNIT_SIZE;
+            ret.y = 3 * UNIT_SIZE;
+        }
+    
+        if (rank === 'DIVINE' || rank === 6) {
+            if (isWeap) {
+                ret.x = 4 * UNIT_SIZE;
+                ret.y = 1 * UNIT_SIZE;
+            } else {
+                ret.x = 1 * UNIT_SIZE;
+                ret.y = 2 * UNIT_SIZE;
+            }
+        }
+    
+        if (rank === 'ANCIENT' || rank === 7) {
+            ret.url = `${values.divinitor_api}/dds/uit_itemslotbutton.dds/png`;
+            if (isWeap) {
+                ret.x = 1 * UNIT_SIZE;
+                ret.y = 3 * UNIT_SIZE;
+            } else {
+                ret.x = 0 * UNIT_SIZE;
+                ret.y = 3 * UNIT_SIZE;
+            }
+        }
+    
+        return ret;
+    }
+    
     static formatPercent(number: number) {
         const ret = number * 100;
         return `${ret.toFixed(2)}%`;
