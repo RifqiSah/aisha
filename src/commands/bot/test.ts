@@ -1,4 +1,5 @@
 import func from '../../lib/function';
+import values from '../../lib/values';
 
 module.exports = {
     name: 'test',
