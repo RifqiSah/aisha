@@ -2,6 +2,10 @@ import { logger } from '../../lib/logger';
 import { Channel } from '../models/channel.model';
 
 module.exports = {
+    count() {
+        return Channel.countDocuments({});
+    },
+
     getAllChannel() {
         Channel.find({}, (e, ch) => {
             if (e) {

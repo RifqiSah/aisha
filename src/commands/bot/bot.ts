@@ -8,11 +8,11 @@ module.exports = {
     aliases: [],
     usage: '[sub command] [status]',
     cooldown: 0,
-    func: (client: any, message: any, args: any) => {
+    func: async (client: any, message: any, args: any) => {
         message.delete();
 
         if (!args.length) {
-            return message.channel.send('Harap masukkan parameter!').then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch((err: any) => {
+            return message.channel.send('Harap masukkan parameter!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
                 client.logger.error(err);
             });
         }
@@ -22,6 +22,9 @@ module.exports = {
         const guildid = message.guild.id;
         const chname = client.bot.channels.cache.get(chid).name;
         
+        const gcount = await client.guildsvc.count();
+        const chcount = await client.chsvc.count();
+
         switch (args[0]) {
             case 'dch':
                 client.chsvc.addChannel(guildid, chid, chname);
@@ -32,12 +35,20 @@ module.exports = {
                 client.chsvc.deleteChannel(guildid, chid, chname);
                 data.push(`Channel <#${chid}> telah diaktifkan`);
                 break;
+            
+            case 'gcount':
+                data.push(`Aisha telah masuk kedalam \`${gcount}\` guild!`);
+                break;
+
+            case 'chcount':
+                data.push(`Aisha telah masuk kedalam \`${chcount}\` channel!`);
+                break;
 
             default:
                 data.push(`Pengaturan untuk \`${args[0]}\` tidak ditemukan!`);
         }
 
-        message.channel.send(data, { split: true }).then((msg: any) => { msg.delete({ timeout: 5000 }); }).catch((err: any) => {
+        message.channel.send(data).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
             client.logger.error(err);
         });
     },

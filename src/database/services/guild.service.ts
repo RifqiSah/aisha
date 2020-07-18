@@ -2,6 +2,10 @@ import { logger } from '../../lib/logger';
 import { Guild } from '../models/guild.model';
 
 module.exports = {
+    count() {
+        return Guild.countDocuments({});
+    },
+
     addGuild(gId: string, gName: string) {
         const guild = new Guild({ guildId: gId, guildName: gName });
         guild.save((e, ch) => {
