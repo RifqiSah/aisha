@@ -17,7 +17,7 @@ module.exports = {
 
         await get(`${values.aisha_api}/server_update/${args}`)
             .then((res) => {
-                msgs.edit(`Sukses \`${args}\`! Respon:\`\`\`${res.text}\`\`\``).then((msg: any) => { msg.delete({ timeout: 50000 }); });
+                msgs.edit(`Sukses \`${args}\`! Respon:\`\`\`${res.text}\`\`\``).then((msg: any) => msg.delete({ timeout: 50000 }));
             })
             .catch((err) => {
                 client.logger.error(err);

@@ -16,7 +16,7 @@ module.exports = {
 
         await get(`http://sea.dragonnest.com/news/notice/all/${args}`)
             .then((res) => {
-                msgs.edit(`Respon:\`\`\`${res.text.slice(635, 1000)}\`\`\``).then((msg: any) => { msg.delete({ timeout: 60000 }); });
+                msgs.edit(`Respon:\`\`\`${res.text.slice(635, 1000)}\`\`\``).then((msg: any) => msg.delete({ timeout: 60000 }));
             })
             .catch((err) => {
                 client.logger.error(err);

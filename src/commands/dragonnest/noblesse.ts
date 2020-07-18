@@ -28,7 +28,7 @@ module.exports = {
                 const nbdata = JSON.parse(res.text);
 
                 if (Array.isArray(nbdata) && nbdata.length === 0) {
-                    return msgs.edit('Belum ada informasi untuk Noblesse Buff!').then((msg: any) => { msg.delete({ timeout: 10000 }); });
+                    return msgs.edit('Belum ada informasi untuk Noblesse Buff!').then((msg: any) => msg.delete({ timeout: 10000 }));
                 }
 
                 for (const nbh in nbdata) {

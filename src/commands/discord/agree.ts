@@ -15,7 +15,7 @@ module.exports = {
         }
 
         channel.send(`\`${message.author.tag}\` telah menyetujui peraturan!`);
-        message.reply('Terima kasih sudah menyetujui peraturan yang dibuat.\n\nJika kedapatan melanggar, kami akan segera mengeluarkan Anda dari Discord demi kenyamanan.\n\nTerima kasih.').then((msg: any) => { msg.delete({ timeout: 10000 }); }).catch((err: any) => client.logger.error(err));
+        message.reply('Terima kasih sudah menyetujui peraturan yang dibuat.\n\nJika kedapatan melanggar, kami akan segera mengeluarkan Anda dari Discord demi kenyamanan.\n\nTerima kasih.').then((msg: any) => msg.delete({ timeout: 10000 })).catch((err: any) => client.logger.error(err));
 
         message.delete();
         message.member.roles.remove('669544469594374145'); // new-member

@@ -16,7 +16,7 @@ module.exports = {
 
         await get(`https://alriftech.com/cron/${args}`)
             .then((res) => {
-                msgs.edit(`Sukses *cron* \`${args}\`! Respon:\`\`\`${res.text}\`\`\``).then((msg: any) => { msg.delete({ timeout: 5000 }); });
+                msgs.edit(`Sukses *cron* \`${args}\`! Respon:\`\`\`${res.text}\`\`\``).then((msg: any) => msg.delete({ timeout: 5000 }));
             })
             .catch((err) => {
                 client.logger.error(err);
