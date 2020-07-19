@@ -112,7 +112,6 @@ module.exports = async (client: any, message: any) => {
                     commandfile.func(client, message, args);
                 } else {
                     // Tidak ada? Tampilkan pesan error
-                    // eslint-disable-next-line @typescript-eslint/no-empty-function
                     message.delete().catch((err: any) => client.logger.error(err));
                     message.channel.send(`Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
                 }
@@ -122,7 +121,6 @@ module.exports = async (client: any, message: any) => {
             }
         } else {
             // Command tidak aktif
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
             message.delete().catch((err: any) => client.logger.error(err));
             message.channel.send(`Command \`${commandfile.name}\` sedang tidak aktif!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
         }

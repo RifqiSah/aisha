@@ -1,4 +1,4 @@
-import { readdirSync } from 'fs';
+import { readdirSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
 module.exports = (client: any) => {
@@ -22,6 +22,19 @@ module.exports = (client: any) => {
                 cmdfile.aliases.forEach((alias: string) => {
                     client.cmdsregex.set(alias, `\\${key}\\`);
                 });
+            }
+
+            // check subcommand
+            if (existsSync(resolve(__dirname, `../commands/subcmd/${dirs}/${key}`))) {
+                const subcmds = readdirSync(resolve(__dirname, `../commands/subcmd/${dirs}/${key}`)).filter((f) => f.endsWith('.js'));
+                for (const file of subcmds) {
+                    const subcmdfile = require(resolve(__dirname, `../commands/subcmd/${dirs}/${key}/${file}`));
+                    const subkey = file.slice(0, -3);
+
+                    client.logger.info(`      + '${subkey}' added.`);
+
+                    client.subcmds.set(`${key}.${subkey}`, subcmdfile);
+                }
             }
         }
     };
