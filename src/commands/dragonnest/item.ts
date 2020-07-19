@@ -139,6 +139,13 @@ module.exports = {
     func: async (client: any, message: any, args: any) => {
         const data: any = [];
         const itemName = args.join(' ');
+        
+        if (!args.length) {
+            return message.channel.send('Harap masukkan nama atau ID item!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
+                client.logger.error(err);
+            });
+        }
+        
         const msgs = await message.channel.send(`Mencari item \`${itemName}\` ...`);
 
         if (!isNaN(itemName)) {
