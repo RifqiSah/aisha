@@ -1,6 +1,6 @@
 module.exports = {
     name: 'bot',
-    desc: 'Control panel untuk BOT.\nPengaturan yang tersedia yaitu: ```- dch (Disable channel)\n- ech (Enable channel)```',
+    desc: 'Control panel untuk Aisha.',
     enable: true,
     regex: false,
     help: false,
