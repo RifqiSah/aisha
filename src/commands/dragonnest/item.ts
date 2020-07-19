@@ -104,7 +104,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
             data.push(`Can Trade? ${item.canTrade ? 'Yes' : 'No'}`);
             data.push(`Cash Item? ${item.cashItem ? 'Yes' : 'No'}`);
             data.push(`Can Use Server Storage? ${item.canServerStorage ? 'Yes' : 'No'}`);
-            data.push(`Unstamp Count: ${item.unstampCount ? item.unstampCount : 0}\n`);
+            data.push(`Unstamp Count: ${item.unstampCount ? item.unstampCount : 0} time(s).\n`);
             data.push('```');
             
             /*
@@ -145,7 +145,7 @@ module.exports = {
                 client.logger.error(err);
             });
         }
-        
+
         const msgs = await message.channel.send(`Mencari item \`${itemName}\` ...`);
 
         if (!isNaN(itemName)) {
