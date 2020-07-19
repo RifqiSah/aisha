@@ -9,6 +9,12 @@ module.exports = {
     usage: '[pesan anda]',
     cooldown: 60,
     func: (client: any, message: any, args: any) => {
+        if (!args.length) {
+            return message.channel.send('Harap masukkan pesan Anda!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
+                client.logger.error(err);
+            });
+        }
+
         message.delete();
 
         const Organizer = message.guild.roles.find((role: any) => role.name === 'Organizer').members.array();
@@ -22,7 +28,6 @@ module.exports = {
                         text: message.author.tag,
                     },
                 },
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
             }).catch((err: any) => client.logger.error(err));
         }
 
