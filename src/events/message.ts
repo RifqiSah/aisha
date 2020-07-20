@@ -100,7 +100,7 @@ module.exports = async (client: any, message: any) => {
             }, commandfile.cooldown * 1000);
         }
 
-        client.logger.info(`-> Command '${commandfile.name}' executed! (Regex: ${(regex ? 'YES' : 'NO')})`);
+        client.logger.info(`-> Command '${commandfile.name}' dijalankan oleh '${message.author.tag}'! (Regex: ${(regex ? 'YES' : 'NO')})`);
 
         // Cek apakah command sedang aktif atau tidak
         if (commandfile.enable) {
