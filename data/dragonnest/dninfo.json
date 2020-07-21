@@ -205,10 +205,24 @@
     },
     {
         "key": ["hero level"],
-        "name": "Hero Level Stats",
+        "name": "Hero Level Info",
         "data": [
             "1 to 1500 is very fast so Skipped most of it",
-            "https://i.imgur.com/pesGFeP.png"
+            "https://i.imgur.com/pesGFeP.png",
+
+            "\n__**Hero Level Repeatable Quest- Vandar Patch**__",
+
+            "\nRepeatable Quest Cost = 1 Coral Drop + 400 Gold",
+            "1 [Bubble Coral] gives = 126,773,800 Hero Exp",
+            
+            "1 to 2000 = 153 Coral + 61200 Gold",
+            "1500 to 2000 = 146 Coral + 58400 Gold",
+            "1600 to 2000 = 117 Coral + 46800 Gold",
+            "1700 to 2000 = 88 Coral + 35200 Gold",
+            "1800 to 2000 = 59 Coral + 23600 Gold",
+            "1900 to 2000 = 30 Coral + 12000 Gold",
+            
+            "\nBubble Coral = Drops from Mission Board Tasks / 30k BST or 6k Crystal Point"
         ]
     },
     {
