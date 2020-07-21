@@ -227,10 +227,20 @@
     },
     {
         "key": ["invader"],
-        "name": "Blood Moon Invader Drop Rate",
+        "name": "Blood Moon Invader Spawn Chance",
         "data": [
-            "(Invader **Spawn Chance is Unknown**)",
-            "https://i.imgur.com/DQlUDfG.png"
+            "(Invader **See below**)",
+            "https://i.imgur.com/DQlUDfG.png",
+
+            "\nNote :- This is experimental data, its not 100% accurate",
+
+            "\n__**Blood Moon Invader Spawn Chance**__",
+            "1) Run without General or Target Mission => 0.37% chance to spawn Tomb",
+            "2) Run with General or Target Mission =>  1.87% chance to spawn Tomb",
+            
+            "\n__**Normal Invader Spawn Chance**__",
+            "1) Run without General or Target Mission =>  6%",
+            "2) Run with General or Target Mission => 30%"
         ]
     }
 ]
