@@ -41,9 +41,9 @@ module.exports = async (client: any, message: any) => {
         if (user.presence.status === 'offline') { return `**${user.tag}** sedang offline.`; }
         if (user.presence.status === 'idle') { return `**${user.tag}** sedang away.`; }
         if (user.presence.status === 'dnd') { return `**${user.tag}** sedang tidak dapat diganggu.`; }
-    });
+    }).filter((user: any) => !!user);
 
-    if (users.length > 0) message.channel.send(users).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+    if (users.length) message.channel.send(users).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
     // == Akhir pengecekan user ==
 
     let regex = null;
