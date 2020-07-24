@@ -6,7 +6,7 @@ module.exports = {
         const chname = client.bot.channels.cache.get(chid).name;
         const status: boolean = args[1] === 'enable';
         
-        if (!status) {
+        if (!args[1]) {
             return message.channel.send('Mohon masukkan status!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
                 client.logger.error(err);
             });
