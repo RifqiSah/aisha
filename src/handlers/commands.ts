@@ -38,7 +38,7 @@ module.exports = (client: any) => {
                     }
                 }
             } catch (err) {
-                client.logger.error(`    + '${key}' command is error.`);
+                client.logger.error(`    + '${key}': ${err}`);
                 continue;
             }
         }
