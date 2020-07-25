@@ -31,4 +31,14 @@ module.exports = {
             logger.info(`[DB]: ${uId} with ${uPoint} saved!`);
         });
     },
+
+    delete(uId: string) {
+        Point.deleteMany({ userId: uId }, (e) => {
+            if (e) {
+                return logger.error(e);
+            }
+
+            logger.info(`[DB]: ${uId} deleted!`);
+        });
+    }
 };
