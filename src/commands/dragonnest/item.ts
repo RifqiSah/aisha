@@ -176,7 +176,7 @@ module.exports = {
                     }
                 }
 
-                data.push('Silahkan masukkan pilihan Anda:');
+                data.push('\nSilahkan masukkan pilihan Anda:');
                 data.push('```');
 
                 msgs.edit(data)
