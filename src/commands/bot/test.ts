@@ -16,15 +16,15 @@ module.exports = {
     func: async (client: any, message: any, args: any) => {
         // message.channel.send('Dalam perbaikan! Tidak ada fitur baru!');
 
-        // psvc.addPoint('1234567890', 100);
-        // psvc.addPoint('1234567890', 200);
-        // psvc.addPoint('1234567890', 100);
-        // psvc.addPoint('1234567890', 400);
+        await psvc.addPoint('1234567890', 100);
+        await psvc.addPoint('1234567890', 200);
+        await psvc.addPoint('1234567890', 100);
+        await psvc.addPoint('1234567890', 400);
 
-        // psvc.addPoint('1234567890', -50);
-        // psvc.addPoint('1234567890', -100);
+        await psvc.addPoint('1234567890', -50);
+        await psvc.addPoint('1234567890', -100);
 
-        const sum = await psvc.total('1234567890');
+        const sum = await psvc.getPoint('1234567890');
         console.log(sum);
     },
 };
