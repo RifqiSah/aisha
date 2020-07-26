@@ -16,15 +16,20 @@ module.exports = {
     func: async (client: any, message: any, args: any) => {
         // message.channel.send('Dalam perbaikan! Tidak ada fitur baru!');
 
-        await psvc.addPoint('1234567890', 100);
-        await psvc.addPoint('1234567890', 200);
-        await psvc.addPoint('1234567890', 100);
-        await psvc.addPoint('1234567890', 400);
+        // await psvc.addPoint('1234567890', 100);
+        // await psvc.addPoint('1234567890', 200);
+        // await psvc.addPoint('1234567890', 100);
+        // await psvc.addPoint('1234567890', 400);
 
-        await psvc.addPoint('1234567890', -50);
-        await psvc.addPoint('1234567890', -100);
+        // await psvc.addPoint('1234567890', -50);
+        // await psvc.addPoint('1234567890', -100);
 
-        const sum = await psvc.getPoint('1234567890');
-        console.log(sum);
+        // const sum = await psvc.getPoint('1234567890');
+        // console.log(sum.point);
+
+        const rank = await psvc.rank('1234567890');
+        rank.eachAsync((row: any) => {
+            console.log(`${row.userId} with ${row.point}`);
+        });
     },
 };
