@@ -34,7 +34,9 @@ module.exports = async (client: any, message: any) => {
         if (user.presence.status === 'dnd') { return `**${user.tag}** sedang tidak dapat diganggu.`; }
     }).filter((user: any) => !!user);
 
-    if (users.length) message.channel.send(users).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+    if (users.length) {
+        message.channel.send(users).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+    }
 
     let regex = null;
     let args = null;
@@ -69,38 +71,40 @@ module.exports = async (client: any, message: any) => {
     }
 
     const commandfile = client.cmds.get(command) || client.cmds.get(client.cmdsalias.get(command)); // Cari file command yang ditunjuk
-    if (commandfile) {
-        // Cooldown?
-        if (commandfile.cooldown > 0) {
-            if (client.cmdcd.has(message.author.id)) {
-                return message.reply(`Anda harus menunggu selama \`${commandfile.cooldown} detik\` sebelum menggunakan command \`${commandfile.name}\` kembali!`).then((msg: any) => msg.delete({ timeout: 10000 })).catch((err: any) => client.logger.error(err));
-            }
+    if (!commandfile) {
+        return;
+    }
 
-            client.cmdcd.add(message.author.id);
-
-            setTimeout(() => {
-                client.cmdcd.delete(message.author.id);
-            }, commandfile.cooldown * 1000);
+    // Cooldown?
+    if (commandfile.cooldown > 0) {
+        if (client.cmdcd.has(message.author.id)) {
+            return message.reply(`Anda harus menunggu selama \`${commandfile.cooldown} detik\` sebelum menggunakan command \`${commandfile.name}\` kembali!`).then((msg: any) => msg.delete({ timeout: 10000 })).catch((err: any) => client.logger.error(err));
         }
 
-        client.logger.info(`-> Command '${commandfile.name}' dijalankan oleh '${message.author.tag}'! (Regex: ${(regex ? 'YES' : 'NO')})`);
+        client.cmdcd.add(message.author.id);
 
-        // Aktif?
-        if (commandfile.enable) {
-            // Command mempunyai role?
-            if (commandfile.role.length > 0) {
-                if (message.member.roles.cache.some((role: any) => commandfile.role.includes(role.id))) {
-                    commandfile.func(client, message, args);
-                } else {
-                    message.delete().catch((err: any) => client.logger.error(err));
-                    message.channel.send(`Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
-                }
-            } else {
-                commandfile.func(client, message, args);
-            }
+        setTimeout(() => {
+            client.cmdcd.delete(message.author.id);
+        }, commandfile.cooldown * 1000);
+    }
+
+    client.logger.info(`-> Command '${commandfile.name}' dijalankan oleh '${message.author.tag}'! (Regex: ${(regex ? 'YES' : 'NO')})`);
+
+    // Aktif?
+    if (!commandfile.enable) {
+        message.delete().catch((err: any) => client.logger.error(err));
+        return message.channel.send(`Command \`${commandfile.name}\` sedang tidak aktif!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+    }
+
+    // Command mempunyai role?
+    if (commandfile.role.length > 0) {
+        if (message.member.roles.cache.some((role: any) => commandfile.role.includes(role.id))) {
+            return commandfile.func(client, message, args);
         } else {
             message.delete().catch((err: any) => client.logger.error(err));
-            message.channel.send(`Command \`${commandfile.name}\` sedang tidak aktif!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+            return message.channel.send(`Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
         }
     }
+        
+    return commandfile.func(client, message, args);
 };
