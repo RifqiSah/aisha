@@ -50,6 +50,9 @@ module.exports = async (client: any, message: any) => {
         }
     }
 
+    // 1 aja
+    client.pointsvc.addPoint(message.author.id, 1);
+
     // Cek regex
     if (message.content.indexOf(client.config.BOT_PREFIX) !== 0) {
         regex = message.content.match(client.regexList);
