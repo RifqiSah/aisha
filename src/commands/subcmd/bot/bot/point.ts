@@ -10,7 +10,7 @@ module.exports = {
         }
 
         if (args[2] == 'delete') {
-            client.pointsvc.delete(user.id);
+            client.pointsvc.deletePoint(user.id);
 
             return message.channel.send(`Berhasil menghapus semua point milik ${user.tag}!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
                 client.logger.error(err);
