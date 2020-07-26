@@ -99,12 +99,14 @@ module.exports = async (client: any, message: any) => {
     // Command mempunyai role?
     if (commandfile.role.length > 0) {
         if (message.member.roles.cache.some((role: any) => commandfile.role.includes(role.id))) {
+            client.pointsvc.addPoint(message.author.id, 10);
             return commandfile.func(client, message, args);
         } else {
             message.delete().catch((err: any) => client.logger.error(err));
             return message.channel.send(`Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
         }
     }
-        
+    
+    client.pointsvc.addPoint(message.author.id, 10);
     return commandfile.func(client, message, args);
 };
