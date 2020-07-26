@@ -17,7 +17,7 @@ module.exports = {
             return await new Point({ userId: uId, point: uPoint, updated: now }).save((err, doc) => {
                 if (err) return logger.error(err);
     
-                logger.info(`[DB]: ${uId} saved!`);
+                // logger.info(`[DB]: ${uId} saved!`);
             });
         }
 
@@ -29,8 +29,8 @@ module.exports = {
         }, (err, doc) => {
             if (err) return logger.error(err);
 
-            const msg = doc ? 'saved!' : 'not found!';
-            logger.info(`[DB]: ${uId} with ${uPoint} ${msg}`);
+            // const msg = doc ? 'saved!' : 'not found!';
+            // logger.info(`[DB]: ${uId} with ${uPoint} ${msg}`);
         });
     },
 
@@ -38,8 +38,12 @@ module.exports = {
         Point.findOneAndDelete({ userId: uId }, (err, doc) => {
             if (err) return logger.error(err);
 
-            const msg = doc ? 'deleted!' : 'not found!';
-            logger.info(`[DB]: ${uId} ${msg}`);
+            // const msg = doc ? 'deleted!' : 'not found!';
+            // logger.info(`[DB]: ${uId} ${msg}`);
         });
+    },
+
+    async rank(uId: string) {
+        return Point.find({}).sort({ point: -1 }).cursor();
     }
 };

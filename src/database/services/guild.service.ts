@@ -11,7 +11,7 @@ module.exports = {
         guild.save((err, ch) => {
             if (err) return logger.error(err);
 
-            logger.info(`[DB]: ${gId} saved!`);
+            // logger.info(`[DB]: ${gId} saved!`);
         });
     },
 
@@ -19,8 +19,8 @@ module.exports = {
         Guild.findOneAndDelete({ guildId: gId }, (err, doc) => {
             if (err) return logger.error(err);
 
-            const msg = doc ? 'deleted!' : 'not found!';
-            logger.info(`[DB]: ${gId} ${msg}`);
+            // const msg = doc ? 'deleted!' : 'not found!';
+            // logger.info(`[DB]: ${gId} ${msg}`);
         });
     },
 };

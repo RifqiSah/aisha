@@ -23,7 +23,7 @@ module.exports = {
         channel.save((err, doc) => {
             if (err) return logger.error(err);
 
-            logger.info(`[DB]: #${name}(${chId}) in ${gId} saved!`);
+            // logger.info(`[DB]: #${name}(${chId}) in ${gId} saved!`);
         });
     },
 
@@ -31,8 +31,8 @@ module.exports = {
         Channel.findOneAndDelete({ guildId: gId, channelId: chId }, (err, doc) => {
             if (err) return logger.error(err);
 
-            const msg = doc ? 'deleted!' : 'not found!';
-            logger.info(`[DB]: ${chId} in ${gId} ${msg}`);
+            // const msg = doc ? 'deleted!' : 'not found!';
+            // logger.info(`[DB]: ${chId} in ${gId} ${msg}`);
         });
     },
 
@@ -40,8 +40,8 @@ module.exports = {
         Channel.findOneAndUpdate({ guildId: gId, channelId: chId }, data, (err, doc) => {
             if (err) return logger.error(err);
 
-            const msg = doc ? 'updated!' : 'not found!';
-            logger.info(`[DB]: ${chId} in ${gId} ${msg}`);
+            // const msg = doc ? 'updated!' : 'not found!';
+            // logger.info(`[DB]: ${chId} in ${gId} ${msg}`);
         });
     },
 };
