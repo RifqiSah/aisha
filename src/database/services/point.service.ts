@@ -4,41 +4,42 @@ import { logger } from '../../lib/logger';
 import { Point } from '../models/point.model';
 
 module.exports = {
-    async total(uId: string) {
-        return await Point.aggregate([
-            {
-                $match: {
-                    userId: uId
-                } },
-            {
-                $group: {
-                    _id: null,
-                    total: { $sum: '$point' }
-                }
-            }
-        ]);
+    getPoint(uId: string) {
+        return Point.findOne({ userId: uId });
     },
 
-    addPoint(uId: string, uPoint: number) {
+    async addPoint(uId: string, uPoint: number) {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
         const now = func.getDate();
-        const point = new Point({ userId: uId, point: uPoint, date: now });
+        const row = await Point.findOne({ userId: uId });
+        if (!row) {
+            return await new Point({ userId: uId, point: uPoint, updated: now }).save((err, doc) => {
+                if (err) return logger.error(err);
+    
+                logger.info(`[DB]: ${uId} saved!`);
+            });
+        }
 
-        point.save((e, ch) => {
-            if (e) {
-                return logger.error(e);
-            }
+        Point.findOneAndUpdate({ userId: uId }, {
+            $inc: { point: uPoint },
+            updated: now
+        },{
+            new: true
+        }, (err, doc) => {
+            if (err) return logger.error(err);
 
-            logger.info(`[DB]: ${uId} with ${uPoint} saved!`);
+            const msg = doc ? 'saved!' : 'not found!';
+            logger.info(`[DB]: ${uId} with ${uPoint} ${msg}`);
         });
     },
 
-    delete(uId: string) {
-        Point.deleteMany({ userId: uId }, (e) => {
-            if (e) {
-                return logger.error(e);
-            }
+    deletePoint(uId: string) {
+        Point.findOneAndDelete({ userId: uId }, (err, doc) => {
+            if (err) return logger.error(err);
 
-            logger.info(`[DB]: ${uId} deleted!`);
+            const msg = doc ? 'deleted!' : 'not found!';
+            logger.info(`[DB]: ${uId} ${msg}`);
         });
     }
 };

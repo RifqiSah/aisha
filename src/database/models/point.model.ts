@@ -9,7 +9,7 @@ const pointSchema = new Schema({
         type: Number,
         required: true,
     },
-    date: {
+    updated: {
         type: Date,
         required: true,
     }
