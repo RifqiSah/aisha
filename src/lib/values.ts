@@ -7,6 +7,8 @@ export default class Values {
     static cat_apikey       = '17151c18-d9a3-4ada-9a1f-e7e5747cb8c2';
     static cat_api          = 'https://api.thecatapi.com/v1/images/search';
 
+    static yesno_api        = 'https://yesno.wtf/api/';
+    
     static STATES = {
         STRENGTH: {
             name: 'Strength',
