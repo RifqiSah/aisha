@@ -50,8 +50,10 @@ module.exports = async (client: any, message: any) => {
         }
     }
 
-    // 1 aja
-    await client.pointsvc.addPoint(message.author.id, 1);
+    // random
+    if (Math.round(Math.random())) {
+        await client.pointsvc.addPoint(message.author.id, 1);
+    }
 
     // Cek regex
     if (message.content.indexOf(client.config.BOT_PREFIX) !== 0) {
@@ -102,7 +104,7 @@ module.exports = async (client: any, message: any) => {
     // Command mempunyai role?
     if (commandfile.role.length > 0) {
         if (message.member.roles.cache.some((role: any) => commandfile.role.includes(role.id))) {
-            await client.pointsvc.addPoint(message.author.id, 10);
+            await client.pointsvc.addPoint(message.author.id, 5);
             return commandfile.func(client, message, args);
         } else {
             message.delete().catch((err: any) => client.logger.error(err));
@@ -110,6 +112,6 @@ module.exports = async (client: any, message: any) => {
         }
     }
     
-    await client.pointsvc.addPoint(message.author.id, 10);
+    await client.pointsvc.addPoint(message.author.id, 5);
     return commandfile.func(client, message, args);
 };
