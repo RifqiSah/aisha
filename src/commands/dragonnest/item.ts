@@ -139,6 +139,7 @@ module.exports = {
     func: async (client: any, message: any, args: any) => {
         const data: any = [];
         const itemName = args.join(' ');
+        const maxItems = 25;
         
         if (!args.length) {
             return message.channel.send('Harap masukkan nama atau ID item!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
@@ -167,11 +168,12 @@ module.exports = {
 
                 for (const i in items) {
                     const item = items[i];
+                    const index = parseInt(i) + 1;
 
-                    data.push(`${parseInt(i) + 1}: ${item.name.name} [${func.formatTitleCase(item.rank)}]`);
+                    data.push(`${index}: ${item.name.name} [${func.formatTitleCase(item.rank)}]`);
 
-                    if (parseInt(i) === 24) {
-                        data.push(`\n*) Data yang ditampilkan hanya 25 dari ${items.length}. Dimohon untuk menggunakan nama item yang spesifik.`);
+                    if (index === maxItems) {
+                        data.push(`\n*) Hanya ${index} dari ${items.length} data yang ditampilkan. Dimohon untuk menggunakan nama item yang spesifik.`);
                         break;
                     }
                 }
