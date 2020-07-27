@@ -9,6 +9,8 @@ export default class Values {
 
     static yesno_api        = 'https://yesno.wtf/api/';
     
+    static d_status_api     = 'https://status.discord.com/api/v2/summary.json';
+    
     static STATES = {
         STRENGTH: {
             name: 'Strength',

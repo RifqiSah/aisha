@@ -2,6 +2,7 @@
 import { readFileSync, readdirSync } from 'fs';
 import { resolve } from 'path';
 import { Collection } from 'discord.js';
+import moment from 'moment';
 import { logger } from './logger';
 import values from './values';
 
@@ -34,6 +35,10 @@ export default class Function {
         return new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
     }
     
+    static parseDate(date: string): moment.Moment {
+        return moment(date);
+    }
+
     static getMonthName(): string {
         return new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta', month: 'long' });
     }
