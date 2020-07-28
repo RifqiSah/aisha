@@ -1,9 +1,9 @@
 module.exports = {
     name: 'dnskill',
     desc: 'Quiz menebak skill pada game Dragon Nest.',
-    enable: true,
+    enable: false,
     regex: false,
-    help: true,
+    help: false,
     role: [],
     aliases: [],
     usage: '',
