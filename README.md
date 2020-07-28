@@ -2,7 +2,12 @@
 
 Aisha is a solution to managing our server problems, built from scratch with code organization and quality in mind. Our goal is to cover as many functionalities and niches as possible, while still maintaining high quality.
 
-This BOT made with [Discord.js](https://github.com/discordjs/discord.js/).
+## Built With
+
+* [NodeJS](https://nodejs.org/en/) - The bot environment
+* [Discord.JS](https://discord.js.org/#/) - Used to run the bot
+* [Lumen](https://lumen.laravel.com/) - API server
+* [Express](https://expressjs.com/) - Backend (WIP)
 
 ## Contributing
 
