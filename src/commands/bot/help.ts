@@ -17,7 +17,9 @@ module.exports = {
         if (!args.length || dev) {
             data.push('Hai! Ini adalah daftar command yang tersedia:\n');
             client.cmds.forEach((item: any) => {
-                if (item.help || dev) data.push(`\`${item.name}\` : ${item.desc.split('.')[0]}.`);
+                if (item.help || dev) {
+                    data.push(`\`${item.name}\` : ${item.desc.split('.')[0]}.`);
+                }
             });
 
             data.push(`\nAnda dapat menggunakan \`${client.config.BOT_PREFIX}help [nama command]\` untuk mendapatkan informasi dari command tersebut.`);
