@@ -237,5 +237,12 @@
             "Total Unique Weapon Engraving = 0.45%",
             "Total High Grade Unique Weapon Engraving = 0.11%"
         ]
+    },
+    {
+        "key": ["board", "mission board"],
+        "name": "Mission Board Tasks",
+        "data": [
+            "https://i.imgur.com/zbADRck.png"
+        ]
     }
 ]
