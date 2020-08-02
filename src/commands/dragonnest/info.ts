@@ -7,7 +7,7 @@ module.exports = {
     enable: true,
     regex: false,
     help: true,
-    role: [],
+    role: ['489292018628165633'],
     aliases: [],
     usage: '[jenis info]',
     cooldown: 0,

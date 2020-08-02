@@ -8,7 +8,7 @@ module.exports = {
     enable: true,
     regex: false,
     help: false,
-    role: ['489292018628165633'],
+    role: ['433870492378595329'],
     aliases: ['nb'],
     usage: '',
     cooldown: 60,
