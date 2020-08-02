@@ -33,9 +33,10 @@ module.exports = {
 
                 for (const nbh in nbdata) {
                     const item = nbdata[nbh];
+                    const everyday = item.everyday == true;
 
                     data.push('<@&676221506346549251>\n');
-                    data.push(`Noblesse Buff akan disebarkan oleh \`${item.name}\` (VVIP1) bertempat di \`${item.map}\` pada tanggal **${moment(item.date).format('DD-MMM-YYYY')}**, pukul **${item.time}** [GMT+8]`);
+                    data.push(`Noblesse Buff akan disebarkan oleh \`${item.name}\` (VVIP1) bertempat di \`${item.map}\` ${everyday ? '**setiap hari**' : `pada tanggal **${moment(item.date).format('DD-MMM-YYYY')}**`}, pukul **${item.time}** [GMT+8]`);
                     data.push(`<${item.image}>`);
                     data.push('\nKetik `.iam noblesse info` pada `#bot-spam` untuk mendapatkan informasi.');
                 }
