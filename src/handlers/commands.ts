@@ -23,6 +23,8 @@ module.exports = (client: any) => {
                     });
                 }
                 
+                client.cmdsloc.set(key, dirs);
+                
                 client.logger.info(`    + '${key}' added.`);
 
                 // check subcommand

@@ -27,6 +27,7 @@ const client = {
     cmdsalias: new Collection(),
     cmdsregex: new Collection(),
     subcmds: new Collection(),
+    cmdsloc: new Collection(),
 };
 
 logger.info('[V] Done!');
