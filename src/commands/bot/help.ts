@@ -12,20 +12,18 @@ module.exports = {
     cooldown: 0,
     func: (client: any, message: any, args: any) => {
         const data = [];
-        const dev = funct.isDeveloper(message.member) && (args.length ? args[0].toLowerCase().match('dev') : false);
+        // const dev = funct.isDeveloper(message.member) && (args.length ? args[0].toLowerCase().match('dev') : false);
         let lastLoc = '';
 
-        if (!args.length || dev) {
+        if (!args.lengthv) {
             data.push('Hai! Ini adalah daftar command yang tersedia:');
             client.cmds.forEach((item: any) => {
-                if (item.help || dev) {
-                    if (!lastLoc.includes(client.cmdsloc.get(item.name))) {
-                        lastLoc = client.cmdsloc.get(item.name);
-                        data.push(`\n__**${lastLoc.replace(/^./, lastLoc[0].toUpperCase())}**__`);
-                    }
-
-                    data.push(`\`${item.name}\` : ${item.desc.split('.')[0]}.`);
+                if (!lastLoc.includes(client.cmdsloc.get(item.name))) {
+                    lastLoc = client.cmdsloc.get(item.name);
+                    data.push(`\n__**${lastLoc.replace(/^./, lastLoc[0].toUpperCase())}**__`);
                 }
+
+                data.push(`\`${item.name}\` : ${item.desc.split('.')[0]}.`);
             });
 
             data.push(`\nAnda dapat menggunakan \`${client.config.BOT_PREFIX}help [nama command]\` untuk mendapatkan informasi dari command tersebut.`);

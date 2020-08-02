@@ -24,7 +24,7 @@ module.exports = {
         });
 
         data.push('```');
-        data.push('Ayo tingkatkan point kamu dengan dengan bermain quiz!');
+        data.push(`Ayo tingkatkan point kamu dengan dengan bermain quiz! Quiz dapat dilihat melalui command \`${client.config.BOT_PREFIX}help\`.`);
 
         return message.channel.send(data).catch((err: any) => {
             client.logger.error(err);
