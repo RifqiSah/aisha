@@ -9,13 +9,15 @@ module.exports = {
     usage: '[rock | paper | scissors]',
     cooldown: 0,
     func: async (client: any, message: any, args: any) => {
+        message.delete();
+
         const rps = ['scissors','rock', 'paper'];
         const res = ['Scissors :v:','Rock :fist:', 'Paper :raised_hand:'];
 
         let userChoice;
         if (args.length) userChoice = args[0].toLowerCase();
         if (!rps.includes(userChoice)) {
-            return message.channel.send(`Maaf ${message.member}, Aku tidak mengenali itu. Mohon masukkan \`rock\`, \`paper\`, atau \`scissors\`.`);
+            return message.channel.send(`Maaf ${message.member}, Aku tidak mengenali itu. Mohon masukkan \`rock\`, \`paper\`, atau \`scissors\`.`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
         }
 
         userChoice = rps.indexOf(userChoice);
@@ -31,6 +33,6 @@ module.exports = {
             result = `**${message.member.displayName}** menang! Selamat, kamu mendapatkan **10** point!`;
         }
 
-        return message.channel.send(`${message.member.displayName}: ${res[userChoice]}\nAisha: ${res[botChoice]}\n\n${result}`);
+        return message.channel.send(`${message.member.displayName}: ${res[userChoice]}\nAisha: ${res[botChoice]}\n\n${result}`).then((msg: any) => msg.delete({ timeout: 10000 })).catch((err: any) => client.logger.error(err));
     },
 };
