@@ -15,7 +15,7 @@ module.exports = {
         // const dev = funct.isDeveloper(message.member) && (args.length ? args[0].toLowerCase().match('dev') : false);
         let lastLoc = '';
 
-        if (!args.lengthv) {
+        if (!args.length) {
             data.push('Hai! Ini adalah daftar command yang tersedia:');
             client.cmds.forEach((item: any) => {
                 if (!lastLoc.includes(client.cmdsloc.get(item.name))) {
