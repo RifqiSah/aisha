@@ -1,6 +1,6 @@
 [
     {
-        "key": ["mq", "main quest", "cp"],
+        "key": ["mq", "main quest"],
         "name": "Main Quest / Crystal Point",
         "data": [
             "__**Total Chapter**__",
@@ -256,6 +256,62 @@
         "data": [
             "Coming in August/September for KDN",
             "https://i.imgur.com/W03HaTC.png"
+        ]
+    },
+    {
+        "key": ["cp", "crystal point"],
+        "name": ["Crystal Point"],
+        "data": [
+            "__**Magic**__",
+            "Helmet: 500",
+            "Upper Body: 700",
+            "Lower Body: 600",
+            "Glove: 400",
+            "Shoes: 400",
+            "One-Piece Costume: 2100",
+
+            "\n__**Rare**__",
+            "Helmet: 2200",
+            "Upper Body: 2700",
+            "Lower Body: 2500",
+            "Glove: 1600",
+            "Shoes: 1600",
+            "One-Piece Costume: 8400",
+
+            "\n__**Epic**__",
+            "Helmet: 35400",
+            "Upper Body: 45400",
+            "Lower Body: 42000",
+            "Glove: 27000",
+            "Shoes: 27000",
+            "One-Piece Costume: 141400",
+
+            "\n__**Magic**__",
+            "Ring: 200",
+            "Necklace: 200",
+            "Earring: 200",
+            "Wings: 300",
+            "Tail: 300",
+            "Decal: 300",
+            "Spirit: 300",
+
+            "\n__**Rare**__",
+            "Ring: 11000",
+            "Necklace: 11000",
+            "Earring: 11000",
+            "Wings: 3500",
+            "Tail: 3500",
+            "Decal: 3500",
+            "Spirit: 3500",
+
+            "\n__**Epic**__",
+            "Ring: 16000",
+            "Necklace: 16000",
+            "Earring: 16000",
+            "Wings: 5000",
+            "Tail: 5000",
+            "Decal: 5000",
+            "Spirit: 5000"
         ]
     }
 ]
