@@ -249,5 +249,13 @@
             "1) Run without General or Target Mission =>  6%",
             "2) Run with General or Target Mission => 30%"
         ]
+    },
+    {
+        "key": ["fmj", "full moon"],
+        "name": "Full Moon Jade - Special Skill Jade Season 3",
+        "data": [
+            "Coming in August/September for KDN",
+            "https://i.imgur.com/W03HaTC.png"
+        ]
     }
 ]
