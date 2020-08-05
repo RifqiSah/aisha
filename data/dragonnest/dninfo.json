@@ -313,5 +313,40 @@
             "Decal: 5000",
             "Spirit: 5000"
         ]
+    },
+    {
+        "key": ["devotion minos"],
+        "name": "New Minos Armor of Devotion",
+        "data": [
+            "Mino Armors can be Evolved to Devotion Minos",
+            "Same stats of Enhancement Minos and Same Set Bonus",
+            "Enhancement Value will be Carried over to Evolved Part",
+            "New Skill Effect is Applied to Devotion Minos Armor",
+
+            "\nkill Effect = 10% Additional Damage to Critical Hits on Each Devotion Minos Part",
+            "Total 5 parts = 50% Additional Damage",
+            "Skill Effect is Applied to Hero Skill from Each class ( example  Panic Exit , Lunatic Blow , Hunt Break etc )",
+
+            "\n__**Devotion Armours  Stats changed compared to Minos Legend & Insight Minos**__",
+            "> Attack power and Enhancement stat increase Remains Same",
+
+            "\nInsight Helm :  438k HP",
+            "Insight Upper : Phys Def 33k + Magic Def 31k",
+            "Insight Bottom : Phys Def 24k + Magic Def 22k",
+            "Insight Gloves : Phys Def 9k + Magic Def 9k",
+            "Insight Shoes : Phys Def 9k + Magic Def 9k",
+            
+            "\nDevotion Helm : Crit Dmg 150k (HP removed)",
+            "Devotion Upper : Magic Defence 65k",
+            "Devotion Bottom : Phys Defence 46k",
+            "Devotion Gloves : 900k extra HP added (Defence removed)",
+            "Devotion Shoes : Magic Def 9k + 400 FD added (PDef removed)",
+
+            "\nDevotion Minos Crafting",
+            "https://i.imgur.com/u0iwMVo.png",
+
+            "\nDevotion Minos Cubes Crafting",
+            "https://i.imgur.com/ej41k72.png"
+        ]
     }
 ]
