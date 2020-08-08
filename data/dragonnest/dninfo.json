@@ -233,6 +233,21 @@
         ]
     },
     {
+        "key": ["hero exp"],
+        "name": "Hero Level Experience Info",
+        "data": [
+            "This data is extracted from KDN March Patchnote",
+
+            "\nlv 1 - 1000",
+            "http://forum.dragonnest.com/filedata/fetch?id=163533&d=1562823184",
+
+            "\nlv 1 - 2000",
+            "http://forum.dragonnest.com/filedata/fetch?id=163534&d=1562823183",
+
+            "\nSource: https://docs.google.com/spreadsheets/d/1cvko6ojp1M_GcBMbUYiS3EWPEsjvp7-XkKZvC7_e7SM/edit?usp=sharing"
+        ]
+    },
+    {
         "key": ["invader"],
         "name": "Blood Moon Invader Spawn Chance",
         "data": [
