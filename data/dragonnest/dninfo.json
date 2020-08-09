@@ -132,10 +132,13 @@
     },
     {
         "key": ["celestone"],
-        "name": "Celestone",
+        "name": "Diassemble Skila to obtain Celestones",
         "data": [
-            "Diassemble Skila to obtain Celestones",
-            "https://i.imgur.com/y1QsmhK.png"
+            "__**+0 to +9**__",
+            "https://i.imgur.com/qgOa72J.png",
+
+            "\n__**+10 to +20**__",
+            "https://i.imgur.com/j5o5Ciw.png"
         ]
     },
     {
