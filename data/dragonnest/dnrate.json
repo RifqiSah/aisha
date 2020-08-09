@@ -43,9 +43,13 @@
     },
     {
         "key": ["acc", "ring", "earring", "ear", "neck", "nek"],
-        "name": "Legend & Ancient Accesories",
+        "name": "Accessories Enhance Rate",
         "data": [
-            "https://i.imgur.com/KTUB4oV.png"
+            "__**Legend & Ancient Accesories**__",
+            "https://i.imgur.com/KTUB4oV.png",
+
+            "\n__**Desert Dragon Accessories**__",
+            "https://i.imgur.com/aDYgoUQ.png"
         ]
     },
     {
