@@ -132,9 +132,12 @@
     },
     {
         "key": ["conversion weapon", "tf weapon", "tf wepon"],
-        "name": "Conversion Weapon",
+        "name": "Conversion Weapons Enhance Rates",
         "data": [
-            "https://cdn.discordapp.com/attachments/519164580476223500/519168748075221001/Conversion_weapon_rate.png"
+            "Note :",
+            "This data is from 2018 when it was still in client. Bbut now its server sided so cannot find +9 & +10 rates",
+            
+            "\nhttps://i.imgur.com/xt7aaJp.png"
         ]
     },
     {
