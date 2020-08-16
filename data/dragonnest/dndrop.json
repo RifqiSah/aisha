@@ -162,5 +162,23 @@
             "\n__**Nest Drop rate for Full Bloom Jade**__",
             "https://i.imgur.com/vvaGD8v.jpg"
         ]
+    },
+    {
+        "key": ["watchtower"],
+        "name": "Watch Tower Restricted Area",
+        "data": [
+            "This is Drop rate from Each enemy",
+            "Drop rate of Twilight is 10% upto 19% > After it trigger drops , its either [Trace of Twilight] or [Essence of Twilight]",
+            "Drop rate of Equipment is higher in F10 compare to F9 > After it triggers drop , it will be any random item from Loot Pool Chart Below ","**F1** = 3-4 items",
+            
+            "\n__**Floor 9**__",
+            "https://i.imgur.com/GQYxZhO.png",
+
+            "\n__**Floor 10**__",
+            "https://i.imgur.com/hwQraAN.png",
+
+            "\n__**Loot Pool**__",
+            "https://i.imgur.com/qP8ZTMQ.png"
+        ]
     }
 ]
