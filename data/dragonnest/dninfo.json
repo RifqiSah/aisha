@@ -75,8 +75,10 @@
     },
     {
         "key": ["nest debuff"],
-        "name": "Nest Debuff",
+        "name": "Nest Debuff / Labyrinth Cruelty",
         "data": [
+            "Negative Effects for each floor after 13",
+            "\nhttps://i.imgur.com/APU8LMp.png",
             "https://media.discordapp.net/attachments/580444014218838041/713316309936504862/unknown_2.png"
         ]
     },
