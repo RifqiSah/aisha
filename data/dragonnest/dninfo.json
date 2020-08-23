@@ -369,5 +369,76 @@
             "\nDevotion Minos Cubes Crafting",
             "https://i.imgur.com/ej41k72.png"
         ]
+    },
+    {
+        "key": ["full bloom heraldry", "vibrant heraldry"],
+        "name": "Vibrant Heraldy / Full Bloom Heraldry",
+        "data": [
+            "1) Full Bloom Heraldry Pouch",
+            "Contains:",
+            "- Random Full Bloom Plate (Magic grade)",
+
+            "\n2) High Grade Full Bloom Heraldry Pouch",
+            "Contains:",
+            "- Random Full Bloom Plate (Magic grade)",
+            "- Random Full Bloom Plate (Rare grade)",
+            "- Hakyul's Full Bloom Refiner",
+
+            "\n3) Hakyul's Full Bloom Refiner",
+            "```",
+            "Evolve Magic Grade to Rare Grade Plate",
+            "Gives Additional Stats while maintaining the existing Additional stats",
+            "Cannot be used for Ultimate Full Bloom Plates",
+            "```",
+
+            "4) Hakyul's Special Full Bloom Refiner",
+            "```",
+            "Evolve Magic Grade to Rare Grade Plate",
+            "Gives Additional Stats while maintaining the existing Additional stats",
+            "Only used for Ultimate Full Bloom Plates",
+            "```",
+
+            "5) Full Bloom Plate Fragment",
+            "```",
+            "Get Full Bloom Plate Fragments by Dismantle Full Bloom Plates",
+            "Use Fragments to purchase Full Bloom Plate Pouch",
+            "```",
+
+            "6) Cats Eye?",
+            "```",
+            "Rare Crafting Material",
+            "Use it at Blacksmith to craft new items",
+            "```",
+
+            "7) Full Bloom Plate (Magic Grade)",
+            "```",
+            "Main Stat:",
+            "- No Info Yet",
+            "\nAdditional stats:",
+            "- Phys/Magic Attack = 50.000",
+            "- Phys Def = 7.500",
+            "- Magic Def = 7.500",
+            "- Critical = 25.000",
+            "- Crit Dmg = 112.500",
+            "- Max HP = 200.000",
+            "- FD = 686",
+            "\n*) One Option is Added Randomly",
+            "```",
+
+            "8) Full Bloom Plate (Rare Grade)",
+            "```",
+            "Main Stat:",
+            "- No Info Yet",
+            "\nAdditional stats (from Magic Grade plate is Carried over):",
+            "- Phys/Magic Attack = 50000",
+            "- Phys Def = 7500",
+            "- Magic Def = 7500",
+            "- Critical = 25000",
+            "- Crit Dmg = 112500",
+            "- Max HP = 200000",
+            "- FD = 100 upto 786",
+            "\n*) Upto Two Options are Added Randomly",
+            "```"
+        ]
     }
 ]
