@@ -39,8 +39,8 @@ export default class Function {
             await loadDataFiles(x);
         });
 
-        await delay(2000);
-        
+        await delay(10000);
+
         logger.info('[V] Done!');
     }
 
