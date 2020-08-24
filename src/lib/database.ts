@@ -12,7 +12,8 @@ if (!config.MONGODB) {
 
 // Connect
 export default class Database {
-    static connect(): void {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    static async connect() {
         mongoose.connect(`${config.MONGODB}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
             .then(() => {
                 logger.info('[V] Database connected!');
