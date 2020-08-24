@@ -3,31 +3,44 @@ import { readFileSync, readdirSync } from 'fs';
 import { resolve } from 'path';
 import { Collection } from 'discord.js';
 import moment from 'moment';
+import { get } from 'superagent';
 import { logger } from './logger';
 import values from './values';
 
 const externalDatas: Collection<string, any> = new Collection();
 
-function loadDataFiles(dirs: string): void {
-    const files = readdirSync(resolve(__dirname, `../../data/${dirs}`)).filter((f) => f.endsWith('.json'));
-    for (const file of files) {
-        const key = file.slice(0, -5);
-        const rawdata: Buffer = readFileSync(resolve(__dirname, `../../data/${dirs}/${file}`));
-        const parsed = JSON.parse(rawdata.toString());
-
-        logger.info(`  + '${dirs}/${key}' readed and parsed.`);
-        externalDatas.set(`${dirs}.${key}`, parsed);
-    }
+async function getFileList(dir: string) {
+    const response = await get(`${values.aisha_api}/data/${dir}`);
+    return JSON.parse(response.text);
 }
 
+async function loadDataFiles(dirs: string) {
+    const files: any = await getFileList(dirs);
+    
+    files.forEach(async (file: string) => {
+        const response = await get(`${values.aisha_api}/data/${dirs}/${file}`);
+        const data = response.text;
+
+        const key = file.slice(0, -5);
+        const parsed = JSON.parse(data);
+
+        logger.info(`  + '${dirs}/${key}' readed and parsed. [${data.length} bytes].`);
+        externalDatas.set(`${dirs}.${key}`, parsed);
+    });
+}
+
+const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
+
 export default class Function {
-    static loadData(): void {
+    static async loadData() {
         logger.info('[-] Reading external data');
-        
-        ['dragonnest'].forEach((x) => {
-            loadDataFiles(x);
+
+        ['dragonnest'].map(async (x) => {
+            await loadDataFiles(x);
         });
 
+        await delay(2000);
+        
         logger.info('[V] Done!');
     }
 
@@ -76,7 +89,7 @@ export default class Function {
         return match ? match.join(', ') : undefined;
     }
 
-    static formatData(key: string): any {
+    static formatData(key: string) {
         return externalDatas?.get(`dragonnest.${key}`)?.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
     }
 
@@ -90,11 +103,7 @@ export default class Function {
             return item;
         });
 
-        if (!data) {
-            return null;
-        }
-        
-        return data;
+        return data ?? null;
     }
 
     static getIconCoordinates(itemIconIndex: number) {
