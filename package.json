@@ -1,6 +1,6 @@
 {
   "name": "aisha",
-  "version": "2.1.0",
+  "version": "2.5.0",
   "description": "Aisha, Informate Community Private Discord BOT",
   "repository": {
     "url": "https://github.com/RifqiSah/Aisha"
@@ -25,24 +25,24 @@
   "license": "MIT",
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
-    "@types/mongoose": "^5.7.32",
-    "@types/node": "^14.0.23",
-    "@types/superagent": "^4.1.8",
+    "@types/mongoose": "^5.7.36",
+    "@types/node": "^14.6.3",
+    "@types/superagent": "^4.1.10",
     "@types/ws": "^7.2.6",
-    "@typescript-eslint/eslint-plugin": "^3.6.1",
-    "@typescript-eslint/parser": "^3.6.1",
-    "eslint": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "eslint": "^7.8.1",
     "eslint-plugin-import": "^2.22.0",
     "typescript": "^3.9.7"
   },
   "dependencies": {
     "apiai": "^4.0.3",
-    "discord.js": "^12.2.0",
+    "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
     "jimp": "^0.14.0",
     "moment": "^2.27.0",
-    "mongoose": "^5.9.25",
+    "mongoose": "^5.10.2",
     "net": "^1.0.2",
     "superagent": "^5.3.1",
     "winston": "^3.3.3",
