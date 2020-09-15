@@ -24,7 +24,6 @@
   "author": "RifqiSah",
   "license": "MIT",
   "devDependencies": {
-    "@types/dotenv": "^8.2.0",
     "@types/mongoose": "^5.7.36",
     "@types/node": "^14.6.3",
     "@types/superagent": "^4.1.10",
