@@ -151,12 +151,12 @@ async function getItemTuner(client: any, tunerID: number) {
                 const items = tuner.items;
                 const itemKeys = Object.keys(items);
 
-                for(const i in itemKeys) {
-                    const item = items[i].originalItem;
+                itemKeys.forEach((key) => {
+                    const item = items[key].originalItem;
 
                     data.push(`#${item.id}`);
                     data.push(`${item.name.name} [${func.formatTitleCase(item.rank)}]\n`);
-                }
+                });
             })
             .catch((err) => {
                 client.logger.error(err);
