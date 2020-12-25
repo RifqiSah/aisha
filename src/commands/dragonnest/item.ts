@@ -115,7 +115,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
             // item tuner
             if (item.type?.type === 'ITEM_TUNER') {
                 const tuner = await getItemTuner(client, item.type.changeMatchingId);
-                data.push(tuner);
+                data.push(...tuner);
             }
 
             /*
@@ -144,19 +144,18 @@ async function getItemTuner(client: any, tunerID: number) {
         await get(`${values.divinitor_api}/items/tuner/${tunerID}`)
             .then(async (res) => {
                 const tuner = JSON.parse(res.text);
-
-                data.push('**[Item Tuner]**');
-                data.push(`ID: ${tuner.id}`);
-
                 const items = tuner.items;
-                const itemKeys = Object.keys(items);
 
-                itemKeys.forEach((key) => {
+                data.push('**[Item Tuner]**```');
+
+                Object.keys(items).forEach((key) => {
                     const item = items[key].originalItem;
 
                     data.push(`#${item.id}`);
                     data.push(`${item.name.name} [${func.formatTitleCase(item.rank)}]\n`);
                 });
+
+                data.push('```');
             })
             .catch((err) => {
                 client.logger.error(err);
