@@ -5,10 +5,10 @@
     "sourceMap": true,
     "removeComments": true,
     "outDir": "dist",
-    
+
     "strict": true,
     "noImplicitAny": true,
-    
+
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
@@ -16,10 +16,12 @@
         "node_modules/*"
       ]
     },
-    
+
     "esModuleInterop": true,
-    
-    "forceConsistentCasingInFileNames": true
+
+    "forceConsistentCasingInFileNames": true,
+
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*"
