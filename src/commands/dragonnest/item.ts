@@ -23,6 +23,11 @@ async function getItemDatas(client: any, message: any, itemID: number) {
                 data.push(`${item.desc.desc.replace(/<br\/>/g, '\n').replace(/<(.|\n)*?>/g, '').replace(/\[/g, '**[').replace(/\]/g, ']**')}\n`);
             }
 
+            // location
+            if (item.gainText) {
+                data.push(`${item.gainText.replace(/<br\/>/g, '\n').replace(/<(.|\n)*?>/g, '').replace(/\[/g, '**[').replace(/\]/g, ']**')}\n`);
+            }
+
             // general info
             data.push('**[General Info]**```');
             data.push(`Item ID: ${item.id}`);
@@ -61,7 +66,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
 
                     data.push(`${name}: ${num}`);
                 }
-                        
+
                 data.push('```');
             }
 
@@ -73,7 +78,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
 
                 for (const i in potentials) {
                     const states = potentials[i].states;
-                            
+
                     data.push(`\`\`\`[${func.formatPercent(potentials[i].rate)}]\n`);
 
                     for (const j in states) {
@@ -83,7 +88,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
 
                         data.push(`${name}: ${num}`);
                     }
-                            
+
                     data.push('```');
                 }
             }
@@ -106,7 +111,7 @@ async function getItemDatas(client: any, message: any, itemID: number) {
             data.push(`Can Use Server Storage? ${item.canServerStorage ? 'Yes' : 'No'}`);
             data.push(`Unstamp Count: ${item.unstampCount ? item.unstampCount : 0} time(s).\n`);
             data.push('```');
-            
+
             /*
             if (item.iconIndex) {
                 const itemOverlayData = func.getSlotOverlay(item.rank, item.type.type);
@@ -140,7 +145,7 @@ module.exports = {
         const data: any = [];
         const itemName = args.join(' ');
         const maxItems = 25;
-        
+
         if (!args.length) {
             return message.channel.send('Harap masukkan nama atau ID item!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
                 client.logger.error(err);
@@ -161,7 +166,7 @@ module.exports = {
                 if (items.length <= 0) {
                     return msgs.edit(`Item \`${itemName}\` tidak ditemukan!`);
                 }
-                
+
                 if (items.length == 1) {
                     return getItemDatas(client, msgs, items[0].id);
                 }
