@@ -145,14 +145,14 @@ async function getItemTuner(client: any, tunerID: number) {
             .then(async (res) => {
                 const tuner = JSON.parse(res.text);
 
-                data.push('**[Item Tuner]**```');
+                data.push('**[Item Tuner]**');
                 data.push(`ID: ${tuner.id}`);
 
                 const items = tuner.items;
                 const itemKeys = Object.keys(items);
 
                 for(const i in itemKeys) {
-                    const item = items[i];
+                    const item = items[i].originalItem;
 
                     data.push(`#${item.id}`);
                     data.push(`${item.name.name} [${func.formatTitleCase(item.rank)}]\n`);
