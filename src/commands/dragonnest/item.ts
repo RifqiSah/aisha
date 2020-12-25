@@ -112,6 +112,12 @@ async function getItemDatas(client: any, message: any, itemID: number) {
             data.push(`Unstamp Count: ${item.unstampCount ? item.unstampCount : 0} time(s).\n`);
             data.push('```');
 
+            // item tuner
+            if (item.type?.type === 'ITEM_TUNER') {
+                const tuner = await getItemTuner(client, item.type.changeMatchingId);
+                data.push(tuner);
+            }
+
             /*
             if (item.iconIndex) {
                 const itemOverlayData = func.getSlotOverlay(item.rank, item.type.type);
@@ -129,6 +135,35 @@ async function getItemDatas(client: any, message: any, itemID: number) {
         .catch((err) => {
             client.logger.error(err);
         });
+}
+
+async function getItemTuner(client: any, tunerID: number) {
+    const data: any = [];
+
+    await Promise.all([
+        await get(`${values.divinitor_api}/items/tuner/${tunerID}`)
+            .then(async (res) => {
+                const data = JSON.parse(res.text);
+
+                data.push('**[Item Tuner]**```');
+                data.push(`ID: ${data.id}`);
+
+                const items = data.items;
+                const itemKeys = Object.keys(items);
+
+                for(const i in itemKeys) {
+                    const item = items[i];
+
+                    data.push(`#${item.id}`);
+                    data.push(`${item.name.name} [${func.formatTitleCase(item.rank)}]\n`);
+                }
+            })
+            .catch((err) => {
+                client.logger.error(err);
+            })
+    ]);
+
+    return data;
 }
 
 module.exports = {
