@@ -143,12 +143,12 @@ async function getItemTuner(client: any, tunerID: number) {
     await Promise.all([
         await get(`${values.divinitor_api}/items/tuner/${tunerID}`)
             .then(async (res) => {
-                const data = JSON.parse(res.text);
+                const tuner = JSON.parse(res.text);
 
                 data.push('**[Item Tuner]**```');
-                data.push(`ID: ${data.id}`);
+                data.push(`ID: ${tuner.id}`);
 
-                const items = data.items;
+                const items = tuner.items;
                 const itemKeys = Object.keys(items);
 
                 for(const i in itemKeys) {
