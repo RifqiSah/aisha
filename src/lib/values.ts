@@ -1,5 +1,5 @@
 export default class Values {
-    static bot_version      = 'v2.5.05';
+    static bot_version      = 'v2.5.06';
 
     static aisha_api        = 'https://alriftech.com/api/v2/bot/aisha';
     static divinitor_api    = 'https://reference.dn.divinitor.com/api/server/sea';
@@ -8,9 +8,9 @@ export default class Values {
     static cat_api          = 'https://api.thecatapi.com/v1/images/search';
 
     static yesno_api        = 'https://yesno.wtf/api/';
-    
+
     static d_status_api     = 'https://status.discord.com/api/v2/summary.json';
-    
+
     static STATES = {
         STRENGTH: {
             name: 'Strength',
