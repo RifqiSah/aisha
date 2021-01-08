@@ -2,7 +2,7 @@ module.exports = async (client: any, message: any) => {
     if (message.author.bot || message.channel.type === 'dm') {
         return;
     }
-    
+
     if (client.config.ENV === 'local') {
         if (!message.member.roles.cache.has('433870492378595329')) {
             return;
@@ -71,7 +71,8 @@ module.exports = async (client: any, message: any) => {
     if (command !== 'bot') {
         const isexist = await client.chsvc.getChannel(message.channel.id);
         if (isexist) {
-            return;
+            message.delete().catch((err: any) => client.logger.error(err));
+            return message.channel.send('Mohon selalu gunakan <#382003046990872576> untuk bermain dengan bot!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
         }
     }
 
@@ -111,7 +112,7 @@ module.exports = async (client: any, message: any) => {
             return message.channel.send(`Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
         }
     }
-    
+
     await client.pointsvc.addPoint(message.author.id, 5);
     return commandfile.func(client, message, args);
 };
