@@ -12,4 +12,6 @@ export default class Config {
     static BOT_OWNER = process.env.BOT_OWNERS;
     static BOT_PREFIX = process.env.BOT_PREFIX;
     static BOT_WEBHOOK_LOG = process.env.BOT_WEBHOOK_LOG;
+
+    static MC_TOKEN = process.env.MC_TOKEN;
 }

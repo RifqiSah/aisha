@@ -5,7 +5,7 @@ module.exports = (client: any) => {
     client.logger.info('  [-] Initialize commands');
     const load = (dirs: string) => {
         const commands = readdirSync(resolve(__dirname, `../commands/${dirs}`)).filter((f) => f.endsWith('.js'));
-        
+
         for (const file of commands) {
             const cmdfile = require(resolve(__dirname, `../commands/${dirs}/${file}`));
             const key = file.slice(0, -3);
@@ -15,16 +15,16 @@ module.exports = (client: any) => {
                 cmdfile.aliases.forEach((alias: string) => {
                     client.cmdsalias.set(alias, key);
                 });
-                
+
                 if (cmdfile.regex) {
                     client.cmdsregex.set(key, `\\${cmdfile.name}\\`);
                     cmdfile.aliases.forEach((alias: string) => {
                         client.cmdsregex.set(alias, `\\${key}\\`);
                     });
                 }
-                
+
                 client.cmdsloc.set(key, dirs);
-                
+
                 client.logger.info(`    + '${key}' added.`);
 
                 // check subcommand
@@ -46,7 +46,7 @@ module.exports = (client: any) => {
         }
     };
 
-    ['bot', 'discord', 'dragonnest', 'fun', 'moderation'].forEach((x) => load(x));
+    ['bot', 'discord', 'dragonnest', 'fun', 'minecraft', 'moderation'].forEach((x) => load(x));
     client.regexList = new RegExp(client.cmdsregex.map((key: any, item: any) => item).join('|'));
     client.logger.info('  [V] Done!');
 };
