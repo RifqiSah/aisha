@@ -1,7 +1,8 @@
 import { get } from 'superagent';
+import func from '../../../../lib/function';
 import values from '../../../../lib/values';
 
-const status = (id: number) => {
+const status = (id: any) => {
     if (id === 0) return 'OFFLINE';
     else if (id === 1) return 'ONLINE';
     else if (id === 2) return 'STARTING';
@@ -22,6 +23,7 @@ module.exports = {
             .set('Authorization', `Bearer ${client.config.MC_TOKEN}`)
             .then((res) => {
                 const json = JSON.parse(res.text);
+
                 if (!json.success) {
                     return message.channel.send(json.error);
                 }
@@ -29,17 +31,20 @@ module.exports = {
                 const mcData = json.data;
                 if (mcData) {
                     const data = [
-                        `__**${mcData.name.toUppercase()}**__`,
+                        `__**${mcData.name.toUpperCase()}**__`,
                         `${mcData.motd}`,
 
-                        `\nTotal players: ${mcData.players.count}/${mcData.players.max}`,
+                        '\n__**Software**__',
                         `Name: ${mcData.software.name}`,
                         `Version: ${mcData.software.version}`,
 
-                        `\nStatus: __**${status(mcData.status)}**__`,
+                        '\n__**Server**__',
+                        `Status: __**${status(mcData.status)}**__`,
+                        `Players: ${mcData.players.count}/${mcData.players.max}`,
+
                     ];
 
-                    return message.channel.send(data);
+                    return message.channel.send(data).then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
                 }
             })
             .catch((err) => {

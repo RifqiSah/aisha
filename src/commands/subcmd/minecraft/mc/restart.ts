@@ -16,7 +16,7 @@ module.exports = {
                     'Mohon tunggu beberapa detik hingga server telah offline dan online kembali!'
                 ];
 
-                return message.channel.send(data);
+                return message.channel.send(data).then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
             })
             .catch((err) => {
                 client.logger.error(err);
