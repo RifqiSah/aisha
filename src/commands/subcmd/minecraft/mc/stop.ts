@@ -5,7 +5,7 @@ module.exports = {
     name: 'stop',
     func: (client: any, message: any, args: any) => {
         get(`${values.mc_api}/server/${values.mc_serever_id}/stop`)
-            .set('Authorization', `Bearer ${client.config.MC_API}`)
+            .set('Authorization', `Bearer ${client.config.MC_TOKEN}`)
             .then((res) => {
                 const json = JSON.parse(res.text);
                 if (!json.success) {
