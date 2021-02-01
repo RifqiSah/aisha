@@ -1,21 +1,25 @@
 import values from '../../../../lib/values';
 
-const isOnline = (client: any, msg: any) => {
-    return msg.edit('Server telah online!').then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
-};
-
 module.exports = {
     name: 'start',
     func: async (client: any, message: any, args: any) => {
-        client.ev.on('mc_srv_online', isOnline);
+        const msgs = await message.channel.send('Mohon tunggu sebentar ...');
 
         try {
             const server = client.mcsvc.server(values.mc_server_id);
             await server.start();
 
-            return message.channel.send('Mohon tunggu beberapa detik hingga server online!').then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
+            const refreshId = setInterval(() => {
+                const status = server.get().status;
+                if (server.hasStatus(server.STATUS.ONLINE)) {
+                    msgs.edit('Server telah online! Selamat bermain :D').then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
+                    clearInterval(refreshId);
+                }
+            }, 5000);
+
+            return true;
         } catch (e) {
-            return message.channel.send(e.message).then((msg: any) => {
+            return msgs.edit(e.message).then((msg: any) => {
                 msg.delete({ timeout: 5000 });
                 client.logger.error(e);
             });
