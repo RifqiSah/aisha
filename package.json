@@ -38,6 +38,7 @@
     "apiai": "^4.0.3",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
+    "exaroton": "^1.3.0",
     "fs": "0.0.1-security",
     "jimp": "^0.14.0",
     "moment": "^2.29.1",
