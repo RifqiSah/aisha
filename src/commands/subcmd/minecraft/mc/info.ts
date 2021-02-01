@@ -1,5 +1,3 @@
-import { get } from 'superagent';
-import func from '../../../../lib/function';
 import values from '../../../../lib/values';
 
 const status = (id: any) => {
@@ -18,37 +16,28 @@ const status = (id: any) => {
 
 module.exports = {
     name: 'info',
-    func: (client: any, message: any, args: any) => {
-        get(`${values.mc_api}/server/${values.mc_serever_id}`)
-            .set('Authorization', `Bearer ${client.config.MC_TOKEN}`)
-            .then((res) => {
-                const json = JSON.parse(res.text);
+    func: async (client: any, message: any, args: any) => {
+        try {
+            const server = await client.mcsvc.server(values.mc_server_id).get();
+            const data = [
+                `__**${server.name.toUpperCase()}**__`,
+                `${server.motd}`,
 
-                if (!json.success) {
-                    return message.channel.send(json.error);
-                }
+                '\n__**Software**__',
+                `Name: ${server.software.name}`,
+                `Version: ${server.software.version}`,
 
-                const mcData = json.data;
-                if (mcData) {
-                    const data = [
-                        `__**${mcData.name.toUpperCase()}**__`,
-                        `${mcData.motd}`,
+                '\n__**Server**__',
+                `Status: __**${status(server.status)}**__`,
+                `Players: ${server.players.count}/${server.players.max}`,
+            ];
 
-                        '\n__**Software**__',
-                        `Name: ${mcData.software.name}`,
-                        `Version: ${mcData.software.version}`,
-
-                        '\n__**Server**__',
-                        `Status: __**${status(mcData.status)}**__`,
-                        `Players: ${mcData.players.count}/${mcData.players.max}`,
-
-                    ];
-
-                    return message.channel.send(data).then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
-                }
-            })
-            .catch((err) => {
-                client.logger.error(err);
+            return message.channel.send(data).then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
+        } catch (e) {
+            return message.channel.send(e.message).then((msg: any) => {
+                msg.delete({ timeout: 5000 });
+                client.logger.error(e);
             });
+        }
     },
 };

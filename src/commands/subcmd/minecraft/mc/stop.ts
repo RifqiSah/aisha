@@ -1,25 +1,18 @@
-import { get } from 'superagent';
 import values from '../../../../lib/values';
 
 module.exports = {
     name: 'stop',
-    func: (client: any, message: any, args: any) => {
-        get(`${values.mc_api}/server/${values.mc_serever_id}/stop`)
-            .set('Authorization', `Bearer ${client.config.MC_TOKEN}`)
-            .then((res) => {
-                const json = JSON.parse(res.text);
-                if (!json.success) {
-                    return message.channel.send(json.error);
-                }
+    func: async (client: any, message: any, args: any) => {
+        try {
+            const server = client.mcsvc.server(values.mc_server_id);
+            await server.stop();
 
-                const data = [
-                    'Mohon tunggu beberapa detik hingga server telah offline!'
-                ];
-
-                return message.channel.send(data).then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
-            })
-            .catch((err) => {
-                client.logger.error(err);
+            return message.channel.send('Mohon tunggu beberapa detik hingga server offline!').then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
+        } catch (e) {
+            return message.channel.send(e.message).then((msg: any) => {
+                msg.delete({ timeout: 5000 });
+                client.logger.error(e);
             });
+        }
     },
 };
