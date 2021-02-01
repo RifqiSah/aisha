@@ -51,9 +51,9 @@ module.exports = async (client: any, message: any) => {
     }
 
     // random
-    // if (Math.round(Math.random())) {
-    //     await client.pointsvc.addPoint(message.author.id, 1);
-    // }
+    if (Math.round(Math.random())) {
+        await client.pointsvc.addPoint(message.author.id, 1);
+    }
 
     // Cek regex
     if (message.content.indexOf(client.config.BOT_PREFIX) !== 0) {
@@ -68,13 +68,13 @@ module.exports = async (client: any, message: any) => {
         command = args.shift().toLowerCase(); // Mengambil command
     }
 
-    // if (command !== 'bot') {
-    //     const isexist = await client.chsvc.getChannel(message.channel.id);
-    //     if (isexist) {
-    //         message.delete().catch((err: any) => client.logger.error(err));
-    //         return message.channel.send('Mohon selalu gunakan <#382003046990872576> untuk bermain dengan bot!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
-    //     }
-    // }
+    if (command !== 'bot') {
+        const isexist = await client.chsvc.getChannel(message.channel.id);
+        if (isexist) {
+            message.delete().catch((err: any) => client.logger.error(err));
+            return message.channel.send('Mohon selalu gunakan <#382003046990872576> untuk bermain dengan bot!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+        }
+    }
 
     const commandfile = client.cmds.get(command) || client.cmds.get(client.cmdsalias.get(command)); // Cari file command yang ditunjuk
     if (!commandfile) {
@@ -105,7 +105,7 @@ module.exports = async (client: any, message: any) => {
     // Command mempunyai role?
     if (commandfile.role.length > 0) {
         if (message.member.roles.cache.some((role: any) => commandfile.role.includes(role.id))) {
-            // await client.pointsvc.addPoint(message.author.id, 5);
+            await client.pointsvc.addPoint(message.author.id, 5);
             return commandfile.func(client, message, args);
         } else {
             message.delete().catch((err: any) => client.logger.error(err));
@@ -113,6 +113,6 @@ module.exports = async (client: any, message: any) => {
         }
     }
 
-    // await client.pointsvc.addPoint(message.author.id, 5);
+    await client.pointsvc.addPoint(message.author.id, 5);
     return commandfile.func(client, message, args);
 };
