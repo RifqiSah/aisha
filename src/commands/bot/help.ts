@@ -30,7 +30,7 @@ module.exports = {
         } else {
             const name = args[0].toLowerCase();
             const command = client.cmds.get(name) || client.cmds.get(client.cmdsalias.get(name));
-            
+
             if (!command) {
                 return message.reply('Command tidak valid!');
             }
@@ -41,6 +41,15 @@ module.exports = {
             if (command.desc) data.push(`\`Deskripsi\` : ${command.desc}`);
             if (command.usage) data.push(`\`Penggunaan\` : ${client.config.BOT_PREFIX}${name} ${command.usage}.`);
             if (command.role) data.push(`\`Role\` : ${command.role.length ? command.role.map((i: any) => message.guild.roles.cache.get(`${i}`)).join(', ') : '-'}.`);
+
+            const subCmds: any = Array.from(client.subcmds.keys()).filter((key: any) => {
+                const regex = new RegExp(`${command.name}\\b`, 'g');
+                return key.match(regex);
+            }).map((key: any, cmd: any) => {
+                return key.split('.')[1];
+            });
+
+            if (subCmds.length) data.push(`\`Sub-Command\` : ${subCmds.join(', ')}`);
 
             data.push(`\`Regex\` : ${command.regex ? 'Ya' : 'Tidak'}.`);
             data.push(`\`Cooldown\` : ${command.cooldown} detik.`);
