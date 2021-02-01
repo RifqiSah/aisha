@@ -1,5 +1,5 @@
 module.exports = {
-    name: 'account',
+    name: 'acc',
     func: async (client: any, message: any, args: any) => {
         try {
             const account = await client.mcsvc.getAccount();
