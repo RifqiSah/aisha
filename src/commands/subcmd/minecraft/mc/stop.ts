@@ -12,7 +12,7 @@ module.exports = {
             const refreshId = setInterval(() => {
                 const status = server.get().status;
                 if (server.hasStatus(server.STATUS.OFFLINE)) {
-                    msgs.edit('Server telah dimatikan! Terima kasih telah bermain :D').then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
+                    msgs.edit('Server telah dimatikan! Terima kasih telah bermain 😃').then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
                     clearInterval(refreshId);
                 }
             }, 5000);
