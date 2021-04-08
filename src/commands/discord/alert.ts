@@ -17,9 +17,9 @@ module.exports = {
 
         message.delete();
 
-        const Organizer = message.guild.roles.find((role: any) => role.name === 'Organizer').members.array();
-        for (const mOrganizer in Organizer) {
-            Organizer[mOrganizer].user.send(`Anda mendapatkan pesan penting dari ${message.author.username}:`, {
+        const organizers = message.guild.roles.find((role: any) => role.name === 'Organizer').members.array();
+        for (const organizer in organizers) {
+            organizers[organizer].user.send(`Anda mendapatkan pesan penting dari ${message.author.username}:`, {
                 embed: {
                     color: 3447003,
                     description: args.join(' '),
