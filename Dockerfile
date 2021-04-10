@@ -1,0 +1,14 @@
+FROM node:12
+
+ENV TZ=US
+
+RUN mkdir -p /usr/src/aisha
+WORKDIR /usr/src/aisha
+
+COPY package.json /usr/src/aisha
+RUN npm install
+
+COPY . /usr/src/aisha
+
+RUN npm run build
+CMD ["node", "./dist/bot.js"]
