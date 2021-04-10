@@ -5,7 +5,7 @@ ENV TZ=US
 RUN mkdir -p /usr/src/aisha
 WORKDIR /usr/src/aisha
 
-COPY package.json /usr/src/aisha
+COPY package*.json /usr/src/aisha
 RUN npm install
 RUN npm install typescript
 
