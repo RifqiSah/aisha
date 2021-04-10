@@ -9,7 +9,7 @@ module.exports = {
     getAllChannel() {
         Channel.find({}, (err, doc) => {
             if (err)  return logger.error(err);
-            
+
             return doc;
         });
     },
@@ -20,7 +20,7 @@ module.exports = {
 
     addChannel(gId: string, chId: string, name: string) {
         const channel = new Channel({ guildId: gId, channelId: chId, channelName: name });
-        channel.save((err, doc) => {
+        channel.save((err: any, doc: any) => {
             if (err) return logger.error(err);
 
             // logger.info(`[DB]: #${name}(${chId}) in ${gId} saved!`);
@@ -28,7 +28,7 @@ module.exports = {
     },
 
     deleteChannel(gId: string, chId: string) {
-        Channel.findOneAndDelete({ guildId: gId, channelId: chId }, (err, doc) => {
+        Channel.findOneAndDelete({ guildId: gId, channelId: chId }, (err: any, doc: any) => {
             if (err) return logger.error(err);
 
             // const msg = doc ? 'deleted!' : 'not found!';
@@ -37,7 +37,7 @@ module.exports = {
     },
 
     updateChannel(gId: string, chId: string, data: any) {
-        Channel.findOneAndUpdate({ guildId: gId, channelId: chId }, data, (err, doc) => {
+        Channel.findOneAndUpdate({ guildId: gId, channelId: chId }, data, (err: any, doc: any) => {
             if (err) return logger.error(err);
 
             // const msg = doc ? 'updated!' : 'not found!';
