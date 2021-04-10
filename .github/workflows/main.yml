@@ -96,4 +96,4 @@ jobs:
             docker pull rifqisah/aisha:latest
             docker image prune -f
 
-            docker run --rm --env-file ./config/aisha/.env --name=aisha rifqisah/aisha:latest
+            docker run -it --rm --env-file ./config/aisha/.env --name=aisha rifqisah/aisha:latest
