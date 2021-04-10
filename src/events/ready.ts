@@ -6,7 +6,7 @@ module.exports = (client: any) => {
 
     const activitiesList = [
         `${client.config.BOT_PREFIX}h for command.`,
-        `${client.config.BOT_VERSION} is running.`,
+        // `${client.config.BOT_VERSION} is running.`,
         "Informate's Bot.",
         `Serving ${client.bot.users.cache.size} users in ${client.bot.guilds.cache.size} guilds.`,
     ];

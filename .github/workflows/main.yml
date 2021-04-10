@@ -95,4 +95,4 @@ jobs:
             docker rmi rifqisah/aisha:latest
 
             docker pull rifqisah/aisha:latest
-            docker run --env-file ./config/aisha/.env  rifqisah/aisha:latest --name aisha
+            docker run --env-file ./config/aisha/.env --name=aisha rifqisah/aisha:latest
