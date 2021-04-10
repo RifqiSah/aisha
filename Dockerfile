@@ -7,6 +7,7 @@ WORKDIR /usr/src/aisha
 
 COPY package.json /usr/src/aisha
 RUN npm install
+RUN npm install typescript
 
 COPY . /usr/src/aisha
 
