@@ -22,8 +22,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       -
         name: Build and push images
+        id: docker_build
         uses: docker/build-push-action@v2.4.0
         with:
+          push: true
           tags: rifqisah/aisha:latest
       -
         name: Image digest
