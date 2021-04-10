@@ -1,6 +1,6 @@
 import { get } from 'superagent';
 import func from '../../lib/function';
-import image from '../../lib/image';
+// import image from '../../lib/image';
 import values from '../../lib/values';
 
 async function getItemDatas(client: any, message: any, itemID: number) {
