@@ -24,8 +24,7 @@ jobs:
         name: Build and push images
         uses: docker/build-push-action@v2.4.0
         with:
-          repository: rifqisah/aisha
-          tags: latest
+          tags: rifqisah/aisha:latest
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
