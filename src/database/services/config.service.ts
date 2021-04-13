@@ -18,8 +18,8 @@ module.exports = {
         return Config.findOne({ guildId: gId, key: key });
     },
 
-    addConfig(gId: string, key: string, value: string) {
-        const config = new Config({ guildId: gId, key: key, value: value });
+    addConfig(gId: string, key: string, value: string, desc: string) {
+        const config = new Config({ guildId: gId, key: key, value: value, desc: desc });
         config.save((err: any, doc: any) => {
             if (err) return logger.error(err);
         });

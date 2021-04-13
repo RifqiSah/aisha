@@ -13,6 +13,10 @@ const configSchema = new Schema({
         type: String,
         required: true,
     },
+    desc: {
+        type: String,
+        required: true,
+    },
 });
 
 export const Config = model('config', configSchema);
