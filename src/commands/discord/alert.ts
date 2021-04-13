@@ -4,6 +4,7 @@ module.exports = {
     enabled: true,
     regex: false,
     help: true,
+    public: false,
     role: ['372929327903408150', '668439117264191498'],
     aliases: ['report'],
     usage: '[pesan anda]',
