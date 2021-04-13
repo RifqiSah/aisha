@@ -5,6 +5,7 @@ module.exports = {
     enable: true,
     regex: false,
     help: false,
+    public: false,
     role: ['372915947478056960'],
     aliases: ['turnoff', 'botkill', 'botstop'],
     usage: '',
@@ -13,7 +14,7 @@ module.exports = {
         if (message.author.id !== client.config.BOT_OWNER) {
             return message.channel.send('Anda bukan pemilik hati aku!');
         }
-        
+
         try {
             await message.channel.send('Aisha pergi dulu ya! Bye bye ~');
             process.exit();

@@ -6,6 +6,7 @@ module.exports = {
     enable: true,
     regex: false,
     help: true,
+    public: true,
     role: [],
     aliases: ['h'],
     usage: '[nama command]',
