@@ -7,6 +7,7 @@ module.exports = {
     enable: true,
     regex: false,
     help: false,
+    public: false,
     role: ['433870492378595329'],
     aliases: ['sg'],
     usage: '[server ID]',
