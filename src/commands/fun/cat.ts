@@ -7,6 +7,7 @@ module.exports = {
     enable: true,
     regex: true,
     help: false,
+    public: true,
     role: [],
     aliases: ['mpus', 'meow', 'meong', 'puss'],
     usage: '',

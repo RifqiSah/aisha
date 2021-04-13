@@ -4,6 +4,7 @@ module.exports = {
     enable: true,
     regex: false,
     help: true,
+    public: true,
     role: [],
     aliases: ['fortune'],
     usage: '',
@@ -31,7 +32,7 @@ module.exports = {
             'Outlook not so good.',
             'Very doubtful.'
         ];
-        
+
         message.channel.send(`The Magic 8-Ball says: **${answers[Math.floor(Math.random() * answers.length)]}**`);
     },
 };
