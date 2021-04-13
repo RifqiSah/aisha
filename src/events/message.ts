@@ -85,7 +85,7 @@ module.exports = async (client: any, message: any) => {
     const botChannel = await client.configsvc.getConfig(guildObject.guildId, 'channel-bot');
     const newsChannel = await client.configsvc.getConfig(guildObject.guildId, 'channel-news');
 
-    if (command !== 'bot') {
+    if (!['bot', 'config'].includes(command)) {
         if (!masterRole) {
             message.delete().catch((err: any) => client.logger.error(err));
             return message.channel.send('Server ini belum mengatur Master Role!\n\n```Master role adalah sebuah role yang dikhususkan untuk bot master (Administrator), atau orang yang memasukkan bot kedalam server.```\nGunakan command `.bot config master [mention role]` untuk membuatnya.').then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
@@ -108,7 +108,7 @@ module.exports = async (client: any, message: any) => {
     }
     // end config
 
-    if (command !== 'bot') {
+    if (!['bot', 'config'].includes(command)) {
         if (message.channel.id !== botChannel.value) {
             message.delete().catch((err: any) => client.logger.error(err));
             return message.channel.send(`Mohon selalu gunakan <#${botChannel.value}> untuk bermain dengan bot!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
@@ -142,19 +142,30 @@ module.exports = async (client: any, message: any) => {
     }
 
     // public?
-    if (!commandfile.public) {
+    if (!commandfile.public && guildObject.guildId !== '306617555332628480') {
         message.delete().catch((err: any) => client.logger.error(err));
         return message.channel.send(`Maaf, command \`${commandfile.name}\` hanya dapat digunakan pada **Informate Community Discord**!`).then((msg: any) => msg.delete({ timeout: 10000 })).catch((err: any) => client.logger.error(err));
     }
 
     // Command mempunyai role?
     if (commandfile.role.length > 0) {
-        if (message.member.roles.cache.some((role: any) => commandfile.role.includes(role.id))) {
-            await client.pointsvc.addPoint(message.author.id, 5);
-            return commandfile.func(client, message, args);
+        // bypass
+        if (commandfile.role.includes('admin')) {
+            if (message.member.roles.cache.has(masterRole.value)) {
+                await client.pointsvc.addPoint(message.author.id, 5);
+                return commandfile.func(client, message, args);
+            } else {
+                message.delete().catch((err: any) => client.logger.error(err));
+                return message.channel.send(`Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+            }
         } else {
-            message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send(`Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+            if (message.member.roles.cache.some((role: any) => commandfile.role.includes(role.id))) {
+                await client.pointsvc.addPoint(message.author.id, 5);
+                return commandfile.func(client, message, args);
+            } else {
+                message.delete().catch((err: any) => client.logger.error(err));
+                return message.channel.send(`Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+            }
         }
     }
 
