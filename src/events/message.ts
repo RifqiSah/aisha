@@ -1,4 +1,6 @@
 module.exports = async (client: any, message: any) => {
+    const guildObject = await client.guildsvc.getGuild(message.guild.id);
+
     if (message.author.bot || message.channel.type === 'dm') {
         return;
     }
@@ -28,25 +30,27 @@ module.exports = async (client: any, message: any) => {
         return;
     }
 
-    const users = message.mentions.users.map((user: any) => {
-        if (user.presence.status === 'offline') { return `**${user.tag}** sedang offline.`; }
-        if (user.presence.status === 'idle') { return `**${user.tag}** sedang away.`; }
-        if (user.presence.status === 'dnd') { return `**${user.tag}** sedang tidak dapat diganggu.`; }
-    }).filter((user: any) => !!user);
-
-    if (users.length) {
-        message.channel.send(users).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
-    }
-
     let regex = null;
     let args = null;
     let command = null;
 
-    if (message.channel.id === '372926591849988096') { // peraturan
-        if (!message.content.startsWith('.setuju')) {
-            client.logger.info('-> Pesan baru terdeteksi pada channel #peraturan dan akan segera dihapus!');
+    if (guildObject.guildId === '306617555332628480') {
+        const users = message.mentions.users.map((user: any) => {
+            if (user.presence.status === 'offline') { return `**${user.tag}** sedang offline.`; }
+            if (user.presence.status === 'idle') { return `**${user.tag}** sedang away.`; }
+            if (user.presence.status === 'dnd') { return `**${user.tag}** sedang tidak dapat diganggu.`; }
+        }).filter((user: any) => !!user);
 
-            message.delete();
+        if (users.length) {
+            message.channel.send(users).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+        }
+
+        if (message.channel.id === '372926591849988096') { // peraturan
+            if (!message.content.startsWith('.setuju')) {
+                client.logger.info('-> Pesan baru terdeteksi pada channel #peraturan dan akan segera dihapus!');
+
+                message.delete();
+            }
         }
     }
 
