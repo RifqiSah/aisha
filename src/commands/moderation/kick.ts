@@ -4,6 +4,7 @@ module.exports = {
     enable: true,
     regex: false,
     help: false,
+    public: false,
     role: ['372915947478056960', '372916656231415811'],
     aliases: [],
     usage: '[user] [alasan]',
@@ -22,7 +23,7 @@ module.exports = {
         if (!channel) {
             return message.channel.send('Channel tidak ditemukan!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
         }
-        
+
         member.kick().then((member: any) => {
             channel.send(`${member.displayName} telah dikick oleh Aisha! Alasan:\n\`\`\`${alasan}!\`\`\``);
         });
