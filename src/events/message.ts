@@ -1,11 +1,15 @@
 /* eslint-disable max-len */
 module.exports = async (client: any, message: any) => {
+    // public guild
     const guildObject = await client.guildsvc.getGuild(message.guild.id);
+    const guildPrefix = await client.configsvc.getConfig(guildObject.guildId, 'prefix');
+    if (guildPrefix) client.config.BOT_PREFIX = guildPrefix.value;
 
     if (message.author.bot || message.channel.type === 'dm') {
         return;
     }
 
+    // local
     if (client.config.ENV === 'local') {
         if (!message.member.roles.cache.has('433870492378595329')) {
             return;
@@ -35,6 +39,7 @@ module.exports = async (client: any, message: any) => {
     let args = null;
     let command = null;
 
+    // informate only
     if (guildObject.guildId === '306617555332628480') {
         const users = message.mentions.users.map((user: any) => {
             if (user.presence.status === 'offline') { return `**${user.tag}** sedang offline.`; }
@@ -74,17 +79,17 @@ module.exports = async (client: any, message: any) => {
     }
 
     // check server configuration
-    const masterRole = await client.configsvc.getConfig(guildObject.guildId, 'role-master');
+    // const masterRole = await client.configsvc.getConfig(guildObject.guildId, 'role-master');
     const organizerRole = await client.configsvc.getConfig(guildObject.guildId, 'role-organizer');
 
     const botChannel = await client.configsvc.getConfig(guildObject.guildId, 'channel-bot');
     const newsChannel = await client.configsvc.getConfig(guildObject.guildId, 'channel-news');
 
     if (command !== 'bot') {
-        if (!masterRole) {
-            message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send('Server ini belum mengatur Master Role!\n\n```Master role adalah sebuah role yang dikhususkan untuk bot master, orang yang memasukkan bot kedalam server.```\nGunakan command `.bot config master [mention role]` untuk membuatnya.').then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
-        }
+        // if (!masterRole) {
+        //     message.delete().catch((err: any) => client.logger.error(err));
+        //     return message.channel.send('Server ini belum mengatur Master Role!\n\n```Master role adalah sebuah role yang dikhususkan untuk bot master, orang yang memasukkan bot kedalam server.```\nGunakan command `.bot config master [mention role]` untuk membuatnya.').then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
+        // }
 
         if (!organizerRole) {
             message.delete().catch((err: any) => client.logger.error(err));
@@ -104,8 +109,7 @@ module.exports = async (client: any, message: any) => {
     // end config
 
     if (command !== 'bot') {
-        const isexist = await client.chsvc.getChannel(message.channel.id);
-        if (isexist) {
+        if (message.channel.id !== botChannel.value) {
             message.delete().catch((err: any) => client.logger.error(err));
             return message.channel.send(`Mohon selalu gunakan <#${botChannel.value}> untuk bermain dengan bot!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
         }
