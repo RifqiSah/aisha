@@ -13,6 +13,7 @@ module.exports = {
     cooldown: 0,
     func: (client: any, message: any, args: any) => {
         const data = [];
+        const guildid = message.guild.id;
         // const dev = funct.isDeveloper(message.member) && (args.length ? args[0].toLowerCase().match('dev') : false);
         let lastLoc = '';
 
@@ -41,7 +42,7 @@ module.exports = {
             if (command.aliases) data.push(`\`Alias\` : ${command.aliases.length ? `${command.aliases.join(', ')}` : '-'}`);
             if (command.desc) data.push(`\`Deskripsi\` : ${command.desc}`);
             if (command.usage) data.push(`\`Penggunaan\` : ${client.config.BOT_PREFIX}${name} ${command.usage}.`);
-            if (command.role) data.push(`\`Role\` : ${command.role.length ? command.role.map((i: any) => message.guild.roles.cache.get(`${i}`)).join(', ') : '-'}.`);
+            if (guildid === '306617555332628480' && command.role) data.push(`\`Role\` : ${command.role.length ? command.role.map((i: any) => message.guild.roles.cache.get(`${i}`)).join(', ') : '-'}.`);
 
             const subCmds: any = Array.from(client.subcmds.keys()).filter((key: any) => {
                 const regex = new RegExp(`${command.name}\\b`, 'g');

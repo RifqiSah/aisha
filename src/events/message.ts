@@ -141,6 +141,12 @@ module.exports = async (client: any, message: any) => {
         return message.channel.send(`Command \`${commandfile.name}\` sedang tidak aktif!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
     }
 
+    // public?
+    if (!commandfile.public) {
+        message.delete().catch((err: any) => client.logger.error(err));
+        return message.channel.send(`Maaf, command \`${commandfile.name}\` hanya dapat digunakan pada **Informate Community Discord**!`).then((msg: any) => msg.delete({ timeout: 10000 })).catch((err: any) => client.logger.error(err));
+    }
+
     // Command mempunyai role?
     if (commandfile.role.length > 0) {
         if (message.member.roles.cache.some((role: any) => commandfile.role.includes(role.id))) {
