@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 module.exports = async (client: any, message: any) => {
     const guildObject = await client.guildsvc.getGuild(message.guild.id);
 
@@ -54,6 +55,34 @@ module.exports = async (client: any, message: any) => {
         }
     }
 
+    // check server configuration
+    const masterRole = await client.configsvc.getConfig(guildObject.guildId, 'role-master');
+    const organizerRole = await client.configsvc.getConfig(guildObject.guildId, 'role-organizer');
+
+    const botChannel = await client.configsvc.getConfig(guildObject.guildId, 'channel-bot');
+    const newsChannel = await client.configsvc.getConfig(guildObject.guildId, 'channel-news');
+
+    if (!masterRole) {
+        message.delete().catch((err: any) => client.logger.error(err));
+        return message.channel.send('Server ini belum mengatur Master Role!\n\n```Master role adalah sebuah role yang dikhususkan untuk bot master, orang yang memasukkan bot kedalam server.```\nGunakan command `.bot config master [mention role]` untuk membuatnya.').then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
+    }
+
+    if (!organizerRole) {
+        message.delete().catch((err: any) => client.logger.error(err));
+        return message.channel.send('Server ini belum mengatur Organizer Role!\n\n```Organizer role adalah sebuah role yang dikhususkan untuk para staff/pengurus server ini.```\nGunakan command `.bot config organizer [mention role]` untuk membuatnya.').then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
+    }
+
+    if (!botChannel) {
+        message.delete().catch((err: any) => client.logger.error(err));
+        return message.channel.send('Server ini belum mengatur Channel untuk BOT Spam!\n\n```Channel BOT Spam digunakan untuk menjadikan sebuah channel khusus untuk melakukan command-command kepada bot yang terdaftar.```\nGunakan command `.bot config bot-channel [mention channel]` untuk membuatnya.').then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
+    }
+
+    if (!newsChannel) {
+        message.delete().catch((err: any) => client.logger.error(err));
+        return message.channel.send('Server ini belum mengatur Channel Berita!\n\n```Channel berita digunakan untuk mengirim informasi dari dan untuk semua member pada server.```\nGunakan command `.bot config news-channel [mention channel]` untuk membuatnya.').then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
+    }
+    // end config
+
     // random
     if (Math.round(Math.random())) {
         await client.pointsvc.addPoint(message.author.id, 1);
@@ -76,7 +105,7 @@ module.exports = async (client: any, message: any) => {
         const isexist = await client.chsvc.getChannel(message.channel.id);
         if (isexist) {
             message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send('Mohon selalu gunakan <#382003046990872576> untuk bermain dengan bot!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+            return message.channel.send(`Mohon selalu gunakan <#${botChannel.value}> untuk bermain dengan bot!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
         }
     }
 
@@ -98,7 +127,7 @@ module.exports = async (client: any, message: any) => {
         }, commandfile.cooldown * 1000);
     }
 
-    client.logger.info(`-> Command '${commandfile.name}' dijalankan oleh '${message.author.tag}'! (Regex: ${(regex ? 'YES' : 'NO')})`);
+    client.logger.info(`-> Command '${commandfile.name}' dijalankan oleh '${message.author.tag}' pada guild ${guildObject.guildName} (${guildObject.guildId})! (Regex: ${(regex ? 'YES' : 'NO')})`);
 
     // Aktif?
     if (!commandfile.enable) {
