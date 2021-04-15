@@ -15,7 +15,7 @@ module.exports = {
         message.delete();
         const msgs = await message.channel.send(`Menunggu *cron* \`${args}\` ...`);
 
-        await get(`https://alriftech.com/cron/${args}`)
+        await get(`${client.config.ENDPOINT}/cron/${args}`)
             .then((res) => {
                 msgs.edit(`Sukses *cron* \`${args}\`! Respon:\`\`\`${res.text}\`\`\``).then((msg: any) => msg.delete({ timeout: 5000 }));
             })

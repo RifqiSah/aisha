@@ -16,7 +16,7 @@ module.exports = {
         const data: any = [];
         const msgs = await message.channel.send('Megambil data ...');
 
-        await get('https://alriftech.com/api/v2/bot/aisha/rob')
+        await get(`${client.config.ENDPOINT}/api/v2/bot/aisha/rob`)
             .then((res) => {
                 const robdata = JSON.parse(res.text);
                 let count = 0;
