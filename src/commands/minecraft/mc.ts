@@ -4,6 +4,7 @@ module.exports = {
     enable: true,
     regex: false,
     help: false,
+    public: false,
     role: ['802718208180092939'],
     aliases: [],
     usage: '[sub command] [param]',

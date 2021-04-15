@@ -6,6 +6,7 @@ module.exports = {
     enable: true,
     regex: false,
     help: false,
+    public: false,
     role: ['372929327903408150', '668439117264191498'],
     aliases: [],
     usage: '',

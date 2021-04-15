@@ -24,6 +24,7 @@ const run = async () => {
         chsvc: require('./database/services/channel.service'),
         guildsvc: require('./database/services/guild.service'),
         pointsvc: require('./database/services/point.service'),
+        configsvc: require('./database/services/config.service'),
         mcsvc: new Exaroton(config.MC_TOKEN),
 
         // Variables

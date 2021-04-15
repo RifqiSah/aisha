@@ -4,6 +4,7 @@ module.exports = {
     enable: true,
     regex: false,
     help: true,
+    public: true,
     role: [],
     aliases: ['coin', 'cointoss', 'flip'],
     usage: '[rock | paper | scissors]',

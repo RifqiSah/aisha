@@ -15,6 +15,10 @@ module.exports = {
         });
     },
 
+    getGuild(gId: string) {
+        return Guild.findOne({ guildId: gId });
+    },
+
     deleteGuild(gId: string) {
         Guild.findOneAndDelete({ guildId: gId }, (err: any, doc: any) => {
             if (err) return logger.error(err);

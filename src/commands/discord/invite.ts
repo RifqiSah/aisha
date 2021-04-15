@@ -4,6 +4,7 @@ module.exports = {
     enable: true,
     regex: true,
     help: false,
+    public: false,
     role: [],
     aliases: ['inv', 'invt', 'invit'],
     usage: '',
