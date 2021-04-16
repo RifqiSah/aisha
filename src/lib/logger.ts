@@ -20,14 +20,14 @@ export const logger = createLogger({
         }),
 
         // Loging to Discord
-        new DiscordTransport({
-            webhook: `${config.BOT_WEBHOOK_LOG}`,
-            defaultMeta: { Service: 'Aisha' },
-            level: 'warn'
-        }),
-        
+        // new DiscordTransport({
+        //     webhook: `${config.BOT_WEBHOOK_LOG}`,
+        //     defaultMeta: { Service: 'Aisha' },
+        //     level: 'warn'
+        // }),
+
         // Logging info and up to file
-        new transports.File({ 
+        new transports.File({
             filename: path.join(resolve(__dirname, '../../logs'), 'full.log'),
             level: 'info',
             format: logFormat,
@@ -35,7 +35,7 @@ export const logger = createLogger({
         }),
 
         // Logging only errors to file
-        new transports.File({ 
+        new transports.File({
             filename: path.join(resolve(__dirname, '../../logs'), 'error.log'),
             level: 'error',
             format: logFormat,
