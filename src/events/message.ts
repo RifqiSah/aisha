@@ -93,22 +93,22 @@ module.exports = async (client: any, message: any) => {
     if (!['bot', 'config'].includes(command)) {
         if (!masterRole) {
             message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send('Server ini belum mengatur Master Role!\n\n```Master role adalah sebuah role yang dikhususkan untuk bot master (Administrator), atau orang yang memasukkan bot kedalam server.```\nGunakan command `.config master [mention role]` untuk membuatnya.').then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
+            return message.channel.send(`Server ini belum mengatur Master Role!\n\n\`\`\`Master role adalah sebuah role yang dikhususkan untuk bot master (Administrator), atau orang yang memasukkan bot kedalam server.\`\`\`\nGunakan command \`${client.config.BOT_PREFIX}config master [mention role]\` untuk membuatnya.`).then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
         }
 
         if (!organizerRole) {
             message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send('Server ini belum mengatur Organizer Role!\n\n```Organizer role adalah sebuah role yang dikhususkan untuk para staff/pengurus server ini.```\nGunakan command `.config organizer [mention role]` untuk membuatnya.').then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
+            return message.channel.send(`Server ini belum mengatur Organizer Role!\n\n\`\`\`Organizer role adalah sebuah role yang dikhususkan untuk para staff/pengurus server ini.\`\`\`\nGunakan command \`${client.config.BOT_PREFIX}config organizer [mention role]\` untuk membuatnya.`).then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
         }
 
         if (!botChannel) {
             message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send('Server ini belum mengatur Channel untuk BOT Spam!\n\n```Channel BOT Spam digunakan untuk menjadikan sebuah channel khusus untuk melakukan command-command kepada bot yang terdaftar.```\nGunakan command `.config bot-channel [mention channel]` untuk membuatnya.').then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
+            return message.channel.send(`Server ini belum mengatur Channel untuk BOT Spam!\n\n\`\`\`Channel BOT Spam digunakan untuk menjadikan sebuah channel khusus untuk melakukan command-command kepada bot yang terdaftar.\`\`\`\nGunakan command \`${client.config.BOT_PREFIX}config bot-channel [mention channel]\` untuk membuatnya.`).then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
         }
 
         if (!newsChannel) {
             message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send('Server ini belum mengatur Channel Berita!\n\n```Channel berita digunakan untuk mengirim informasi dari dan untuk semua member pada server.```\nGunakan command `.config news-channel [mention channel]` untuk membuatnya.').then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
+            return message.channel.send(`Server ini belum mengatur Channel Berita!\n\n\`\`\`Channel berita digunakan untuk mengirim informasi dari dan untuk semua member pada server.\`\`\`\nGunakan command \`${client.config.BOT_PREFIX}config news-channel [mention channel]\` untuk membuatnya.`).then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
         }
     }
     // end config
