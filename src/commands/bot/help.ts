@@ -18,20 +18,22 @@ module.exports = {
         let lastLoc = '';
 
         if (!args.length) {
+            let cmdArr: string[] = client.cmds;
             data.push('Hai! Ini adalah daftar command yang tersedia:');
 
             // apakah public channel?
             const publicServer = message.guild.id !== '306617555332628480';
+            if (publicServer) {
+                cmdArr = cmdArr.filter((item: any) => item.public);
+            }
 
-            client.cmds.forEach((item: any) => {
-                if (item.public === publicServer) {
-                    if (!lastLoc.includes(client.cmdsloc.get(item.name))) {
-                        lastLoc = client.cmdsloc.get(item.name);
-                        data.push(`\n__**${lastLoc.replace(/^./, lastLoc[0].toUpperCase())}**__`);
-                    }
-
-                    data.push(`\`${item.name}\` : ${item.desc.split('.')[0]}.`);
+            cmdArr.forEach((item: any) => {
+                if (!lastLoc.includes(client.cmdsloc.get(item.name))) {
+                    lastLoc = client.cmdsloc.get(item.name);
+                    data.push(`\n__**${lastLoc.replace(/^./, lastLoc[0].toUpperCase())}**__`);
                 }
+
+                data.push(`\`${item.name}\` : ${item.desc.split('.')[0]}.`);
             });
 
             data.push(`\nAnda dapat menggunakan \`${client.config.BOT_PREFIX}help [nama command]\` untuk mendapatkan informasi dari command tersebut.`);
