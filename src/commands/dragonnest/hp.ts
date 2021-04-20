@@ -27,7 +27,8 @@ module.exports = {
             data.data.map((id: string) => {
                 msg.push(id);
                 if (id.startsWith('http')) {
-                    message.channel.send(msg, { split: true });
+					msg.pop();
+                    message.channel.send(msg, { split: true ,files: [id]});
                     msg.length = 0;
                 }
             });
