@@ -14,7 +14,7 @@ module.exports = {
     cooldown: 0,
     func: (client: any, message: any, args: any) => {
         const item = (args.length ? args.join(' ').toLowerCase() : 'null');
-        const msg = [];
+        const msg: string[]=[];
 
         const data = func.getExternalData('dragonnest.dndrop', item);
         if (!data) {
@@ -26,6 +26,11 @@ module.exports = {
             msg.push(`__**Drop rate untuk ${data.name}**__\n`);
             data.data.map((id: string) => {
                 msg.push(id);
+                if (id.startsWith('http')) {
+					msg.pop();
+                    message.channel.send(msg, { split: true ,files: [id]});
+                    msg.length = 0;
+                }
             });
         }
 
