@@ -25,7 +25,7 @@ module.exports = {
         } else {
             msg.push(`__**Rate untuk ${data.name}**__\n`);
             data.data.map((id: string) => {
-				msg.push(id);
+                msg.push(id);
                 if (id.startsWith('http')) {
                     message.channel.send(msg, { split: true });
                     msg.length = 0;

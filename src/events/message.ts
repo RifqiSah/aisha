@@ -75,8 +75,7 @@ module.exports = async (client: any, message: any) => {
         regex = message.content.match(client.regexList);
         if (regex) {
             command = regex[0]; // Isi command dengan hasil regexnya			
-        }
-		else {
+        } else {
             return; // Jika tidak selesaikan
         }
     } else {
