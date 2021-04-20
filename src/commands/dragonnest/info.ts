@@ -14,7 +14,7 @@ module.exports = {
     cooldown: 0,
     func: (client: any, message: any, args: any) => {
         const info = (args.length ? args.join(' ').toLowerCase() : 'null');
-        const msg = [];
+        const msg: string[]=[];
 
         const data = func.getExternalData('dragonnest.dninfo', info);
         if (!data) {
@@ -26,6 +26,10 @@ module.exports = {
             msg.push(`__**Info untuk ${data.name}**__\n`);
             data.data.map((id: string) => {
                 msg.push(id);
+                if (id.startsWith('http')) {
+                    message.channel.send(msg, { split: true });
+                    msg.length = 0;
+                }
             });
         }
 
