@@ -74,7 +74,7 @@ module.exports = async (client: any, message: any) => {
     if (message.content.indexOf(client.config.BOT_PREFIX) !== 0){
         regex = message.content.match(client.regexList);
         if (regex) {
-            command = regex[0]; // Isi command dengan hasil regexnya			
+            command = regex[0]; // Isi command dengan hasil regexnya
         } else {
             return; // Jika tidak selesaikan
         }
@@ -84,40 +84,25 @@ module.exports = async (client: any, message: any) => {
     }
 
     // check server configuration
-    const masterRole = await client.configsvc.getConfig(guildObject.guildId, 'role-master');
-    const organizerRole = await client.configsvc.getConfig(guildObject.guildId, 'role-organizer');
-
-    const botChannel = await client.configsvc.getConfig(guildObject.guildId, 'channel-bot');
-    const newsChannel = await client.configsvc.getConfig(guildObject.guildId, 'channel-news');
+    const step1 = await client.configsvc.getConfig(guildObject.guildId, 'role-master');
+    const step2 = await client.configsvc.getConfig(guildObject.guildId, 'role-organizer');
+    const step3 = await client.configsvc.getConfig(guildObject.guildId, 'channel-bot');
+    const step4 = await client.configsvc.getConfig(guildObject.guildId, 'channel-news');
+    const step5 = await client.configsvc.getConfig(guildObject.guildId, 'prefix');
 
     if (!['bot', 'config'].includes(command)) {
-        if (!masterRole) {
+        if (!step1 && !step2 && !step3 && !step4 && !step5) {
             message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send(`Server ini belum mengatur Master Role!\n\n\`\`\`Master role adalah sebuah role yang dikhususkan untuk bot master (Administrator), atau orang yang memasukkan bot kedalam server.\`\`\`\nGunakan command \`${client.config.BOT_PREFIX}config master [mention role]\` untuk membuatnya.`).then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
-        }
-
-        if (!organizerRole) {
-            message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send(`Server ini belum mengatur Organizer Role!\n\n\`\`\`Organizer role adalah sebuah role yang dikhususkan untuk para staff/pengurus server ini.\`\`\`\nGunakan command \`${client.config.BOT_PREFIX}config organizer [mention role]\` untuk membuatnya.`).then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
-        }
-
-        if (!botChannel) {
-            message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send(`Server ini belum mengatur Channel untuk BOT Spam!\n\n\`\`\`Channel BOT Spam digunakan untuk menjadikan sebuah channel khusus untuk melakukan command-command kepada bot yang terdaftar.\`\`\`\nGunakan command \`${client.config.BOT_PREFIX}config bot-channel [mention channel]\` untuk membuatnya.`).then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
-        }
-
-        if (!newsChannel) {
-            message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send(`Server ini belum mengatur Channel Berita!\n\n\`\`\`Channel berita digunakan untuk mengirim informasi dari dan untuk semua member pada server.\`\`\`\nGunakan command \`${client.config.BOT_PREFIX}config news-channel [mention channel]\` untuk membuatnya.`).then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
+            return message.channel.send(`Konfigurasi untuk __**${guildObject.guildName}**__ tidak ditemukan!\n\nSilahkan gunakan command \`${client.config.BOT_PREFIX}config\` untuk memulai konfigurasi.`).then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
         }
     }
     // end config
 
     if (!['bot', 'config'].includes(command)) {
         if (message.author.id !== client.config.BOT_OWNER) {
-            if (message.channel.id !== botChannel.value) {
+            if (message.channel.id !== step3.value) {
                 message.delete().catch((err: any) => client.logger.error(err));
-                return message.channel.send(`Mohon selalu gunakan <#${botChannel.value}> untuk bermain dengan bot!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+                return message.channel.send(`Mohon selalu gunakan <#${step3.value}> untuk Aisha!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
             }
         }
     }
@@ -159,9 +144,9 @@ module.exports = async (client: any, message: any) => {
         // bypass
         if (commandfile.name === 'config') {
             // apakah master role sudah ada?
-            if (masterRole) {
+            if (step1) {
                 // cek apakah user tersebut ada pada master role?
-                if (message.member.roles.cache.has(masterRole.value)) {
+                if (message.member.roles.cache.has(step1.value)) {
                     await client.pointsvc.addPoint(message.author.id, 5);
                     return commandfile.func(client, message, args);
                 } else {
