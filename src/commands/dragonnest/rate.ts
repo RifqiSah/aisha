@@ -12,7 +12,7 @@ module.exports = {
     aliases: [],
     usage: '[jenis rate]',
     cooldown: 0,
-    func: (client: any, message: any, args: any) => {
+    func: async (client: any, message: any, args: any) => {
         const rate = (args.length ? args.join(' ').toLowerCase() : 'null');
         const msg: string[] = [];
 
@@ -24,14 +24,7 @@ module.exports = {
             if (recom) msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
         } else {
             msg.push(`__**Rate untuk ${data.name}**__\n`);
-            data.data.map((id: string) => {
-                msg.push(id);
-                if (/(https?:\/\/[^\s]+)/.test(id)) {
-                    // msg.pop();
-                    message.channel.send(msg, { split: true/*, files: [id]*/ });
-                    msg.length = 0;
-                }
-            });
+            await func.formatImageInMessage(msg, message, data);
         }
 
         msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help rate\` untuk melihat daftar rate yang tersedia.\n`);

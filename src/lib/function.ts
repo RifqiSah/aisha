@@ -16,7 +16,7 @@ async function getFileList(dir: string) {
 
 async function loadDataFiles(dirs: string) {
     const files: any = await getFileList(dirs);
-    
+
     files.forEach(async (file: string) => {
         const response = await get(`${values.aisha_api}/data/${dirs}/${file}`);
         const data = response.text;
@@ -47,7 +47,7 @@ export default class Function {
     static getDate(): string {
         return new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
     }
-    
+
     static parseDate(date: string): moment.Moment {
         return moment(date);
     }
@@ -112,17 +112,17 @@ export default class Function {
         const row = Math.floor(pageIdx / 10);
         const column = pageIdx % 10;
         const UNIT_SIZE = 50;
-    
+
         const ret = {
             page: page,
             x: Math.max(UNIT_SIZE * column, 0),
             y: UNIT_SIZE * row,
             size: UNIT_SIZE
         };
-    
+
         return ret;
     }
-    
+
     static getItemIconPageUrl(page: number) {
         let pageStr;
         if (page < 10) {
@@ -130,10 +130,10 @@ export default class Function {
         } else {
             pageStr = page;
         }
-    
+
         return `${values.divinitor_api}/dds/itemicon${pageStr}/png`;
     }
-    
+
     static getSlotOverlay(rank: any, type: string) {
         const UNIT_SIZE = 52;
         const ret = {
@@ -141,9 +141,9 @@ export default class Function {
             x: 0,
             y: 0,
         };
-    
+
         const isWeap = type === 'WEAPON' || type === 'PARTS';
-    
+
         if (rank === 'NORMAL' || rank === 0) {
             if (isWeap) {
                 ret.x = 0 * UNIT_SIZE;
@@ -153,7 +153,7 @@ export default class Function {
                 ret.y = 2 * UNIT_SIZE;
             }
         }
-        
+
         if (rank === 'MAGIC' || rank === 1) {
             if (isWeap) {
                 ret.x = 6 * UNIT_SIZE;
@@ -163,7 +163,7 @@ export default class Function {
                 ret.y = 1 * UNIT_SIZE;
             }
         }
-        
+
         if (rank === 'RARE' || rank === 2) {
             if (isWeap) {
                 ret.x = 6 * UNIT_SIZE;
@@ -173,7 +173,7 @@ export default class Function {
                 ret.y = 0 * UNIT_SIZE;
             }
         }
-    
+
         if (rank === 'EPIC' || rank === 3) {
             if (isWeap) {
                 ret.x = 7 * UNIT_SIZE;
@@ -183,7 +183,7 @@ export default class Function {
                 ret.y = 3 * UNIT_SIZE;
             }
         }
-    
+
         if (rank === 'UNIQUE' || rank === 4) {
             if (isWeap) {
                 ret.x = 7 * UNIT_SIZE;
@@ -193,12 +193,12 @@ export default class Function {
                 ret.y = 2 * UNIT_SIZE;
             }
         }
-    
+
         if (rank === 'LEGENDARY' || rank === 5) {
             ret.x = 5 * UNIT_SIZE;
             ret.y = 3 * UNIT_SIZE;
         }
-    
+
         if (rank === 'DIVINE' || rank === 6) {
             if (isWeap) {
                 ret.x = 4 * UNIT_SIZE;
@@ -208,7 +208,7 @@ export default class Function {
                 ret.y = 2 * UNIT_SIZE;
             }
         }
-    
+
         if (rank === 'ANCIENT' || rank === 7) {
             ret.url = `${values.divinitor_api}/dds/uit_itemslotbutton.dds/png`;
             if (isWeap) {
@@ -219,10 +219,10 @@ export default class Function {
                 ret.y = 3 * UNIT_SIZE;
             }
         }
-    
+
         return ret;
     }
-    
+
     static getKeyValue(key: string) {
         return (obj: Record<string, any>) => obj[key];
     }
@@ -246,7 +246,7 @@ export default class Function {
     static formatNumberReal(number: number) {
         return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
-    
+
     static formatNumberArray(number: any) {
         const num = new RegExp('(:?^|\\s)(?=.)((?:0|(?:[1-9](?:\\d*|\\d{0,2}(?:,\\d{3})*)))?(?:\\.\\d*[1-9])?)(?!\\S)', 'g');
         const numbers = number.match(num)?.map((x: number) => this.formatNumber(x));
@@ -261,7 +261,7 @@ export default class Function {
     static combineState(states: any, stateKey?: any) {
         const combined: any = [];
         let obj: any = {};
-        
+
         if (!stateKey) {
             stateKey = 'min';
         }
@@ -321,11 +321,37 @@ export default class Function {
 
         // console.log(states);
         // console.log(combined);
-        
+
         return combined;
     }
 
     static formatTitleCase(str: string) {
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
+
+    static async formatImageInMessage(msg: any, message: any, data: any) {
+        // for (let i = 0; i < data.data.length + 1; i++) {
+        //     const id = data.data[i];
+        //     const urlRegex = /(https?:\/\/[^\s]+)/;
+
+        //     msg.push(id);
+        //     if (urlRegex.test(id)) {
+        //         msg.pop();
+
+        //         const url = id.match(urlRegex)[1];
+        //         await message.channel.send(msg, { split: true, files: [url] });
+
+        //         msg.length = 0;
+        //     }
+        // }
+
+        data.data.map((id: string) => {
+            msg.push(id);
+            if (/(https?:\/\/[^\s]+)/.test(id)) {
+                // msg.pop();
+                message.channel.send(msg, { split: true/*, files: [id]*/ });
+                msg.length = 0;
+            }
+        });
     }
 }
