@@ -13,7 +13,7 @@ dist
 logs/*
 
 # Docker
-docker-compose.yml
+# docker-compose.yml
 
 # Skip ignore
 !.gitkeep

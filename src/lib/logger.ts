@@ -2,8 +2,8 @@
 /* eslint-disable function-paren-newline */
 import path, { resolve } from 'path';
 import { createLogger, format, transports } from 'winston';
-import DiscordTransport from 'winston-discord-transport';
-import config from './config';
+// import DiscordTransport from 'winston-discord-transport';
+// import config from './config';
 
 // Custom log formatting
 const logFormat = format.printf((info) => `${info.timestamp} - ${info.level}: ${info.message}`);
