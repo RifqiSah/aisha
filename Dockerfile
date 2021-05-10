@@ -1,13 +1,12 @@
 FROM node:16-alpine
 
-ENV TZ=US
+# ENV TZ=US
 
 RUN mkdir -p /usr/src/aisha
 WORKDIR /usr/src/aisha
 
 COPY package*.json /usr/src/aisha
-RUN npm install
-RUN npm install typescript
+RUN npm install && npm install typescript
 
 COPY . /usr/src/aisha
 

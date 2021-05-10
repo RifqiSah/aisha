@@ -26,13 +26,13 @@ module.exports = {
     },
 
     deleteConfig(gId: string, key: string) {
-        Config.findOneAndDelete({ guildId: gId, key: key }, (err: any, doc: any) => {
+        Config.findOneAndDelete({ guildId: gId, key: key }, {}, (err: any, doc: any) => {
             if (err) return logger.error(err);
         });
     },
 
     updateConfig(gId: string, key: string, value: any) {
-        Config.findOneAndUpdate({ guildId: gId, key: key }, value, (err: any, doc: any) => {
+        Config.findOneAndUpdate({ guildId: gId, key: key }, value, {}, (err: any, doc: any) => {
             if (err) return logger.error(err);
         });
     },

@@ -14,10 +14,8 @@ module.exports = {
         const now = func.getDate();
         const row = await Point.findOne({ userId: uId });
         if (!row) {
-            return await new Point({ userId: uId, point: uPoint, updated: now }).save((err: any, doc: any) => {
+            return new Point({ userId: uId, point: uPoint, updated: now }).save((err: any, doc: any) => {
                 if (err) return logger.error(err);
-
-                // logger.info(`[DB]: ${uId} saved!`);
             });
         }
 
@@ -28,18 +26,12 @@ module.exports = {
             new: true
         }, (err: any, doc: any) => {
             if (err) return logger.error(err);
-
-            // const msg = doc ? 'saved!' : 'not found!';
-            // logger.info(`[DB]: ${uId} with ${uPoint} ${msg}`);
         });
     },
 
     deletePoint(uId: string) {
-        Point.findOneAndDelete({ userId: uId }, (err: any, doc: any) => {
+        Point.findOneAndDelete({ userId: uId }, {}, (err: any, doc: any) => {
             if (err) return logger.error(err);
-
-            // const msg = doc ? 'deleted!' : 'not found!';
-            // logger.info(`[DB]: ${uId} ${msg}`);
         });
     },
 
