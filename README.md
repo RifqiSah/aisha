@@ -2,6 +2,8 @@
 
 Aisha is a solution to managing our server problems, built from scratch with code organization and quality in mind. Our goal is to cover as many functionalities and niches as possible, while still maintaining high quality.
 
+[![build](https://github.com/RifqiSah/Aisha/actions/workflows/main.yml/badge.svg)](https://github.com/RifqiSah/Aisha/actions/workflows/main.yml)
+
 ## Built With
 
 * [NodeJS](https://nodejs.org/en/) - The bot environment
@@ -11,7 +13,7 @@ Aisha is a solution to managing our server problems, built from scratch with cod
 
 ## Contributing
 
-**We want everyone to be able to help with Aisha as easily as possible,** so we've created a list with the many ways you can contribute to the project. Take a look, and if you think you can help with any of these, please do! If you have any questions, don't hesitate to [join our community server](https://discord.gg/YvpEtYd) and ask as many questions as you want.
+**We want everyone to be able to help with Aisha as easily as possible,** so we've created a list with the many ways you can contribute to the project. Take a look, and if you think you can help with any of these, please do! If you have any questions, don't hesitate to [join our community server](https://discord.gg/UA6gYhx84m) and ask as many questions as you want.
 
 ### Ideas and discussion
 
