@@ -15,7 +15,7 @@ module.exports = {
     cooldown: 0,
     func: async (client: any, message: any, args: any) => {
         const data = [];
-        const taxes = await get(`${values.divinitor_api}/taxes`)
+        const taxes = await get(`${values.aisha_api}/taxes`)
             .then((res) => {
                 return JSON.parse(res.text);
             }).catch((err) => {
