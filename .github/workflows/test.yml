@@ -1,0 +1,41 @@
+name: test
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [12.x, 14.x, 15.x, 16.x]
+
+    steps:
+    -
+      name: Checkout latest commit
+      uses: actions/checkout@v1
+    -
+      name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    -
+      name: Install dependencies
+      run: npm ci
+      env:
+        CI: "true"
+    -
+      name: Lint Script
+      run: npm run lint
+      env:
+        CI: "true"
+    -
+      name: Build Aisha
+      run: npm run build
+      env:
+        CI: "true"
