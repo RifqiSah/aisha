@@ -7,8 +7,10 @@ RUN npm install
 # 2
 FROM node:16 AS compile-env
 RUN mkdir /compile
+
 COPY --from=build-deps /build /compile
 WORKDIR /compile
+
 COPY . .
 RUN npm run build
 
@@ -24,5 +26,5 @@ WORKDIR /app
 
 COPY --from=compile-env --chown=node:node /compile/dist /app
 COPY --from=runtime-deps --chown=node:node /build /app
-RUN ls
-CMD ["node", "./dist/bot.js"]
+
+CMD ["node", "bot.js"]
