@@ -98,9 +98,17 @@ module.exports = {
         answer.forEach(async (ans: string, i: any) => {
             const config = configDatas[i];
 
-            const canMention = ans.startsWith('<') && ans.endsWith('>');
-            const value = canMention ? ans.replace(/\D/g, '') : ans;
-            const desc = canMention ? ans.length > 2 && ans[1] === '@' ? message.guild.roles.cache.get(value).name : message.guild.channels.cache.get(value).name : '-';
+            let canMention = false;
+            let value = '-';
+            let desc = '-';
+
+            try {
+                canMention = ans.startsWith('<') && ans.endsWith('>');
+                value = canMention ? ans.replace(/\D/g, '') : ans;
+                desc = canMention ? ans.length > 2 && ans[1] === '@' ? message.guild.roles.cache.get(value).name : message.guild.channels.cache.get(value).name : '-';
+            } catch (err: any) {
+                client.logger.error(err);
+            }
 
             await client.configsvc.addConfig(guildId, config, value.toString(), desc);
         });
