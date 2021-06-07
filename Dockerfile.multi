@@ -24,6 +24,12 @@ RUN npm install --production
 FROM node:16-alpine AS runtime-env
 WORKDIR /app
 
+ENV NODE_ENV=production \
+    TZ=Asia/Jakarta
+
+RUN apk add tzdata \
+    && rm -rf /var/cache/apk/*
+
 COPY --from=compile-env --chown=node:node /compile/dist /app
 COPY --from=runtime-deps --chown=node:node /build /app
 
