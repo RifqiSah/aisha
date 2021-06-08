@@ -10,10 +10,16 @@ module.exports = {
     public: true,
     role: [],
     aliases: ['sc'],
-    usage: '[server ID]',
+    usage: '[server Name]',
     cooldown: 0,
     func: async (client: any, message: any, args: any) => {
         message.delete();
+
+        if (!args.length) {
+            return message.channel.send('Harap masukkan nama server!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
+                client.logger.error(err);
+            });
+        }
 
         const ret: any = [];
         const dns: any = funct.getServerIP(args[0].toUpperCase());

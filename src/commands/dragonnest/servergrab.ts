@@ -14,6 +14,13 @@ module.exports = {
     cooldown: 0,
     func: async (client: any, message: any, args: any) => {
         message.delete();
+
+        if (!args.length) {
+            return message.channel.send('Harap masukkan nama server!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
+                client.logger.error(err);
+            });
+        }
+
         const msgs = await message.channel.send(`Menunggu \`${args}\` ...`);
 
         await get(`${values.aisha_api}/server_update/${args}`)

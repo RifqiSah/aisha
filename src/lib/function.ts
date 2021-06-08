@@ -63,9 +63,9 @@ export default class Function {
 
     static getServerIP(name: string): any {
         const serverIp = [
-            { name: 'NA', ip: '211.43.155.163', port: 14300 },
-            { name: 'KO', ip: '211.233.18.72', port: 14300 },
-            { name: 'SEA', ip: '202.14.200.67', port: 14301 },
+            { name: 'NA', ip: '110.234.17.5', port: 14300 },
+            { name: 'KO', ip: '211.56.89.200', port: 14300 },
+            { name: 'SEA', ip: '13.76.128.50', port: 14301 },
         ];
 
         return serverIp.find((x) => x.name === name);
