@@ -98,7 +98,7 @@ module.exports = async (client: any, message: any) => {
     }
     // end config
 
-    if (!['bot', 'config'].includes(command) || !regex) {
+    if (!['bot', 'config'].includes(command)) {
         if (message.author.id !== client.config.BOT_OWNER) {
             if (message.channel.id !== step3.value) {
                 message.delete().catch((err: any) => client.logger.error(err));
