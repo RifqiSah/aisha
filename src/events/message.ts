@@ -98,18 +98,18 @@ module.exports = async (client: any, message: any) => {
     }
     // end config
 
-    if (!['bot', 'config'].includes(command)) {
+    const commandfile = client.cmds.get(command) || client.cmds.get(client.cmdsalias.get(command)); // Cari file command yang ditunjuk
+    if (!commandfile) {
+        return;
+    }
+
+    if (!['bot', 'config'].includes(command) && !commandfile.regex) {
         if (message.author.id !== client.config.BOT_OWNER) {
             if (message.channel.id !== step3.value) {
                 message.delete().catch((err: any) => client.logger.error(err));
                 return message.channel.send(`Mohon selalu gunakan <#${step3.value}> untuk Aisha!`).then((msg: any) => msg.delete({ timeout: 15000 })).catch((err: any) => client.logger.error(err));
             }
         }
-    }
-
-    const commandfile = client.cmds.get(command) || client.cmds.get(client.cmdsalias.get(command)); // Cari file command yang ditunjuk
-    if (!commandfile) {
-        return;
     }
 
     // Cooldown?
