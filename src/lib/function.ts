@@ -33,7 +33,9 @@ const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
 
 export default class Function {
     static async loadData() {
-        logger.info('[-] Reading external data');
+        logger.info('[-] Clearing and Reading new external data');
+
+        externalDatas.clear();
 
         ['dragonnest'].map(async (x) => {
             await loadDataFiles(x);
