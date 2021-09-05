@@ -33,7 +33,7 @@ module.exports = {
             ];
 
             return message.channel.send(data).then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
-        } catch (e: any) {
+        } catch (e) {
             return message.channel.send(e.message).then((msg: any) => {
                 msg.delete({ timeout: 5000 });
                 client.logger.error(e);
