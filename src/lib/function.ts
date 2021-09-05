@@ -351,7 +351,7 @@ export default class Function {
             msg.push(id);
             if (/(https?:\/\/[^\s]+)/.test(id)) {
                 // msg.pop();
-                message.channel.send(msg, { split: true/*, files: [id]*/ });
+                message.channel.send(msg.join('\n'), { split: true/*, files: [id]*/ });
                 msg.length = 0;
             }
         });

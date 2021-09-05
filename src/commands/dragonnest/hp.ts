@@ -28,6 +28,6 @@ module.exports = {
         }
 
         msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help hp\` untuk melihat daftar info HP yang tersedia.\n`);
-        message.channel.send(msg, { split: true });
+        message.channel.send(msg.join('\n'), { split: true });
     },
 };

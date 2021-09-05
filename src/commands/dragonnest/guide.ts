@@ -28,6 +28,6 @@ module.exports = {
         }
 
         msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help guide\` untuk melihat daftar guide yang tersedia.\n`);
-        message.channel.send(msg, { split: true });
+        message.channel.send(msg.join('\n'), { split: true });
     },
 };

@@ -83,6 +83,6 @@ module.exports = {
         }
 
         data.push(`\nGunakan \`${client.config.BOT_PREFIX}help tax\` untuk melihat daftar pajak yang tersedia.\n`);
-        message.channel.send(data, { split: true });
+        message.channel.send(data.join('\n'), { split: true });
     }
 };

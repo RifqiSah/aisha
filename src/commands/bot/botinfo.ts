@@ -19,6 +19,6 @@ module.exports = {
         data.push('`Bot Owner`: `RifqiSah#6743`');
         data.push('\nSemoga harimu menyenangkan 😃. Terima kasih ~');
 
-        message.channel.send(data, { split: true });
+        message.channel.send(data.join('\n'), { split: true });
     },
 };
