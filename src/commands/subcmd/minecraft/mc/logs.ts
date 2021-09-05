@@ -8,7 +8,7 @@ module.exports = {
             const logs = await server.getLogs();
 
             return message.channel.send(`\`\`\`\`${logs}\`\`\``).then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
-        } catch (e) {
+        } catch (e: any) {
             return message.channel.send(e.message).then((msg: any) => {
                 msg.delete({ timeout: 5000 });
                 client.logger.error(e);

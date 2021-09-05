@@ -18,7 +18,7 @@ module.exports = {
             }, 5000);
 
             return true;
-        } catch (e) {
+        } catch (e: any) {
             return msgs.edit(e.message).then((msg: any) => {
                 msg.delete({ timeout: 5000 });
                 client.logger.error(e);
