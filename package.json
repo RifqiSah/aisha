@@ -23,6 +23,7 @@
   "author": "RifqiSah",
   "license": "MIT",
   "devDependencies": {
+    "@discordjs/rest": "0.1.0-canary.0",
     "@types/node": "^14.17.14",
     "@types/superagent": "^4.1.12",
     "@types/ws": "^7.4.7",
@@ -35,6 +36,7 @@
   },
   "dependencies": {
     "apiai": "^4.0.3",
+    "discord-api-types": "^0.22.0",
     "discord.js": "^13.1.0",
     "dotenv": "^8.2.0",
     "exaroton": "^1.6.2",
