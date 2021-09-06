@@ -1,5 +1,5 @@
-import func from '../../lib/function';
-const list = func.formatData('dnrate');
+import funct from '../../lib/function';
+const list = funct.formatData('dnrate');
 
 module.exports = {
     name: 'rate',
@@ -16,18 +16,18 @@ module.exports = {
         const rate = (args.length ? args.join(' ').toLowerCase() : 'null');
         const msg: string[] = [];
 
-        const data = func.getExternalData('dragonnest.dnrate', rate);
+        const data = funct.getExternalData('dragonnest.dnrate', rate);
         if (!data) {
             msg.push(`Rate untuk \`${rate}\` tidak ditemukan!`);
 
-            const recom = func.commandRecom('dnrate', rate);
+            const recom = funct.commandRecom('dnrate', rate);
             if (recom) msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
         } else {
             msg.push(`__**Rate untuk ${data.name}**__\n`);
-            await func.formatImageInMessage(msg, message, data);
+            await funct.formatImageInMessage(msg, message, data);
         }
 
         msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help rate\` untuk melihat daftar rate yang tersedia.\n`);
-        message.channel.send(msg.join('\n'), { split: true });
+        funct.sendMessage(message, msg);
     },
 };

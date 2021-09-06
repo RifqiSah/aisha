@@ -1,5 +1,5 @@
-import func from '../../lib/function';
-const list = func.formatData('dnhp');
+import funct from '../../lib/function';
+const list = funct.formatData('dnhp');
 
 module.exports = {
     name: 'hp',
@@ -16,18 +16,18 @@ module.exports = {
         const nest = (args.length ? args.join(' ').toLowerCase() : 'null');
         const msg: string[] = [];
 
-        const data = func.getExternalData('dragonnest.dnhp', nest);
+        const data = funct.getExternalData('dragonnest.dnhp', nest);
         if (!data) {
             msg.push(`HP untuk \`${nest}\` tidak ditemukan!`);
 
-            const recom = func.commandRecom('dnhp', nest);
+            const recom = funct.commandRecom('dnhp', nest);
             if (recom) msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
         } else {
             msg.push(`__**HP untuk ${data.name}**__\n`);
-            await func.formatImageInMessage(msg, message, data);
+            await funct.formatImageInMessage(msg, message, data);
         }
 
         msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help hp\` untuk melihat daftar info HP yang tersedia.\n`);
-        message.channel.send(msg.join('\n'), { split: true });
+        funct.sendMessage(message, msg);
     },
 };
