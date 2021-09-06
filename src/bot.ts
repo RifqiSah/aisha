@@ -14,7 +14,14 @@ const run = async () => {
     logger.info('[-] Initialize variable');
     const client = {
         // General
-        bot: new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'] }),
+        bot: new Client({ intents: [
+            Intents.FLAGS.GUILDS,
+            Intents.FLAGS.GUILD_MESSAGES,
+            Intents.FLAGS.GUILD_PRESENCES,
+            Intents.FLAGS.GUILD_MEMBERS,
+            Intents.FLAGS.GUILD_WEBHOOKS,
+            Intents.FLAGS.DIRECT_MESSAGES,
+        ], partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'] }),
         embed: new MessageEmbed(),
         apiai: apiai(`${config.TOKEN_APIAI}`),
         config: config,
