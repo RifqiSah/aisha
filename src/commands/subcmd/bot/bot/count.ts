@@ -16,7 +16,7 @@ module.exports = {
             count = await client.chsvc.count();
         }
 
-        return message.channel.send(`Aisha telah masuk kedalam \`${count}\` ${type}!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
+        return message.channel.send(`Aisha telah masuk kedalam \`${count}\` ${type}!`).then((msg: any) => msg.delete({ timeout: 15000 })).catch((err: any) => {
             client.logger.error(err);
         });
     }

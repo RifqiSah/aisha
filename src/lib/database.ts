@@ -1,25 +1,20 @@
-import mongoose from 'mongoose';
 import config from './config';
 import { logger } from '../lib/logger';
 
-mongoose.Promise = global.Promise;
-
-// Cek apakah envnya ada atau tidak
-if (!config.MONGODB) {
-    logger.error('[X] DB configuration error!');
-    process.exit();
-}
+const db = require('../database/models');
 
 // Connect
 export default class Database {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    static async connect() {
-        mongoose.connect(`${config.MONGODB}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-            .then(() => {
-                logger.info('[V] Database connected!');
-            }).catch((err: any) => {
-                logger.error(`[X] Database error with: ${err}!`);
-                process.exit();
+    static async connect(force: boolean) {
+        if (force) {
+            db.adapter.sync({ force: true }).then(() => {
+                logger.warn('Drop and re-sync db.');
             });
+        } else {
+            await db.adapter.sync();
+            logger.warn('Re-sync db.');
+        }
+        logger.info('[V] Database connected!');
     }
 }

@@ -49,7 +49,7 @@ const run = async () => {
     logger.info('[V] Done!');
 
     await func.loadData(); // Load external data
-    db.connect(); // Connect ke database
+    db.connect(false); // Connect ke database
 
     // init event handler
     logger.info('[-] Initialize handler');

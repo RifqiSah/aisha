@@ -1,39 +1,47 @@
-import { logger } from '../../lib/logger';
-import { Channel } from '../models/channel.model';
+const { ChannelModel } = require('../models');
 
 module.exports = {
-    count() {
-        return Channel.countDocuments({});
+    async count() {
+        return await ChannelModel.count();
     },
 
-    getAllChannel() {
-        Channel.find({}, (err, doc) => {
-            if (err)  return logger.error(err);
+    async getAllChannel() {
+        return await ChannelModel.findAll();
+    },
 
-            return doc;
+    async getChannel(chId: string) {
+        return ChannelModel.findOne({
+            where: {
+                channelId: chId,
+            },
         });
     },
 
-    getChannel(chId: string) {
-        return Channel.findOne({ channelId: chId });
-    },
-
-    addChannel(gId: string, chId: string, name: string) {
-        const channel = new Channel({ guildId: gId, channelId: chId, channelName: name });
-        channel.save((err: any, doc: any) => {
-            if (err) return logger.error(err);
+    async addChannel(gId: string, chId: string, name: string) {
+        await ChannelModel.create({
+            guildId: gId,
+            channelId: chId,
+            channelName: name,
         });
     },
 
-    deleteChannel(gId: string, chId: string) {
-        Channel.findOneAndDelete({ guildId: gId, channelId: chId }, {}, (err: any, doc: any) => {
-            if (err) return logger.error(err);
+    async deleteChannel(gId: string, chId: string) {
+        await ChannelModel.destroy({
+            where: {
+                guildId: gId,
+                channelId: chId,
+            },
         });
     },
 
-    updateChannel(gId: string, chId: string, data: any) {
-        Channel.findOneAndUpdate({ guildId: gId, channelId: chId }, data, {}, (err: any, doc: any) => {
-            if (err) return logger.error(err);
+    async updateChannel(gId: string, chId: string, data: any) {
+        await ChannelModel.update({
+
+        }, {
+            where: {
+                guildId: gId,
+                channelId: chId,
+            },
         });
     },
 };

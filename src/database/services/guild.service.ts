@@ -1,25 +1,30 @@
-import { logger } from '../../lib/logger';
-import { Guild } from '../models/guild.model';
+const { GuildModel } = require('../models');
 
 module.exports = {
-    count() {
-        return Guild.countDocuments({});
+    async count() {
+        return await GuildModel.count();
     },
 
-    addGuild(gId: string, gName: string) {
-        const guild = new Guild({ guildId: gId, guildName: gName });
-        guild.save((err: any, ch: any) => {
-            if (err) return logger.error(err);
+    async addGuild(gId: string, gName: string) {
+        await GuildModel.create({
+            guildId: gId,
+            guildName: gName,
         });
     },
 
-    getGuild(gId: string) {
-        return Guild.findOne({ guildId: gId });
+    async getGuild(gId: string) {
+        return await GuildModel.findOne({
+            where: {
+                guildId: gId,
+            },
+        });
     },
 
-    deleteGuild(gId: string) {
-        Guild.findOneAndDelete({ guildId: gId }, {}, (err: any, doc: any) => {
-            if (err) return logger.error(err);
+    async deleteGuild(gId: string) {
+        await GuildModel.destroy({
+            where: {
+                guildId: gId,
+            },
         });
     },
 };
