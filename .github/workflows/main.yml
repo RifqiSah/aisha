@@ -35,6 +35,9 @@ jobs:
       env:
         CI: "true"
     -
+      name: Check Typescript version
+      run: tsc --version
+    -
       name: Build Aisha
       run: npm run build
       env:

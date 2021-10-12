@@ -1,41 +1,48 @@
 import func from '../../lib/function';
-
-import { logger } from '../../lib/logger';
-import { Point } from '../models/point.model';
+const { PointModel } = require('../models');
 
 module.exports = {
-    getPoint(uId: string) {
-        return Point.findOne({ userId: uId });
+    async getPoint(uId: string) {
+        return await PointModel.findOne({
+            where: {
+                userId: uId,
+            },
+        });
     },
 
     async addPoint(uId: string, uPoint: number) {
         await new Promise((resolve) => setTimeout(resolve, 100));
 
         const now = func.getDate();
-        const row = await Point.findOne({ userId: uId });
+        const row = await PointModel.findOne({
+            where: {
+                userId: uId,
+            },
+        });
         if (!row) {
-            return new Point({ userId: uId, point: uPoint, updated: now }).save((err: any, doc: any) => {
-                if (err) return logger.error(err);
+            return await PointModel.create({
+                userId: uId,
+                point: uPoint,
+                updated: now,
             });
         }
 
-        Point.findOneAndUpdate({ userId: uId }, {
-            $inc: { point: uPoint },
-            updated: now
-        },{
-            new: true
-        }, (err: any, doc: any) => {
-            if (err) return logger.error(err);
-        });
+        await row.increment('point', { by: uPoint });
     },
 
-    deletePoint(uId: string) {
-        Point.findOneAndDelete({ userId: uId }, {}, (err: any, doc: any) => {
-            if (err) return logger.error(err);
+    async deletePoint(uId: string) {
+        await PointModel.destroy({
+            where: {
+                userId: uId,
+            },
         });
     },
 
     async rank(uId: string) {
-        return Point.find({}).sort({ point: -1 }).cursor();
+        return await PointModel.findAll({
+            order: [
+                ['point', 'DESC'],
+            ],
+        });
     }
 };

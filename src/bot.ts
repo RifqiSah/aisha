@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import apiai from 'apiai';
-import { Client, Collection, MessageEmbed } from 'discord.js';
+import { Client, Collection, MessageEmbed, Intents } from 'discord.js';
 
 import config from './lib/config';
 import db from './lib/database';
@@ -14,7 +14,14 @@ const run = async () => {
     logger.info('[-] Initialize variable');
     const client = {
         // General
-        bot: new Client({ partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'] }),
+        bot: new Client({ intents: [
+            Intents.FLAGS.GUILDS,
+            Intents.FLAGS.GUILD_MESSAGES,
+            Intents.FLAGS.GUILD_PRESENCES,
+            Intents.FLAGS.GUILD_MEMBERS,
+            Intents.FLAGS.GUILD_WEBHOOKS,
+            Intents.FLAGS.DIRECT_MESSAGES,
+        ], partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'] }),
         embed: new MessageEmbed(),
         apiai: apiai(`${config.TOKEN_APIAI}`),
         config: config,
@@ -42,7 +49,7 @@ const run = async () => {
     logger.info('[V] Done!');
 
     await func.loadData(); // Load external data
-    db.connect(); // Connect ke database
+    db.connect(false); // Connect ke database
 
     // init event handler
     logger.info('[-] Initialize handler');

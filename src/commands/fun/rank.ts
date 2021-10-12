@@ -16,18 +16,20 @@ module.exports = {
         data.push('Ranking perolehan point:```');
 
         const rank = await client.pointsvc.rank(message.author.id);
-        await rank.eachAsync((row: any) => {
+        await rank.forEach((row: any) => {
             const user = client.bot.users.cache.get(row.userId);
             const same = row.userId == message.author.id;
 
-            data.push(`${index}: ${row.point} [${user.tag}] ${same ? '<- ini kamu :)' : ''}`);
-            index++;
+            if (user) {
+                data.push(`${index}: ${row.point} [${user.tag}] ${same ? '<- ini kamu :)' : ''}`);
+                index++;
+            }
         });
 
         data.push('```');
         data.push(`Ayo tingkatkan point kamu dengan dengan bermain quiz! Quiz dapat dilihat melalui command \`${client.config.BOT_PREFIX}help\`.`);
 
-        return message.channel.send(data).catch((err: any) => {
+        return message.channel.send(data.join('\n')).catch((err: any) => {
             client.logger.error(err);
         });
     },

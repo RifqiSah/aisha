@@ -42,7 +42,7 @@ module.exports = {
                     data.push('\nKetik `.iam noblesse info` pada `#bot-spam` untuk mendapatkan informasi.');
                 }
 
-                channel.send(data);
+                channel.send(data.join('\n'));
                 msgs.delete({ timeout: 5000 });
             })
             .catch((err) => {

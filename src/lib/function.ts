@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { readFileSync, readdirSync } from 'fs';
 import { resolve } from 'path';
-import { Collection } from 'discord.js';
+import { Collection, Util } from 'discord.js';
 import moment from 'moment';
 import { get } from 'superagent';
 import { logger } from './logger';
 import values from './values';
+
 
 const externalDatas: Collection<string, any> = new Collection();
 
@@ -351,9 +352,22 @@ export default class Function {
             msg.push(id);
             if (/(https?:\/\/[^\s]+)/.test(id)) {
                 // msg.pop();
-                message.channel.send(msg, { split: true/*, files: [id]*/ });
+                message.channel.send(msg.join('\n'), { split: true/*, files: [id]*/ });
                 msg.length = 0;
             }
+        });
+    }
+
+    static sendMessage(msgObj: any, message: any) {
+        let str = message;
+
+        if (Array.isArray(str)) {
+            str = message.join('\n');
+        }
+
+        str = Util.splitMessage(str);
+        str.forEach((ele: string) => {
+            return ele ? msgObj.channel.send(ele) : null;
         });
     }
 }

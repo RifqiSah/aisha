@@ -1,39 +1,49 @@
-import { logger } from '../../lib/logger';
-import { Config } from '../models/config.model';
+const { ConfigModel } = require('../models');
 
 module.exports = {
-    count() {
-        return Config.countDocuments({});
+    async count() {
+        return await ConfigModel.count();
     },
 
-    getAllConfig() {
-        Config.find({}, (err, doc) => {
-            if (err)  return logger.error(err);
+    async getAllConfig() {
+        return await ConfigModel.findAll();
+    },
 
-            return doc;
+    async getConfig(gId: string, key: string) {
+        return await ConfigModel.findOne({
+            where: {
+                guildId: gId,
+                key: key,
+            },
         });
     },
 
-    getConfig(gId: string, key: string) {
-        return Config.findOne({ guildId: gId, key: key });
-    },
-
-    addConfig(gId: string, key: string, value: string, desc: string) {
-        const config = new Config({ guildId: gId, key: key, value: value, desc: desc });
-        config.save((err: any, doc: any) => {
-            if (err) return logger.error(err);
+    async addConfig(gId: string, key: string, value: string, desc: string) {
+        await ConfigModel.create({
+            guildId: gId,
+            key: key,
+            value: value,
+            desc: desc,
         });
     },
 
-    deleteConfig(gId: string, key: string) {
-        Config.findOneAndDelete({ guildId: gId, key: key }, {}, (err: any, doc: any) => {
-            if (err) return logger.error(err);
+    async deleteConfig(gId: string, key: string) {
+        await ConfigModel.destroy({
+            where: {
+                guildId: gId,
+                key: key,
+            },
         });
     },
 
-    updateConfig(gId: string, key: string, value: any) {
-        Config.findOneAndUpdate({ guildId: gId, key: key }, value, {}, (err: any, doc: any) => {
-            if (err) return logger.error(err);
+    async updateConfig(gId: string, key: string, value: any) {
+        await ConfigModel.update({
+
+        }, {
+            where: {
+                guildId: gId,
+                key: key,
+            },
         });
     },
 };

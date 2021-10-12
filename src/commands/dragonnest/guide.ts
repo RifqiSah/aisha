@@ -1,5 +1,5 @@
-import func from '../../lib/function';
-const list = func.formatData('dnguide');
+import funct from '../../lib/function';
+const list = funct.formatData('dnguide');
 
 module.exports = {
     name: 'guide',
@@ -16,18 +16,18 @@ module.exports = {
         const guide = (args.length ? args.join(' ').toLowerCase() : 'null');
         const msg: string[] = [];
 
-        const data = func.getExternalData('dragonnest.dnguide', guide);
+        const data = funct.getExternalData('dragonnest.dnguide', guide);
         if (!data) {
             msg.push(`Guide untuk \`${guide}\` tidak ditemukan!`);
 
-            const recom = func.commandRecom('dnguide', guide);
+            const recom = funct.commandRecom('dnguide', guide);
             if (recom) msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
         } else {
             msg.push(`__**Guide untuk ${data.name}**__\n`);
-            await func.formatImageInMessage(msg, message, data);
+            await funct.formatImageInMessage(msg, message, data);
         }
 
         msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help guide\` untuk melihat daftar guide yang tersedia.\n`);
-        message.channel.send(msg, { split: true });
+        funct.sendMessage(message, msg);
     },
 };
