@@ -41,7 +41,7 @@ module.exports = {
     async rank(uId: string) {
         return await PointModel.findAll({
             order: [
-                ['point', 'ASC'],
+                ['point', 'DESC'],
             ],
         });
     }
