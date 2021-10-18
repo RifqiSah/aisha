@@ -1,9 +1,7 @@
 module.exports = async (client: any, reaction: any, user: any) => {
-    client.logger.info(`-> Pesan dari ${reaction.message.author.tag} dengan id '${reaction.message.id}' mendapat reaction!`);
+    // client.logger.info(`-> Pesan dari ${reaction.message.author.tag} dengan id '${reaction.message.id}' mendapat reaction!`);
 
-    // Ketika menerima reaction, cek jika pesan sebagian atau tidak
     if (reaction.message.partial) {
-        // Jika pesan sudah dihapus, akan terjadi API error, harus dihandle
         try {
             await reaction.message.fetch();
         } catch (error) {
@@ -11,7 +9,6 @@ module.exports = async (client: any, reaction: any, user: any) => {
         }
     }
 
-    // Cek juka jika reaction sebagian atau tidak
     if (reaction.partial) {
         try {
             await reaction.fetch();
@@ -24,15 +21,61 @@ module.exports = async (client: any, reaction: any, user: any) => {
     const { message } = reaction;
     const { emoji } = reaction;
 
-    if (emoji.name === '🇲') {
-        message.guild.members.fetch(user.id).then((member: any) => {
-            member.roles.add('668660316036530216');
-        });
-    }
+    const roles = [
+        // general
+        {
+            e: '🇲',
+            roleId: '668660316036530216',
+            roleName: 'Mod DN Update',
+        },
+        {
+            e: '🇹',
+            roleId: '668680264096022550',
+            roleName: 'Mod DN Tools',
+        },
+        // games
+        {
+            e: '1️⃣',
+            roleId: '489292018628165633',
+            roleName: 'Dragon Nest',
+        },
+        {
+            e: '2️⃣',
+            roleId: '776426142264721428',
+            roleName: 'Monster Hunter World',
+        },
+        {
+            e: '3️⃣',
+            roleId: '496658639034122240',
+            roleName: 'PUBG',
+        },
+        {
+            e: '4️⃣',
+            roleId: '853495757688274965',
+            roleName: 'Black Desert Mobile',
+        },
+        {
+            e: '5️⃣',
+            roleId: '772004888112529419',
+            roleName: 'Genshin Impact',
+        },
+        {
+            e: '6️⃣',
+            roleId: '802718208180092939',
+            roleName: 'Minecraft',
+        },
+        {
+            e: '7️⃣',
+            roleId: '756162195468976339',
+            roleName: 'Among Us',
+        },
+    ];
 
-    if (emoji.name === '🇹') {
-        message.guild.members.fetch(user.id).then((member: any) => {
-            member.roles.add('668680264096022550');
-        });
-    }
+    roles.forEach((el: any) => {
+        if (emoji.name === el.e) {
+            message.guild.members.fetch(user.id).then((member: any) => {
+                member.roles.add(el.roleId);
+            });
+        }
+    });
 };
