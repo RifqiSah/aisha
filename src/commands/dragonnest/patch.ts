@@ -27,6 +27,6 @@ module.exports = {
         data.push(`__**[Patchnote] ${month} Patchnote**__`);
         data.push(`https://sea.dragonnest.com/news/notice/all/${newsNumber}`);
 
-        channel.send(data);
+        func.sendMessageChannel(channel, data);
     },
 };

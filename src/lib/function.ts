@@ -370,4 +370,17 @@ export default class Function {
             return ele ? msgObj.channel.send(ele) : null;
         });
     }
+
+    static sendMessageChannel(chObj: any, message: any) {
+        let str = message;
+
+        if (Array.isArray(str)) {
+            str = message.join('\n');
+        }
+
+        str = Util.splitMessage(str);
+        str.forEach((ele: string) => {
+            return ele ? chObj.send(ele) : null;
+        });
+    }
 }
