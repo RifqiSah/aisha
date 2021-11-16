@@ -27,7 +27,7 @@ module.exports = {
             await funct.formatImageInMessage(msg, message, data);
         }
 
-        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help rate\` untuk melihat daftar rate yang tersedia.\n`);
+        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help dnrate\` untuk melihat daftar rate yang tersedia.\n`);
         funct.sendMessage(message, msg);
     },
 };

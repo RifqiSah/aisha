@@ -27,7 +27,7 @@ module.exports = {
             await funct.formatImageInMessage(msg, message, data);
         }
 
-        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help hp\` untuk melihat daftar info HP yang tersedia.\n`);
+        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help dnhp\` untuk melihat daftar info HP yang tersedia.\n`);
         funct.sendMessage(message, msg);
     },
 };

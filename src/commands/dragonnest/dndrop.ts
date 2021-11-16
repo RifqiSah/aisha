@@ -27,7 +27,7 @@ module.exports = {
             await funct.formatImageInMessage(msg, message, data);
         }
 
-        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help drop\` untuk melihat daftar drop yang tersedia.\n`);
+        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help dndrop\` untuk melihat daftar drop yang tersedia.\n`);
         funct.sendMessage(message, msg);
     },
 };

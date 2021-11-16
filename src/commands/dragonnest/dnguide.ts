@@ -27,7 +27,7 @@ module.exports = {
             await funct.formatImageInMessage(msg, message, data);
         }
 
-        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help guide\` untuk melihat daftar guide yang tersedia.\n`);
+        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help dnguide\` untuk melihat daftar guide yang tersedia.\n`);
         funct.sendMessage(message, msg);
     },
 };

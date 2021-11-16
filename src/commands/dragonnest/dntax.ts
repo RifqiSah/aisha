@@ -82,7 +82,7 @@ module.exports = {
             data.push(`Total yang didapat: \`${funct.formatNumber(total)}\``);
         }
 
-        data.push(`\nGunakan \`${client.config.BOT_PREFIX}help tax\` untuk melihat daftar pajak yang tersedia.\n`);
+        data.push(`\nGunakan \`${client.config.BOT_PREFIX}help dntax\` untuk melihat daftar pajak yang tersedia.\n`);
         funct.sendMessage(message, data);
     }
 };
