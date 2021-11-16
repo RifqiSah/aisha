@@ -46,7 +46,7 @@ module.exports = (client: any) => {
         }
     };
 
-    ['bot', 'discord', 'dragonnest', 'fun', 'minecraft', 'moderation'].forEach((x) => load(x));
+    ['bdm', 'bot', 'discord', 'dragonnest', 'fun', 'minecraft', 'moderation'].forEach((x) => load(x));
     client.regexList = new RegExp(client.cmdsregex.map((key: any, item: any) => item).join('|'));
     client.logger.info('  [V] Done!');
 };
