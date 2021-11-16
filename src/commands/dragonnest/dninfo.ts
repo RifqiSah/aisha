@@ -2,7 +2,7 @@ import funct from '../../lib/function';
 const list = funct.formatData('dninfo');
 
 module.exports = {
-    name: 'info',
+    name: 'dninfo',
     desc: `Melihat info hal-hal yang ada pada Dragon Nest. Info yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
     enable: true,
     regex: false,

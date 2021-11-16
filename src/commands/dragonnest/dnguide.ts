@@ -2,7 +2,7 @@ import funct from '../../lib/function';
 const list = funct.formatData('dnguide');
 
 module.exports = {
-    name: 'guide',
+    name: 'dnguide',
     desc: `Melihat guide dari Dragon Nest. Guide yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
     enable: true,
     regex: false,

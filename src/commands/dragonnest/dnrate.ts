@@ -2,7 +2,7 @@ import funct from '../../lib/function';
 const list = funct.formatData('dnrate');
 
 module.exports = {
-    name: 'rate',
+    name: 'dnrate',
     desc: `Melihat info rate enhance, dan chance apapun (kecuali drop) pada Dragon Nest. Rate yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
     enable: true,
     regex: false,

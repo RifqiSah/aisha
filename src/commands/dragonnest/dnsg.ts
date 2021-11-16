@@ -2,14 +2,14 @@ import { get } from 'superagent';
 import values from '../../lib/values';
 
 module.exports = {
-    name: 'servergrab',
+    name: 'dnsg',
     desc: 'Mengubah status server Dragon Nest.',
     enable: true,
     regex: false,
     help: false,
     public: false,
     role: ['433870492378595329'],
-    aliases: ['sg'],
+    aliases: [],
     usage: '[server ID]',
     cooldown: 0,
     func: async (client: any, message: any, args: any) => {

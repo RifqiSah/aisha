@@ -2,7 +2,7 @@ import funct from '../../lib/function';
 const list = funct.formatData('dnhp');
 
 module.exports = {
-    name: 'hp',
+    name: 'dnhp',
     desc: `Informasi mengenai jumlah HP dari nest. Nest yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
     enable: true,
     regex: false,

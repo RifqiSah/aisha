@@ -1,7 +1,7 @@
 import func from '../../lib/function';
 
 module.exports = {
-    name: 'patch',
+    name: 'dnpatch',
     desc: 'Untuk memudahakan dalam menulis patchnote.',
     enable: true,
     regex: false,

@@ -2,14 +2,14 @@ import { Socket } from 'net';
 import funct from '../../lib/function';
 
 module.exports = {
-    name: 'servercheck',
+    name: 'dnsc',
     desc: 'Melihat status server Dragon Nest.',
     enable: true,
     regex: false,
     help: false,
     public: true,
     role: [],
-    aliases: ['sc'],
+    aliases: [],
     usage: '[server Name]',
     cooldown: 0,
     func: async (client: any, message: any, args: any) => {

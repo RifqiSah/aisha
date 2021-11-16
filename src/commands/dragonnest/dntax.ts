@@ -11,14 +11,14 @@ const calc: any = {
 };
 
 module.exports = {
-    name: 'tax',
+    name: 'dntax',
     desc: 'Melihat tax atau pajak dari Trading House, Trade, Server Storage, dll.\nPajak yg tersedia yaitu:```> mail\n> th\n> trade```',
     enable: true,
     regex: false,
     help: true,
     public: true,
     role: [],
-    aliases: ['pajak'],
+    aliases: [],
     usage: '[jenis] [nominal]',
     cooldown: 0,
     func: async (client: any, message: any, args: any) => {

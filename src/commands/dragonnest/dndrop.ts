@@ -2,7 +2,7 @@ import funct from '../../lib/function';
 const list = funct.formatData('dndrop');
 
 module.exports = {
-    name: 'drop',
+    name: 'dndrop',
     desc: `Melihat info drop rate dari sebuah item pada Dragon Nest. Drop yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
     enable: true,
     regex: false,

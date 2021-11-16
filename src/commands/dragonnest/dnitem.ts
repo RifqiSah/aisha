@@ -166,7 +166,7 @@ async function getItemTuner(client: any, tunerID: number) {
 }
 
 module.exports = {
-    name: 'item',
+    name: 'dnitem',
     desc: 'Untuk memudahakan dalam mencari item yang terdapat pada Dragon Nest.\n\nNama item harus spesifik, tidak boleh umum.\nBenar: `Conversion Helmet`\nSalah: `Conversion\n\nCara melihat:\n1. Cari nama item untuk mendapatkan ID item.\n2. Jalankan kembali command ini dengan parameter ID item.',
     enable: true,
     regex: false,

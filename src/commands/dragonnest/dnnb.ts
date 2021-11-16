@@ -3,7 +3,7 @@ import { get } from 'superagent';
 import values from '../../lib/values';
 
 module.exports = {
-    name: 'noblesse',
+    name: 'dnnb',
     desc: 'Memberikan informasi untuk `Noblesse Buff` oleh VVIP1!',
     enable: true,
     regex: false,
