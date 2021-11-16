@@ -38,7 +38,7 @@ export default class Function {
 
         externalDatas.clear();
 
-        ['dragonnest'].map(async (x) => {
+        ['dragonnest', 'bdm'].map(async (x) => {
             await loadDataFiles(x);
         });
 
@@ -93,7 +93,7 @@ export default class Function {
     }
 
     static formatData(key: string) {
-        return externalDatas?.get(`dragonnest.${key}`)?.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
+        return externalDatas?.get(key)?.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
     }
 
     static getExternalData(dataKey: string, key: string) {

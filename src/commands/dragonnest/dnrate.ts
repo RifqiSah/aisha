@@ -1,5 +1,5 @@
 import funct from '../../lib/function';
-const list = funct.formatData('dnrate');
+const list = funct.formatData('dragonnest.dnrate');
 
 module.exports = {
     name: 'dnrate',
