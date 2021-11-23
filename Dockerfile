@@ -1,14 +1,36 @@
-FROM node:16-alpine
+# 1
+FROM node:16 AS build-deps
+COPY package*.json /build/
+WORKDIR /build
+RUN npm install
 
-# ENV TZ=US
+# 2
+FROM node:16 AS compile-env
+RUN mkdir /compile
 
-RUN mkdir -p /usr/src/aisha
-WORKDIR /usr/src/aisha
+COPY --from=build-deps /build /compile
+WORKDIR /compile
 
-COPY package*.json /usr/src/aisha
-RUN npm install && npm install typescript
-
-COPY . /usr/src/aisha
-
+COPY . .
 RUN npm run build
-CMD ["node", "./dist/bot.js"]
+
+# 3
+FROM node:16 AS runtime-deps
+COPY package*.json /build/
+WORKDIR /build
+RUN npm install --production
+
+# final
+FROM node:16-alpine AS runtime-env
+WORKDIR /app
+
+ENV NODE_ENV=production \
+    TZ=Asia/Jakarta
+
+RUN apk add tzdata \
+    && rm -rf /var/cache/apk/*
+
+COPY --from=compile-env --chown=node:node /compile/dist /app
+COPY --from=runtime-deps --chown=node:node /build /app
+
+CMD ["node", "bot.js"]
