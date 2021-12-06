@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 module.exports = async (client: any, message: any) => {
     // public guild
-    const guildObject = await client.guildsvc.getGuild(message.guild.id);
+    const guildObject = await client.guildsvc.getGuild(message.guildId);
     if (!guildObject) {
-        client.logger.error(`Cannot get guild ID of ${message.guild.id}`);
+        client.logger.error(`Cannot get guild ID of ${message.guildId}`);
         return;
     }
 
@@ -13,13 +13,6 @@ module.exports = async (client: any, message: any) => {
     if (message.author.bot || message.channel.type === 'dm') {
         return;
     }
-
-    // local
-    // if (client.config.ENV === 'local') {
-    //     if (!message.member.roles.cache.has('433870492378595329')) {
-    //         return;
-    //     }
-    // }
 
     if (message.mentions.has(client.bot.user)) {
         const text = message.content;
@@ -43,27 +36,6 @@ module.exports = async (client: any, message: any) => {
     let regex = null;
     let args = null;
     let command = null;
-
-    // informate only
-    if (guildObject.guildId === '306617555332628480') {
-        // const users = message.mentions.users.map((user: any) => {
-        //     if (user.presence.status === 'offline') { return `**${user.tag}** sedang offline.`; }
-        //     if (user.presence.status === 'idle') { return `**${user.tag}** sedang away.`; }
-        //     if (user.presence.status === 'dnd') { return `**${user.tag}** sedang tidak dapat diganggu.`; }
-        // }).filter((user: any) => !!user);
-
-        // if (users.length) {
-        //     message.channel.send(users).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
-        // }
-
-        if (message.channel.id === '372926591849988096') { // peraturan
-            if (!message.content.startsWith('.setuju')) {
-                client.logger.info('-> Pesan baru terdeteksi pada channel #peraturan dan akan segera dihapus!');
-
-                message.delete();
-            }
-        }
-    }
 
     // random
     if (Math.round(Math.random())) {
@@ -106,8 +78,8 @@ module.exports = async (client: any, message: any) => {
     if (!['bot', 'config'].includes(command) && !commandfile.regex) {
         if (message.author.id !== client.config.BOT_OWNER) {
             if (message.channel.id !== step3.value) {
-                message.delete().catch((err: any) => client.logger.error(err));
-                return message.channel.send(`Mohon selalu gunakan <#${step3.value}> untuk Aisha!`).then((msg: any) => msg.delete({ timeout: 15000 })).catch((err: any) => client.logger.error(err));
+                return message.delete().catch((err: any) => client.logger.error(err));
+                // return message.channel.send(`Mohon selalu gunakan <#${step3.value}> untuk Aisha!`).then((msg: any) => msg.delete({ timeout: 15000 })).catch((err: any) => client.logger.error(err));
             }
         }
     }

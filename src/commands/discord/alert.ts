@@ -1,7 +1,7 @@
 module.exports = {
     name: 'alert',
-    desc: 'Mengirim pesan **Penting** kepada para Organizer. Command ini digunakan jika ada pesan **penting** yang ingin segera disampaikan!.',
-    enabled: true,
+    desc: 'Mengirim pesan **Penting** kepada pengurus. Command ini digunakan jika ada pesan **penting** yang ingin segera disampaikan!.',
+    enable: true,
     regex: false,
     help: true,
     public: false,
@@ -18,20 +18,13 @@ module.exports = {
 
         message.delete();
 
-        const organizers = message.guild.roles.find((role: any) => role.name === 'Organizer').members.array();
-        for (const organizer in organizers) {
-            organizers[organizer].user.send(`Anda mendapatkan pesan penting dari ${message.author.username}:`, {
-                embed: {
-                    color: 3447003,
-                    description: args.join(' '),
-                    footer: {
-                        icon_url: message.author.avatarURL(),
-                        text: message.author.tag,
-                    },
-                },
-            }).catch((err: any) => client.logger.error(err));
+        const channel = message.guild.channels.cache.find((ch: any) => ch.id === '917430153586565120'); // member-log
+        if (!channel) {
+            return;
         }
 
-        message.reply('Sukses mengirim pesan kepada para Organizer!');
+        channel.send(`Anda mendapatkan pesan penting dari **${message.author.tag}**:\n\`\`\`${args.join(' ')}\`\`\``);
+
+        return message.channel.send('Sukses mengirim pesan kepada pengurus!');
     },
 };
