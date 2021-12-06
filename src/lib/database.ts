@@ -9,11 +9,11 @@ export default class Database {
     static async connect(force: boolean) {
         if (force) {
             db.adapter.sync({ force: true }).then(() => {
-                logger.warn('Drop and re-sync db.');
+                logger.warn('[V] Drop and re-sync db.');
             });
         } else {
             await db.adapter.sync();
-            logger.warn('Re-sync db.');
+            logger.warn('[V] Re-sync db.');
         }
         logger.info('[V] Database connected!');
     }
