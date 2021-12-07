@@ -23,7 +23,7 @@ module.exports = {
         const month = func.getMonthName();
         const newsNumber = args[0];
 
-        data.push('<@&489292018628165633>\n');
+        data.push(client.builder.roleMention('489292018628165633'));
         data.push(`__**[Patchnote] ${month} Patchnote**__`);
         data.push(`https://sea.dragonnest.com/news/notice/all/${newsNumber}`);
 

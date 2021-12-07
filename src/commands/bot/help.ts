@@ -17,12 +17,13 @@ module.exports = {
         // const dev = funct.isDeveloper(message.member) && (args.length ? args[0].toLowerCase().match('dev') : false);
         let lastLoc = '';
 
+        // apakah public channel?
+        const publicServer = guildid !== '306617555332628480';
+
         if (!args.length) {
             let cmdArr: string[] = client.cmds;
             data.push('Hai! Ini adalah daftar command yang tersedia:');
 
-            // apakah public channel?
-            const publicServer = message.guild.id !== '306617555332628480';
             if (publicServer) {
                 cmdArr = cmdArr.filter((item: any) => item.public);
             }
@@ -50,7 +51,7 @@ module.exports = {
             if (command.aliases) data.push(`\`Alias\` : ${command.aliases.length ? `${command.aliases.join(', ')}` : '-'}`);
             if (command.desc) data.push(`\`Deskripsi\` : ${command.desc}`);
             if (command.usage) data.push(`\`Penggunaan\` : ${client.config.BOT_PREFIX}${name} ${command.usage}.`);
-            if (guildid === '306617555332628480' && command.role) data.push(`\`Role\` : ${command.role.length ? command.role.map((i: any) => message.guild.roles.cache.get(`${i}`)).join(', ') : '-'}.`);
+            if (!publicServer && command.role) data.push(`\`Role\` : ${command.role.length ? command.role.map((i: any) => client.builder.roleMention(i)).join(', ') : '-'}.`);
 
             const subCmds: any = Array.from(client.subcmds.keys()).filter((key: any) => {
                 const regex = new RegExp(`${command.name}\\b`, 'g');

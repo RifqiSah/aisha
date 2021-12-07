@@ -1,4 +1,5 @@
 import { EventEmitter } from 'events';
+import * as builder from '@discordjs/builders';
 import apiai from 'apiai';
 import { Client, Collection, MessageEmbed, Intents } from 'discord.js';
 
@@ -24,6 +25,7 @@ const run = async () => {
             Intents.FLAGS.DIRECT_MESSAGES,
         ], partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'] }),
         embed: new MessageEmbed(),
+        builder,
         apiai: apiai(`${config.TOKEN_APIAI}`),
         config: config,
         logger: logger,
