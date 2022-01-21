@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/RifqiSah/Aisha#readme",
   "dependencies": {
-    "node-cron": "^3.0.0"
+    "moment": "^2.29.1",
+    "node-cron": "^3.0.0",
+    "rss-parser": "^3.12.0"
   },
   "devDependencies": {
     "@types/node-cron": "^3.0.1"
