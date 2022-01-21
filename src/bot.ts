@@ -12,8 +12,7 @@ const { Client: Exaroton } = require('exaroton');
 
 let client: any = null;
 
-const run = async () => {
-    // public init
+const init = async () => {
     logger.info('[-] Initialize variable');
     client = {
         // General
@@ -52,24 +51,21 @@ const run = async () => {
     };
 
     logger.info('[V] Done!');
+};
 
+const database = async () => {
     await func.loadData(); // Load external data
-    db.connect(false); // Connect ke database
+    await db.connect(false); // Connect ke database
+};
 
-    // init event handler
+const modules = async () => {
     logger.info('[-] Initialize handler');
     ['commands', 'events'].forEach((x) => {
         logger.info(` [O] ${x} handler`);
         require(`./handlers/${x}`)(client);
     });
-
-    client.bot.login(client.config.TOKEN);
-
     logger.info('[V] Done!');
-    logger.info('[V] Aisha is ready to start!');
-};
 
-const modules = async () => {
     logger.info('[-] Initialize external modules');
     ['cron'].forEach((x) => {
         logger.info(` [O] ${x} modules`);
@@ -78,5 +74,16 @@ const modules = async () => {
     logger.info('[V] Done!');
 };
 
+const login = async () => {
+    await client.bot.login(client.config.TOKEN);
+    logger.info('[V] Aisha is ready to start!');
+};
+
+const run = async () => {
+    await init();
+    await database();
+    await modules();
+    await login();
+};
+
 run();
-modules();
