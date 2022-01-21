@@ -36,6 +36,7 @@ const init = async () => {
         guildsvc: require('./database/services/guild.service'),
         pointsvc: require('./database/services/point.service'),
         configsvc: require('./database/services/config.service'),
+        globalsvc: require('./database/services/globals.service'),
         mcsvc: new Exaroton(config.MC_TOKEN),
 
         // Variables
@@ -67,7 +68,7 @@ const modules = async () => {
     logger.info('[V] Done!');
 
     logger.info('[-] Initialize external modules');
-    ['cron'].forEach((x) => {
+    func.getDirs('modules').forEach((x) => {
         logger.info(` [O] ${x} modules`);
         require(`./modules/${x}/index.js`)(client);
     });

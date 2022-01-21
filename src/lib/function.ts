@@ -381,4 +381,11 @@ export default class Function {
             return ele ? chObj.send(ele) : null;
         });
     }
+
+    static getDirs(dir: string): string[] {
+        dir = resolve(__dirname, `../${dir}`);
+        return readdirSync(dir, { withFileTypes: true })
+            .filter((item) => item.isDirectory())
+            .map((item) => item.name);
+    }
 }
