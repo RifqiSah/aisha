@@ -24,7 +24,6 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.18.3",
-    "@types/node-cron": "^3.0.1",
     "@types/superagent": "^4.1.13",
     "@types/ws": "^7.4.7",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
@@ -44,9 +43,12 @@
     "moment": "^2.29.1",
     "mysql2": "^2.3.3",
     "net": "^1.0.2",
-    "node-cron": "^3.0.0",
     "sequelize": "^6.12.3",
     "superagent": "^5.3.1",
     "winston": "^3.3.3"
-  }
+  },
+  "workspaces": [
+    "src/modules/*",
+    "modules/*"
+  ]
 }
