@@ -34,7 +34,7 @@ module.exports = {
 
     async updateGlobals(key: string, value: any) {
         await GlobalsModel.update({
-
+            value,
         }, {
             where: {
                 key: key,

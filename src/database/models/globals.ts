@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from 'sequelize';
 
 const Globals = {
-    name: 'globals',
+    name: 'global',
     define: {
         key: {
             type: DataTypes.STRING,
