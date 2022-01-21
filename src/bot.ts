@@ -10,10 +10,12 @@ import { logger } from './lib/logger';
 
 const { Client: Exaroton } = require('exaroton');
 
+let client: any = null;
+
 const run = async () => {
     // public init
     logger.info('[-] Initialize variable');
-    const client = {
+    client = {
         // General
         bot: new Client({ intents: [
             Intents.FLAGS.GUILDS,
@@ -67,4 +69,14 @@ const run = async () => {
     logger.info('[V] Aisha is ready to start!');
 };
 
+const modules = async () => {
+    logger.info('[-] Initialize external modules');
+    ['cron'].forEach((x) => {
+        logger.info(` [O] ${x} modules`);
+        require(`./modules/${x}/index.js`)(client);
+    });
+    logger.info('[V] Done!');
+};
+
 run();
+modules();
