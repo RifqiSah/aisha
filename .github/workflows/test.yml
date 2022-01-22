@@ -40,6 +40,11 @@ jobs:
       env:
         CI: "true"
     -
+      name: Show installed packages
+      run: npm list --depth=0
+      env:
+        CI: "true"
+    -
       name: Linting script
       run: npm run lint
       env:
