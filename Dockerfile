@@ -5,7 +5,7 @@ RUN apt-get update && \
     apt-get -y install rsync
 
 COPY package*.json /build/
-RUN rsync -zarv --include="*/" --include="*.json" --exclude="*" ./src/modules /build/modules/
+RUN rsync -zarv --include="*/" --include="*.json" --exclude="*" src\modules /build/modules/
 COPY lerna.json /build/
 
 RUN npm install --global lerna
