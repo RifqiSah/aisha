@@ -5,8 +5,10 @@ RUN apt-get update && \
     apt-get -y install tree
 
 COPY package*.json /build/
-# COPY src/modules /build/modules
-COPY src/modules/*/package*.json ./build/modules/*
+
+COPY src/modules /build/modules
+RUN find /build/modules \! -name "package.json" -mindepth 2 -maxdepth 2 -print | xargs rm -rf
+
 RUN tree /build/
 
 WORKDIR /build
