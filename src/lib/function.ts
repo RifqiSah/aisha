@@ -18,7 +18,7 @@ async function getFileList(dir: string) {
 async function loadDataFiles(dirs: string) {
     const files: any = await getFileList(dirs);
 
-    files.forEach(async (file: string) => {
+    await Promise.all(files.map(async (file: string) => {
         const response = await get(`${values.aisha_api}/data/${dirs}/${file}`);
         const data = response.text;
 
@@ -27,7 +27,7 @@ async function loadDataFiles(dirs: string) {
 
         logger.info(`  + '${dirs}/${key}' readed and parsed. [${data.length} bytes].`);
         externalDatas.set(`${dirs}.${key}`, parsed);
-    });
+    }));
 }
 
 const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
@@ -38,11 +38,9 @@ export default class Function {
 
         externalDatas.clear();
 
-        ['dragonnest', 'bdm'].map(async (x) => {
+        await Promise.all(['dragonnest', 'bdm'].map(async (x) => {
             await loadDataFiles(x);
-        });
-
-        await delay(10000);
+        }));
 
         logger.info('[V] Done!');
     }
@@ -382,5 +380,12 @@ export default class Function {
         str.forEach((ele: string) => {
             return ele ? chObj.send(ele) : null;
         });
+    }
+
+    static getDirs(dir: string): string[] {
+        dir = resolve(__dirname, `../${dir}`);
+        return readdirSync(dir, { withFileTypes: true })
+            .filter((item) => item.isDirectory())
+            .map((item) => item.name);
     }
 }

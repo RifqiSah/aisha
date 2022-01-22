@@ -27,5 +27,6 @@ db.ChannelModel = require('./channel.js')(sequelize);
 db.ConfigModel = require('./config.js')(sequelize);
 db.GuildModel = require('./guild.js')(sequelize);
 db.PointModel = require('./point.js')(sequelize);
+db.GlobalsModel = require('./globals.js')(sequelize);
 
 module.exports = db;

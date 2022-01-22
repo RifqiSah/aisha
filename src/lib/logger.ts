@@ -8,7 +8,7 @@ import { createLogger, format, transports } from 'winston';
 // Custom log formatting
 const logFormat = format.printf((info) => `${info.timestamp} - ${info.level}: ${info.message}`);
 export const logger = createLogger({
-    level: 'info',
+    level: 'silly',
     format: format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
     transports: [
         // Logging to console

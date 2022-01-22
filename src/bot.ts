@@ -10,10 +10,11 @@ import { logger } from './lib/logger';
 
 const { Client: Exaroton } = require('exaroton');
 
-const run = async () => {
-    // public init
+let client: any = null;
+
+const init = async () => {
     logger.info('[-] Initialize variable');
-    const client = {
+    client = {
         // General
         bot: new Client({ intents: [
             Intents.FLAGS.GUILDS,
@@ -27,14 +28,16 @@ const run = async () => {
         embed: new MessageEmbed(),
         builder,
         apiai: apiai(`${config.TOKEN_APIAI}`),
-        config: config,
-        logger: logger,
+        func,
+        config,
+        logger,
 
         // Services
         chsvc: require('./database/services/channel.service'),
         guildsvc: require('./database/services/guild.service'),
         pointsvc: require('./database/services/point.service'),
         configsvc: require('./database/services/config.service'),
+        globalsvc: require('./database/services/globals.service'),
         mcsvc: new Exaroton(config.MC_TOKEN),
 
         // Variables
@@ -50,21 +53,39 @@ const run = async () => {
     };
 
     logger.info('[V] Done!');
+};
 
+const database = async () => {
     await func.loadData(); // Load external data
-    db.connect(false); // Connect ke database
+    await db.connect(false); // Connect ke database
+};
 
-    // init event handler
+const modules = async () => {
     logger.info('[-] Initialize handler');
     ['commands', 'events'].forEach((x) => {
         logger.info(` [O] ${x} handler`);
         require(`./handlers/${x}`)(client);
     });
-
-    client.bot.login(client.config.TOKEN);
-
     logger.info('[V] Done!');
+
+    logger.info('[-] Initialize external modules');
+    func.getDirs('modules').forEach((x) => {
+        logger.info(` [O] ${x} modules`);
+        require(`./modules/${x}/index.js`)(client);
+    });
+    logger.info('[V] Done!');
+};
+
+const login = async () => {
+    await client.bot.login(client.config.TOKEN);
     logger.info('[V] Aisha is ready to start!');
+};
+
+const run = async () => {
+    await init();
+    await database();
+    await modules();
+    await login();
 };
 
 run();
