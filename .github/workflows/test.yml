@@ -25,16 +25,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     -
-      name: Installing Lerna
-      run: npm install --global lerna
-      env:
-        CI: "true"
-    -
-      name: Bootstrapping
-      run: lerna bootstrap
-      env:
-        CI: "true"
-    -
       name: Installing dependencies
       run: npm ci
       env:
