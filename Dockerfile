@@ -2,7 +2,7 @@
 FROM node:17 AS build-deps
 
 COPY package*.json /build/
-COPY src/modules/cron/package*.json /build/modules/cron/
+COPY src/modules/*/package*.json /build/modules/*/
 
 RUN ls -la /build/
 
@@ -23,7 +23,7 @@ RUN npm run build
 FROM node:17 AS runtime-deps
 
 COPY package*.json /build/
-COPY src/modules/cron/package*.json /build/modules/cron/
+COPY src/modules/*/package*.json /build/modules/*/
 
 WORKDIR /build
 RUN npm install --production
