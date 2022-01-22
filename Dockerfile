@@ -1,6 +1,9 @@
 # 1
 FROM node:17 AS build-deps
 
+RUN apt-get update && \
+    apt-get -y install rsync
+
 COPY package*.json /build/
 RUN rsync -zarv --include="*/" --include="*.json" --exclude="*" src/modules /build/modules/
 COPY lerna.json /build/
@@ -23,6 +26,9 @@ RUN npm run build
 
 # 3
 FROM node:17 AS runtime-deps
+
+RUN apt-get update && \
+    apt-get -y install rsync
 
 COPY package*.json /build/
 RUN rsync -zarv --include="*/" --include="*.json" --exclude="*" src/modules /build/modules/
