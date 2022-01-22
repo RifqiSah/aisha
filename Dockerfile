@@ -1,8 +1,11 @@
 # 1
 FROM node:17 AS build-deps
+
 COPY package*.json /build/
+COPY src/modules/*/package*.json /build/
+
 WORKDIR /build
-RUN npm install --ws
+RUN npm install
 
 # 2
 FROM node:17 AS compile-env
@@ -16,9 +19,12 @@ RUN npm run build
 
 # 3
 FROM node:17 AS runtime-deps
+
 COPY package*.json /build/
+COPY src/modules/*/package*.json /build/
+
 WORKDIR /build
-RUN npm install --production --ws
+RUN npm install --production
 
 # final
 FROM node:17-alpine AS runtime-env
