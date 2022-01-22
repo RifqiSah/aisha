@@ -1,10 +1,13 @@
 # 1
 FROM node:17 AS build-deps
 
+RUN apt-get update && \
+    apt-get -y install tree
+
 COPY package*.json /build/
 # COPY src/modules /build/modules
 COPY src/modules/*/package*.json ./build/modules/*
-RUN ls -la /build/
+RUN tree /build/
 
 WORKDIR /build
 RUN npm install
