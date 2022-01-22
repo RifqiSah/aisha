@@ -1,15 +1,8 @@
 # 1
 FROM node:17 AS build-deps
 
-RUN apt-get update && \
-    apt-get -y install rsync
-
 COPY package*.json /build/
-RUN rsync -zarv --include="*/" --include="*.json" --exclude="*" src\modules /build/modules/
-COPY lerna.json /build/
-
-RUN npm install --global lerna
-RUN lerna bootstrap
+COPY src/modules /build/modules
 
 WORKDIR /build
 RUN npm install
@@ -27,15 +20,8 @@ RUN npm run build
 # 3
 FROM node:17 AS runtime-deps
 
-RUN apt-get update && \
-    apt-get -y install rsync
-
 COPY package*.json /build/
-RUN rsync -zarv --include="*/" --include="*.json" --exclude="*" ./src/modules /build/modules/
-COPY lerna.json /build/
-
-RUN npm install --global lerna
-RUN lerna bootstrap
+COPY src/modules /build/modules
 
 WORKDIR /build
 RUN npm install --production
