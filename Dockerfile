@@ -4,7 +4,7 @@ FROM node:17 AS build-deps
 COPY package*.json /build/
 COPY src/modules/*/package*.json /build/modules/*/
 
-RUN ls -la /build/
+RUN tree /build/
 
 WORKDIR /build
 RUN npm install
