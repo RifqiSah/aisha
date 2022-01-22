@@ -28,8 +28,9 @@ const init = async () => {
         embed: new MessageEmbed(),
         builder,
         apiai: apiai(`${config.TOKEN_APIAI}`),
-        config: config,
-        logger: logger,
+        func,
+        config,
+        logger,
 
         // Services
         chsvc: require('./database/services/channel.service'),
