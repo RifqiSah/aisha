@@ -1,0 +1,6 @@
+{
+  "packages": [
+    "src/modules/*"
+  ],
+  "version": "2.6.0"
+}
