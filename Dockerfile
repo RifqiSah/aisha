@@ -4,8 +4,8 @@ FROM node:17 AS build-deps
 COPY package*.json /build/
 COPY src/modules/*/package*.json /build/modules/*/
 
-RUN apk add --no-cache tree
-RUN tree /build/
+RUN ls -la /build/
+RUN ls -la /build/modules/
 
 WORKDIR /build
 RUN npm install
