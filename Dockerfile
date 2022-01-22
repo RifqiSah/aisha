@@ -2,7 +2,9 @@
 FROM node:17 AS build-deps
 
 COPY package*.json /build/
-COPY src/modules /build/modules
+# COPY src/modules /build/modules
+COPY src/modules/*/package*.json ./build/modules/*
+RUN ls -la
 
 WORKDIR /build
 RUN npm install
@@ -21,7 +23,8 @@ RUN npm run build
 FROM node:17 AS runtime-deps
 
 COPY package*.json /build/
-COPY src/modules /build/modules
+# COPY src/modules /build/modules
+COPY src/modules/*/package*.json ./build/modules/*
 
 WORKDIR /build
 RUN npm install --production
