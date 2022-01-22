@@ -35,12 +35,12 @@ jobs:
       env:
         CI: "true"
     -
-      name: Install dependencies
+      name: Installing dependencies
       run: npm ci
       env:
         CI: "true"
     -
-      name: Lint Script
+      name: Linting script
       run: npm run lint
       env:
         CI: "true"

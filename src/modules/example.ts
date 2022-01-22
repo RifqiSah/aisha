@@ -1,3 +1,4 @@
+/*
 import cron from 'node-cron';
 
 let _client: any = null;
@@ -13,3 +14,4 @@ exports.init = (client: any) => {
 export const handle = cron.schedule('* * * * *', () => {
     getData();
 });
+*/
