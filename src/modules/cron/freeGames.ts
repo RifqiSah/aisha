@@ -36,7 +36,7 @@ const getData = async () => {
                 const descriptionArr = item.contentSnippet?.split('\n');
                 const gameDescription = descriptionArr?.[0];
 
-                const claimIndex = descriptionArr?.findIndex((v) => v.match(/Offer good/));
+                const claimIndex = descriptionArr?.findIndex((v: any) => v.match(/Offer good/));
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 const claimBefore = item.contentSnippet?.split('\n')[claimIndex!].replace('- ', '').trim();
 

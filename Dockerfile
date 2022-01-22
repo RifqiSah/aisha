@@ -1,11 +1,11 @@
 # 1
-FROM node:16 AS build-deps
+FROM node:17 AS build-deps
 COPY package*.json /build/
 WORKDIR /build
 RUN npm install
 
 # 2
-FROM node:16 AS compile-env
+FROM node:17 AS compile-env
 RUN mkdir /compile
 
 COPY --from=build-deps /build /compile
@@ -15,13 +15,13 @@ COPY . .
 RUN npm run build
 
 # 3
-FROM node:16 AS runtime-deps
+FROM node:17 AS runtime-deps
 COPY package*.json /build/
 WORKDIR /build
 RUN npm install --production
 
 # final
-FROM node:16-alpine AS runtime-env
+FROM node:17-alpine AS runtime-env
 WORKDIR /app
 
 ENV NODE_ENV=production \
