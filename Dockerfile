@@ -2,7 +2,8 @@
 FROM node:17 AS build-deps
 
 COPY package*.json /build/
-COPY lerna*.json /build/
+RUN rsync -zarv --include="*/" --include="*.json" --exclude="*" src/modules /build/modules/
+COPY lerna.json /build/
 
 RUN npm install --global lerna
 RUN lerna bootstrap
@@ -24,7 +25,8 @@ RUN npm run build
 FROM node:17 AS runtime-deps
 
 COPY package*.json /build/
-COPY lerna*.json /build/
+RUN rsync -zarv --include="*/" --include="*.json" --exclude="*" src/modules /build/modules/
+COPY lerna.json /build/
 
 RUN npm install --global lerna
 RUN lerna bootstrap
