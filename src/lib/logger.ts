@@ -8,11 +8,12 @@ import { createLogger, format, transports } from 'winston';
 // Custom log formatting
 const logFormat = format.printf((info) => `${info.timestamp} - ${info.level}: ${info.message}`);
 export const logger = createLogger({
-    level: 'silly',
+    level: 'debug',
     format: format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
     transports: [
         // Logging to console
         new transports.Console({
+            level: 'info',
             format: format.combine(
                 format.colorize(),
                 logFormat
@@ -40,6 +41,14 @@ export const logger = createLogger({
             level: 'error',
             format: logFormat,
             options: { flags: 'w' }
-        })
+        }),
+
+        // Logging for debug
+        new transports.File({
+            filename: path.join(resolve(__dirname, '../../logs'), 'debug.log'),
+            level: 'debug',
+            format: logFormat,
+            options: { flags: 'w' }
+        }),
     ],
 });
