@@ -15,7 +15,7 @@ const getData = async () => {
         let latestData = await _client.globalsvc.getGlobals('news.freegames');
         latestData = moment(latestData.value);
 
-        const channel = _client.channels.cache.find((ch: any) => ch.id === freeGamesChannelId);
+        const channel = _client.bot.channels.cache.find((ch: any) => ch.id === freeGamesChannelId);
         if (!channel) {
             return;
         }
@@ -64,6 +64,6 @@ exports.init = (client: any) => {
     _client = client;
 };
 
-export const handle = cron.schedule('0 * * * *', () => {
+export const handle = cron.schedule('* * * * *', () => {
     getData();
 });
