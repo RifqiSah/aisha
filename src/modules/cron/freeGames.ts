@@ -51,7 +51,7 @@ const getData = async () => {
                 }
             }
 
-            _client.func.delay(5000);
+            await _client.func.delay(5000);
         }
     } catch (err: any) {
         _client.logger.error('[CRON] An error occured!', err);
@@ -64,6 +64,6 @@ exports.init = (client: any) => {
     _client = client;
 };
 
-export const handle = cron.schedule('* * * * *', () => {
+export const handle = cron.schedule('0 * * * *', () => {
     getData();
 });

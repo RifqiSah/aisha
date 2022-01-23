@@ -29,7 +29,7 @@ export const logger = createLogger({
 
         // Logging info and up to file
         new transports.File({
-            filename: path.join(resolve(__dirname, '../../logs'), 'full.log'),
+            filename: path.join(resolve(__dirname, '../logs'), 'full.log'),
             level: 'info',
             format: logFormat,
             options: { flags: 'w' }
@@ -37,7 +37,7 @@ export const logger = createLogger({
 
         // Logging only errors to file
         new transports.File({
-            filename: path.join(resolve(__dirname, '../../logs'), 'error.log'),
+            filename: path.join(resolve(__dirname, '../logs'), 'error.log'),
             level: 'error',
             format: logFormat,
             options: { flags: 'w' }
@@ -45,7 +45,7 @@ export const logger = createLogger({
 
         // Logging for debug
         new transports.File({
-            filename: path.join(resolve(__dirname, '../../logs'), 'debug.log'),
+            filename: path.join(resolve(__dirname, '../logs'), 'debug.log'),
             level: 'debug',
             format: logFormat,
             options: { flags: 'w' }

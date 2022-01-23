@@ -7,7 +7,6 @@ import { get } from 'superagent';
 import { logger } from './logger';
 import values from './values';
 
-
 const externalDatas: Collection<string, any> = new Collection();
 
 async function getFileList(dir: string) {
@@ -33,6 +32,10 @@ async function loadDataFiles(dirs: string) {
 const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
 
 export default class Function {
+    static delay(ms: any) {
+        return delay(ms);
+    }
+
     static async loadData() {
         logger.info('[-] Clearing and Reading new external data');
 
