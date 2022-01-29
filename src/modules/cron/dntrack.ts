@@ -1,7 +1,13 @@
 import axios from 'axios';
 import cron from 'node-cron';
 
+import discord from '../../lib/discord';
+
 let _client: any = null;
+
+const urls = [
+    'https://discordapp.com/api/webhooks/431290543197257729/EWStX8QzyWL79uQZU_o5sl6jsO9oC02qCpA45-dzsjxmWvpsIJNPWGQXbtGJ-_re0JHX'
+];
 
 const getData = async () => {
     _client.logger.debug('[CRON] Dragon Nest Version Tracker ticked!');
@@ -46,7 +52,7 @@ const getData = async () => {
             const newver = DN_Version[i].version;
 
             if ((Number(oldver) < Number(newver)) && (DB_Version[i].shortName === DN_Version[i].shortName)) {
-                console.log(`${DN_Version[i].longName} updated from ${oldver} to ${newver}`);
+                await discord.sendTracker(urls, DN_Version[i].longName, oldver, newver);
 
                 await _client.gameserversvc.update({
                     game: 'dn',
