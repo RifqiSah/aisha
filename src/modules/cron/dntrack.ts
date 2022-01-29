@@ -26,7 +26,7 @@ const getData = async () => {
         DN_Version.sort((a, b) => a.id - b.id);
 
         // get saved version
-        const dbdata = await _client.gameserversvc.getAllGameServer({
+        const dbdata = await _client.gameserversvc.findAll({
             where: {
                 game: 'dn',
             },
@@ -47,6 +47,13 @@ const getData = async () => {
 
             if ((Number(oldver) < Number(newver)) && (DB_Version[i].shortName === DN_Version[i].shortName)) {
                 console.log(`${DN_Version[i].longName} updated from ${oldver} to ${newver}`);
+
+                await _client.gameserversvc.update({
+                    game: 'dn',
+                    shortName: DN_Version[i].shortName,
+                }, {
+                    version: newver,
+                });
             }
 
             await _client.func.delay(5000);
