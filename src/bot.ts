@@ -33,12 +33,16 @@ const init = async () => {
         logger,
 
         // Services
+        mcsvc: new Exaroton(config.MC_TOKEN),
+
+        // database service
         chsvc: require('./database/services/channel.service'),
         guildsvc: require('./database/services/guild.service'),
         pointsvc: require('./database/services/point.service'),
         configsvc: require('./database/services/config.service'),
         globalsvc: require('./database/services/globals.service'),
-        mcsvc: new Exaroton(config.MC_TOKEN),
+
+        gameserversvc: require('./database/services/gameserver.service'),
 
         // Variables
         cmdcd: new Set(),

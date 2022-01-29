@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/RifqiSah/Aisha#readme",
   "dependencies": {
+    "axios": "^0.25.0",
     "moment": "^2.29.1",
     "node-cron": "^3.0.0",
     "rss-parser": "^3.12.0"
