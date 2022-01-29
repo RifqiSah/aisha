@@ -1,5 +1,5 @@
 import func from '../../lib/function';
-const { PointModel } = require('../models');
+const { PointModel } = require('../models/aisha');
 
 module.exports = {
     async getPoint(uId: string) {

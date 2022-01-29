@@ -1,4 +1,4 @@
-const { GlobalsModel } = require('../models');
+const { GlobalsModel } = require('../models/aisha');
 
 module.exports = {
     async count() {

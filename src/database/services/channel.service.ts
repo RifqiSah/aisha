@@ -1,4 +1,4 @@
-const { ChannelModel } = require('../models');
+const { ChannelModel } = require('../models/aisha');
 
 module.exports = {
     async count() {

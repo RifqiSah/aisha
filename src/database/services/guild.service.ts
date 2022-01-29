@@ -1,4 +1,4 @@
-const { GuildModel } = require('../models');
+const { GuildModel } = require('../models/aisha');
 
 module.exports = {
     async count() {
