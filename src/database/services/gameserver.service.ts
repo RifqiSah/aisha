@@ -5,11 +5,11 @@ module.exports = {
         return await GameServer.count();
     },
 
-    async getAllGameServer(opt: any = {}) {
+    async findAll(opt: any = {}) {
         return await GameServer.findAll(opt);
     },
 
-    async getGameServer(key: string) {
+    async findOne(key: string) {
         return await GameServer.findOne({
             where: {
                 key: key,
@@ -17,14 +17,14 @@ module.exports = {
         });
     },
 
-    async addGameServer(key: string, value: string) {
+    async create(key: string, value: string) {
         await GameServer.create({
             key: key,
             value: value,
         });
     },
 
-    async deleteGameServer(key: string) {
+    async destroy(key: string) {
         await GameServer.destroy({
             where: {
                 key: key,
@@ -32,13 +32,9 @@ module.exports = {
         });
     },
 
-    async updateGameServer(key: string, value: any) {
-        await GameServer.update({
-            value,
-        }, {
-            where: {
-                key: key,
-            },
+    async update(where: any, value: any) {
+        await GameServer.update(value, {
+            where: where,
         });
     },
 };

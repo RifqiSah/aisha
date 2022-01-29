@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from 'sequelize';
 
 const GameServer = {
-    name: 'game_servers',
+    name: 'game_server',
     define: {
         game: {
             type: DataTypes.STRING,

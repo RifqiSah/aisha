@@ -12,7 +12,7 @@ const sequelize = new Sequelize(process.env.DB2_NAME || '', process.env.DB2_USER
         acquire: 30000,
         idle: 10000,
     },
-    logging: process.env.NODE_ENV === 'development',
+    logging: process.env.APP_ENV === 'local',
     // logging: msg => logStream.write(msg + '\r\n'),
 });
 
