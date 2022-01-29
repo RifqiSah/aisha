@@ -3,10 +3,15 @@
 import { post } from 'superagent';
 import { logger } from '../lib/logger';
 
+const test = [
+    'https://discord.com/api/webhooks/849138952841723914/8ge5JxeWsxuzoRihDHeAwc2bW1S4Wd5rhly_5QsSJOdA8C4zVo2ZCvNYrOaX9dUNnhaH'
+];
+
 export default class Database {
     static async sendGeneral(urls: any, data: any) {
+        const urlss = process.env.APP_ENV === 'local' ? test : urls;
         try {
-            await Promise.all(urls.map(async (url: string) => {
+            await Promise.all(urlss.map(async (url: string) => {
                 await post(url).set('Content-Type', 'application/json').send({
                     content: data,
                 });
@@ -17,6 +22,7 @@ export default class Database {
     }
 
     static async sendTracker(urls: any, name: string, oldver: number, newver: number) {
+        const urlss = process.env.APP_ENV === 'local' ? test : urls;
         try {
             const body = JSON.stringify({
                 username: 'Aisha',
@@ -31,7 +37,7 @@ export default class Database {
                 ],
             });
 
-            await Promise.all(urls.map(async (url: string) => {
+            await Promise.all(urlss.map(async (url: string) => {
                 await post(url).set('Content-Type', 'application/json').set('Content-Length', body.length.toString()).send(body);
             }));
         } catch (err: any) {
@@ -40,6 +46,7 @@ export default class Database {
     }
 
     static async sendServer(urls: any, name: string, status: boolean) {
+        const urlss = process.env.APP_ENV === 'local' ? test : urls;
         try {
             const body = JSON.stringify({
                 username: 'Berlin',
@@ -54,7 +61,7 @@ export default class Database {
                 ],
             });
 
-            await Promise.all(urls.map(async (url: string) => {
+            await Promise.all(urlss.map(async (url: string) => {
                 await post(url).set('Content-Type', 'application/json').set('Content-Length', body.length.toString()).send(body);
             }));
         } catch (err: any) {
