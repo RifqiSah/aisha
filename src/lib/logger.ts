@@ -13,7 +13,7 @@ export const logger = createLogger({
     transports: [
         // Logging to console
         new transports.Console({
-            level: 'info',
+            level: process.env.APP_ENV === 'production' ? 'info' : 'debug',
             format: format.combine(
                 format.colorize(),
                 logFormat
