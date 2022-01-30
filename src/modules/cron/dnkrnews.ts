@@ -49,6 +49,6 @@ exports.init = (client: any) => {
     _client = client;
 };
 
-export const handle = cron.schedule('* * * * *', () => {
+export const handle = cron.schedule('0 * * * *', () => {
     getData();
 });
