@@ -43,6 +43,7 @@ const init = async () => {
         globalsvc: require('./database/services/globals.service'),
 
         gameserversvc: require('./database/services/gameserver.service'),
+        gamenewssvc: require('./database/services/gamenews.service'),
 
         // Variables
         cmdcd: new Set(),
