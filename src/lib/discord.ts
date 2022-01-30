@@ -1,15 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import { post } from 'superagent';
+import func from '../lib/function';
 import { logger } from '../lib/logger';
-
-const test = [
-    'https://discord.com/api/webhooks/849138952841723914/8ge5JxeWsxuzoRihDHeAwc2bW1S4Wd5rhly_5QsSJOdA8C4zVo2ZCvNYrOaX9dUNnhaH'
-];
 
 export default class Database {
     static async sendGeneral(urls: any, data: any) {
-        const urlss = process.env.APP_ENV === 'local' ? test : urls;
+        const urlss = process.env.APP_ENV === 'local' ? await func.getWebhookUrls('webhook.testing') : urls;
         try {
             await Promise.all(urlss.map(async (url: string) => {
                 await post(url).set('Content-Type', 'application/json').send({
@@ -22,7 +19,7 @@ export default class Database {
     }
 
     static async sendTracker(urls: any, name: string, oldver: number, newver: number) {
-        const urlss = process.env.APP_ENV === 'local' ? test : urls;
+        const urlss = process.env.APP_ENV === 'local' ? await func.getWebhookUrls('webhook.testing') : urls;
         try {
             const body = JSON.stringify({
                 username: 'Aisha',
@@ -46,7 +43,7 @@ export default class Database {
     }
 
     static async sendServer(urls: any, name: string, status: boolean) {
-        const urlss = process.env.APP_ENV === 'local' ? test : urls;
+        const urlss = process.env.APP_ENV === 'local' ? await func.getWebhookUrls('webhook.testing') : urls;
         try {
             const body = JSON.stringify({
                 username: 'Berlin',
