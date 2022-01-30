@@ -9,11 +9,9 @@ module.exports = {
         return await GameServer.findAll(opt);
     },
 
-    async findOne(key: string) {
+    async findOne(where: any = {}) {
         return await GameServer.findOne({
-            where: {
-                key: key,
-            },
+            where: where,
         });
     },
 
