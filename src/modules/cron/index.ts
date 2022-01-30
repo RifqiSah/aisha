@@ -1,8 +1,5 @@
 import { readdirSync } from 'fs';
 import { resolve } from 'path';
-import { handle } from './freeGames';
-
-handle.start();
 
 module.exports = (client: any) => {
     client.logger.info('  [-] Initialize cron');

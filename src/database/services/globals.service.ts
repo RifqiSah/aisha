@@ -1,12 +1,12 @@
-const { GlobalsModel } = require('../models');
+const { GlobalsModel } = require('../models/aisha');
 
 module.exports = {
     async count() {
         return await GlobalsModel.count();
     },
 
-    async getAllGlobals() {
-        return await GlobalsModel.findAll();
+    async findAll(opt: any = {}) {
+        return await GlobalsModel.findAll(opt);
     },
 
     async getGlobals(key: string) {

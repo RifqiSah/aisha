@@ -7,6 +7,8 @@ import { get } from 'superagent';
 import { logger } from './logger';
 import values from './values';
 
+const globalsvc = require('../database/services/globals.service');
+
 const externalDatas: Collection<string, any> = new Collection();
 
 async function getFileList(dir: string) {
@@ -390,5 +392,14 @@ export default class Function {
         return readdirSync(dir, { withFileTypes: true })
             .filter((item) => item.isDirectory())
             .map((item) => item.name);
+    }
+
+    static async getWebhookUrls(webhook: string) {
+        const urls = await globalsvc.findAll({
+            where: {
+                key: webhook,
+            },
+        });
+        return urls.map((url: any) => url.value);
     }
 }

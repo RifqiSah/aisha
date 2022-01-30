@@ -1,4 +1,4 @@
-const { ConfigModel } = require('../models');
+const { ConfigModel } = require('../models/aisha');
 
 module.exports = {
     async count() {
