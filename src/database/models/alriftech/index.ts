@@ -24,5 +24,6 @@ db.adapter = sequelize;
 
 // Models
 db.GameServer = require('./gameserver.js')(sequelize);
+db.GameNews = require('./gamenews.js')(sequelize);
 
 module.exports = db;
