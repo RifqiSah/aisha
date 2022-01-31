@@ -16,7 +16,7 @@ const getData = async () => {
         const buffer = await axios.post('https://patchnote.dragonnest.com/main/list?', {
             PageNo: 1,
             PageSize: 1,
-        });
+        }, { timeout: 5000 });
         const data = buffer?.data;
 
         const patchNumber = data?.PatchNoteList[0]?.PatchNoteNo;

@@ -20,7 +20,7 @@ const getData = async () => {
         const number: any[] = [];
         const date: any[] = [];
 
-        const buffer = await axios.get('https://www.world.blackdesertm.com/Ocean/News');
+        const buffer = await axios.get('https://www.world.blackdesertm.com/Ocean/News', { timeout: 5000 });
         const data = buffer?.data;
 
         const $ = cheerio.load(data);

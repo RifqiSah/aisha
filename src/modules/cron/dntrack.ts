@@ -13,7 +13,7 @@ const getData = async () => {
         const DB_Version: any[] = [];
 
         // get version
-        const buffer = await axios.get('https://arcsat.divinitor.com/svc/rs/regions');
+        const buffer = await axios.get('https://arcsat.divinitor.com/svc/rs/regions', { timeout: 5000 });
         const data = buffer?.data;
 
         for (let i = 0; i < data.length; i++) {

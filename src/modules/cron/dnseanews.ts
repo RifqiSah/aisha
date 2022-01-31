@@ -14,7 +14,7 @@ const getData = async () => {
         const title: any[] = [];
         const number: any[] = [];
 
-        const buffer = await axios.get('https://sea.dragonnest.com/news/notice/all');
+        const buffer = await axios.get('https://sea.dragonnest.com/news/notice/all', { timeout: 5000 });
         const data = buffer?.data;
 
         const $ = cheerio.load(data);
