@@ -1,9 +1,18 @@
 /* eslint-disable function-call-argument-newline */
 /* eslint-disable function-paren-newline */
+
 import path, { resolve } from 'path';
 import { createLogger, format, transports } from 'winston';
-// import DiscordTransport from 'winston-discord-transport';
-// import config from './config';
+
+/**
+  error: 0,
+  warn: 1,
+  info: 2,
+  http: 3,
+  verbose: 4,
+  debug: 5,
+  silly: 6
+ */
 
 // Custom log formatting
 const logFormat = format.printf((info) => `${info.timestamp} - ${info.level}: ${info.message}`);
@@ -19,13 +28,6 @@ export const logger = createLogger({
                 logFormat
             )
         }),
-
-        // Loging to Discord
-        // new DiscordTransport({
-        //     webhook: `${config.BOT_WEBHOOK_LOG}`,
-        //     defaultMeta: { Service: 'Aisha' },
-        //     level: 'warn'
-        // }),
 
         // Logging info and up to file
         new transports.File({
