@@ -54,7 +54,7 @@ const getData = async () => {
             await _client.func.delay(5000);
         }
     } catch (err: any) {
-        _client.logger.error('[CRON] An error occured!', err);
+        _client.logger.debug('[CRON] An error occured freegames!', err);
     }
 
     _client.logger.debug('[CRON] FreeGames success!');

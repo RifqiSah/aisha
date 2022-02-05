@@ -1,8 +1,8 @@
-import axios from 'axios';
 import cron from 'node-cron';
 
-import discord from '../../lib/discord';
-import func from '../../lib/function';
+import discord from '../../../lib/discord';
+import func from '../../../lib/function';
+import axios from '../lib/axios';
 
 let _client: any = null;
 
@@ -16,7 +16,7 @@ const getData = async () => {
         const buffer = await axios.post('https://patchnote.dragonnest.com/main/list?', {
             PageNo: 1,
             PageSize: 1,
-        }, { timeout: 5000 });
+        });
         const data = buffer?.data;
 
         const patchNumber = data?.PatchNoteList[0]?.PatchNoteNo;
@@ -39,7 +39,7 @@ const getData = async () => {
         });
 
     } catch (err: any) {
-        _client.logger.error('[CRON] An error occured!', err);
+        _client.logger.debug('[CRON] An error occured dnkrnews!', err);
     }
 
     _client.logger.debug('[CRON] Dragon Nest KR News success!');

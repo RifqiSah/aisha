@@ -1,9 +1,9 @@
-import axios from 'axios';
 import * as cheerio from 'cheerio';
 import cron from 'node-cron';
 
-import discord from '../../lib/discord';
-import func from '../../lib/function';
+import discord from '../../../lib/discord';
+import func from '../../../lib/function';
+import axios from '../lib/axios';
 
 let _client: any = null;
 
@@ -14,7 +14,7 @@ const getData = async () => {
         const title: any[] = [];
         const number: any[] = [];
 
-        const buffer = await axios.get('https://sea.dragonnest.com/news/notice/all', { timeout: 5000 });
+        const buffer = await axios.get('https://sea.dragonnest.com/news/notice/all');
         const data = buffer?.data;
 
         const $ = cheerio.load(data);
@@ -45,7 +45,7 @@ const getData = async () => {
         });
 
     } catch (err: any) {
-        _client.logger.error('[CRON] An error occured!', err);
+        _client.logger.debug('[CRON] An error occured with dnseanews!', err);
     }
 
     _client.logger.debug('[CRON] Dragon Nest SEA News success!');

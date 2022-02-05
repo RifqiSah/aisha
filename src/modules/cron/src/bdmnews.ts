@@ -1,10 +1,10 @@
-import axios from 'axios';
 import * as cheerio from 'cheerio';
 import moment from 'moment';
 import cron from 'node-cron';
 
-import discord from '../../lib/discord';
-import func from '../../lib/function';
+import discord from '../../../lib/discord';
+import func from '../../../lib/function';
+import axios from '../lib/axios';
 
 let _client: any = null;
 
@@ -20,7 +20,7 @@ const getData = async () => {
         const number: any[] = [];
         const date: any[] = [];
 
-        const buffer = await axios.get('https://www.world.blackdesertm.com/Ocean/News', { timeout: 5000 });
+        const buffer = await axios.get('https://www.world.blackdesertm.com/Ocean/News');
         const data = buffer?.data;
 
         const $ = cheerio.load(data);
@@ -60,7 +60,7 @@ const getData = async () => {
         }
 
     } catch (err: any) {
-        _client.logger.error('[CRON] An error occured!', err);
+        _client.logger.debug('[CRON] An error occured bdmnews!', err);
     }
 
     _client.logger.debug('[CRON] Black Desert Global News success!');

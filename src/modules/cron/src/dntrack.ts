@@ -1,8 +1,8 @@
-import axios from 'axios';
 import cron from 'node-cron';
 
-import discord from '../../lib/discord';
-import func from '../../lib/function';
+import discord from '../../../lib/discord';
+import func from '../../../lib/function';
+import axios from '../lib/axios';
 
 let _client: any = null;
 
@@ -13,7 +13,7 @@ const getData = async () => {
         const DB_Version: any[] = [];
 
         // get version
-        const buffer = await axios.get('https://arcsat.divinitor.com/svc/rs/regions', { timeout: 5000 });
+        const buffer = await axios.get('https://arcsat.divinitor.com/svc/rs/regions');
         const data = buffer?.data;
 
         for (let i = 0; i < data.length; i++) {
@@ -62,7 +62,7 @@ const getData = async () => {
             await _client.func.delay(5000);
         }
     } catch (err: any) {
-        _client.logger.error('[CRON] An error occured!', err);
+        _client.logger.debug('[CRON] An error occured with dntrack!', err);
     }
 
     _client.logger.debug('[CRON] Dragon Nest Version Tracker success!');
