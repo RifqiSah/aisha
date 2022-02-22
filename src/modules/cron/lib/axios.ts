@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { logger } from '../../../lib/logger';
 
+const trimString = function (string: string, length: number) {
+    return string.length > length ? string.substring(0, length) + '...' : string;
+};
+
 const axiosClient = axios.create({
     timeout: 20000,
     headers: {
@@ -25,7 +29,7 @@ axiosClient.interceptors.request.use((x) => {
 
 axiosClient.interceptors.response.use((x) => {
 
-    const printable = `[API] Response: ${x.status} | ${JSON.stringify(x.data)}`;
+    const printable = `[API] Response: ${x.status} | ${trimString(JSON.stringify(x.data), 100)}`;
     logger.debug(printable);
 
     return x;
