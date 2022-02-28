@@ -29,8 +29,8 @@ const getData = async () => {
                 // console.log(item.contentSnippet?.split('\n')[0]);
 
                 const title = item?.title?.split('free from') || '';
-                const gameTitle = title[0].trim();
-                const freeFrom = title[1].trim();
+                const gameTitle = title[0]?.trim();
+                const freeFrom = title[1]?.trim();
 
                 const desc = item?.content || '';
                 const descriptionArr = item.contentSnippet?.split('\n');
@@ -38,9 +38,9 @@ const getData = async () => {
 
                 const claimIndex = descriptionArr?.findIndex((v: any) => v.match(/Offer good/));
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                const claimBefore = item.contentSnippet?.split('\n')[claimIndex!].replace('- ', '').trim();
+                const claimBefore = item.contentSnippet?.split('\n')[claimIndex!]?.replace('- ', '').trim();
 
-                const claimLink = /(https?:\/\/[^\s]+)"/.exec(desc)?.[0].replace('https://steamcommunity.com/linkfilter/?url=', '').slice(0, -1);
+                const claimLink = /(https?:\/\/[^\s]+)"/.exec(desc)?.[0]?.replace('https://steamcommunity.com/linkfilter/?url=', '').slice(0, -1);
 
                 // console.log(`__**[${freeFrom}] ${gameTitle}**__\n${gameDescription}\n\n${claimBefore}\n${claimLink}`);
 
@@ -64,6 +64,6 @@ exports.init = (client: any) => {
     _client = client;
 };
 
-export const handle = cron.schedule('0 * * * *', () => {
+export const handle = cron.schedule('* * * * *', () => {
     getData();
 });
