@@ -71,5 +71,5 @@ exports.init = (client: any) => {
 };
 
 export const handle = cron.schedule('*/5 * * * *', () => {
-    getData();
+    // getData();
 });
