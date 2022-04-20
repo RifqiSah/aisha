@@ -4,7 +4,7 @@ import values from '../../lib/values';
 module.exports = {
     name: 'dnsg',
     desc: 'Mengubah status server Dragon Nest.',
-    enable: true,
+    enable: false,
     regex: false,
     help: false,
     public: false,

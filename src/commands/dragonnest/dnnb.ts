@@ -5,7 +5,7 @@ import values from '../../lib/values';
 module.exports = {
     name: 'dnnb',
     desc: 'Memberikan informasi untuk `Noblesse Buff` oleh VVIP1!',
-    enable: true,
+    enable: false,
     regex: false,
     help: false,
     public: false,
