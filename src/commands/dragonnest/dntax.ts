@@ -25,7 +25,7 @@ module.exports = {
         const data = [];
         const taxes = await get(`${values.aisha_api}/taxes`)
             .then((res) => {
-                return JSON.parse(res.text);
+                return JSON.parse(res.text).data;
             }).catch((err) => {
                 client.logger.error(err);
                 return null;

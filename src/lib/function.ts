@@ -13,7 +13,7 @@ const externalDatas: Collection<string, any> = new Collection();
 
 async function getFileList(dir: string) {
     const response = await get(`${values.aisha_api}/data/${dir}`);
-    return JSON.parse(response.text);
+    return JSON.parse(response.text).data;
 }
 
 async function loadDataFiles(dirs: string) {
@@ -24,7 +24,7 @@ async function loadDataFiles(dirs: string) {
         const data = response.text;
 
         const key = file.slice(0, -5);
-        const parsed = JSON.parse(data);
+        const parsed = JSON.parse(data).data;
 
         logger.info(`  + '${dirs}/${key}' readed and parsed. [${data.length} bytes].`);
         externalDatas.set(`${dirs}.${key}`, parsed);
