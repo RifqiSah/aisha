@@ -1,4 +1,4 @@
-const { GameServer } = require('../models/alriftech');
+const { GameServer } = require('../models/aisha');
 
 module.exports = {
     async count() {

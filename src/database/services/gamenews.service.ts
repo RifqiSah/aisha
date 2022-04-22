@@ -1,4 +1,4 @@
-const { GameNews } = require('../models/alriftech');
+const { GameNews } = require('../models/aisha');
 
 module.exports = {
     async count() {
