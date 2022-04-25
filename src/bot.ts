@@ -94,3 +94,12 @@ const run = async () => {
 };
 
 run();
+
+const shutDown = async () => {
+    logger.info('[V] Received kill signal, shutting down gracefully');
+    await client.bot.destroy();
+    process.exit(0);
+};
+
+process.on('SIGTERM', shutDown);
+process.on('SIGINT', shutDown);
