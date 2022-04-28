@@ -28,5 +28,7 @@ db.ConfigModel = require('./config.js')(sequelize);
 db.GuildModel = require('./guild.js')(sequelize);
 db.PointModel = require('./point.js')(sequelize);
 db.GlobalsModel = require('./globals.js')(sequelize);
+db.GameNews = require('./gamenews.js')(sequelize);
+db.GameServer = require('./gameserver.js')(sequelize);
 
 module.exports = db;

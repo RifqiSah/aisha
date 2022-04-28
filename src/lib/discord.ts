@@ -18,6 +18,17 @@ export default class Database {
         }
     }
 
+    static async sendGeneralWithAttachment(urls: any, data: any, attachment: any) {
+        const urlss = process.env.APP_ENV === 'local' ? await func.getWebhookUrls('webhook.testing') : urls;
+        try {
+            await Promise.all(urlss.map(async (url: string) => {
+                await post(url).type('form').field('payload_json', data).attach('file1', attachment);
+            }));
+        } catch (err: any) {
+            logger.error(`An error occured! ${err}`);
+        }
+    }
+
     static async sendTracker(urls: any, name: string, oldver: number, newver: number) {
         const urlss = process.env.APP_ENV === 'local' ? await func.getWebhookUrls('webhook.testing') : urls;
         try {
