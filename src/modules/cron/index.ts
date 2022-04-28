@@ -1,10 +1,15 @@
 import { readdirSync } from 'fs';
 import { resolve } from 'path';
 
+const disabledModule = [
+    'example.js',
+    'bdmnews.js',
+];
+
 module.exports = (client: any) => {
     client.logger.info('  [-] Initialize cron');
 
-    const crons = readdirSync(resolve(__dirname, './src/')).filter((f) => f.endsWith('.js') && !f.includes('example.js'));
+    const crons = readdirSync(resolve(__dirname, './src/')).filter((f) => f.endsWith('.js') && !disabledModule.some((v) => f.includes(v)));
     for (const file of crons) {
         const cron = require(resolve(__dirname, `./src/${file}`));
         const key = file.slice(0, -3);
