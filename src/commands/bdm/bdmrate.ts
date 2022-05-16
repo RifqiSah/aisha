@@ -1,5 +1,5 @@
-import funct from '../../lib/function';
-const list = funct.formatData('bdm.bdmrate');
+import { getExternalData, commandRecom, formatImageInMessage, sendMessage, formatData } from '../../helpers/function';
+const list = formatData('bdm.bdmrate');
 
 module.exports = {
     name: 'bdmrate',
@@ -16,18 +16,18 @@ module.exports = {
         const rate = (args.length ? args.join(' ').toLowerCase() : 'null');
         const msg: string[] = [];
 
-        const data = funct.getExternalData('bdm.bdmrate', rate);
+        const data = getExternalData('bdm.bdmrate', rate);
         if (!data) {
             msg.push(`Rate untuk \`${rate}\` tidak ditemukan!`);
 
-            const recom = funct.commandRecom('bdmrate', rate);
+            const recom = commandRecom('bdmrate', rate);
             if (recom) msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
         } else {
             msg.push(`__**Rate untuk ${data.name}**__\n`);
-            await funct.formatImageInMessage(msg, message, data);
+            await formatImageInMessage(msg, message, data);
         }
 
         msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help bdmrate\` untuk melihat daftar rate yang tersedia.\n`);
-        funct.sendMessage(message, msg);
+        sendMessage(message, msg);
     },
 };

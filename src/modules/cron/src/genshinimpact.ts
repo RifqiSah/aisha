@@ -2,8 +2,8 @@ import * as cheerio from 'cheerio';
 import moment, { Moment } from 'moment';
 import cron from 'node-cron';
 
-import discord from '../../../lib/discord';
-import func from '../../../lib/function';
+import { sendGeneral } from '../../../helpers/discord';
+import { getWebhookUrls, delay } from '../../../helpers/function';
 import axios from '../lib/axios';
 
 let _client: any = null;
@@ -54,10 +54,10 @@ const getData = async () => {
         if (sameIndex) {
             for(let i = sameIndex - 1; i >= 0; i--) {
                 const message = `__**[${category[i]}] ${title[i]}:**__\n\n${intro[i]}\n\nStart Time: **${startTime[i].format('YYYY-MM-DD HH:mm')} GMT+8**\nDetails: <https://genshin.hoyoverse.com/en/news/detail/${id[i]}>\n\n${banner[i]}`;
-                await discord.sendGeneral(await func.getWebhookUrls('webhook.genshin.news'), message);
+                await sendGeneral(await getWebhookUrls('webhook.genshin.news'), message);
                 // console.log(message);
 
-                await _client.func.delay(5000);
+                await delay(5000);
             }
 
             await news.update({

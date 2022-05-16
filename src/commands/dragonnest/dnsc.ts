@@ -1,5 +1,5 @@
 import { Socket } from 'net';
-import funct from '../../lib/function';
+import { getServerIP } from '../../helpers/function';
 
 module.exports = {
     name: 'dnsc',
@@ -22,7 +22,7 @@ module.exports = {
         }
 
         const ret: any = [];
-        const dns: any = funct.getServerIP(args[0].toUpperCase());
+        const dns: any = getServerIP(args[0].toUpperCase());
         const msgs = await message.channel.send(`Menghubungkan ke \`${dns.ip} (${dns.name})\` ...`);
 
         // Start server check

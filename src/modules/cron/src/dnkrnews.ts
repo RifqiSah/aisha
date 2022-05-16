@@ -1,7 +1,7 @@
 import cron from 'node-cron';
 
-import discord from '../../../lib/discord';
-import func from '../../../lib/function';
+import { sendGeneral } from '../../../helpers/discord';
+import { getWebhookUrls, delay } from '../../../helpers/function';
 import axios from '../lib/axios';
 
 let _client: any = null;
@@ -31,7 +31,7 @@ const getData = async () => {
 
         if (Number(patchNumber) > Number(news.patchNote)) {
             const message = `Patchnote baru telah ditemukan! Dengan:\n\n\`\`\`ID: ${patchNumber}\nNama Patch: ${patchName}\nCover: https:${patchCover}\nThumbnail: https:${patchThumbnail}\`\`\`\nBaca selengkapnya di https://patchnote.dragonnest.com/Category?patchnoteno=${patchNumber}`;
-            await discord.sendGeneral(await func.getWebhookUrls('webhook.dn.kr.patch'), message);
+            await sendGeneral(await getWebhookUrls('webhook.dn.kr.patch'), message);
         }
 
         await news.update({

@@ -3,9 +3,9 @@ import * as builder from '@discordjs/builders';
 import apiai from 'apiai';
 import { Client, Collection, MessageEmbed, Intents } from 'discord.js';
 
+import { loadData, getDirs } from './helpers/function';
 import config from './lib/config';
 import db from './lib/database';
-import func from './lib/function';
 import { logger } from './lib/logger';
 
 const { Client: Exaroton } = require('exaroton');
@@ -28,7 +28,7 @@ const init = async () => {
         embed: new MessageEmbed(),
         builder,
         apiai: apiai(`${config.TOKEN_APIAI}`),
-        func,
+        // func,
         config,
         logger,
 
@@ -61,7 +61,7 @@ const init = async () => {
 };
 
 const database = async () => {
-    await func.loadData(); // Load external data
+    await loadData(); // Load external data
     await db.connect(false); // Connect ke database
 };
 
@@ -74,7 +74,7 @@ const modules = async () => {
     logger.info('[V] Done!');
 
     logger.info('[-] Initialize external modules');
-    func.getDirs('modules').forEach((x) => {
+    getDirs('modules').forEach((x) => {
         logger.info(` [O] ${x} modules`);
         require(`./modules/${x}/index.js`)(client);
     });

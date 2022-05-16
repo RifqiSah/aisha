@@ -1,4 +1,4 @@
-import func from '../../lib/function';
+import { getDate } from '../../helpers/function';
 const { PointModel } = require('../models/aisha');
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
     async addPoint(uId: string, uPoint: number) {
         await new Promise((resolve) => setTimeout(resolve, 100));
 
-        const now = func.getDate();
+        const now = getDate();
         const row = await PointModel.findOne({
             where: {
                 userId: uId,

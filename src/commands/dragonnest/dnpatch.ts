@@ -1,4 +1,4 @@
-import func from '../../lib/function';
+import { getMonthName, sendMessageChannel } from '../../helpers/function';
 
 module.exports = {
     name: 'dnpatch',
@@ -20,13 +20,13 @@ module.exports = {
             return;
         }
 
-        const month = func.getMonthName();
+        const month = getMonthName();
         const newsNumber = args[0];
 
         data.push(client.builder.roleMention('489292018628165633'));
         data.push(`__**[Patchnote] ${month} Patchnote**__`);
         data.push(`https://sea.dragonnest.com/news/notice/all/${newsNumber}`);
 
-        func.sendMessageChannel(channel, data);
+        sendMessageChannel(channel, data);
     },
 };

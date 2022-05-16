@@ -1,4 +1,4 @@
-import funct from './../../lib/function';
+import { sendMessage } from '../../helpers/function';
 
 module.exports = {
     name: 'help',
@@ -67,6 +67,6 @@ module.exports = {
             data.push(`\nAnda dapat menggunakan \`${client.config.BOT_PREFIX}help\` untuk mendapatkan informasi dari semua command yang tersedia.`);
         }
 
-        funct.sendMessage(message, data);
+        sendMessage(message, data);
     },
 };

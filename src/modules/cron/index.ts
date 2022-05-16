@@ -12,6 +12,10 @@ const disabledModule = [
 
 module.exports = (client: any) => {
     client.logger.info('  [-] Initialize cron');
+    if (process.env.APP_ENV === 'local') {
+        client.logger.info('  [X] Skipped for development!');
+        return true;
+    }
 
     const crons = readdirSync(resolve(__dirname, './src/')).filter((f) => f.endsWith('.js') && !disabledModule.some((v) => f.includes(`${v}.js`)));
     for (const file of crons) {

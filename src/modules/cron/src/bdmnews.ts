@@ -2,8 +2,8 @@ import * as cheerio from 'cheerio';
 import moment from 'moment';
 import cron from 'node-cron';
 
-import discord from '../../../lib/discord';
-import func from '../../../lib/function';
+import { sendGeneral } from '../../../helpers/discord';
+import { getWebhookUrls, delay } from '../../../helpers/function';
 import axios from '../lib/axios';
 
 let _client: any = null;
@@ -48,9 +48,9 @@ const getData = async () => {
         if (sameIndex) {
             for(let i = sameIndex - 1; i >= 0; i--) {
                 const message = `__**[${category[i]}] ${title[i]}:**__\nhttps://www.world.blackdesertm.com/Ocean/News/Detail?boardNo=${number[i]}`;
-                await discord.sendGeneral(await func.getWebhookUrls('webhook.bdm.gl.news'), message);
+                await sendGeneral(await getWebhookUrls('webhook.bdm.gl.news'), message);
 
-                await _client.func.delay(5000);
+                await delay(5000);
             }
 
             await news.update({

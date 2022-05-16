@@ -1,7 +1,7 @@
 import { readdirSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
-import funct from '../lib/function';
+import { getDirs } from '../helpers/function';
 
 module.exports = (client: any) => {
     client.logger.info('  [-] Initialize commands');
@@ -50,7 +50,7 @@ module.exports = (client: any) => {
         }
     };
 
-    funct.getDirs('commands').forEach((x) => {
+    getDirs('commands').forEach((x: string) => {
         if (x === 'subcmd') return false;
         load(x);
     });

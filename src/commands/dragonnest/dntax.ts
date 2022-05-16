@@ -1,5 +1,5 @@
 import { get } from 'superagent';
-import funct from '../../lib/function';
+import { sendMessage, formatNumber } from '../../helpers/function';
 import values from '../../lib/values';
 
 const calc: any = {
@@ -68,21 +68,21 @@ module.exports = {
         const taxCost = tax * cost;
         const total = calc[op](cost, taxCost);
 
-        data.push(`Nilai: \`${funct.formatNumber(cost)}\``);
-        data.push(`Pajak: \`${funct.formatNumber(taxCost)} (${tax * 100}%)\``);
+        data.push(`Nilai: \`${formatNumber(cost)}\``);
+        data.push(`Pajak: \`${formatNumber(taxCost)} (${tax * 100}%)\``);
         if (args[0] === 'th' && tax2) {
-            data.push(`Tanpa tiket TH? Ditambah: \`${funct.formatNumber(tax2 * cost)} (${tax2 * 100}%)\``);
+            data.push(`Tanpa tiket TH? Ditambah: \`${formatNumber(tax2 * cost)} (${tax2 * 100}%)\``);
         }
 
         data.push('--');
 
         if (op === 'plus') {
-            data.push(`Total yang dikeluarkan: \`${funct.formatNumber(total)}\``);
+            data.push(`Total yang dikeluarkan: \`${formatNumber(total)}\``);
         } else if (op === 'min') {
-            data.push(`Total yang didapat: \`${funct.formatNumber(total)}\``);
+            data.push(`Total yang didapat: \`${formatNumber(total)}\``);
         }
 
         data.push(`\nGunakan \`${client.config.BOT_PREFIX}help dntax\` untuk melihat daftar pajak yang tersedia.\n`);
-        funct.sendMessage(message, data);
+        sendMessage(message, data);
     }
 };

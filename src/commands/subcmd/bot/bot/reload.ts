@@ -1,4 +1,4 @@
-import func from './../../../../lib/function';
+import { loadData } from '../../../../helpers/function';
 
 module.exports = {
     name: 'reload',
@@ -12,7 +12,7 @@ module.exports = {
         }
 
         if (type === 'data') {
-            await func.loadData();
+            await loadData();
         } else {
             return message.channel.send(`Reload ${type} tidak ditemukan!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
                 client.logger.error(err);

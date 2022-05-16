@@ -1,5 +1,5 @@
-import funct from '../../lib/function';
-const list = funct.formatData('dragonnest.dnhp');
+import { getExternalData, commandRecom, formatImageInMessage, sendMessage, formatData } from '../../helpers/function';
+const list = formatData('dragonnest.dnhp');
 
 module.exports = {
     name: 'dnhp',
@@ -16,18 +16,18 @@ module.exports = {
         const nest = (args.length ? args.join(' ').toLowerCase() : 'null');
         const msg: string[] = [];
 
-        const data = funct.getExternalData('dragonnest.dnhp', nest);
+        const data = getExternalData('dragonnest.dnhp', nest);
         if (!data) {
             msg.push(`HP untuk \`${nest}\` tidak ditemukan!`);
 
-            const recom = funct.commandRecom('dnhp', nest);
+            const recom = commandRecom('dnhp', nest);
             if (recom) msg.push(`\nMungkin yang Anda maksud: \`${recom}\`?`);
         } else {
             msg.push(`__**HP untuk ${data.name}**__\n`);
-            await funct.formatImageInMessage(msg, message, data);
+            await formatImageInMessage(msg, message, data);
         }
 
         msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help dnhp\` untuk melihat daftar info HP yang tersedia.\n`);
-        funct.sendMessage(message, msg);
+        sendMessage(message, msg);
     },
 };

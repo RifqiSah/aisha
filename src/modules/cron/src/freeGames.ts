@@ -4,6 +4,7 @@ import cron from 'node-cron';
 let _client: any = null;
 
 import Parser from 'rss-parser';
+import { delay } from '../../../helpers/function';
 const parser = new Parser();
 
 const freeGamesChannelId = '910538794799874108';
@@ -51,7 +52,7 @@ const getData = async () => {
                 }
             }
 
-            await _client.func.delay(5000);
+            await delay(5000);
         }
     } catch (err: any) {
         _client.logger.debug('[CRON] An error occured freegames!', err);

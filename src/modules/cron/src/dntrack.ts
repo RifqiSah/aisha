@@ -1,7 +1,7 @@
 import cron from 'node-cron';
 
-import discord from '../../../lib/discord';
-import func from '../../../lib/function';
+import { sendTracker } from '../../../helpers/discord';
+import { getWebhookUrls, delay } from '../../../helpers/function';
 import axios from '../lib/axios';
 
 let _client: any = null;
@@ -49,7 +49,7 @@ const getData = async () => {
             const newver = DN_Version[i].version;
 
             if ((Number(oldver) < Number(newver)) && (DB_Version[i].shortName === DN_Version[i].shortName)) {
-                await discord.sendTracker(await func.getWebhookUrls('webhook.dn.sea.patch'), DN_Version[i].longName, oldver, newver);
+                await sendTracker(await getWebhookUrls('webhook.dn.sea.patch'), DN_Version[i].longName, oldver, newver);
 
                 await _client.gameserversvc.update({
                     game: 'dn',
@@ -59,7 +59,7 @@ const getData = async () => {
                 });
             }
 
-            await _client.func.delay(5000);
+            await delay(5000);
         }
     } catch (err: any) {
         _client.logger.debug('[CRON] An error occured with dntrack!', err);

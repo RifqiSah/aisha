@@ -1,8 +1,8 @@
 import * as cheerio from 'cheerio';
 import cron from 'node-cron';
 
-import discord from '../../../lib/discord';
-import func from '../../../lib/function';
+import { sendGeneral } from '../../../helpers/discord';
+import { getWebhookUrls, delay } from '../../../helpers/function';
 import axios from '../lib/axios';
 
 let _client: any = null;
@@ -36,7 +36,7 @@ const getData = async () => {
         for(let i = category.length - 1; i >= 0; i--) {
             if (Number(number[i]) > Number(news.berita)) {
                 const message = `<@&489292018628165633>\n\n__**[${category[i]}] ${title[i]}:**__\nhttps://sea.dragonnest.com/news/notice/all/${number[i]}`;
-                await discord.sendGeneral(await func.getWebhookUrls('webhook.dn.sea.news'), message);
+                await sendGeneral(await getWebhookUrls('webhook.dn.sea.news'), message);
             }
         }
 
