@@ -1,10 +1,14 @@
 import { readdirSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
+import funct from '../lib/function';
+
 module.exports = (client: any) => {
     client.logger.info('  [-] Initialize commands');
     const load = (dirs: string) => {
         const commands = readdirSync(resolve(__dirname, `../commands/${dirs}`)).filter((f) => f.endsWith('.js'));
+
+        client.logger.info(`    + '${dirs}`);
 
         for (const file of commands) {
             const cmdfile = require(resolve(__dirname, `../commands/${dirs}/${file}`));
@@ -25,7 +29,7 @@ module.exports = (client: any) => {
 
                 client.cmdsloc.set(key, dirs);
 
-                client.logger.info(`    + '${key}' added.`);
+                client.logger.info(`      + '${key}' added.`);
 
                 // check subcommand
                 if (existsSync(resolve(__dirname, `../commands/subcmd/${dirs}/${key}`))) {
@@ -46,7 +50,11 @@ module.exports = (client: any) => {
         }
     };
 
-    ['bdm', 'bot', 'discord', 'dragonnest', 'fun', 'minecraft'].forEach((x) => load(x));
+    funct.getDirs('commands').forEach((x) => {
+        if (x === 'subcmd') return false;
+        load(x);
+    });
+
     client.regexList = new RegExp(client.cmdsregex.map((key: any, item: any) => item).join('|'));
     client.logger.info('  [V] Done!');
 };
