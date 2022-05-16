@@ -60,7 +60,7 @@
             }
         ],
         "max-len": [
-            "error",
+            "warn",
             {
                 "code": 300
             }
