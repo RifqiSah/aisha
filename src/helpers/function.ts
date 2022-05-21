@@ -399,3 +399,7 @@ export async function getWebhookUrls(webhook: string) {
     });
     return urls.map((url: any) => url.value);
 }
+
+export function getFileExtensionFromUrl(url: string) {
+    return url?.split(/[#?]/)[0]?.split('.')?.pop()?.trim();
+}

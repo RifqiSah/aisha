@@ -1,8 +1,7 @@
-import * as cheerio from 'cheerio';
 import moment, { Moment } from 'moment';
 import cron from 'node-cron';
 
-import { sendGeneral } from '../../../helpers/discord';
+import { sendGeneralWithAttachment } from '../../../helpers/discord';
 import { getWebhookUrls, delay } from '../../../helpers/function';
 import axios from '../lib/axios';
 
@@ -53,8 +52,11 @@ const getData = async () => {
 
         if (sameIndex) {
             for(let i = sameIndex - 1; i >= 0; i--) {
-                const message = `__**[${category[i]}] ${title[i]}:**__\n\n${intro[i]}\n\nStart Time: **${startTime[i].format('YYYY-MM-DD HH:mm')} GMT+8**\nDetails: <https://genshin.hoyoverse.com/en/news/detail/${id[i]}>\n\n${banner[i]}`;
-                await sendGeneral(await getWebhookUrls('webhook.genshin.news'), message);
+                // const message = `__**[${category[i]}] ${title[i]}:**__\n\n${intro[i]}\n\nStart Time: **${startTime[i].format('YYYY-MM-DD HH:mm')} GMT+8**\nDetails: <https://genshin.hoyoverse.com/en/news/detail/${id[i]}>\n\n${banner[i]}`;
+                // await sendGeneral(await getWebhookUrls('webhook.genshin.news'), message);
+
+                const message = `__**[${category[i]}] ${title[i]}:**__\n\n${intro[i]}\n\nDetails: <https://genshin.hoyoverse.com/en/news/detail/${id[i]}>\n\nPreview:`;
+                await sendGeneralWithAttachment(await getWebhookUrls('webhook.genshin.news'), message, banner[i]);
                 // console.log(message);
 
                 await delay(5000);
