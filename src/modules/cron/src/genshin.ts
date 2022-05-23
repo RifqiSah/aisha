@@ -7,10 +7,18 @@ import axios from '../lib/axios';
 
 let _client: any = null;
 
-const getCategory = (ids: string[]) => {
+const getCategoryEn = (ids: string[]) => {
     return ids.map((id) => {
         if (id === '11') return 'Info';
         if (id === '13') return 'Event';
+        return null;
+    }).filter((x) => x)?.[0];
+};
+
+const getCategoryId = (ids: string[]) => {
+    return ids.map((id) => {
+        if (id === '267') return 'Buletin';
+        if (id === '269') return 'Event';
         return null;
     }).filter((x) => x)?.[0];
 };
@@ -29,14 +37,14 @@ const getData = async () => {
         const banner: any[] = [];
         const startTime: Moment[] = [];
 
-        const buffer = await axios.get('https://content-static-sea.hoyoverse.com/content/yuanshen/getContentList?pageSize=10&pageNum=1&channelId=10');
+        const buffer = await axios.get('https://content-static-sea.hoyoverse.com/content/yuanshen/getContentList?pageSize=10&pageNum=1&channelId=266');
         const data = buffer?.data;
 
         const newsList = data?.data?.list;
         newsList.map((news: any) => {
             id.push(Number(news?.contentId));
             title.push(news?.title);
-            category.push(getCategory(news?.channelId));
+            category.push(getCategoryId(news?.channelId));
             intro.push(news?.intro);
             banner.push(news?.ext?.[1].value[0].url);
             startTime.push(moment(news?.start_time));
@@ -55,7 +63,7 @@ const getData = async () => {
                 // const message = `__**[${category[i]}] ${title[i]}:**__\n\n${intro[i]}\n\nStart Time: **${startTime[i].format('YYYY-MM-DD HH:mm')} GMT+8**\nDetails: <https://genshin.hoyoverse.com/en/news/detail/${id[i]}>\n\n${banner[i]}`;
                 // await sendGeneral(await getWebhookUrls('webhook.genshin.news'), message);
 
-                const message = `__**[${category[i]}] ${title[i]}:**__\n\n${intro[i]}\n\nDetails: <https://genshin.hoyoverse.com/en/news/detail/${id[i]}>\n\nPreview:`;
+                const message = `__**[${category[i]}] ${title[i]}:**__\n\n${intro[i]}\n\nSelengkapnya: <https://genshin.hoyoverse.com/en/news/detail/${id[i]}>\n\nPratinjau:`;
                 await sendGeneralWithAttachment(await getWebhookUrls('webhook.genshin.news'), message, banner[i]);
                 // console.log(message);
 
