@@ -21,7 +21,7 @@ module.exports = {
         // jika tanpa keyword?
         if (!keyword) {
             const today = getCurrentDay();
-            if (today === 'sunday') {
+            if (today === 'minggu') {
                 msg.push('Hari Minggu dapat farm semua item! 😀\n');
             } else {
                 const embed = new MessageEmbed()

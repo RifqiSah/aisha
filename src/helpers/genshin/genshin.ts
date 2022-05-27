@@ -65,13 +65,13 @@ export async function search(query: string): Promise<any> {
 
 export function getCurrentDay(offset = 0): string {
     const weekdays = [
-        'sunday',
-        'monday',
-        'tuesday',
-        'wednesday',
-        'thursday',
-        'friday',
-        'saturday',
+        'minggu',
+        'senin',
+        'selasa',
+        'rabu',
+        'kamis',
+        'jumat',
+        'sabtu',
     ];
 
     const time = dayjs().utcOffset(8);
