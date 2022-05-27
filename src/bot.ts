@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import * as builder from '@discordjs/builders';
 import apiai from 'apiai';
-import { Client, Collection, MessageEmbed, Intents } from 'discord.js';
+import { Client, Collection, Intents } from 'discord.js';
 
 import { loadData, getDirs } from './helpers/function';
 import config from './lib/config';
@@ -25,7 +25,6 @@ const init = async () => {
             Intents.FLAGS.GUILD_WEBHOOKS,
             Intents.FLAGS.DIRECT_MESSAGES,
         ], partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'] }),
-        embed: new MessageEmbed(),
         builder,
         apiai: apiai(`${config.TOKEN_APIAI}`),
         // func,
