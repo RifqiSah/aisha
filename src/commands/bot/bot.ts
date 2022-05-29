@@ -1,3 +1,5 @@
+import { sendAndDelete } from '../../helpers/bot';
+
 module.exports = {
     name: 'bot',
     desc: 'Control panel untuk Aisha.',
@@ -13,18 +15,14 @@ module.exports = {
         message.delete();
 
         if (!args.length) {
-            return message.channel.send('Harap masukkan parameter!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
-                client.logger.error(err);
-            });
+            return sendAndDelete(message, 'Harap masukkan parameter!', 5000);
         }
 
         const subcmdname = args[0];
         const subcmd = client.subcmds.get(`bot.${subcmdname}`);
 
         if (!subcmd) {
-            return message.channel.send(`Pengaturan untuk \`${subcmdname}\` tidak ditemukan!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
-                client.logger.error(err);
-            });
+            return sendAndDelete(message, `Pengaturan untuk \`${subcmdname}\` tidak ditemukan!`, 5000);
         }
 
         return subcmd.func(client, message, args);

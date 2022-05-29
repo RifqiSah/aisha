@@ -1,3 +1,5 @@
+import { sendAndDelete } from '../../helpers/bot';
+
 module.exports = {
     name: 'alert',
     desc: 'Mengirim pesan **Penting** kepada pengurus. Command ini digunakan jika ada pesan **penting** yang ingin segera disampaikan!.',
@@ -11,9 +13,7 @@ module.exports = {
     cooldown: 60,
     func: (client: any, message: any, args: any) => {
         if (!args.length) {
-            return message.channel.send('Harap masukkan pesan Anda!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
-                client.logger.error(err);
-            });
+            return sendAndDelete(message, 'Harap masukkan pesan Anda!', 5000);
         }
 
         message.delete();

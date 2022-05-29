@@ -1,4 +1,5 @@
 import { Socket } from 'net';
+import { sendAndDelete, editAndDelete } from '../../helpers/bot';
 import { getServerIP } from '../../helpers/function';
 
 module.exports = {
@@ -16,9 +17,7 @@ module.exports = {
         message.delete();
 
         if (!args.length) {
-            return message.channel.send('Harap masukkan nama server!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
-                client.logger.error(err);
-            });
+            return sendAndDelete(message, 'Harap masukkan nama server!', 5000);
         }
 
         const ret: any = [];
@@ -51,7 +50,7 @@ module.exports = {
 
         socket.on('close', () => {
             ret.push('Closed!');
-            msgs.edit(ret).then((msg: any) => msg.delete({ timeout: 10000 }));
+            editAndDelete(msgs, ret, 10000);
         });
     },
 };

@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import { editAndDelete } from '../../helpers/bot';
 
 const questions = [
     '```1. Aisha dapat mengirim pesan kedalam server Discord ini secara otomatis.\n2. Aisha dapat dikeluarkan oleh pembuat (gunakan command .botinfo untuk informasi) jika terdapat pelanggaran / eksploitasi dalam penggunaan Aisha.\n3. Info selanjutnya dapat dikirim melalui peraturan pertama.```\nSetelah ini, Anda akan diminta untuk memasukkan beberapa pengaturan agar Aisha dapat bekerja. Balas `YA` untuk melanjutkan.\n\n* Anda akan diberikan waktu 1 menit dalam menjawab setiap pertanyaan.',
@@ -52,7 +53,7 @@ module.exports = {
         let cancel = false;
 
         if (a && b && c && d && e) {
-            return msg.edit('Anda sudah melakukan konfigurasi untuk server ini!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+            return editAndDelete(msg, 'Anda sudah melakukan konfigurasi untuk server ini!', 5000);
         }
 
         for(const q in questions) {
@@ -70,7 +71,7 @@ module.exports = {
 
                     if (qNumber === 1) {
                         if (!isNaN(ans) || ans.toString().toUpperCase() !== 'YA') {
-                            msg.edit(exitMessage).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+                            editAndDelete(msg, exitMessage, 5000);
                             cancel = true;
                         }
                     }
@@ -79,7 +80,7 @@ module.exports = {
 
                     answer.push(ans);
                 }).catch((collected: any) => {
-                    msg.edit(timeoutMessage).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+                    editAndDelete(msg, timeoutMessage, 5000);
                     cancel = true;
                 });
             }).catch((err: any) => client.logger.error(err));
@@ -87,7 +88,7 @@ module.exports = {
 
         if (cancel) {
             answer.length = 0;
-            return msg.edit('Konfigurasi dibatalkan!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+            return editAndDelete(msg, 'Konfigurasi dibatalkan!', 5000);
         }
 
         // buang jawaban pertama
@@ -105,6 +106,6 @@ module.exports = {
             await client.configsvc.addConfig(guildId, config, value.toString(), desc);
         });
 
-        return msg.edit('Terima kasih sudah menggunakan Aisha, konfigurasi Anda telah disimpan.').then((msg: any) => msg.delete({ timeout: 10000 })).catch((err: any) => client.logger.error(err));
+        return editAndDelete(msg, 'Terima kasih sudah menggunakan Aisha, konfigurasi Anda telah disimpan.', 10000);
     },
 };

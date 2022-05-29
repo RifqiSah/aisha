@@ -1,3 +1,5 @@
+import { sendAndDelete } from '../../../../helpers/bot';
+
 module.exports = {
     name: 'leave',
     func: async (client: any, message: any, args: any) => {
@@ -7,9 +9,7 @@ module.exports = {
         let counts = 0;
 
         if (!guildIds.length) {
-            return message.channel.send('Mohon masukkan minimal 1 Guild ID!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
-                client.logger.error(err);
-            });
+            return sendAndDelete(message, 'Mohon masukkan minimal 1 Guild ID!', 5000);
         }
 
         guildIds.forEach((id: string) => {
@@ -23,8 +23,6 @@ module.exports = {
             }
         });
 
-        return message.channel.send(`Aisha telah keluar dari ${counts} - ${guildIds.length} guild!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
-            client.logger.error(err);
-        });
+        return sendAndDelete(message, `Aisha telah keluar dari ${counts} - ${guildIds.length} guild!`, 5000);
     }
 };

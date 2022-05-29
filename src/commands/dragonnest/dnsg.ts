@@ -1,4 +1,5 @@
 import { get } from 'superagent';
+import { sendAndDelete, editAndDelete } from '../../helpers/bot';
 import values from '../../lib/values';
 
 module.exports = {
@@ -16,16 +17,14 @@ module.exports = {
         message.delete();
 
         if (!args.length) {
-            return message.channel.send('Harap masukkan nama server!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
-                client.logger.error(err);
-            });
+            return sendAndDelete(message, 'Harap masukkan nama server!', 5000);
         }
 
         const msgs = await message.channel.send(`Menunggu \`${args}\` ...`);
 
         await get(`${values.aisha_api}/server_update/${args}`)
             .then((res) => {
-                msgs.edit(`Sukses \`${args}\`! Respon:\`\`\`${res.text}\`\`\``).then((msg: any) => msg.delete({ timeout: 50000 }));
+                editAndDelete(msgs, `Sukses \`${args}\`! Respon:\`\`\`${res.text}\`\`\``, 50000);
             })
             .catch((err) => {
                 client.logger.error(err);

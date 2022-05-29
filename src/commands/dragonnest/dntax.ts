@@ -1,4 +1,5 @@
 import { get } from 'superagent';
+import { sendAndDelete } from '../../helpers/bot';
 import { sendMessage, formatNumber } from '../../helpers/function';
 import values from '../../lib/values';
 
@@ -32,7 +33,7 @@ module.exports = {
             });
 
         if (!taxes) {
-            return message.channel.send('Terjadi kesalahan dalam mengambil data!').then((msg: any) => msg.delete({ timeout: 10000 })).catch((err: any) => client.logger.error(err));
+            return sendAndDelete(message, 'Terjadi kesalahan dalam mengambil data!', 10000);
         }
 
         let tax = null;

@@ -1,4 +1,5 @@
 import { get } from 'superagent';
+import { sendAndDelete } from '../../helpers/bot';
 import { getItemDatas, getItemTuner } from '../../helpers/dragonnest/divinitor';
 import { formatTitleCase } from '../../helpers/function';
 // import image from '../../lib/image';
@@ -21,9 +22,7 @@ module.exports = {
         const maxItems = 25;
 
         if (!args.length) {
-            return message.channel.send('Harap masukkan nama atau ID item!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
-                client.logger.error(err);
-            });
+            return sendAndDelete(message, 'Harap masukkan nama atau ID item!', 5000);
         }
 
         const msgs = await message.channel.send(`Mencari item \`${itemName}\` ...`);
@@ -69,13 +68,13 @@ module.exports = {
                         }).then((collected: any) => {
                             const id = collected.first().content;
                             if (isNaN(id)) {
-                                return message.channel.send(`\`${id}\` bukan merupakan angka! Mohon masukkan angka.`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+                                return sendAndDelete(message, `\`${id}\` bukan merupakan angka! Mohon masukkan angka.`, 5000);
                             }
 
                             collected.first().delete();
                             getItemDatas(client, msgs, items[parseInt(id) - 1].id);
                         }).catch((collected: any) => {
-                            message.channel.send('Waktu Anda telah habis, silahkan ulangi.').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+                            sendAndDelete(message, 'Waktu Anda telah habis, silahkan ulangi.', 5000);
                         });
                     })
                     .catch((err: any) => client.logger.error(err));

@@ -1,3 +1,5 @@
+import { sendAndDelete } from '../../../../helpers/bot';
+import { delay } from '../../../../helpers/function';
 import values from '../../../../lib/values';
 
 const status = (id: any) => {
@@ -32,10 +34,10 @@ module.exports = {
                 `Players: ${server.players.count}/${server.players.max}`,
             ];
 
-            return message.channel.send(data).then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
+            return sendAndDelete(message, data, 30000);
         } catch (e: any) {
             return message.channel.send(e.message).then((msg: any) => {
-                msg.delete({ timeout: 5000 });
+                setTimeout(() => msg.delete(), 5000);
                 client.logger.error(e);
             });
         }

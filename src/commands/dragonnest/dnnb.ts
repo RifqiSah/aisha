@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { get } from 'superagent';
+import { editAndDelete } from '../../helpers/bot';
 import values from '../../lib/values';
 
 module.exports = {
@@ -29,7 +30,7 @@ module.exports = {
                 const nbdata = JSON.parse(res.text);
 
                 if (Array.isArray(nbdata) && nbdata.length === 0) {
-                    return msgs.edit('Belum ada informasi untuk Noblesse Buff!').then((msg: any) => msg.delete({ timeout: 10000 }));
+                    return editAndDelete(msgs, 'Belum ada informasi untuk Noblesse Buff!', 10000);
                 }
 
                 for (const nbh in nbdata) {
@@ -43,7 +44,7 @@ module.exports = {
                 }
 
                 channel.send(data.join('\n'));
-                msgs.delete({ timeout: 5000 });
+                setTimeout(() => msgs.delete(), 5000);
             })
             .catch((err) => {
                 client.logger.error(err);

@@ -1,4 +1,7 @@
+import { sendAndDelete, editAndDelete, replyAndDelete } from '../helpers/bot';
+
 /* eslint-disable max-len */
+
 module.exports = async (client: any, message: any) => {
     // public guild
     const guildObject = await client.guildsvc.getGuild(message.guildId);
@@ -65,7 +68,7 @@ module.exports = async (client: any, message: any) => {
     if (!['bot', 'config'].includes(command)) {
         if (!step1 && !step2 && !step3 && !step4 && !step5) {
             message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send(`Konfigurasi untuk __**${guildObject.guildName}**__ tidak ditemukan!\n\nSilahkan gunakan command \`${client.config.BOT_PREFIX}config\` untuk memulai konfigurasi.`).then((msg: any) => msg.delete({ timeout: 60000 })).catch((err: any) => client.logger.error(err));
+            return sendAndDelete(message, `Konfigurasi untuk __**${guildObject.guildName}**__ tidak ditemukan!\n\nSilahkan gunakan command \`${client.config.BOT_PREFIX}config\` untuk memulai konfigurasi.`, 60000);
         }
     }
     // end config
@@ -79,7 +82,7 @@ module.exports = async (client: any, message: any) => {
         if (message.author.id !== client.config.BOT_OWNER) {
             if (message.channel.id !== step3.value) {
                 return message.delete().catch((err: any) => client.logger.error(err));
-                // return message.channel.send(`Mohon selalu gunakan <#${step3.value}> untuk Aisha!`).then((msg: any) => msg.delete({ timeout: 15000 })).catch((err: any) => client.logger.error(err));
+                // return sendAndDelete(message, `Mohon selalu gunakan <#${step3.value}> untuk Aisha!`, 15000);
             }
         }
     }
@@ -87,7 +90,7 @@ module.exports = async (client: any, message: any) => {
     // Cooldown?
     if (commandfile.cooldown > 0) {
         if (client.cmdcd.has(message.author.id)) {
-            return message.reply(`Anda harus menunggu selama \`${commandfile.cooldown} detik\` sebelum menggunakan command \`${commandfile.name}\` kembali!`).then((msg: any) => msg.delete({ timeout: 10000 })).catch((err: any) => client.logger.error(err));
+            return replyAndDelete(message, `Anda harus menunggu selama \`${commandfile.cooldown} detik\` sebelum menggunakan command \`${commandfile.name}\` kembali!`, 10000);
         }
 
         client.cmdcd.add(message.author.id);
@@ -102,13 +105,13 @@ module.exports = async (client: any, message: any) => {
     // Aktif?
     if (!commandfile.enable) {
         message.delete().catch((err: any) => client.logger.error(err));
-        return message.channel.send(`Command \`${commandfile.name}\` sedang tidak aktif!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+        return sendAndDelete(message, `Command \`${commandfile.name}\` sedang tidak aktif!`, 5000);
     }
 
     // public?
     if (!commandfile.public && guildObject.guildId !== '306617555332628480') {
         message.delete().catch((err: any) => client.logger.error(err));
-        return message.channel.send(`Maaf, command \`${commandfile.name}\` hanya dapat digunakan pada **Informate Community Discord**!`).then((msg: any) => msg.delete({ timeout: 10000 })).catch((err: any) => client.logger.error(err));
+        return sendAndDelete(message, `Maaf, command \`${commandfile.name}\` hanya dapat digunakan pada **Informate Community Discord**!`, 10000);
     }
 
     // Command mempunyai role?
@@ -123,7 +126,7 @@ module.exports = async (client: any, message: any) => {
                     return commandfile.func(client, message, args);
                 } else {
                     message.delete().catch((err: any) => client.logger.error(err));
-                    return message.channel.send(`Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+                    return sendAndDelete(message, `Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`, 5000);
                 }
             } else {
                 // jika tidak ada, jalankan saja
@@ -137,7 +140,7 @@ module.exports = async (client: any, message: any) => {
             return commandfile.func(client, message, args);
         } else {
             message.delete().catch((err: any) => client.logger.error(err));
-            return message.channel.send(`Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => client.logger.error(err));
+            return sendAndDelete(message, `Anda tidak mempunyai ijin untuk menggunakan command \`${commandfile.name}\`!`, 5000);
         }
     }
 

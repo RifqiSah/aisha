@@ -1,3 +1,5 @@
+import { sendAndDelete } from '../../../../helpers/bot';
+
 module.exports = {
     name: 'count',
     func: async (client: any, message: any, args: any) => {
@@ -5,9 +7,7 @@ module.exports = {
         let count = 0;
 
         if (!type) {
-            return message.channel.send('Mohon masukkan type!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
-                client.logger.error(err);
-            });
+            return sendAndDelete(message, 'Mohon masukkan type!', 5000);
         }
 
         if (type === 'guild') {
@@ -16,8 +16,6 @@ module.exports = {
             count = await client.chsvc.count();
         }
 
-        return message.channel.send(`Aisha telah masuk kedalam \`${count}\` ${type}!`).then((msg: any) => msg.delete({ timeout: 15000 })).catch((err: any) => {
-            client.logger.error(err);
-        });
+        return sendAndDelete(message, `Aisha telah masuk kedalam \`${count}\` ${type}!`, 5000);
     }
 };

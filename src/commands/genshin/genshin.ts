@@ -22,7 +22,7 @@ module.exports = {
         if (!keyword) {
             const today = getCurrentDay();
             if (today === 'minggu') {
-                msg.push('Hari Minggu dapat farm semua item! 😀\n');
+                msg.push('Hari Minggu dapat farm semua item! 😀');
             } else {
                 const embed = new MessageEmbed()
                     .setColor([254, 254, 254])

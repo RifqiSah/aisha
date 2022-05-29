@@ -1,6 +1,6 @@
 {
   "name": "aisha",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Aisha, Informate Community Private Discord BOT",
   "repository": {
     "url": "https://github.com/RifqiSah/Aisha"
@@ -23,6 +23,7 @@
   "author": "RifqiSah",
   "license": "MIT",
   "devDependencies": {
+    "@types/exaroton": "^1.7.1",
     "@types/node": "^14.18.3",
     "@types/superagent": "^4.1.13",
     "@types/ws": "^7.4.7",

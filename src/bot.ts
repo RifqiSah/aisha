@@ -1,14 +1,12 @@
-import { EventEmitter } from 'events';
 import * as builder from '@discordjs/builders';
 import apiai from 'apiai';
 import { Client, Collection, Intents } from 'discord.js';
 
+import { Client as Exaroton } from 'exaroton';
 import { loadData, getDirs } from './helpers/function';
 import config from './lib/config';
 import db from './lib/database';
 import { logger } from './lib/logger';
-
-const { Client: Exaroton } = require('exaroton');
 
 let client: any = null;
 
@@ -32,7 +30,7 @@ const init = async () => {
         logger,
 
         // Services
-        mcsvc: new Exaroton(config.MC_TOKEN),
+        mcsvc: new Exaroton(config.MC_TOKEN || ''),
 
         // database service
         chsvc: require('./database/services/channel.service'),
@@ -51,9 +49,6 @@ const init = async () => {
         cmdsregex: new Collection(),
         subcmds: new Collection(),
         cmdsloc: new Collection(),
-
-        // Constant
-        ev: new EventEmitter(),
     };
 
     logger.info('[V] Done!');

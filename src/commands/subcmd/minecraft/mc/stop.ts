@@ -1,3 +1,4 @@
+import { editAndDelete } from '../../../../helpers/bot';
 import values from '../../../../lib/values';
 
 module.exports = {
@@ -12,7 +13,7 @@ module.exports = {
             const refreshId = setInterval(() => {
                 const status = server.get().status;
                 if (server.hasStatus(server.STATUS.OFFLINE)) {
-                    msgs.edit('Server telah dimatikan! Terima kasih telah bermain 😃').then((msg: any) => msg.delete({ timeout: 30000 })).catch((err: any) => client.logger.error(err));
+                    editAndDelete(msgs, 'Server telah dimatikan! Terima kasih telah bermain 😃', 30000);
                     clearInterval(refreshId);
                 }
             }, 5000);
@@ -20,7 +21,7 @@ module.exports = {
             return true;
         } catch (e: any) {
             return msgs.edit(e.message).then((msg: any) => {
-                msg.delete({ timeout: 5000 });
+                setTimeout(() => msg.delete(), 5000);
                 client.logger.error(e);
             });
         }

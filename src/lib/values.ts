@@ -2,7 +2,7 @@ import './env';
 import config from './config';
 
 export default class Values {
-    static bot_version      = 'v3.0.0';
+    static bot_version      = 'v4.0.0';
 
     static aisha_api        = `${process.env.ENDPOINT}/bot/aisha`;
     static divinitor_api    = 'https://reference.dn.divinitor.com/api/server/sea';

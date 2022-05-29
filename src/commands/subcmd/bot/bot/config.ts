@@ -1,3 +1,6 @@
+import { sendAndDelete } from '../../../../helpers/bot';
+
+
 module.exports = {
     name: 'config',
     func: async (client: any, message: any, args: any) => {
@@ -22,13 +25,9 @@ module.exports = {
             const name = client.bot.channels.cache.get(mentioned).name;
             await client.configsvc.addConfig(guildid, 'channel-news', mentioned, name);
         } else {
-            return message.channel.send(`Peraturan untuk \`${cmd}\` tidak ditemukan!`).then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
-                client.logger.error(err);
-            });
+            return sendAndDelete(message, `Peraturan untuk \`${cmd}\` tidak ditemukan!`, 5000);
         }
 
-        return message.channel.send('Berhasil disimpan!').then((msg: any) => msg.delete({ timeout: 5000 })).catch((err: any) => {
-            client.logger.error(err);
-        });
+        return sendAndDelete(message, 'Berhasil disimpan!', 5000);
     }
 };
