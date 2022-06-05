@@ -22,7 +22,7 @@ export default class Help extends Command {
             data.push('Hai! Ini adalah daftar command yang tersedia:');
 
             commands.forEach((item: any) => {
-                const category = commandCategories.get(item.command);
+                const category = String(commandCategories.get(item.command));
 
                 if (!lastLoc.includes(category)) {
                     lastLoc = category;
