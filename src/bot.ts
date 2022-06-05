@@ -1,7 +1,4 @@
-import * as builder from '@discordjs/builders';
 import apiai from 'apiai';
-import { Collection } from 'discord.js';
-
 import { Client as Exaroton } from 'exaroton';
 import { client as bot } from './client';
 import { loadData, getDirs } from './helpers/function';
@@ -15,18 +12,13 @@ let client: any = null;
 const init = async () => {
     logger.info('[-] Initialize variable');
     client = {
-        // General
         bot,
-        builder,
         apiai: apiai(`${config.TOKEN_APIAI}`),
-        // func,
         config,
         logger,
 
-        // Services
         mcsvc: new Exaroton(config.MC_TOKEN || ''),
 
-        // database service
         chsvc: require('./database/services/channel.service'),
         guildsvc: require('./database/services/guild.service'),
         pointsvc: require('./database/services/point.service'),
@@ -36,7 +28,6 @@ const init = async () => {
         gameserversvc: require('./database/services/gameserver.service'),
         gamenewssvc: require('./database/services/gamenews.service'),
 
-        // Variables
         commandCategories,
         commands,
         interactionCommands,
