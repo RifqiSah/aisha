@@ -1,4 +1,5 @@
 import { Message, TextChannel } from 'discord.js';
+
 import Command from '../../classes/command';
 import { logger } from '../../lib/logger';
 

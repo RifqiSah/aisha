@@ -1,4 +1,5 @@
-import { Message, TextChannel } from 'discord.js';
+import { Message } from 'discord.js';
+
 import Command from '../../classes/command';
 import { client } from '../../client';
 
@@ -15,7 +16,7 @@ export default class Uptime extends Command {
     constructor() {
         super({
             name: 'Melihat berapa lama bot sudah berjalan.',
-            command: 'up',
+            command: 'uptime',
             ownerOnly: true,
             onlyInformate: true,
         });

@@ -1,5 +1,6 @@
 import { roleMention } from '@discordjs/builders';
 import { Message } from 'discord.js';
+
 import Command from '../../classes/command';
 import { sendMessage } from '../../helpers/function';
 import config from '../../lib/config';
@@ -21,8 +22,10 @@ export default class Help extends Command {
             data.push('Hai! Ini adalah daftar command yang tersedia:');
 
             commands.forEach((item: any) => {
-                if (!lastLoc.includes(String(commandCategories.get(item.command)))) {
-                    lastLoc = String(commandCategories.get(item.command));
+                const category = commandCategories.get(item.command);
+
+                if (!lastLoc.includes(category)) {
+                    lastLoc = category;
                     data.push(`\n__**${lastLoc.replace(/^./, lastLoc[0].toUpperCase())}**__`);
                 }
 
@@ -45,7 +48,7 @@ export default class Help extends Command {
                 if (command.roles) data.push(`\`Role\` : ${command.roles.length ? command.roles.map((i: any) => roleMention(i)).join(', ') : '-'}.`);
 
                 // data.push(`\`Regex\` : ${command.regex ? 'Ya' : 'Tidak'}.`);
-                data.push(`\`Cooldown\` : ${command.cooldown} detik.`);
+                data.push(`\`Cooldown\` : ${command.cooldown || 0} detik.`);
 
                 data.push(`\nAnda dapat menggunakan \`${config.BOT_PREFIX}help\` untuk mendapatkan informasi dari semua command yang tersedia.`);
             }

@@ -1,6 +1,6 @@
 import { Message, TextChannel } from 'discord.js';
+
 import Command from '../../classes/command';
-import { client } from '../../client';
 import { sendAndDelete } from '../../helpers/bot';
 
 export default class Ticket extends Command {
