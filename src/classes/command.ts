@@ -1,3 +1,4 @@
+import { userMention } from '@discordjs/builders';
 import {
     Message,
     CommandInteraction,
@@ -6,7 +7,7 @@ import {
     ApplicationCommandOptionData,
     AutocompleteInteraction,
 } from 'discord.js';
-import { replyAndDelete } from '../helpers/bot';
+import { replyAndDelete, sendAndDelete } from '../helpers/bot';
 import globalConfig from '../lib/config';
 import { logger } from '../lib/logger';
 
@@ -24,6 +25,7 @@ export default abstract class Command {
     onlyInformate?: boolean;
     hasAutocomplete?: boolean;
     cooldown?: number;
+    roles?: string[];
 
     constructor(config: {
         name: string;
@@ -35,6 +37,7 @@ export default abstract class Command {
         hasAutocomplete?: boolean;
         slashCommandOptions?: ApplicationCommandOptionData[];
         cooldown?: number;
+        roles?: string[];
     }) {
         this.name = config.name;
         this.command = config.command;
@@ -44,6 +47,7 @@ export default abstract class Command {
         this.onlyInformate = config.onlyInformate;
         this.hasAutocomplete = config.hasAutocomplete;
         this.cooldown = config.cooldown;
+        this.roles = config.roles || [];
 
         if (config.registerSlashCommand === true) {
             if (config.onlyInformate === true) {
@@ -76,6 +80,7 @@ export default abstract class Command {
 
         logger.info(`-> Command '${this.command}' dijalankan oleh '${message.author.tag}'`);
 
+        // cooldown
         if (this.cooldown) {
             if (commandCooldown.has(message.author.id)) {
                 return replyAndDelete(message, `Anda harus menunggu selama \`${this.cooldown} detik\` sebelum menggunakan command \`${this.command}\` kembali!`, 10000);
@@ -86,6 +91,14 @@ export default abstract class Command {
             setTimeout(() => {
                 commandCooldown.delete(message.author.id);
             }, this.cooldown * 1000);
+        }
+
+        // role check
+        if (this.roles?.length) {
+            if (message.member?.roles.cache.some((role: any) => !this.roles?.includes(role.id))) {
+                message.delete();
+                return sendAndDelete(message, `${userMention(message.author.id)}, Anda tidak mempunyai ijin untuk menggunakan command \`${this.command}\`!`, 5000);
+            }
         }
 
         const args = message.content.substring(`${globalConfig.BOT_PREFIX}${this.command}`.length + 1);
