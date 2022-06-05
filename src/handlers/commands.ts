@@ -23,9 +23,6 @@ module.exports = (client: any) => {
                     client.interactionCommands.set(key, command);
                 } else {
                     client.commands.set(key, command);
-                    command.alias.forEach((alias: string) => {
-                        client.commandAlias.set(alias, key);
-                    });
                 }
 
                 if ((command as Command).hasAutocomplete === true) {
