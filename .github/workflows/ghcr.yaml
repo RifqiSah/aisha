@@ -2,7 +2,8 @@ name: build-container
 
 on:
   workflow_run:
-    workflows: ["test"]
+    workflows:
+      - test
     types:
       - completed
 
