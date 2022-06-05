@@ -1,4 +1,4 @@
-name: build-prod
+name: build-branch
 
 on:
   push:
