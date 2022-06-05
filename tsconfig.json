@@ -1,27 +1,21 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
+    "lib": ["ES2021"],
+    "module": "CommonJS",
+    "target": "ES2021",
     "sourceMap": true,
     "removeComments": true,
-    "outDir": "dist",
-
     "strict": true,
     "noImplicitAny": true,
-
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
     "moduleResolution": "node",
+    "outDir": "dist",
     "baseUrl": "./",
     "paths": {
-      "*": [
-        "node_modules/*"
-      ]
-    },
-
-    "esModuleInterop": true,
-
-    "forceConsistentCasingInFileNames": true,
-
-    "skipLibCheck": true
+      "*": ["node_modules/*"],
+    }
   },
   "include": [
     "src/**/*"
