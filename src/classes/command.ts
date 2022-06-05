@@ -6,8 +6,11 @@ import {
     ApplicationCommandOptionData,
     AutocompleteInteraction,
 } from 'discord.js';
+import { replyAndDelete } from '../helpers/bot';
 import globalConfig from '../lib/config';
 import { logger } from '../lib/logger';
+
+const commandCooldown = new Set();
 
 export default abstract class Command {
     static commands: ApplicationCommandData[] = [];
@@ -20,6 +23,7 @@ export default abstract class Command {
     registerSlashCommand?: boolean;
     onlyInformate?: boolean;
     hasAutocomplete?: boolean;
+    cooldown?: number;
 
     constructor(config: {
         name: string;
@@ -30,6 +34,7 @@ export default abstract class Command {
         onlyInformate?: boolean;
         hasAutocomplete?: boolean;
         slashCommandOptions?: ApplicationCommandOptionData[];
+        cooldown?: number;
     }) {
         this.name = config.name;
         this.command = config.command;
@@ -38,6 +43,7 @@ export default abstract class Command {
         this.registerSlashCommand = config.registerSlashCommand;
         this.onlyInformate = config.onlyInformate;
         this.hasAutocomplete = config.hasAutocomplete;
+        this.cooldown = config.cooldown;
 
         if (config.registerSlashCommand === true) {
             if (config.onlyInformate === true) {
@@ -56,7 +62,7 @@ export default abstract class Command {
         }
     }
 
-    check(message: Message): void {
+    check(message: Message): any {
         if (!message.content.startsWith(`${globalConfig.BOT_PREFIX}${this.command}`)) return;
         if (
             this.permission !== undefined &&
@@ -70,8 +76,20 @@ export default abstract class Command {
 
         logger.info(`-> Command '${this.command}' dijalankan oleh '${message.author.tag}'`);
 
+        if (this.cooldown) {
+            if (commandCooldown.has(message.author.id)) {
+                return replyAndDelete(message, `Anda harus menunggu selama \`${this.cooldown} detik\` sebelum menggunakan command \`${this.command}\` kembali!`, 10000);
+            }
+
+            commandCooldown.add(message.author.id);
+
+            setTimeout(() => {
+                commandCooldown.delete(message.author.id);
+            }, this.cooldown * 1000);
+        }
+
         const args = message.content.substring(`${globalConfig.BOT_PREFIX}${this.command}`.length + 1);
-        void this.run(message, args);
+        return this.run(message, args);
     }
 
     checkInteraction(interaction: CommandInteraction): void {
