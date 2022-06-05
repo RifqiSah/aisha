@@ -8,7 +8,7 @@ import { loadData, getDirs } from './helpers/function';
 import config from './lib/config';
 import db from './lib/database';
 import { logger } from './lib/logger';
-import { commandCategories, commands, commandCooldown, interactionCommands, autocompletes, subCommands } from './vars';
+import { commandCategories, commands, interactionCommands, autocompletes, subCommands } from './vars';
 
 let client: any = null;
 
@@ -39,7 +39,6 @@ const init = async () => {
         // Variables
         commandCategories,
         commands,
-        commandCooldown,
         interactionCommands,
         autocompletes,
         subCommands,

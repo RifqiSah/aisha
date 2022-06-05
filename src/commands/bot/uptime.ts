@@ -15,7 +15,7 @@ export default class Uptime extends Command {
     constructor() {
         super({
             name: 'Melihat berapa lama bot sudah berjalan.',
-            command: 'uptime',
+            command: 'up',
             ownerOnly: true,
             onlyInformate: true,
         });

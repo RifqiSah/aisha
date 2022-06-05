@@ -1,3 +1,4 @@
+import { roleMention } from '@discordjs/builders';
 import { Message } from 'discord.js';
 import Command from '../../classes/command';
 import { sendMessage } from '../../helpers/function';
@@ -30,14 +31,24 @@ export default class Help extends Command {
 
             data.push(`\nAnda dapat menggunakan \`${config.BOT_PREFIX}help [nama command]\` untuk mendapatkan informasi dari command tersebut.`);
         } else {
-            const name = args[0].toLowerCase();
-            const command = commands.get(name);
+            const name = args?.split(' ')[0].toLowerCase();
+            const command: Command = commands.get(name) as Command;
 
             if (!command) {
                 void message.reply('Command tidak valid!');
-            }
+            } else {
+                data.push(`Informasi mengenai command \`${command.command}\`:\n`);
 
-            console.log(command);
+                // if (command.aliases) data.push(`\`Alias\` : ${command.aliases.length ? `${command.aliases.join(', ')}` : '-'}`);
+                if (command.name) data.push(`\`Deskripsi\` : ${command.name}`);
+                // if (command.usage) data.push(`\`Penggunaan\` : ${client.config.BOT_PREFIX}${name} ${command.usage}.`);
+                if (command.roles) data.push(`\`Role\` : ${command.roles.length ? command.roles.map((i: any) => roleMention(i)).join(', ') : '-'}.`);
+
+                // data.push(`\`Regex\` : ${command.regex ? 'Ya' : 'Tidak'}.`);
+                data.push(`\`Cooldown\` : ${command.cooldown} detik.`);
+
+                data.push(`\nAnda dapat menggunakan \`${config.BOT_PREFIX}help\` untuk mendapatkan informasi dari semua command yang tersedia.`);
+            }
         }
 
         void sendMessage(message, data);

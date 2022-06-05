@@ -78,9 +78,6 @@ export default abstract class Command {
             return;
         }
 
-        logger.info(`-> Command '${this.command}' dijalankan oleh '${message.author.tag}'`);
-
-        // cooldown
         if (this.cooldown) {
             if (commandCooldown.has(message.author.id)) {
                 return replyAndDelete(message, `Anda harus menunggu selama \`${this.cooldown} detik\` sebelum menggunakan command \`${this.command}\` kembali!`, 10000);
@@ -93,13 +90,14 @@ export default abstract class Command {
             }, this.cooldown * 1000);
         }
 
-        // role check
         if (this.roles?.length) {
             if (message.member?.roles.cache.some((role: any) => !this.roles?.includes(role.id))) {
                 message.delete();
                 return sendAndDelete(message, `${userMention(message.author.id)}, Anda tidak mempunyai ijin untuk menggunakan command \`${this.command}\`!`, 5000);
             }
         }
+
+        logger.info(`-> Command '${this.command}' dijalankan oleh '${message.author.tag}'`);
 
         const args = message.content.substring(`${globalConfig.BOT_PREFIX}${this.command}`.length + 1);
         return this.run(message, args);
