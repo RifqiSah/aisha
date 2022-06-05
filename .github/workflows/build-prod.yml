@@ -6,11 +6,11 @@ on:
 
 jobs:
   test:
-    uses: ./.github/workflows/main/test.yml
+    uses: ./.github/workflows/test.yml
 
   dockerize:
     needs: [test]
-    uses: ./.github/workflows/main/build.yml
+    uses: ./.github/workflows/build.yml
     with:
       username: ${{ secrets.DOCKER_USERNAME }}
       password: ${{ secrets.DOCKER_PASSWORD }}
