@@ -1,5 +1,5 @@
 import { get } from 'superagent';
-import { sendAndDelete } from '../../helpers/bot';
+import { sendAndDelete, toString } from '../../helpers/bot';
 import { getItemDatas, getItemTuner } from '../../helpers/dragonnest/divinitor';
 import { formatTitleCase } from '../../helpers/function';
 // import image from '../../lib/image';
@@ -59,25 +59,33 @@ module.exports = {
                 data.push('\nSilahkan masukkan pilihan Anda:');
                 data.push('```');
 
-                msgs.edit(data)
-                    .then(() => {
-                        message.channel.awaitMessages((res: any) => message.content, {
-                            max: 1,
-                            time: 30000,
-                            errors: ['time']
-                        }).then((collected: any) => {
-                            const id = collected.first().content;
-                            if (isNaN(id)) {
-                                return sendAndDelete(message, `\`${id}\` bukan merupakan angka! Mohon masukkan angka.`, 5000);
-                            }
+                const msgArr = toString(msgs, data);
+                const filter = (response: any) => {
+                    return isNaN(response);
+                };
 
-                            collected.first().delete();
-                            getItemDatas(client, msgs, items[parseInt(id) - 1].id);
-                        }).catch((collected: any) => {
-                            sendAndDelete(message, 'Waktu Anda telah habis, silahkan ulangi.', 5000);
-                        });
-                    })
-                    .catch((err: any) => client.logger.error(err));
+                msgArr.forEach((el: any) => {
+                    msgs.edit(el)
+                        .then(() => {
+                            message.channel.awaitMessages({
+                                filter,
+                                max: 1,
+                                time: 30000,
+                                errors: ['time']
+                            }).then((collected: any) => {
+                                const id = collected.first().content;
+                                if (isNaN(id)) {
+                                    return sendAndDelete(message, `\`${id}\` bukan merupakan angka! Mohon masukkan angka.`, 5000);
+                                }
+
+                                collected.first().delete();
+                                getItemDatas(client, msgs, items[parseInt(id) - 1].id);
+                            }).catch((collected: any) => {
+                                sendAndDelete(message, 'Waktu Anda telah habis, silahkan ulangi.', 5000);
+                            });
+                        })
+                        .catch((err: any) => client.logger.error(err));
+                });
             })
             .catch((err) => {
                 client.logger.error(err);

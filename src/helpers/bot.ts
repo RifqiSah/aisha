@@ -2,6 +2,16 @@
 import { Util } from 'discord.js';
 import { logger } from '../lib/logger';
 
+export function toString(obj: any, message: any) {
+    let str = message;
+
+    if (Array.isArray(str)) {
+        str = message.join('\n');
+    }
+
+    return Util.splitMessage(str);
+}
+
 export async function sendAndDelete(obj: any, message: any, timeout: number): Promise<any> {
     let str = message;
 
