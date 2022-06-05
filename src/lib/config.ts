@@ -2,6 +2,8 @@ import './env';
 import values from './values';
 
 export default class Config {
+    static INFORMATE_ID = '306617555332628480';
+
     static ENV = process.env.APP_ENV;
     static MONGODB = process.env.APP_MONGODB_URI;
     static TOKEN = process.env.APP_DISCORD_TOKEN;

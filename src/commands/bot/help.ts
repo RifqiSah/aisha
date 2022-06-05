@@ -1,72 +1,45 @@
+import { Message } from 'discord.js';
+import Command from '../../classes/command';
 import { sendMessage } from '../../helpers/function';
+import config from '../../lib/config';
+import { commandCategories, commands } from '../../vars';
 
-module.exports = {
-    name: 'help',
-    desc: 'Daftar command yang dapat digunakan pada Aisha.',
-    enable: true,
-    regex: false,
-    help: true,
-    public: true,
-    role: [],
-    aliases: ['h'],
-    usage: '[nama command]',
-    cooldown: 0,
-    func: (client: any, message: any, args: any) => {
+export default class Help extends Command {
+    constructor() {
+        super({
+            name: 'Daftar command yang dapat digunakan pada Aisha.',
+            command: 'help',
+        });
+    }
+
+    async run(message: Message, args: string): Promise<void> {
         const data = [];
-        const guildid = message.guild.id;
-        // const dev = funct.isDeveloper(message.member) && (args.length ? args[0].toLowerCase().match('dev') : false);
         let lastLoc = '';
 
-        // apakah public channel?
-        const publicServer = guildid !== '306617555332628480';
-
         if (!args.length) {
-            let cmdArr: string[] = client.cmds;
             data.push('Hai! Ini adalah daftar command yang tersedia:');
 
-            if (publicServer) {
-                cmdArr = cmdArr.filter((item: any) => item.public);
-            }
-
-            cmdArr.forEach((item: any) => {
-                if (!lastLoc.includes(client.cmdsloc.get(item.name))) {
-                    lastLoc = client.cmdsloc.get(item.name);
+            commands.forEach((item: any) => {
+                if (!lastLoc.includes(String(commandCategories.get(item.command)))) {
+                    lastLoc = String(commandCategories.get(item.command));
                     data.push(`\n__**${lastLoc.replace(/^./, lastLoc[0].toUpperCase())}**__`);
                 }
 
-                data.push(`\`${item.name}\` : ${item.desc.split('.')[0]}.`);
+                data.push(`\`${item.command}\` : ${item.name.split('.')[0]}.`);
             });
 
-            data.push(`\nAnda dapat menggunakan \`${client.config.BOT_PREFIX}help [nama command]\` untuk mendapatkan informasi dari command tersebut.`);
+            data.push(`\nAnda dapat menggunakan \`${config.BOT_PREFIX}help [nama command]\` untuk mendapatkan informasi dari command tersebut.`);
         } else {
             const name = args[0].toLowerCase();
-            const command = client.cmds.get(name) || client.cmds.get(client.cmdsalias.get(name));
+            const command = commands.get(name);
 
             if (!command) {
-                return message.reply('Command tidak valid!');
+                void message.reply('Command tidak valid!');
             }
 
-            data.push(`Informasi mengenai command \`${command.name}\`:\n`);
-
-            if (command.aliases) data.push(`\`Alias\` : ${command.aliases.length ? `${command.aliases.join(', ')}` : '-'}`);
-            if (command.desc) data.push(`\`Deskripsi\` : ${command.desc}`);
-            if (command.usage) data.push(`\`Penggunaan\` : ${client.config.BOT_PREFIX}${name} ${command.usage}.`);
-            if (!publicServer && command.role) data.push(`\`Role\` : ${command.role.length ? command.role.map((i: any) => client.builder.roleMention(i)).join(', ') : '-'}.`);
-
-            const subCmds: any = Array.from(client.subcmds.keys()).filter((key: any) => {
-                const regex = new RegExp(`${command.name}\\b`, 'g');
-                return key.match(regex);
-            }).map((key: any, cmd: any) => {
-                return key.split('.')[1];
-            });
-
-            if (subCmds.length) data.push(`\`Sub-Command\` : ${subCmds.join(', ')}`);
-
-            data.push(`\`Regex\` : ${command.regex ? 'Ya' : 'Tidak'}.`);
-            data.push(`\`Cooldown\` : ${command.cooldown} detik.`);
-            data.push(`\nAnda dapat menggunakan \`${client.config.BOT_PREFIX}help\` untuk mendapatkan informasi dari semua command yang tersedia.`);
+            console.log(command);
         }
 
-        sendMessage(message, data);
-    },
-};
+        void sendMessage(message, data);
+    }
+}

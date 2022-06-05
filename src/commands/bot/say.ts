@@ -1,29 +1,33 @@
-module.exports = {
-    name: 'say',
-    desc: 'Aisha akan berbicara sesuai dengan yang kita ketikkan.',
-    enable: true,
-    regex: false,
-    help: false,
-    public: false,
-    role: ['433870492378595329'],
-    aliases: [],
-    usage: '[channel] [pesan anda]',
-    cooldown: 0,
-    func: (client: any, message: any, args: any) => {
-        const channel = message.mentions.channels.first();
+import { Message, TextChannel } from 'discord.js';
+import Command from '../../classes/command';
+import { logger } from '../../lib/logger';
+
+export default class Say extends Command {
+    constructor() {
+        super({
+            name: 'Aisha akan berbicara sesuai dengan yang kita ketikkan.',
+            command: 'say',
+            ownerOnly: true,
+            onlyInformate: true,
+        });
+    }
+
+    async run(message: Message, args: string): Promise<void> {
+        const channel: TextChannel  = message.mentions.channels.first() as TextChannel;
         if (!channel) {
             message.channel.send('Mohon masukkan channel!');
             return;
         }
 
-        args.shift();
-        const sayMessage = args.join(' ');
+        const arg = args.split(' ');
+        arg.shift();
+        const sayMessage = arg.join(' ');
         if (!sayMessage) {
             message.channel.send('Mohon masukkan pesan anda!');
             return;
         }
 
-        message.delete().catch((err: any) => client.logger.error(err));
-        channel.send(sayMessage);
-    },
-};
+        message.delete().catch((err: any) => logger.error(err));
+        void channel.send(sayMessage);
+    }
+}
