@@ -1,0 +1,17 @@
+name: build-prod
+
+on:
+  push:
+    branches: [ '!master' ]
+
+jobs:
+  test:
+    uses: ./.github/workflows/main/test.yml
+
+  dockerize:
+    needs: [test]
+    uses: ./.github/workflows/main/build.yml
+    with:
+      username: ${{ secrets.GH_USERNAME }}
+      password: ${{ secrets.GH_PASSWORD }}
+      repo: ghcr.io/rifqisah/aisha
