@@ -2,7 +2,7 @@
 
 Aisha is a solution to managing our server problems, built from scratch with code organization and quality in mind. Our goal is to cover as many functionalities and niches as possible, while still maintaining high quality.
 
-[![build](https://github.com/RifqiSah/Aisha/actions/workflows/main.yml/badge.svg)](https://github.com/RifqiSah/Aisha/actions/workflows/main.yml)
+[![build](https://github.com/RifqiSah/Aisha/actions/workflows/build.yml/badge.svg)](https://github.com/RifqiSah/Aisha/actions/workflows/build.yml)
 
 ## Built With
 

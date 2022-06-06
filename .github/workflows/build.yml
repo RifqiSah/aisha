@@ -1,15 +1,55 @@
 name: build
 
 on:
-  workflow_run:
-    workflows: ["test"]
-    types:
-      - completed
+  push:
+    branches:
+      - '*'
 
 jobs:
-  dockerize:
+  test:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip build]')"
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [16.x, 17.x]
+    steps:
+    -
+      name: Checkout latest commit
+      uses: actions/checkout@v2
+    -
+      name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    -
+      name: Installing dependencies
+      run: npm ci
+      env:
+        CI: "true"
+    -
+      name: Show installed packages
+      run: npm list --depth=0
+      env:
+        CI: "true"
+    -
+      name: Linting script
+      run: npm run lint
+      env:
+        CI: "true"
+    -
+      name: Check Typescript version
+      run: tsc --version
+    -
+      name: Build Aisha
+      run: npm run build
+      env:
+        CI: "true"
+
+  dockerize:
+    needs: [test]
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip build]') && contains(github.ref, 'refs/heads/deploy')"
     steps:
       -
         name: Set up QEMU
@@ -35,9 +75,9 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
 
   deploy:
-    needs: [dockerize]
+    needs: [test, dockerize]
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip deploy]')"
+    if: "!contains(github.event.head_commit.message, '[skip deploy]') && contains(github.ref, 'refs/heads/deploy')"
     steps:
       -
         name: Connecting to server & Start deploy
