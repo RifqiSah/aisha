@@ -1,4 +1,3 @@
-import apiai from 'apiai';
 import { Client as Exaroton } from 'exaroton';
 import { client as bot } from './client';
 import { loadData, getDirs } from './helpers/function';
@@ -13,7 +12,6 @@ const init = async () => {
     logger.info('[-] Initialize variable');
     client = {
         bot,
-        apiai: apiai(`${config.TOKEN_APIAI}`),
         config,
         logger,
 
