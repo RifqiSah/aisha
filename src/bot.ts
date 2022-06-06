@@ -1,4 +1,3 @@
-import { Client as Exaroton } from 'exaroton';
 import { client as bot } from './client';
 import { loadData, getDirs } from './helpers/function';
 import config from './lib/config';
@@ -14,8 +13,6 @@ const init = async () => {
         bot,
         config,
         logger,
-
-        mcsvc: new Exaroton(config.MC_TOKEN || ''),
 
         chsvc: require('./database/services/channel.service'),
         guildsvc: require('./database/services/guild.service'),
