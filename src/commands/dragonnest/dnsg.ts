@@ -1,19 +1,21 @@
+import { Message } from 'discord.js';
 import { get } from 'superagent';
+
+import Command from '../../classes/command';
 import { sendAndDelete, editAndDelete } from '../../helpers/bot';
+import { logger } from '../../lib/logger';
 import values from '../../lib/values';
 
-module.exports = {
-    name: 'dnsg',
-    desc: 'Mengubah status server Dragon Nest.',
-    enable: false,
-    regex: false,
-    help: false,
-    public: false,
-    role: ['433870492378595329'],
-    aliases: [],
-    usage: '[server ID]',
-    cooldown: 0,
-    func: async (client: any, message: any, args: any) => {
+
+export default class DnInfo extends Command {
+    constructor() {
+        super({
+            name: 'Mengubah status server Dragon Nest.',
+            command: 'dnsg',
+        });
+    }
+
+    async run(message: Message, args: string): Promise<void> {
         message.delete();
 
         if (!args.length) {
@@ -27,7 +29,7 @@ module.exports = {
                 editAndDelete(msgs, `Sukses \`${args}\`! Respon:\`\`\`${res.text}\`\`\``, 50000);
             })
             .catch((err) => {
-                client.logger.error(err);
+                logger.error(err);
             });
-    },
-};
+    }
+}

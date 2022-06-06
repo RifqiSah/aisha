@@ -1,21 +1,19 @@
-import { MessageEmbed } from 'discord.js';
-
+import { Message, MessageEmbed } from 'discord.js';
+import Command from '../../classes/command';
 import { sendMessage } from '../../helpers/function';
 import { search, recom, getCurrentDay } from '../../helpers/genshin/genshin';
+import config from '../../lib/config';
 
-module.exports = {
-    name: 'genshin',
-    desc: 'Cari hal terkait Genshin Impact. Biarkan kata kunci kosong untuk menunjukkan item apa yang dapat dicari hari ini.',
-    enable: true,
-    regex: false,
-    help: true,
-    public: true,
-    role: [],
-    aliases: [],
-    usage: '[keyword]',
-    cooldown: 0,
-    func: async (client: any, message: any, args: any) => {
-        const keyword = (args.length ? args.join(' ').toLowerCase() : null);
+export default class Genshin extends Command {
+    constructor() {
+        super({
+            name: 'Cari hal terkait Genshin Impact. Biarkan kata kunci kosong untuk menunjukkan item apa yang dapat dicari hari ini.',
+            command: 'genshin',
+        });
+    }
+
+    async run(message: Message, args: string): Promise<void> {
+        const keyword = (args.length ? args.toLowerCase() : null);
         const msg: string[] = [];
 
         // jika tanpa keyword?
@@ -43,7 +41,7 @@ module.exports = {
             }
         }
 
-        msg.push(`\nGunakan \`${client.config.BOT_PREFIX}help genshin\` untuk melihat daftar hal yang tersedia.\n`);
+        msg.push(`\nGunakan \`${config.BOT_PREFIX}help genshin\` untuk melihat daftar hal yang tersedia.\n`);
         sendMessage(message, msg);
-    },
-};
+    }
+}

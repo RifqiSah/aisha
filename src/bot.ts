@@ -1,38 +1,22 @@
-import * as builder from '@discordjs/builders';
-import apiai from 'apiai';
-import { Client, Collection, Intents } from 'discord.js';
-
 import { Client as Exaroton } from 'exaroton';
+import { client as bot } from './client';
 import { loadData, getDirs } from './helpers/function';
 import config from './lib/config';
 import db from './lib/database';
 import { logger } from './lib/logger';
+import { commandCategories, commands, interactionCommands, autocompletes, subCommands } from './vars';
 
 let client: any = null;
 
 const init = async () => {
     logger.info('[-] Initialize variable');
     client = {
-        // General
-        bot: new Client({ intents: [
-            Intents.FLAGS.GUILDS,
-            Intents.FLAGS.GUILD_MESSAGES,
-            Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-            Intents.FLAGS.GUILD_PRESENCES,
-            Intents.FLAGS.GUILD_MEMBERS,
-            Intents.FLAGS.GUILD_WEBHOOKS,
-            Intents.FLAGS.DIRECT_MESSAGES,
-        ], partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'] }),
-        builder,
-        apiai: apiai(`${config.TOKEN_APIAI}`),
-        // func,
+        bot,
         config,
         logger,
 
-        // Services
         mcsvc: new Exaroton(config.MC_TOKEN || ''),
 
-        // database service
         chsvc: require('./database/services/channel.service'),
         guildsvc: require('./database/services/guild.service'),
         pointsvc: require('./database/services/point.service'),
@@ -42,13 +26,11 @@ const init = async () => {
         gameserversvc: require('./database/services/gameserver.service'),
         gamenewssvc: require('./database/services/gamenews.service'),
 
-        // Variables
-        cmdcd: new Set(),
-        cmds: new Collection(),
-        cmdsalias: new Collection(),
-        cmdsregex: new Collection(),
-        subcmds: new Collection(),
-        cmdsloc: new Collection(),
+        commandCategories,
+        commands,
+        interactionCommands,
+        autocompletes,
+        subCommands,
     };
 
     logger.info('[V] Done!');
