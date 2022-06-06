@@ -21,6 +21,7 @@ export default class DnInfo extends Command {
         super({
             name: 'Melihat tax atau pajak dari Trading House, Trade, Server Storage, dll.\nPajak yg tersedia yaitu:```> mail\n> th\n> trade```',
             command: 'dntax',
+            usage: '[mail/th/trade] [nominal]',
         });
     }
 

@@ -9,6 +9,7 @@ export default class Genshin extends Command {
         super({
             name: 'Cari hal terkait Genshin Impact. Biarkan kata kunci kosong untuk menunjukkan item apa yang dapat dicari hari ini.',
             command: 'genshin',
+            usage: '[nama item]',
         });
     }
 

@@ -11,6 +11,7 @@ export default class Help extends Command {
         super({
             name: 'Daftar command yang dapat digunakan pada Aisha.',
             command: 'help',
+            usage: '[command]',
         });
     }
 
@@ -44,7 +45,7 @@ export default class Help extends Command {
 
                 // if (command.aliases) data.push(`\`Alias\` : ${command.aliases.length ? `${command.aliases.join(', ')}` : '-'}`);
                 if (command.name) data.push(`\`Deskripsi\` : ${command.name}`);
-                // if (command.usage) data.push(`\`Penggunaan\` : ${client.config.BOT_PREFIX}${name} ${command.usage}.`);
+                if (command.usage) data.push(`\`Penggunaan\` : ${config.BOT_PREFIX}${name} ${command.usage}.`);
                 if (command.roles) data.push(`\`Role\` : ${command.roles.length ? command.roles.map((i: any) => roleMention(i)).join(', ') : '-'}.`);
 
                 // data.push(`\`Regex\` : ${command.regex ? 'Ya' : 'Tidak'}.`);

@@ -19,6 +19,7 @@ export default abstract class Command {
 
     name: string;
     command: string;
+    usage?: string;
     permission?: PermissionResolvable;
     ownerOnly?: boolean;
     registerSlashCommand?: boolean;
@@ -30,6 +31,7 @@ export default abstract class Command {
     constructor(config: {
         name: string;
         command: string;
+        usage?: string;
         permission?: PermissionResolvable;
         ownerOnly?: boolean;
         registerSlashCommand?: boolean;
@@ -41,6 +43,7 @@ export default abstract class Command {
     }) {
         this.name = config.name;
         this.command = config.command;
+        this.usage = config.usage;
         this.permission = config.permission;
         this.ownerOnly = config.ownerOnly;
         this.registerSlashCommand = config.registerSlashCommand;
@@ -91,7 +94,11 @@ export default abstract class Command {
         }
 
         if (this.roles?.length) {
-            if (message.member?.roles.cache.some((role: any) => !this.roles?.includes(role.id))) {
+            const hasRole = message.member?.roles.cache.some((role: any) => {
+                return this.roles?.includes(role.id) === true;
+            });
+
+            if (!hasRole) {
                 message.delete();
                 return sendAndDelete(message, `${userMention(message.author.id)}, Anda tidak mempunyai ijin untuk menggunakan command \`${this.command}\`!`, 5000);
             }

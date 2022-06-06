@@ -27,6 +27,8 @@ export default class Mc extends Command {
             name: 'Control panel untuk Minecraft Server.',
             command: 'mc',
             roles: ['802718208180092939'],
+            usage: '[info/start/stop/restart]',
+            onlyInformate: true,
         });
     }
 

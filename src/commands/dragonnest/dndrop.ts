@@ -11,6 +11,7 @@ export default class DnDrop extends Command {
         super({
             name: `Melihat info drop rate dari sebuah item pada Dragon Nest. Drop yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
             command: 'dndrop',
+            usage: '[nama item]',
         });
     }
 
