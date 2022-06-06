@@ -12,6 +12,9 @@ export default class DnInfo extends Command {
         super({
             name: 'Mengubah status server Dragon Nest.',
             command: 'dnsg',
+            usage: '[server]',
+            ownerOnly: true,
+            onlyInformate: true,
         });
     }
 

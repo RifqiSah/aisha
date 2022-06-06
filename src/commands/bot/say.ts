@@ -8,6 +8,7 @@ export default class Say extends Command {
         super({
             name: 'Aisha akan berbicara sesuai dengan yang kita ketikkan.',
             command: 'say',
+            usage: '[pesan anda]',
             ownerOnly: true,
             onlyInformate: true,
         });

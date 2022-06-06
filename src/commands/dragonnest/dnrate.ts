@@ -9,8 +9,9 @@ const list = formatData('dragonnest.dnrate');
 export default class DnInfo extends Command {
     constructor() {
         super({
-            name: `Melihat info hal-hal yang ada pada Dragon Nest. Info yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
+            name: `Melihat info rate enhance, dan chance apapun (kecuali drop) pada Dragon Nest. Rate yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
             command: 'dninfo',
+            usage: '[nama rate]',
         });
     }
 

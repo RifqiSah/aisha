@@ -11,6 +11,7 @@ export default class Help extends Command {
         super({
             name: 'Daftar command yang dapat digunakan pada Aisha.',
             command: 'help',
+            usage: '[command]',
         });
     }
 
@@ -38,17 +39,16 @@ export default class Help extends Command {
             const command: Command = commands.get(name) as Command;
 
             if (!command) {
-                void message.reply('Command tidak valid!');
+                void message.reply(`Command ${name} tidak ditemukan!`);
             } else {
                 data.push(`Informasi mengenai command \`${command.command}\`:\n`);
 
                 // if (command.aliases) data.push(`\`Alias\` : ${command.aliases.length ? `${command.aliases.join(', ')}` : '-'}`);
                 if (command.name) data.push(`\`Deskripsi\` : ${command.name}`);
-                // if (command.usage) data.push(`\`Penggunaan\` : ${client.config.BOT_PREFIX}${name} ${command.usage}.`);
-                if (command.roles) data.push(`\`Role\` : ${command.roles.length ? command.roles.map((i: any) => roleMention(i)).join(', ') : '-'}.`);
+                if (command.usage) data.push(`\`Penggunaan\` : ${config.BOT_PREFIX}${name} ${command.usage}`);
+                if (command.roles) data.push(`\`Role\` : ${command.roles.length ? command.roles.map((i: any) => roleMention(i)).join(', ') : '-'}`);
 
-                // data.push(`\`Regex\` : ${command.regex ? 'Ya' : 'Tidak'}.`);
-                data.push(`\`Cooldown\` : ${command.cooldown || 0} detik.`);
+                data.push(`\`Cooldown\` : ${command.cooldown || 0} detik`);
 
                 data.push(`\nAnda dapat menggunakan \`${config.BOT_PREFIX}help\` untuk mendapatkan informasi dari semua command yang tersedia.`);
             }

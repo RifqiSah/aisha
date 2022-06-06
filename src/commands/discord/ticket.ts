@@ -8,6 +8,7 @@ export default class Ticket extends Command {
         super({
             name: 'Mengirim pesan **Penting** kepada pengurus. Command ini digunakan jika ada pesan **penting** yang ingin segera disampaikan!.',
             command: 'ticket',
+            usage: '[pesan anda]',
             cooldown: 60,
         });
     }

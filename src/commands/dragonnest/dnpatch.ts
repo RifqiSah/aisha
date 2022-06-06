@@ -11,6 +11,7 @@ export default class DnInfo extends Command {
         super({
             name: `Melihat info hal-hal yang ada pada Dragon Nest. Info yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
             command: 'dnpatch',
+            usage: '[pn id]',
             ownerOnly: true,
             onlyInformate: true,
         });
