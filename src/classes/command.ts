@@ -81,26 +81,37 @@ export default abstract class Command {
             return;
         }
 
-        if (this.cooldown) {
-            if (commandCooldown.has(message.author.id)) {
-                return replyAndDelete(message, `Anda harus menunggu selama \`${this.cooldown} detik\` sebelum menggunakan command \`${this.command}\` kembali!`, 10000);
+        const isOwner = message.author.id === globalConfig.BOT_OWNER;
+        if (this.ownerOnly && !isOwner) return;
+
+        if (!isOwner) {
+            if (this.onlyInformate) {
+                if (message?.guildId !== globalConfig.INFORMATE_ID) {
+                    return replyAndDelete(message, 'Command ini hanya dapat dijalankan pada **Informate Community Guild**!', 10000);
+                }
             }
 
-            commandCooldown.add(message.author.id);
+            if (this.cooldown) {
+                if (commandCooldown.has(message.author.id)) {
+                    return replyAndDelete(message, `Anda harus menunggu selama \`${this.cooldown} detik\` sebelum menggunakan command \`${this.command}\` kembali!`, 10000);
+                }
 
-            setTimeout(() => {
-                commandCooldown.delete(message.author.id);
-            }, this.cooldown * 1000);
-        }
+                commandCooldown.add(message.author.id);
 
-        if (this.roles?.length) {
-            const hasRole = message.member?.roles.cache.some((role: any) => {
-                return this.roles?.includes(role.id) === true;
-            });
+                setTimeout(() => {
+                    commandCooldown.delete(message.author.id);
+                }, this.cooldown * 1000);
+            }
 
-            if (!hasRole) {
-                message.delete();
-                return sendAndDelete(message, `${userMention(message.author.id)}, Anda tidak mempunyai ijin untuk menggunakan command \`${this.command}\`!`, 5000);
+            if (this.roles?.length) {
+                const hasRole = message.member?.roles.cache.some((role: any) => {
+                    return this.roles?.includes(role.id) === true;
+                });
+
+                if (!hasRole) {
+                    message.delete();
+                    return sendAndDelete(message, `${userMention(message.author.id)}, Anda tidak mempunyai ijin untuk menggunakan command \`${this.command}\`!`, 5000);
+                }
             }
         }
 

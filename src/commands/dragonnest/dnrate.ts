@@ -6,11 +6,11 @@ import config from '../../lib/config';
 
 const list = formatData('dragonnest.dnrate');
 
-export default class DnInfo extends Command {
+export default class DnRate extends Command {
     constructor() {
         super({
             name: `Melihat info rate enhance, dan chance apapun (kecuali drop) pada Dragon Nest. Rate yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
-            command: 'dninfo',
+            command: 'dnrate',
             usage: '[nama rate]',
         });
     }
