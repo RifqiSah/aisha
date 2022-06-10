@@ -3,7 +3,7 @@ import cron from 'node-cron';
 
 import { sendGeneralWithAttachment } from '../../../helpers/discord';
 import { getWebhookUrls, delay } from '../../../helpers/function';
-import axios from '../lib/axios';
+import axios from '../../api';
 
 let _client: any = null;
 

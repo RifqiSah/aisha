@@ -1,0 +1,22 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Aisha API Module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RifqiSah/aisha.git"
+  },
+  "author": "RifqiSah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RifqiSah/aisha/issues"
+  },
+  "homepage": "https://github.com/RifqiSah/aisha#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
