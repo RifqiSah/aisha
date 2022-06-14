@@ -2,7 +2,7 @@ import cron from 'node-cron';
 
 import { sendGeneral } from '../../../helpers/discord';
 import { getWebhookUrls, delay } from '../../../helpers/function';
-import axios from '../../api';
+import axios from '../lib/axios';
 
 let _client: any = null;
 

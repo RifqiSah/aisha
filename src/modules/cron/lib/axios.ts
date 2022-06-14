@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { logger } from '../../lib/logger';
+import { logger } from '../../../lib/logger';
 
 const trimString = function (string: string, length: number) {
     return string.length > length ? string.substring(0, length) + '...' : string;
@@ -36,8 +36,3 @@ axiosClient.interceptors.response.use((x: any) => {
 });
 
 export default axiosClient;
-
-module.exports = (client: any) => {
-    client.logger.info('  [-] Initialize API');
-    client.logger.info('  [V] Done!');
-};

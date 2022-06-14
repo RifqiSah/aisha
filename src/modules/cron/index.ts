@@ -8,6 +8,7 @@ const disabledModule = [
     // 'dnseanews',
     // 'dntrack',
     // 'freeGames',
+    // 'genshin',
 ];
 
 module.exports = (client: any) => {
