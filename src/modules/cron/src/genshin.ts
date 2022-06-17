@@ -60,10 +60,10 @@ const getData = async () => {
 
         if (sameIndex) {
             for(let i = sameIndex - 1; i >= 0; i--) {
-                // const message = `__**[${category[i]}] ${title[i]}:**__\n\n${intro[i]}\n\nStart Time: **${startTime[i].format('YYYY-MM-DD HH:mm')} GMT+8**\nDetails: <https://genshin.hoyoverse.com/en/news/detail/${id[i]}>\n\n${banner[i]}`;
+                // const message = `__**[${category[i]}] ${title[i]}:**__\n\n${intro[i]}\n\nStart Time: **${startTime[i].format('YYYY-MM-DD HH:mm')} GMT+8**\nDetails: <https://genshin.hoyoverse.com/id/news/detail/${id[i]}>\n\n${banner[i]}`;
                 // await sendGeneral(await getWebhookUrls('webhook.genshin.news'), message);
 
-                const message = `__**[${category[i]}] ${title[i]}:**__\n\n${intro[i]}\n\nSelengkapnya: <https://genshin.hoyoverse.com/en/news/detail/${id[i]}>\n\nPratinjau:`;
+                const message = `__**[${category[i]}] ${title[i]}:**__\n\n${intro[i]}\n\nSelengkapnya: <https://genshin.hoyoverse.com/id/news/detail/${id[i]}>\n\nPratinjau:`;
                 await sendGeneralWithAttachment(await getWebhookUrls('webhook.genshin.news'), message, banner[i]);
                 // console.log(message);
 
