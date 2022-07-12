@@ -37,7 +37,7 @@ const getData = async () => {
         const banner: any[] = [];
         const startTime: Moment[] = [];
 
-        const buffer = await axios.get('https://content-static-sea.hoyoverse.com/content/yuanshen/getContentList?pageSize=10&pageNum=1&channelId=266');
+        const buffer = await axios.get('https://content-static-sea.hoyoverse.com/content/yuanshen/getContentList?pageSize=15&pageNum=1&channelId=266');
         const data = buffer?.data;
 
         const newsList = data?.data?.list;
@@ -46,7 +46,7 @@ const getData = async () => {
             title.push(news?.title);
             category.push(getCategoryId(news?.channelId));
             intro.push(news?.intro);
-            banner.push(news?.ext?.[1].value[0].url);
+            banner.push(news?.ext?.[1].value[0]?.url);
             startTime.push(moment(news?.start_time));
         });
 
