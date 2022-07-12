@@ -21,6 +21,10 @@ export async function sendGeneral(urls: any, data: any) {
 export async function sendGeneralWithAttachment(urls: any, data: any, attachment: any) {
     const urlss = process.env.APP_ENV === 'local' ? await getWebhookUrls('webhook.testing') : urls;
 
+    if (!attachment) {
+        attachment = 'https://cdn.rifqisah.com/aisha/image-not-available.jpg';
+    }
+
     const filepath = `./${Math.random().toString(36).substring(2, 5)}.${getFileExtensionFromUrl(attachment)}`;
     const stream = createWriteStream(filepath);
 

@@ -65,7 +65,7 @@ const getData = async () => {
 
                 const message = `__**[${category[i]}] ${title[i]}:**__\n\n${intro[i]}\n\nSelengkapnya: <https://genshin.hoyoverse.com/id/news/detail/${id[i]}>\n\nPratinjau:`;
                 await sendGeneralWithAttachment(await getWebhookUrls('webhook.genshin.news'), message, banner[i]);
-                // console.log(message);
+                // console.log(message, banner[i]);
 
                 await delay(5000);
             }
