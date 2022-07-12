@@ -44,7 +44,7 @@
     "exaroton": "^1.7.0",
     "fs": "0.0.1-security",
     "fuse.js": "^6.6.2",
-    "moment": "^2.29.2",
+    "moment": "^2.29.4",
     "mysql2": "^2.3.3",
     "net": "^1.0.2",
     "sequelize": "^6.12.3",
