@@ -1,10 +1,39 @@
 import cron from 'node-cron';
 
 import { sendTracker } from '../../../helpers/discord';
-import { getWebhookUrls, delay } from '../../../helpers/function';
+import { getWebhookUrls, delay, humanFileSize } from '../../../helpers/function';
 import axios from '../lib/axios';
 
 let _client: any = null;
+
+const zeroPad = (num: number, places: number) => String(num).padStart(places, '0');
+
+const getPatchSize = async (name: string, from: number, to: number) => {
+    let totalSize = 0;
+    for (let i = from + 1; i <= to; i++) {
+        let patchUrl;
+        if (name === 'sea') {
+            patchUrl = `http://patchsea.dragonnest.com/Game/DragonNest/Patch/${zeroPad(i, 8)}/Patch${zeroPad(i, 8)}.pak`;
+        } else if (name === 'na') {
+            patchUrl = `http://patchus.dragonnest.com/Game/DragonNest/patch/${zeroPad(i, 8)}/Patch${zeroPad(i, 8)}.pak`;
+        } else if (name === 'ko') {
+            patchUrl = `https://patchkr.dragonnest.com/Patch/${zeroPad(i, 8)}/Patch${zeroPad(i, 8)}.pak`;
+        }
+
+        if (!patchUrl) {
+            break;
+        }
+
+        try {
+            const buffer = await axios.head(patchUrl);
+            totalSize += Number(buffer.headers['content-length']);
+        } catch(err: any) {
+            _client.logger.debug('[CRON] An error occured when getting file size!', err);
+        }
+    }
+
+    return humanFileSize(totalSize, true);
+};
 
 const getData = async () => {
     _client.logger.debug('[CRON] Dragon Nest Version Tracker ticked!');
@@ -49,7 +78,8 @@ const getData = async () => {
             const newver = DN_Version[i].version;
 
             if ((Number(oldver) < Number(newver)) && (DB_Version[i].shortName === DN_Version[i].shortName)) {
-                await sendTracker(await getWebhookUrls('webhook.dn.sea.patch'), DN_Version[i].longName, oldver, newver);
+                const patchSize = await getPatchSize(DN_Version[i].shortName, oldver, newver);
+                await sendTracker(await getWebhookUrls('webhook.dn.sea.patch'), DN_Version[i].longName, oldver, newver, patchSize);
 
                 await _client.gameserversvc.update({
                     game: 'dn',

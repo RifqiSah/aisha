@@ -45,7 +45,7 @@ export async function sendGeneralWithAttachment(urls: any, data: any, attachment
         .pipe(stream);
 }
 
-export async function sendTracker(urls: any, name: string, oldver: number, newver: number) {
+export async function sendTracker(urls: any, name: string, oldver: number, newver: number, fileSize: any) {
     const urlss = process.env.APP_ENV === 'local' ? await getWebhookUrls('webhook.testing') : urls;
     try {
         const body = JSON.stringify({
@@ -55,6 +55,9 @@ export async function sendTracker(urls: any, name: string, oldver: number, newve
                 {
                     title: 'Dragon Nest',
                     description: `**${name}** telah update dari ${oldver} ke ${newver}`,
+                    footer: {
+                        text: `Patch Size • ${fileSize}`,
+                    },
                     color: 4295156,
                     timestamp: new Date(),
                 }
