@@ -10,7 +10,7 @@ const parser = new Parser();
 const freeGamesChannelId = '910538794799874108';
 
 const getData = async () => {
-    _client.logger.debug('[CRON] FreeGames ticked!');
+    _client.logger.debug('[FREE_GAMES] FreeGames ticked!');
     try {
         const data: any[] = [];
         let latestData = await _client.globalsvc.getGlobals('news.freegames');
@@ -55,10 +55,10 @@ const getData = async () => {
             await delay(5000);
         }
     } catch (err: any) {
-        _client.logger.debug('[CRON] An error occured freegames!', err);
+        _client.logger.debug('[FREE_GAMES] An error occured freegames!', err);
     }
 
-    _client.logger.debug('[CRON] FreeGames success!');
+    _client.logger.debug('[FREE_GAMES] FreeGames success!');
 };
 
 exports.init = (client: any) => {

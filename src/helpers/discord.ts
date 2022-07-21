@@ -14,7 +14,7 @@ export async function sendGeneral(urls: any, data: any) {
             });
         }));
     } catch (err: any) {
-        logger.error(`An error occured! ${err}`);
+        logger.error(`[DC_WEBHOOK] An error occured! ${err}`);
     }
 }
 
@@ -34,7 +34,7 @@ export async function sendGeneralWithAttachment(urls: any, data: any, attachment
                 await post(url).type('form').field('payload_json', JSON.stringify({ content: data })).attach('file1', filepath);
             }));
         } catch (err: any) {
-            logger.error(`An error occured! ${err}`);
+            logger.error(`[DC_WEBHOOK] An error occured! ${err}`);
         }
 
         unlinkSync(filepath);
@@ -56,7 +56,7 @@ export async function sendTracker(urls: any, name: string, oldver: number, newve
                     title: 'Dragon Nest',
                     description: `**${name}** telah update dari ${oldver} ke ${newver}`,
                     footer: {
-                        text: `Patch Size • ${fileSize}`,
+                        text: `Patch Size - ${fileSize}`,
                     },
                     color: 4295156,
                     timestamp: new Date(),
@@ -68,7 +68,7 @@ export async function sendTracker(urls: any, name: string, oldver: number, newve
             await post(url).set('Content-Type', 'application/json').set('Content-Length', body.length.toString()).send(body);
         }));
     } catch (err: any) {
-        logger.error(`An error occured! ${err}`);
+        logger.error(`[DC_WEBHOOK] An error occured! ${err}`);
     }
 }
 
@@ -92,6 +92,6 @@ export async function sendServer(urls: any, name: string, status: boolean) {
             await post(url).set('Content-Type', 'application/json').set('Content-Length', body.length.toString()).send(body);
         }));
     } catch (err: any) {
-        logger.error(`An error occured! ${err}`);
+        logger.error(`[DC_WEBHOOK] An error occured! ${err}`);
     }
 }

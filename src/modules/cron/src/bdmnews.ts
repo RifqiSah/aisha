@@ -9,7 +9,7 @@ import axios from '../lib/axios';
 let _client: any = null;
 
 const getData = async () => {
-    _client.logger.debug('[CRON] Black Desert Global News ticked!');
+    _client.logger.debug('[BDM_GL_NEWS] Black Desert Global News ticked!');
     try {
         const news = await _client.gamenewssvc.findOne({
             name: 'bdom',
@@ -60,10 +60,10 @@ const getData = async () => {
         }
 
     } catch (err: any) {
-        _client.logger.debug('[CRON] An error occured bdmnews!', err);
+        _client.logger.debug('[BDM_GL_NEWS] An error occured bdmnews!', err);
     }
 
-    _client.logger.debug('[CRON] Black Desert Global News success!');
+    _client.logger.debug('[BDM_GL_NEWS] Black Desert Global News success!');
 };
 
 exports.init = (client: any) => {

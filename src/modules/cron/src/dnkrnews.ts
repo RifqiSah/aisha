@@ -7,7 +7,7 @@ import axios from '../lib/axios';
 let _client: any = null;
 
 const getData = async () => {
-    _client.logger.debug('[CRON] Dragon Nest KR News ticked!');
+    _client.logger.debug('[DN_KR_NEWS] Dragon Nest KR News ticked!');
     try {
         const category: any[] = [];
         const title: any[] = [];
@@ -39,10 +39,10 @@ const getData = async () => {
         });
 
     } catch (err: any) {
-        _client.logger.debug('[CRON] An error occured dnkrnews!', err);
+        _client.logger.debug('[DN_KR_NEWS] An error occured dnkrnews!', err);
     }
 
-    _client.logger.debug('[CRON] Dragon Nest KR News success!');
+    _client.logger.debug('[DN_KR_NEWS] Dragon Nest KR News success!');
 };
 
 exports.init = (client: any) => {

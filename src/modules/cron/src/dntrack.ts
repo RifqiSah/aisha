@@ -28,7 +28,7 @@ const getPatchSize = async (name: string, from: number, to: number) => {
             const buffer = await axios.head(patchUrl);
             totalSize += Number(buffer.headers['content-length']);
         } catch(err: any) {
-            _client.logger.debug('[CRON] An error occured when getting file size!', err);
+            _client.logger.debug('[DN_TRACK] An error occured when getting file size!', err);
         }
     }
 
@@ -36,7 +36,7 @@ const getPatchSize = async (name: string, from: number, to: number) => {
 };
 
 const getData = async () => {
-    _client.logger.debug('[CRON] Dragon Nest Version Tracker ticked!');
+    _client.logger.debug('[DN_TRACK] Dragon Nest Version Tracker ticked!');
     try {
         const DN_Version: any[] = [];
         const DB_Version: any[] = [];
@@ -92,10 +92,10 @@ const getData = async () => {
             await delay(5000);
         }
     } catch (err: any) {
-        _client.logger.debug('[CRON] An error occured with dntrack!', err);
+        _client.logger.debug('[DN_TRACK] An error occured with dntrack!', err);
     }
 
-    _client.logger.debug('[CRON] Dragon Nest Version Tracker success!');
+    _client.logger.debug('[DN_TRACK] Dragon Nest Version Tracker success!');
 };
 
 exports.init = (client: any) => {

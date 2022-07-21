@@ -24,7 +24,7 @@ const getCategoryId = (ids: string[]) => {
 };
 
 const getData = async () => {
-    _client.logger.debug('[CRON] Genshin Impact News ticked!');
+    _client.logger.debug('[GENSHIN_NEWS] Genshin Impact News ticked!');
     try {
         const news = await _client.gamenewssvc.findOne({
             name: 'genshin',
@@ -77,10 +77,10 @@ const getData = async () => {
         }
 
     } catch (err: any) {
-        _client.logger.debug('[CRON] An error occured genshinimpact!', err);
+        _client.logger.debug('[GENSHIN_NEWS] An error occured genshinimpact!', err);
     }
 
-    _client.logger.debug('[CRON] Genshin Impact News success!');
+    _client.logger.debug('[GENSHIN_NEWS] Genshin Impact News success!');
 };
 
 exports.init = (client: any) => {
