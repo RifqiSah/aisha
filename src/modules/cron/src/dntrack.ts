@@ -32,7 +32,7 @@ const getPatchSize = async (name: string, from: number, to: number) => {
         }
     }
 
-    return humanFileSize(totalSize, true);
+    return humanFileSize(totalSize);
 };
 
 const getData = async () => {

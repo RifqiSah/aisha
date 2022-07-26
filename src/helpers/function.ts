@@ -404,14 +404,14 @@ export function getFileExtensionFromUrl(url: string) {
     return url?.split(/[#?]/)[0]?.split('.')?.pop()?.trim();
 }
 
-export function humanFileSize(bytes: number, si=false, dp=1) {
-    const thresh = si ? 1000 : 1024;
+export function humanFileSize(bytes: number, dp=1) {
+    const thresh = 1024;
 
     if (Math.abs(bytes) < thresh) {
         return bytes + ' B';
     }
 
-    const units = si ? ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'] : ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+    const units = ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     let u = -1;
     const r = 10**dp;
 
