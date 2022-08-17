@@ -10,4 +10,6 @@ export const client = new Client({ intents: [
 
     Intents.FLAGS.DIRECT_MESSAGES,
     Intents.FLAGS.DIRECT_MESSAGE_TYPING,
+
+    Intents.FLAGS.GUILD_VOICE_STATES,
 ], partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'] });

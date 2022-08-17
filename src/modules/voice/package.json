@@ -1,0 +1,25 @@
+{
+  "name": "voice",
+  "version": "1.0.0",
+  "description": "Aisha voice module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RifqiSah/Aisha.git"
+  },
+  "author": "RifqiSah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RifqiSah/Aisha/issues"
+  },
+  "homepage": "https://github.com/RifqiSah/Aisha#readme",
+  "dependencies": {
+    "node-cron": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/node-cron": "^3.0.2"
+  }
+}

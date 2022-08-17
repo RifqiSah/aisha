@@ -4,11 +4,11 @@ import { resolve } from 'path';
 const disabledModule = [
     'example',
     'bdmnews',
-    // 'dnkrnews',
-    // 'dnseanews',
+    'dnkrnews',
+    'dnseanews',
     // 'dntrack',
-    // 'freeGames',
-    // 'genshin',
+    'freeGames',
+    'genshin',
 ];
 
 module.exports = (client: any) => {
