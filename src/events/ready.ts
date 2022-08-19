@@ -9,6 +9,7 @@ module.exports = (client: any) => {
             `${client.config.BOT_PREFIX}h for command.`,
             "Informate's Bot.",
             `Serving ${client.bot.users.cache.size} users in ${client.bot.guilds.cache.size} guilds.`,
+            `Running v${client.config.BOT_VERSION}`
         ];
 
         setInterval(() => {

@@ -37,7 +37,10 @@ RUN npm install --production
 FROM node:17-alpine AS runtime-env
 WORKDIR /app
 
-ENV NODE_ENV=production \
+ARG BOT_VERSION
+
+ENV BOT_VERSION=$BOT_VERSION \
+    NODE_ENV=production \
     TZ=Asia/Jakarta
 
 RUN apk add tzdata \
