@@ -1,6 +1,9 @@
 import { readdirSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
+import { SlashCommandBuilder } from '@discordjs/builders';
+import { Routes } from 'discord-api-types/v9';
+
 import Command from '../classes/command';
 import { getDirs } from '../helpers/function';
 
@@ -32,19 +35,6 @@ module.exports = (client: any) => {
                 client.commandCategories.set(key, dirs);
 
                 client.logger.info(`      + '${key}' added.`);
-
-                // check subcommand
-                // if (existsSync(resolve(__dirname, `../commands/subcmd/${dirs}/${key}`))) {
-                //     const subcmds = readdirSync(resolve(__dirname, `../commands/subcmd/${dirs}/${key}`)).filter((f) => f.endsWith('.js'));
-                //     for (const file of subcmds) {
-                //         const subcmdfile = require(resolve(__dirname, `../commands/subcmd/${dirs}/${key}/${file}`));
-                //         const subkey = file.slice(0, -3);
-
-                //         client.logger.info(`      + '${subkey}' added.`);
-
-                //         client.subcmds.set(`${key}.${subkey}`, subcmdfile);
-                //     }
-                // }
             } catch (err) {
                 client.logger.error(`    + '${key}': ${err}`);
                 continue;
@@ -52,11 +42,47 @@ module.exports = (client: any) => {
         }
     };
 
-    getDirs('commands').forEach((x: string) => {
-        if (x === 'subcmd') return false;
-        load(x);
-    });
+    getDirs('commands').forEach((x: string) => load(x));
 
-    // client.regexList = new RegExp(client.cmdsregex.map((key: any, item: any) => item).join('|'));
+    client.logger.info('  [V] Done!');
+    client.logger.info('  [-] Refresh & registering slash commands');
+
+    (async () => {
+        try {
+            const clientId = process.env.APP_ID ?? '';
+
+            // delete all slash commands
+            // await client.rest.put(Routes.applicationCommands(clientId), { body: [] })
+            //     .then(() => console.log('Successfully deleted all guild commands.'))
+            //     .catch(console.error);
+
+            // registering all slash commands
+            const interactionCommandsJson = client.interactionCommands.map((ic: any) => {
+                if (ic.hasAutocomplete) {
+                    const slashOpts = ic.slashCommandOptions;
+
+                    return new SlashCommandBuilder()
+                        .setName(ic.command)
+                        .setDescription(ic.name.split('.')[0])
+                        .addStringOption((option: any) =>
+                            option.setName(slashOpts[0].name)
+                                .setDescription(slashOpts[0].description)
+                                .setRequired(true)
+                                .setAutocomplete(true))
+                        .toJSON();
+                } else {
+                    return new SlashCommandBuilder()
+                        .setName(ic.command)
+                        .setDescription(ic.name.split('.')[0])
+                        .toJSON();
+                }
+            });
+
+            await client.rest.put(Routes.applicationCommands(clientId), { body: interactionCommandsJson },);
+        } catch (error) {
+            client.logger.error('  [X] Error!', error);
+        }
+    })();
+
     client.logger.info('  [V] Done!');
 };

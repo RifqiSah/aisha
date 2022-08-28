@@ -2,7 +2,10 @@
 import { readFileSync, readdirSync } from 'fs';
 import { resolve } from 'path';
 import { Collection, Util } from 'discord.js';
+
+import Fuse from 'fuse.js';
 import moment from 'moment';
+
 import { get } from 'superagent';
 import { logger } from '../lib/logger';
 import values from '../lib/values';
@@ -90,6 +93,20 @@ export function commandRecom(key: string, subkey: string): string|undefined {
     const match = commands.match(new RegExp(`[^,?!]*(?<=[,?\\s!])${subkey}(?=[\\s,?!])[^,?!]*`, 'igm'));
 
     return match ? match.join(', ') : undefined;
+}
+
+export async function searchAutoComplete(dataKey: string, key: string): Promise<Array<{ name: string; value: string }>> {
+    const data = externalDatas?.get(dataKey);
+    const engine = new Fuse(data, {
+        keys: ['key', 'name'],
+    });
+
+    const result = engine.search(key, { limit: 10 });
+    return result.map((e: any) => ({ name: e.item.name, value: e.item.key[0] }));
+}
+
+export function formatDataAutocomplete(key: string) {
+    return externalDatas?.get(key)?.map((item: any) => item.key).sort();
 }
 
 export function formatData(key: string) {
@@ -333,21 +350,6 @@ export function formatTitleCase(str: string) {
 }
 
 export async function formatImageInMessage(msg: any, message: any, data: any) {
-    // for (let i = 0; i < data.data.length + 1; i++) {
-    //     const id = data.data[i];
-    //     const urlRegex = /(https?:\/\/[^\s]+)/;
-
-    //     msg.push(id);
-    //     if (urlRegex.test(id)) {
-    //         msg.pop();
-
-    //         const url = id.match(urlRegex)[1];
-    //         await message.channel.send(msg, { split: true, files: [url] });
-
-    //         msg.length = 0;
-    //     }
-    // }
-
     data.data.map((id: string) => {
         msg.push(id);
         if (/(https?:\/\/[^\s]+)/.test(id)) {
@@ -356,6 +358,27 @@ export async function formatImageInMessage(msg: any, message: any, data: any) {
             msg.length = 0;
         }
     });
+}
+
+export async function formatImageInInteraction(msg: any, interaction: any, data: any) {
+    let index = 0;
+
+    for (let i = 0; i < data.data.length; i++) {
+        const id = data.data[i];
+        msg.push(id);
+        if (/(https?:\/\/[^\s]+)/.test(id)) {
+            if (index === 0) {
+                await interaction.editReply({ content: msg.join('\n'), }).then((a: any) => {
+                    index++;
+                });
+            } else {
+                await interaction.followUp({ content: msg.join('\n'), });
+            }
+
+            msg.length = 0;
+            index++;
+        }
+    }
 }
 
 export function sendMessage(msgObj: any, message: any) {

@@ -1,4 +1,6 @@
-import { Client, Intents, Collection } from 'discord.js';
+import { Client, Intents, Collection, } from 'discord.js';
+import config from './lib/config';
+const { REST } = require('@discordjs/rest');
 
 export const client = new Client({ intents: [
     Intents.FLAGS.GUILDS,
@@ -13,3 +15,5 @@ export const client = new Client({ intents: [
 
     Intents.FLAGS.GUILD_VOICE_STATES,
 ], partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'] });
+
+export const rest = new REST({ version: '10' }).setToken(config.TOKEN);
