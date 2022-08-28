@@ -1,6 +1,9 @@
 import { readdirSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
+import { SlashCommandBuilder } from '@discordjs/builders';
+import { Routes } from 'discord-api-types/v9';
+
 import Command from '../classes/command';
 import { getDirs } from '../helpers/function';
 
@@ -32,19 +35,6 @@ module.exports = (client: any) => {
                 client.commandCategories.set(key, dirs);
 
                 client.logger.info(`      + '${key}' added.`);
-
-                // check subcommand
-                // if (existsSync(resolve(__dirname, `../commands/subcmd/${dirs}/${key}`))) {
-                //     const subcmds = readdirSync(resolve(__dirname, `../commands/subcmd/${dirs}/${key}`)).filter((f) => f.endsWith('.js'));
-                //     for (const file of subcmds) {
-                //         const subcmdfile = require(resolve(__dirname, `../commands/subcmd/${dirs}/${key}/${file}`));
-                //         const subkey = file.slice(0, -3);
-
-                //         client.logger.info(`      + '${subkey}' added.`);
-
-                //         client.subcmds.set(`${key}.${subkey}`, subcmdfile);
-                //     }
-                // }
             } catch (err) {
                 client.logger.error(`    + '${key}': ${err}`);
                 continue;
@@ -52,11 +42,24 @@ module.exports = (client: any) => {
         }
     };
 
-    getDirs('commands').forEach((x: string) => {
-        if (x === 'subcmd') return false;
-        load(x);
-    });
+    getDirs('commands').forEach((x: string) => load(x));
 
-    // client.regexList = new RegExp(client.cmdsregex.map((key: any, item: any) => item).join('|'));
+    client.logger.info('  [V] Done!');
+    client.logger.info('  [-] Refresh & registering slash commands');
+
+    (async () => {
+        try {
+            const interactionCommandsJson = client.interactionCommands.map((ic: any) => {
+                return new SlashCommandBuilder()
+                    .setName(ic.command)
+                    .setDescription(ic.name).toJSON();
+            });
+
+            await client.rest.put(Routes.applicationGuildCommands('496201019005468672', '306617555332628480'), { body: interactionCommandsJson },);
+        } catch (error) {
+            client.logger.error('  [X] Error!', error);
+        }
+    })();
+
     client.logger.info('  [V] Done!');
 };

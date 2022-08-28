@@ -1,4 +1,4 @@
-import { client as bot } from './client';
+import { client as bot, rest } from './client';
 import { loadData, getDirs } from './helpers/function';
 import config from './lib/config';
 import db from './lib/database';
@@ -11,6 +11,7 @@ const init = async () => {
     logger.info('[-] Initialize variable');
     client = {
         bot,
+        rest,
         config,
         logger,
 
