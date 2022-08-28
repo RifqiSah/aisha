@@ -92,6 +92,10 @@ export function commandRecom(key: string, subkey: string): string|undefined {
     return match ? match.join(', ') : undefined;
 }
 
+export function formatDataAutocomplete(key: string) {
+    return externalDatas?.get(key)?.map((item: any) => item.key).sort();
+}
+
 export function formatData(key: string) {
     return externalDatas?.get(key)?.map((item: any) => '> '.concat(item.key.join(', '))).sort().join('\n');
 }

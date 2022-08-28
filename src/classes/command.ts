@@ -25,6 +25,7 @@ export default abstract class Command {
     registerSlashCommand?: boolean;
     onlyInformate?: boolean;
     hasAutocomplete?: boolean;
+    slashCommandOptions?: ApplicationCommandOptionData[];
     cooldown?: number;
     roles?: string[];
 
@@ -49,6 +50,7 @@ export default abstract class Command {
         this.registerSlashCommand = config.registerSlashCommand;
         this.onlyInformate = config.onlyInformate;
         this.hasAutocomplete = config.hasAutocomplete;
+        this.slashCommandOptions = config.slashCommandOptions;
         this.cooldown = config.cooldown;
         this.roles = config.roles || [];
 

@@ -49,13 +49,36 @@ module.exports = (client: any) => {
 
     (async () => {
         try {
+            const clientId = process.env.APP_ID ?? '';
+
+            // delete all slash commands
+            // await client.rest.put(Routes.applicationCommands(clientId), { body: [] })
+            //     .then(() => console.log('Successfully deleted all guild commands.'))
+            //     .catch(console.error);
+
+            // registering all slash commands
             const interactionCommandsJson = client.interactionCommands.map((ic: any) => {
-                return new SlashCommandBuilder()
-                    .setName(ic.command)
-                    .setDescription(ic.name).toJSON();
+                if (ic.hasAutocomplete) {
+                    const slashOpts = ic.slashCommandOptions;
+
+                    return new SlashCommandBuilder()
+                        .setName(ic.command)
+                        .setDescription(ic.name.split('.')[0])
+                        .addStringOption((option: any) =>
+                            option.setName(slashOpts[0].name)
+                                .setDescription(slashOpts[0].description)
+                                .setRequired(true)
+                                .setAutocomplete(true))
+                        .toJSON();
+                } else {
+                    return new SlashCommandBuilder()
+                        .setName(ic.command)
+                        .setDescription(ic.name.split('.')[0])
+                        .toJSON();
+                }
             });
 
-            await client.rest.put(Routes.applicationGuildCommands('496201019005468672', '306617555332628480'), { body: interactionCommandsJson },);
+            await client.rest.put(Routes.applicationCommands(clientId), { body: interactionCommandsJson },);
         } catch (error) {
             client.logger.error('  [X] Error!', error);
         }
