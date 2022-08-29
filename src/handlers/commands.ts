@@ -61,15 +61,44 @@ module.exports = (client: any) => {
                 if (ic.hasAutocomplete) {
                     const slashOpts = ic.slashCommandOptions;
 
-                    return new SlashCommandBuilder()
+                    const builder = new SlashCommandBuilder()
                         .setName(ic.command)
-                        .setDescription(ic.name.split('.')[0])
-                        .addStringOption((option: any) =>
-                            option.setName(slashOpts[0].name)
-                                .setDescription(slashOpts[0].description)
-                                .setRequired(true)
-                                .setAutocomplete(true))
-                        .toJSON();
+                        .setDescription(ic.name.split('.')[0]);
+
+                    slashOpts.map((opt: any) => {
+                        if (opt.type === 'STRING') {
+                            builder.addStringOption((option: any) => {
+                                option.setName(opt.name)
+                                    .setDescription(opt.description)
+                                    .setRequired(true);
+
+                                if (opt.autocomplete) option.setAutocomplete(true);
+
+                                if (opt?.choices) {
+                                    opt.choices.map((choice: any) => {
+                                        option.addChoices(choice);
+                                    });
+                                }
+
+                                return option;
+                            });
+
+                        } else if (opt.type === 'NUMBER') {
+                            builder.addNumberOption((option: any) =>
+                                option.setName(opt.name)
+                                    .setDescription(opt.description)
+                                    .setRequired(true)
+                                    .setAutocomplete(true));
+                        } else if (opt.type === 'INTEGER') {
+                            builder.addIntegerOption((option: any) =>
+                                option.setName(opt.name)
+                                    .setDescription(opt.description)
+                                    .setRequired(true)
+                                    .setAutocomplete(true));
+                        }
+                    });
+
+                    return builder.toJSON();
                 } else {
                     return new SlashCommandBuilder()
                         .setName(ic.command)
@@ -78,7 +107,11 @@ module.exports = (client: any) => {
                 }
             });
 
-            await client.rest.put(Routes.applicationCommands(clientId), { body: interactionCommandsJson },);
+            if (process.env.APP_ENV === 'local') {
+                await client.rest.put(Routes.applicationGuildCommands(clientId, '851491722764222495'), { body: interactionCommandsJson },);
+            } else {
+                await client.rest.put(Routes.applicationCommands(clientId), { body: interactionCommandsJson },);
+            }
         } catch (error) {
             client.logger.error('  [X] Error!', error);
         }
