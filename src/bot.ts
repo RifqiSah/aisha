@@ -41,7 +41,7 @@ const database = async () => {
 
 const modules = async () => {
     logger.info('[-] Initialize handler');
-    ['commands', 'events'].forEach((x) => {
+    ['commands', 'events', 'slash'].forEach((x) => {
         logger.info(` [O] ${x} handler`);
         require(`./handlers/${x}`)(client);
     });
