@@ -98,10 +98,10 @@ export function commandRecom(key: string, subkey: string): string|undefined {
 export async function searchAutoComplete(dataKey: string, key: string): Promise<Array<{ name: string; value: string }>> {
     const data = externalDatas?.get(dataKey);
     const engine = new Fuse(data, {
-        keys: ['key', 'name'],
+        keys: ['name'],
     });
 
-    const result = engine.search(key, { limit: 10 });
+    const result = engine.search(key, { limit: 25 });
     return result.map((e: any) => ({ name: e.item.name, value: e.item.key[0] }));
 }
 

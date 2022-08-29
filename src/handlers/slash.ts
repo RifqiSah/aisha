@@ -20,7 +20,7 @@ module.exports = (client: any) => {
 
                     const builder = new SlashCommandBuilder()
                         .setName(ic.command)
-                        .setDescription(ic.name.split('.')[0]);
+                        .setDescription(ic.name);
 
                     slashOpts.map((opt: any) => {
                         if (opt.type === 'STRING') {

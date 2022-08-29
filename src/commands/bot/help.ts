@@ -4,7 +4,7 @@ import { Message } from 'discord.js';
 import Command from '../../classes/command';
 import { sendMessage } from '../../helpers/function';
 import config from '../../lib/config';
-import { commandCategories, commands } from '../../vars';
+import { commandCategories, commands, interactionCommands } from '../../vars';
 
 export default class Help extends Command {
     constructor() {
@@ -22,21 +22,36 @@ export default class Help extends Command {
         if (!args.length) {
             data.push('Hai! Ini adalah daftar command yang tersedia:');
 
+            data.push('\n__**NORMAL**__');
+
             commands.forEach((item: any) => {
                 const category = String(commandCategories.get(item.command));
 
                 if (!lastLoc.includes(category)) {
                     lastLoc = category;
-                    data.push(`\n__**${lastLoc.replace(/^./, lastLoc[0].toUpperCase())}**__`);
+                    data.push(`\n🔹${lastLoc.replace(/^./, lastLoc[0].toUpperCase())}🔹`);
                 }
 
-                data.push(`\`${item.command}\` : ${item.name.split('.')[0]}.`);
+                data.push(`\`${item.command}\` : ${item.name}`);
+            });
+
+            data.push('\n__**SLASH COMMANDS**__');
+
+            interactionCommands.forEach((item: any) => {
+                const category = String(commandCategories.get(item.command));
+
+                if (!lastLoc.includes(category)) {
+                    lastLoc = category;
+                    data.push(`\n🔹${lastLoc.replace(/^./, lastLoc[0].toUpperCase())}🔹`);
+                }
+
+                data.push(`\`${item.command}\` : ${item.name}`);
             });
 
             data.push(`\nAnda dapat menggunakan \`${config.BOT_PREFIX}help [nama command]\` untuk mendapatkan informasi dari command tersebut.`);
         } else {
             const name = args?.split(' ')[0].toLowerCase();
-            const command: Command = commands.get(name) as Command;
+            const command: Command = commands.get(name) as Command || interactionCommands.get(name) as Command;
 
             if (!command) {
                 void message.reply(`Command ${name} tidak ditemukan!`);

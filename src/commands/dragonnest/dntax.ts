@@ -1,10 +1,8 @@
-import { AutocompleteInteraction, CommandInteraction, Message } from 'discord.js';
+import { AutocompleteInteraction, CommandInteraction } from 'discord.js';
 import { get } from 'superagent';
 
 import Command from '../../classes/command';
-import { sendAndDelete } from '../../helpers/bot';
-import { sendMessage, formatNumber, formatImageInInteraction } from '../../helpers/function';
-import config from '../../lib/config';
+import { formatNumber } from '../../helpers/function';
 import { logger } from '../../lib/logger';
 import values from '../../lib/values';
 
@@ -82,7 +80,7 @@ const hitung = (taxes: any, type: string, nominal: number) => {
 export default class DnInfo extends Command {
     constructor() {
         super({
-            name: 'Melihat tax atau pajak dari Trading House, Trade, Server Storage, dll.\nPajak yg tersedia yaitu:```> mail\n> th\n> trade```',
+            name: 'Melihat tax atau pajak dari Trading House, Trade, Server Storage, dll.',
             command: 'dntax',
             usage: '[mail/th/trade] [nominal]',
             registerSlashCommand: true,
@@ -101,22 +99,6 @@ export default class DnInfo extends Command {
                 },
             ],
         });
-    }
-
-    async run(message: Message, args: string): Promise<void> {
-        const argss = args.split(' ');
-
-        let data = [];
-        const taxes = await getTaxes();
-
-        if (!taxes) {
-            return sendAndDelete(message, 'Terjadi kesalahan dalam mengambil data!', 10000);
-        }
-
-        data = hitung(taxes, argss[0], argss[1] as unknown as number);
-
-        data.push(`\nGunakan \`${config.BOT_PREFIX}help dntax\` untuk melihat daftar pajak yang tersedia.\n`);
-        sendMessage(message, data);
     }
 
     async interact(interaction: CommandInteraction): Promise<void> {

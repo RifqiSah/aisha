@@ -4,12 +4,10 @@ import { Message, TextChannel } from 'discord.js';
 import Command from '../../classes/command';
 import { formatData, getMonthName, sendMessageChannel } from '../../helpers/function';
 
-const list = formatData('dragonnest.dninfo');
-
 export default class DnInfo extends Command {
     constructor() {
         super({
-            name: `Melihat info hal-hal yang ada pada Dragon Nest. Info yang tersedia yaitu:\n\n\`\`\`${list}\`\`\``,
+            name: 'Informasi Patch Note dari Dragon Nest.',
             command: 'dnpatch',
             usage: '[pn id]',
             ownerOnly: true,
