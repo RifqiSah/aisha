@@ -125,6 +125,9 @@ export default abstract class Command {
 
     checkInteraction(interaction: CommandInteraction): void {
         if (interaction.commandName !== this.command) return;
+
+        logger.info(`-> Interaction '${this.command}' dijalankan oleh '${interaction.user.tag}'`);
+
         void this.interact(interaction);
     }
 
