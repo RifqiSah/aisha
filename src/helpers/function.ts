@@ -105,6 +105,13 @@ export async function searchAutoComplete(dataKey: string, key: string): Promise<
     return result.map((e: any) => ({ name: e.item.name, value: e.item.key[0] }));
 }
 
+export async function searchAutoCompleteFromArray(data: any, option: string[], key: string): Promise<any> {
+    const engine = new Fuse(data, {
+        keys: option
+    });
+    return engine.search(key, { limit: 25 });
+}
+
 export function formatDataAutocomplete(key: string) {
     return externalDatas?.get(key)?.map((item: any) => item.key).sort();
 }
