@@ -1,4 +1,4 @@
-import { AutocompleteInteraction, CommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionType, AutocompleteInteraction, CommandInteraction } from 'discord.js';
 
 import Command from '../../classes/command';
 import { delay } from '../../helpers/function';
@@ -15,7 +15,7 @@ export default class Bot extends Command {
                 {
                     name: 'type',
                     description: 'Commands type',
-                    type: 'STRING',
+                    type: ApplicationCommandOptionType.String,
                     choices: [{ name: 'Restart', value: 'restart' },],
                 },
             ],

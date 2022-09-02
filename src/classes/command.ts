@@ -1,4 +1,3 @@
-import { userMention } from '@discordjs/builders';
 import {
     Message,
     CommandInteraction,
@@ -7,6 +6,7 @@ import {
     ApplicationCommandOptionData,
     AutocompleteInteraction,
     GuildMemberRoleManager,
+    userMention,
 } from 'discord.js';
 import { replyAndDelete, sendAndDelete } from '../helpers/bot';
 import globalConfig from '../lib/config';

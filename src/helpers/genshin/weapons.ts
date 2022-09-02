@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 import { itemGroup } from './data/itemGroup';
 import { weaponList as weaponMaterials } from './data/weaponMaterials';
 import { weapons } from './data/weapons';
@@ -24,8 +24,8 @@ const format = (digits: number, number: number) => {
     }).format(number);
 };
 
-export function generateWeaponEmbed(id: string): MessageEmbed {
-    const embed = new MessageEmbed();
+export function generateWeaponEmbed(id: string): EmbedBuilder {
+    const embed = new EmbedBuilder();
     const weapon = weapons[id];
     const weaponMaterial = (
         weaponMaterials as { [key: string]: typeof weaponMaterials.alley_hunter }
@@ -38,29 +38,29 @@ export function generateWeaponEmbed(id: string): MessageEmbed {
         weapon.skill.name !== undefined &&
     weapon.skill.description !== undefined
     ) {
-        embed.addField(weapon.skill.name, weapon.skill.description
+        embed.addFields({ name: weapon.skill.name, value: weapon.skill.description
             .replace(/<span([^>+]*)>/g, '**')
-            .replace(/<\/span[^>]*>/g, '**'),);
+            .replace(/<\/span[^>]*>/g, '**'), });
     }
 
-    embed.addField('Type', weaponMaterial.type.name, true);
-    embed.addField('Rarity', `${weapon.rarity} ⭐`, true);
-    embed.addField('Source', `${weaponMaterial.source[0].toUpperCase()}${weaponMaterial.source.substring(1,)}`, true,);
-    embed.addField('Base ATK', format(0, Number(weapon.atk[weapon.atk.length - 1])), true,);
+    embed.addFields({ name: 'Type', value: weaponMaterial.type.name, inline: true });
+    embed.addFields({ name: 'Rarity', value: `${weapon.rarity} ⭐`, inline: true });
+    embed.addFields({ name: 'Source', value: `${weaponMaterial.source[0].toUpperCase()}${weaponMaterial.source.substring(1,)}`, inline: true });
+    embed.addFields({ name: 'Base ATK', value: format(0, Number(weapon.atk[weapon.atk.length - 1])), inline: true });
     if (
         weapon.secondary.name !== undefined &&
     weapon.secondary.stats !== undefined
     ) {
-        embed.addField('Secondary Stat', `${secondary[weapon.secondary.name].name} ${format(1, (weapon.secondary.stats[weapon.secondary.stats.length - 1] ?? 0) *
-          secondary[weapon.secondary.name].multiplier,)}${secondary[weapon.secondary.name].suffix}`, true,);
+        embed.addFields({ name: 'Secondary Stat', value: `${secondary[weapon.secondary.name].name} ${format(1, (weapon.secondary.stats[weapon.secondary.stats.length - 1] ?? 0) *
+          secondary[weapon.secondary.name].multiplier,)}${secondary[weapon.secondary.name].suffix}`, inline: true });
     }
-    embed.addField('\u200B', '\u200B', true);
+    embed.addFields({ name: '\u200B', value: '\u200B', inline: true });
 
     const ascension = weaponMaterial.ascension[0].items
         .map((e: any) => `${itemGroup[e.item.id].name}`)
         .join(' \u200B \u200B ');
-    embed.addField('Ascensions Material', ascension);
-    embed.setFooter('※ Stats numbers are at max level');
+    embed.addFields({ name: 'Ascensions Material', value: ascension });
+    embed.setFooter({ text: '※ Stats numbers are at max level' });
 
     return embed;
 }

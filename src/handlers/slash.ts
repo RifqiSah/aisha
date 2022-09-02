@@ -1,5 +1,5 @@
-import { SlashCommandBuilder } from '@discordjs/builders';
-import { Routes } from 'discord-api-types/v9';
+import { ApplicationCommandOptionType, Routes } from 'discord-api-types/v10';
+import { SlashCommandBuilder } from 'discord.js';
 
 module.exports = (client: any) => {
     client.logger.info('  [-] Refresh & registering slash commands');
@@ -9,9 +9,8 @@ module.exports = (client: any) => {
             const clientId = process.env.APP_ID ?? '';
 
             // delete all slash commands
-            // await client.rest.put(Routes.applicationCommands(clientId), { body: [] })
-            //     .then(() => console.log('Successfully deleted all guild commands.'))
-            //     .catch(console.error);
+            // await client.rest.put(Routes.applicationCommands(clientId), { body: [] });
+            // await client.rest.put(Routes.applicationGuildCommands(clientId, '851491722764222495'), { body: [] },);
 
             // registering all slash commands
             const interactionCommandsJson = client.interactionCommands.map((ic: any) => {
@@ -23,7 +22,7 @@ module.exports = (client: any) => {
                         .setDescription(ic.name);
 
                     slashOpts.map((opt: any) => {
-                        if (opt.type === 'STRING') {
+                        if (opt.type === ApplicationCommandOptionType.String) {
                             builder.addStringOption((option: any) => {
                                 option.setName(opt.name)
                                     .setDescription(opt.description)
@@ -40,13 +39,13 @@ module.exports = (client: any) => {
                                 return option;
                             });
 
-                        } else if (opt.type === 'NUMBER') {
+                        } else if (opt.type === ApplicationCommandOptionType.Number) {
                             builder.addNumberOption((option: any) =>
                                 option.setName(opt.name)
                                     .setDescription(opt.description)
                                     .setRequired(true)
                                     .setAutocomplete(true));
-                        } else if (opt.type === 'INTEGER') {
+                        } else if (opt.type === ApplicationCommandOptionType.Integer) {
                             builder.addIntegerOption((option: any) =>
                                 option.setName(opt.name)
                                     .setDescription(opt.description)

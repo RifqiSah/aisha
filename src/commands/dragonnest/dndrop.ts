@@ -1,4 +1,4 @@
-import { CommandInteraction, AutocompleteInteraction } from 'discord.js';
+import { CommandInteraction, AutocompleteInteraction, ApplicationCommandOptionType } from 'discord.js';
 
 import Command from '../../classes/command';
 import { getExternalData, formatImageInInteraction, searchAutoComplete } from '../../helpers/function';
@@ -16,7 +16,7 @@ export default class DnDrop extends Command {
                 {
                     name: 'keyword',
                     description: 'Nama Item / Info / Apapun',
-                    type: 'STRING',
+                    type: ApplicationCommandOptionType.String,
                     autocomplete: true,
                 },
             ],

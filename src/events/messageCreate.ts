@@ -1,5 +1,3 @@
-import config from '../lib/config';
-
 module.exports = async (client: any, message: any) => {
     // if (message?.guildId !== config.INFORMATE_ID) return;
     if (message.member === null) return;

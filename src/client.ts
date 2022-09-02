@@ -1,19 +1,20 @@
-import { Client, Intents, Collection, } from 'discord.js';
+import { Client, GatewayIntentBits, Partials, Collection, } from 'discord.js';
 import config from './lib/config';
 const { REST } = require('@discordjs/rest');
 
 export const client = new Client({ intents: [
-    Intents.FLAGS.GUILDS,
-    Intents.FLAGS.GUILD_MESSAGES,
-    Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-    Intents.FLAGS.GUILD_PRESENCES,
-    Intents.FLAGS.GUILD_MEMBERS,
-    Intents.FLAGS.GUILD_WEBHOOKS,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildWebhooks,
 
-    Intents.FLAGS.DIRECT_MESSAGES,
-    Intents.FLAGS.DIRECT_MESSAGE_TYPING,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.DirectMessageTyping,
 
-    Intents.FLAGS.GUILD_VOICE_STATES,
-], partials: ['USER', 'GUILD_MEMBER', 'MESSAGE', 'CHANNEL', 'REACTION'] });
+    GatewayIntentBits.GuildVoiceStates,
+], partials: [Partials.User, Partials.GuildMember, Partials.Message, Partials.Channel, Partials.Reaction] });
 
 export const rest = new REST({ version: '10' }).setToken(config.TOKEN);

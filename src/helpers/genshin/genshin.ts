@@ -7,7 +7,7 @@ import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);
 
 import { generateArtifactEmbed } from './artifacts';
-import { generateBuildEmbed } from './characters';
+// import { generateBuildEmbed } from './characters';
 import { generateWeaponEmbed } from './weapons';
 
 import { artifacts } from './data/artifacts';
@@ -65,13 +65,13 @@ export async function search(query: string): Promise<any> {
 
 export function getCurrentDay(offset = 0): string {
     const weekdays = [
-        'minggu',
-        'senin',
-        'selasa',
-        'rabu',
-        'kamis',
-        'jumat',
-        'sabtu',
+        'sunday',
+        'monday',
+        'tuesday',
+        'wednesday',
+        'thursday',
+        'friday',
+        'saturday',
     ];
 
     const time = dayjs().utcOffset(8);

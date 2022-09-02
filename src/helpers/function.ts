@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { readFileSync, readdirSync } from 'fs';
 import { resolve } from 'path';
-import { Collection, Util } from 'discord.js';
+import { Collection } from 'discord.js';
 
 import Fuse from 'fuse.js';
 import moment from 'moment';
 
 import { get } from 'superagent';
+import { splitMessage } from './bot';
 import { logger } from '../lib/logger';
 import values from '../lib/values';
 
@@ -395,7 +396,7 @@ export function sendMessage(msgObj: any, message: any) {
         str = message.join('\n');
     }
 
-    str = Util.splitMessage(str);
+    str = splitMessage(str);
     str.forEach((ele: string) => {
         return ele ? msgObj.channel.send(ele) : null;
     });
@@ -408,7 +409,7 @@ export function sendMessageChannel(chObj: any, message: any) {
         str = message.join('\n');
     }
 
-    str = Util.splitMessage(str);
+    str = splitMessage(str);
     str.forEach((ele: string) => {
         return ele ? chObj.send(ele) : null;
     });

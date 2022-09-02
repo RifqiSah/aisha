@@ -1,8 +1,8 @@
-import { MessageEmbed } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 import { artifacts } from './data/artifacts';
 
-export function generateArtifactEmbed(id: string): MessageEmbed {
-    const embed = new MessageEmbed();
+export function generateArtifactEmbed(id: string): EmbedBuilder {
+    const embed = new EmbedBuilder();
     const artifact = artifacts[id];
 
     embed.setThumbnail(`https://paimon.moe/images/artifacts/${id}_flower.png`);
@@ -15,7 +15,7 @@ export function generateArtifactEmbed(id: string): MessageEmbed {
     }
 
     embed.setDescription(descriptions.join('\n'));
-    embed.addField('Rarity', `${artifact.rarity.join('/')} ⭐`);
+    embed.addFields({ name: 'Rarity', value : `${artifact.rarity.join('/')} ⭐` });
 
     return embed;
 }

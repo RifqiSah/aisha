@@ -1,8 +1,7 @@
-import { roleMention } from '@discordjs/builders';
-import { Message, TextChannel } from 'discord.js';
+import { Message, TextChannel, roleMention } from 'discord.js';
 
 import Command from '../../classes/command';
-import { formatData, getMonthName, sendMessageChannel } from '../../helpers/function';
+import { getMonthName, sendMessageChannel } from '../../helpers/function';
 
 export default class DnInfo extends Command {
     constructor() {
