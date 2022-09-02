@@ -1,7 +1,6 @@
-import { Message } from 'discord.js';
+import { AutocompleteInteraction, CommandInteraction } from 'discord.js';
 
 import Command from '../../classes/command';
-import { sendAndDelete } from '../../helpers/bot';
 import { delay } from '../../helpers/function';
 
 export default class Bot extends Command {
@@ -10,21 +9,39 @@ export default class Bot extends Command {
             name: 'Aisha top secret :).',
             command: 'bot',
             ownerOnly: true,
+            registerSlashCommand: true,
+            hasAutocomplete: true,
+            slashCommandOptions: [
+                {
+                    name: 'type',
+                    description: 'Commands type',
+                    type: 'STRING',
+                    choices: [{ name: 'Restart', value: 'restart' },],
+                },
+            ],
         });
     }
 
-    async run(message: Message, args: string): Promise<void> {
-        const cmd = (args.length ? args.toLowerCase() : null);
-        switch (cmd) {
-            case 'restart':
-                sendAndDelete(message, 'Aisha akan dijalankan kembali. Mohon tunggu sejenak ya!', 5000);
-                await delay(5000);
-                process.kill(process.pid, 'SIGINT');
-                break;
+    async interact(interaction: CommandInteraction): Promise<void> {
+        try {
+            const type = interaction.options.get('type')?.value;
+            switch (type) {
+                case 'restart':
+                    await interaction.reply({ content: 'Aisha akan dijalankan kembali. Mohon tunggu sejenak ya!', ephemeral: true });
+                    await delay(5000);
+                    process.kill(process.pid, 'SIGINT');
+                    break;
 
-            default:
-                sendAndDelete(message, 'Oh tidak!! Perintah itu tidak ditemukan!', 5000);
-                break;
+                default:
+                    interaction.reply({ content: 'Oh tidak!! Perintah itu tidak ditemukan!', ephemeral: true });
+                    break;
+            }
+        } catch (err) {
+            console.error(err);
         }
+    }
+
+    async autocomplete(interaction: AutocompleteInteraction): Promise<void> {
+        null;
     }
 }
