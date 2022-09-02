@@ -128,7 +128,7 @@ export default abstract class Command {
         if (interaction.commandName !== this.command) return;
 
         const isOwner = interaction.user.id === globalConfig.BOT_OWNER;
-        if (this.ownerOnly && !isOwner) return interaction.reply({ content: 'Anda tidak mempunyai ijin untuk menjalankan perintah ini!', ephemeral: true });
+        if (this.ownerOnly && !isOwner) return interaction.reply({ content: 'Anda tidak mempunyai ijin untuk menjalankan perintah ini! (Owner)', ephemeral: true });
 
         if (!isOwner) {
             if (this.onlyInformate) {
@@ -155,7 +155,7 @@ export default abstract class Command {
                 });
 
                 if (!hasRole) {
-                    return interaction.reply({ content: 'Anda tidak mempunyai ijin untuk menjalankan perintah ini!', ephemeral: true });
+                    return interaction.reply({ content: 'Anda tidak mempunyai ijin untuk menjalankan perintah ini! (Roles)', ephemeral: true });
                 }
             }
         }
