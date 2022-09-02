@@ -6,6 +6,7 @@ import {
     ApplicationCommandData,
     ApplicationCommandOptionData,
     AutocompleteInteraction,
+    GuildMemberRoleManager,
 } from 'discord.js';
 import { replyAndDelete, sendAndDelete } from '../helpers/bot';
 import globalConfig from '../lib/config';
@@ -123,12 +124,45 @@ export default abstract class Command {
         return this.run(message, args);
     }
 
-    checkInteraction(interaction: CommandInteraction): void {
+    checkInteraction(interaction: CommandInteraction): any {
         if (interaction.commandName !== this.command) return;
+
+        const isOwner = interaction.user.id === globalConfig.BOT_OWNER;
+        if (this.ownerOnly && !isOwner) return interaction.reply({ content: 'Anda tidak mempunyai ijin untuk menjalankan perintah ini!', ephemeral: true });
+
+        if (!isOwner) {
+            if (this.onlyInformate) {
+                if (interaction?.guildId !== globalConfig.INFORMATE_ID) {
+                    return interaction.reply({ content: 'Command ini hanya dapat dijalankan pada **Informate Community Guild**!', ephemeral: true });
+                }
+            }
+
+            // if (this.cooldown) {
+            //     if (commandCooldown.has(message.author.id)) {
+            //         return replyAndDelete(message, `Anda harus menunggu selama \`${this.cooldown} detik\` sebelum menggunakan command \`${this.command}\` kembali!`, 10000);
+            //     }
+
+            //     commandCooldown.add(message.author.id);
+
+            //     setTimeout(() => {
+            //         commandCooldown.delete(message.author.id);
+            //     }, this.cooldown * 1000);
+            // }
+
+            if (this.roles?.length) {
+                const hasRole = (interaction.member?.roles as GuildMemberRoleManager).cache.some((role: any) => {
+                    return this.roles?.includes(role.id) === true;
+                });
+
+                if (!hasRole) {
+                    return interaction.reply({ content: 'Anda tidak mempunyai ijin untuk menjalankan perintah ini!', ephemeral: true });
+                }
+            }
+        }
 
         logger.info(`-> Interaction '${this.command}' dijalankan oleh '${interaction.user.tag}'`);
 
-        void this.interact(interaction);
+        return this.interact(interaction);
     }
 
     async run(message: Message, args: string): Promise<void> {
