@@ -1,4 +1,4 @@
-import { AutocompleteInteraction, CommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionType, AutocompleteInteraction, CommandInteraction } from 'discord.js';
 import { get } from 'superagent';
 
 import Command from '../../classes/command';
@@ -89,13 +89,13 @@ export default class DnInfo extends Command {
                 {
                     name: 'type',
                     description: 'Mail / TH / Trade',
-                    type: 'STRING',
+                    type: ApplicationCommandOptionType.String,
                     choices: [{ name: 'Mail', value: 'mail' }, { name: 'Trading House', value: 'th' }, { name: 'Trade', value: 'trade' }],
                 },
                 {
                     name: 'nominal',
                     description: 'Nominal Gold',
-                    type: 'NUMBER',
+                    type: ApplicationCommandOptionType.Number,
                 },
             ],
         });

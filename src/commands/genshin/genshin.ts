@@ -1,4 +1,4 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { Message, EmbedBuilder } from 'discord.js';
 import Command from '../../classes/command';
 import { sendMessage } from '../../helpers/function';
 import { search, recom, getCurrentDay } from '../../helpers/genshin/genshin';
@@ -23,7 +23,7 @@ export default class Genshin extends Command {
             if (today === 'minggu') {
                 msg.push('Hari Minggu dapat farm semua item! 😀');
             } else {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor([254, 254, 254])
                     .setTitle(`Genshin Impact Items: ${today.charAt(0).toUpperCase()}${today.slice(1,)}`,)
                     .setImage(`https://paimon.moe/images/daily/${today}.png?12`);

@@ -1,5 +1,4 @@
-import { roleMention } from '@discordjs/builders';
-import { Message } from 'discord.js';
+import { Message, roleMention } from 'discord.js';
 
 import Command from '../../classes/command';
 import { sendMessage } from '../../helpers/function';
