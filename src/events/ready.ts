@@ -6,10 +6,10 @@ module.exports = (client: any) => {
         client.logger.info(`[V] Bot has started, with ${client.bot.users.cache.size} users, in ${client.bot.channels.cache.size} channels of ${client.bot.guilds.cache.size} guilds.`);
 
         const activitiesList = [
-            `${client.config.BOT_PREFIX}h for command.`,
+            '/help for command.',
             "Informate's Bot.",
             `Serving ${client.bot.users.cache.size} users in ${client.bot.guilds.cache.size} guilds.`,
-            `v${client.config.BOT_VERSION}`
+            `Ver. ${client.config.BOT_VERSION}`
         ];
 
         setInterval(() => {
