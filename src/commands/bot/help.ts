@@ -1,9 +1,9 @@
-import { Message, roleMention } from 'discord.js';
+import { ApplicationCommandOptionType, AutocompleteInteraction, CommandInteraction, roleMention } from 'discord.js';
 
 import Command from '../../classes/command';
-import { sendMessage } from '../../helpers/function';
+import { searchAutoCompleteFromArray } from '../../helpers/function';
 import config from '../../lib/config';
-import { commandCategories, commands, interactionCommands } from '../../vars';
+import { commands, interactionCommands } from '../../vars';
 
 export default class Help extends Command {
     constructor() {
@@ -11,63 +11,68 @@ export default class Help extends Command {
             name: 'Daftar command yang dapat digunakan pada Aisha.',
             command: 'help',
             usage: '[command]',
+            registerSlashCommand: true,
+            hasAutocomplete: true,
+            slashCommandOptions: [
+                {
+                    name: 'command',
+                    description: 'Nama Command',
+                    type: ApplicationCommandOptionType.String,
+                    autocomplete: true,
+                },
+            ],
         });
     }
 
-    async run(message: Message, args: string): Promise<void> {
-        const data = [];
-        let lastLoc = '';
+    async interact(interaction: CommandInteraction): Promise<void> {
+        try {
+            const data = [];
 
-        if (!args.length) {
-            data.push('Hai! Ini adalah daftar command yang tersedia:');
+            const commandName = interaction.options.get('command')?.value;
+            const command: Command = commands.get(commandName) as Command || interactionCommands.get(commandName) as Command;
 
-            data.push('\n__**NORMAL**__');
+            data.push(`Informasi mengenai command \`${command.command}\`:\n`);
 
-            commands.forEach((item: any) => {
-                const category = String(commandCategories.get(item.command));
+            if (command.name) data.push(`\`Deskripsi\` : ${command.name}`);
+            if (command.registerSlashCommand) data.push(`\`Slash Command\` : ${command.registerSlashCommand ? 'Yes' : 'No'}`);
+            if (command.usage) data.push(`\`Penggunaan\` : ${command.registerSlashCommand ? '/' : config.BOT_PREFIX}${commandName} ${command.usage}`);
+            if (command.roles) data.push(`\`Role\` : ${command.roles.length ? command.roles.map((i: any) => roleMention(i)).join(', ') : '-'}`);
 
-                if (!lastLoc.includes(category)) {
-                    lastLoc = category;
-                    data.push(`\n🔹${lastLoc.replace(/^./, lastLoc[0].toUpperCase())}🔹`);
-                }
+            data.push(`\`Cooldown\` : ${command.cooldown || 0} detik`);
 
-                data.push(`\`${item.command}\` : ${item.name}`);
-            });
+            data.push('\nAnda dapat menggunakan `/help` untuk mendapatkan informasi dari semua command yang tersedia.');
 
-            data.push('\n__**SLASH COMMANDS**__');
+            await interaction.reply({ content: data.join('\n'), ephemeral: true });
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
-            interactionCommands.forEach((item: any) => {
-                const category = String(commandCategories.get(item.command));
+    async autocomplete(interaction: AutocompleteInteraction): Promise<void> {
+        if (interaction.commandName !== this.command) return;
 
-                if (!lastLoc.includes(category)) {
-                    lastLoc = category;
-                    data.push(`\n🔹${lastLoc.replace(/^./, lastLoc[0].toUpperCase())}🔹`);
-                }
+        let search = [];
 
-                data.push(`\`${item.command}\` : ${item.name}`);
-            });
+        let allCommands = commands.concat(interactionCommands);
+        allCommands = allCommands.sort((a: any, b: any) => {
+            if (a.command < b.command) return -1;
+            if (a.command > b.command) return 1;
 
-            data.push(`\nAnda dapat menggunakan \`${config.BOT_PREFIX}help [nama command]\` untuk mendapatkan informasi dari command tersebut.`);
+            return 0;
+        });
+
+        const commandMap = allCommands.map((command: any) => {
+            return { name: command.command, value: command.command };
+        });
+
+        const keyword = interaction.options.get('command')?.value as string ?? '';
+        if (keyword.length) {
+            search = await searchAutoCompleteFromArray(commandMap, ['name'], keyword);
+            search = search.map((e: any) => ({ name: e.item.name, value: e.item.value }));
         } else {
-            const name = args?.split(' ')[0].toLowerCase();
-            const command: Command = commands.get(name) as Command || interactionCommands.get(name) as Command;
-
-            if (!command) {
-                void message.reply(`Command ${name} tidak ditemukan!`);
-            } else {
-                data.push(`Informasi mengenai command \`${command.command}\`:\n`);
-
-                // if (command.aliases) data.push(`\`Alias\` : ${command.aliases.length ? `${command.aliases.join(', ')}` : '-'}`);
-                if (command.name) data.push(`\`Deskripsi\` : ${command.name}`);
-                if (command.usage) data.push(`\`Penggunaan\` : ${config.BOT_PREFIX}${name} ${command.usage}`);
-                if (command.roles) data.push(`\`Role\` : ${command.roles.length ? command.roles.map((i: any) => roleMention(i)).join(', ') : '-'}`);
-
-                data.push(`\`Cooldown\` : ${command.cooldown || 0} detik`);
-
-                data.push(`\nAnda dapat menggunakan \`${config.BOT_PREFIX}help\` untuk mendapatkan informasi dari semua command yang tersedia.`);
-            }
+            search = commandMap;
         }
 
-        void sendMessage(message, data);
+        await interaction.respond(search.slice(0, 25));
     }
 }

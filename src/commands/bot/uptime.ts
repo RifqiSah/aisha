@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 
 import Command from '../../classes/command';
 import { client } from '../../client';
@@ -19,10 +19,16 @@ export default class Uptime extends Command {
             command: 'uptime',
             ownerOnly: true,
             onlyInformate: true,
+            registerSlashCommand: true,
+            slashCommandOptions: [],
         });
     }
 
-    async run(message: Message, args: string): Promise<void> {
-        message.channel.send(`Aku sudah online selama ${duration(client.uptime)}`);
+    async interact(interaction: CommandInteraction): Promise<void> {
+        try {
+            await interaction.reply({ content: `Aku sudah online selama ${duration(client.uptime)}` });
+        } catch (err) {
+            console.error(err);
+        }
     }
 }

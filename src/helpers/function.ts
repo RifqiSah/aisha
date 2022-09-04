@@ -100,6 +100,7 @@ export async function searchAutoComplete(dataKey: string, key: string): Promise<
     const data = externalDatas?.get(dataKey);
     const engine = new Fuse(data, {
         keys: ['name'],
+        includeScore: true,
     });
 
     const result = engine.search(key, { limit: 25 });
@@ -108,7 +109,8 @@ export async function searchAutoComplete(dataKey: string, key: string): Promise<
 
 export async function searchAutoCompleteFromArray(data: any, option: string[], key: string): Promise<any> {
     const engine = new Fuse(data, {
-        keys: option
+        keys: option,
+        includeScore: true,
     });
     return engine.search(key, { limit: 25 });
 }
