@@ -6,9 +6,9 @@ module.exports = (client: any) => {
         client.logger.info(`[V] Bot has started, with ${client.bot.users.cache.size} users, in ${client.bot.channels.cache.size} channels of ${client.bot.guilds.cache.size} guilds.`);
 
         const activitiesList = [
-            '/help for command.',
+            '/help for commands',
             // "Informate's Bot.",
-            `Serving ${client.bot.users.cache.size} users in ${client.bot.guilds.cache.size} guilds.`,
+            `Serving ${client.bot.users.cache.size} users in ${client.bot.guilds.cache.size} guilds`,
             // `Ver. ${client.config.BOT_VERSION}`
         ];
 
