@@ -7,9 +7,9 @@ module.exports = (client: any) => {
 
         const activitiesList = [
             '/help for command.',
-            "Informate's Bot.",
+            // "Informate's Bot.",
             `Serving ${client.bot.users.cache.size} users in ${client.bot.guilds.cache.size} guilds.`,
-            `Ver. ${client.config.BOT_VERSION}`
+            // `Ver. ${client.config.BOT_VERSION}`
         ];
 
         setInterval(() => {
