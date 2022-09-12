@@ -34,7 +34,7 @@ export default class DnRate extends Command {
             msg.push(`__**Rate untuk ${data.name}**__\n`);
             await formatImageInInteraction(msg, interaction, data);
         } catch (err) {
-            await interaction.reply({ content: 'Data tidak ditemukan! Mohon hanya gunakan data yg sudah disediakan!', ephemeral: true });
+            await interaction.editReply({ content: 'Data tidak ditemukan! Mohon hanya gunakan data yg sudah disediakan!' });
             console.error(err);
         }
     }
