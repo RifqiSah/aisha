@@ -34,6 +34,7 @@ export default class DnInfo extends Command {
             msg.push(`__**Info untuk ${data.name}**__\n`);
             await formatImageInInteraction(msg, interaction, data);
         } catch (err) {
+            await interaction.reply({ content: 'Data tidak ditemukan! Mohon hanya gunakan data yg sudah disediakan!', ephemeral: true });
             console.error(err);
         }
     }

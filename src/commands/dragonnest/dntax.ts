@@ -117,6 +117,7 @@ export default class DnInfo extends Command {
 
             interaction.editReply({ content: msg.join('\n') });
         } catch (err) {
+            await interaction.reply({ content: 'Data tidak ditemukan! Mohon hanya gunakan data yg sudah disediakan!', ephemeral: true });
             console.error(err);
         }
     }
