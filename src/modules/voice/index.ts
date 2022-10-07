@@ -1,3 +1,5 @@
+import { ChannelType } from 'discord.js';
+
 import cron from 'node-cron';
 
 let _client: any = null;
@@ -6,7 +8,7 @@ const getData = () => {
     _client.logger.debug('[VOICE] Check ticked!');
 
     const members: string [] = [];
-    const voiceChannels = _client.bot.channels.cache.filter((ch: any) => ch.type === 'GUILD_VOICE');
+    const voiceChannels = _client.bot.channels.cache.filter((ch: any) => ch.type === ChannelType.GuildVoice);
 
     voiceChannels.map((vc: any) => {
         vc?.members?.map((member: any) => {
