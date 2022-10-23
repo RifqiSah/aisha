@@ -3,7 +3,7 @@ import { Message, TextChannel, roleMention } from 'discord.js';
 import Command from '../../classes/command';
 import { getMonthName, sendMessageChannel } from '../../helpers/function';
 
-export default class DnInfo extends Command {
+export default class DnPatch extends Command {
     constructor() {
         super({
             name: 'Informasi Patch Note dari Dragon Nest.',
