@@ -69,7 +69,7 @@ module.exports = (client: any) => {
                 await client.rest.put(Routes.applicationCommands(clientId), { body: interactionCommandsJson },);
             }
         } catch (error) {
-            client.logger.error('  [X] Error!', error);
+            client.logger.error('  [X] Error!', JSON.stringify(error));
         }
     })();
 

@@ -77,10 +77,14 @@ export default class Say extends Command {
             const message = modalSubmission.fields.getTextInputValue('messageInput');
 
             const chObj = interaction.guild?.channels.cache.find((ch) => ch.name === channel);
-            if (!chObj) return;
+            if (!chObj) {
+                throw new Error(`Channel ${channel} tidak ditemukan pada server ini!`);
+            }
 
             const roleObj = interaction.guild?.roles.cache.find((r) => r.name.includes(role));
-            if (!roleObj) return;
+            if (!roleObj) {
+                throw new Error(`Role ${role} tidak ditemukan pada server ini!`);
+            }
 
             await (chObj as TextChannel).send(`${roleMention(roleObj.id)}\n\n${message}`);
 
@@ -91,6 +95,7 @@ export default class Say extends Command {
                 return;
             }
 
+            await interaction.editReply({ content: err?.message });
             console.error(err);
         }
     }
