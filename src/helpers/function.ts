@@ -6,8 +6,8 @@ import { Collection } from 'discord.js';
 import Fuse from 'fuse.js';
 import moment from 'moment';
 
-import { get } from 'superagent';
 import { splitMessage } from './bot';
+import axios from '../lib/axios';
 import { logger } from '../lib/logger';
 import values from '../lib/values';
 
@@ -16,19 +16,19 @@ const globalsvc = require('../database/services/globals.service');
 const externalDatas: Collection<string, any> = new Collection();
 
 async function getFileList(dir: string) {
-    const response = await get(`${values.aisha_api}/data/${dir}`);
-    return JSON.parse(response.text).data;
+    const response = await axios.get(`${values.aisha_api}/data/${dir}`);
+    return response.data.data;
 }
 
 async function loadDataFiles(dirs: string) {
     const files: any = await getFileList(dirs);
 
     await Promise.all(files.map(async (file: string) => {
-        const response = await get(`${values.aisha_api}/data/${dirs}/${file}`);
-        const data = response.text;
+        const response = await axios.get(`${values.aisha_api}/data/${dirs}/${file}`);
+        const data = response.data;
 
         const key = file.slice(0, -5);
-        const parsed = JSON.parse(data).data;
+        const parsed = data.data;
 
         logger.info(`  + '${dirs}/${key}' readed and parsed. [${data.length} bytes].`);
         externalDatas.set(`${dirs}.${key}`, parsed);

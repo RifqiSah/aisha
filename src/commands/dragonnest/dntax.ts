@@ -1,8 +1,8 @@
 import { ApplicationCommandOptionType, AutocompleteInteraction, CommandInteraction } from 'discord.js';
-import { get } from 'superagent';
 
 import Command from '../../classes/command';
 import { formatNumber } from '../../helpers/function';
+import axios from '../../lib/axios';
 import { logger } from '../../lib/logger';
 import values from '../../lib/values';
 
@@ -15,13 +15,8 @@ const calc: any = {
 };
 
 const getTaxes = async () => {
-    return get(`${values.aisha_api}/taxes`)
-        .then((res) => {
-            return JSON.parse(res.text).data;
-        }).catch((err) => {
-            logger.error(err);
-            return null;
-        });
+    const result = await axios.get(`${values.aisha_api}/taxes`);
+    return result.data.data;
 };
 
 const hitung = (taxes: any, type: string, nominal: number) => {
@@ -77,7 +72,7 @@ const hitung = (taxes: any, type: string, nominal: number) => {
     return data;
 };
 
-export default class DnInfo extends Command {
+export default class DnTax extends Command {
     constructor() {
         super({
             name: 'Melihat tax atau pajak dari Trading House, Trade, Server Storage, dll.',

@@ -38,7 +38,7 @@ export default class DnPatch extends Command {
             }
 
             msg.push(roleMention('489292018628165633'));
-            msg.push(`__**[Patchnote] ${month} Patchnote**__\n`);
+            msg.push(`\n__**[Patchnote] ${month} Patchnote**__`);
             msg.push(`https://sea.dragonnest.com/news/notice/all/${patchNumber}`);
 
             await interaction.editReply({ content: msg.join('\n'), });
