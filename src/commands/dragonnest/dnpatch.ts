@@ -1,4 +1,4 @@
-import { TextChannel, roleMention, ApplicationCommandOptionType, CommandInteraction, AutocompleteInteraction } from 'discord.js';
+import { TextChannel, roleMention, ApplicationCommandOptionType, CommandInteraction, AutocompleteInteraction, channelMention } from 'discord.js';
 
 import Command from '../../classes/command';
 import { getMonthName } from '../../helpers/function';
@@ -41,7 +41,8 @@ export default class DnPatch extends Command {
             msg.push(`\n__**[Patchnote] ${month} Patchnote**__`);
             msg.push(`https://sea.dragonnest.com/news/notice/all/${patchNumber}`);
 
-            await interaction.editReply({ content: msg.join('\n'), });
+            await channel.send(msg.join('\n'));
+            await interaction.editReply({ content: `Already sent in ${channelMention(channel.id)}!`, });
         } catch (err: any) {
             await interaction.editReply({ content: err?.message });
             console.error(err);
