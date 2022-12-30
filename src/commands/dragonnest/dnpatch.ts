@@ -6,7 +6,7 @@ import { getMonthName } from '../../helpers/function';
 export default class DnPatch extends Command {
     constructor() {
         super({
-            name: 'Informasi Patch Note dari Dragon Nest.',
+            name: 'Informasi Patch Note dari Dragon Nest [Manual].',
             command: 'dnpatch',
             usage: '[patch number]',
             ownerOnly: true,

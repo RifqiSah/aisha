@@ -3,8 +3,10 @@ import { resolve } from 'path';
 
 const disabledModule = [
     'example',
+
     'bdmnews',
     // 'dnkrnews',
+    // 'dnnanews',
     // 'dnseanews',
     // 'dntrack',
     // 'freeGames',
