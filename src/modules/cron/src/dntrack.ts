@@ -29,6 +29,7 @@ const getPatchSize = async (name: string, from: number, to: number) => {
             totalSize += Number(buffer.headers['content-length']);
         } catch(err: any) {
             _client.logger.debug('[DN_TRACK] An error occured when getting file size!', err);
+            return humanFileSize(0);
         }
     }
 
