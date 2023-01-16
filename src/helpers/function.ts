@@ -455,3 +455,21 @@ export function humanFileSize(bytes: number, dp=1) {
 
     return bytes.toFixed(dp) + ' ' + units[u];
 }
+
+export function getContentFromHtmlString(from: string) {
+    let str = from;
+
+    // replace html
+    const htmlRegex = /(<([^>]+)>)/ig;
+    str = str.replace(htmlRegex, '');
+
+    // check tanda baca
+    const punctuationRegex = /\s*([,.!?:;]+)(?!\s*$)\s*/g;
+    str = str.replace(punctuationRegex, '$1 ');
+
+    return trimString(str, 300);
+}
+
+export function trimString(string: string, length: number) {
+    return string.length > length ? string.substring(0, length) + '...' : string;
+}
