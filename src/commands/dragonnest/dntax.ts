@@ -15,7 +15,7 @@ const calc: any = {
 };
 
 const getTaxes = async () => {
-    const result = await axios.get(`${values.aisha_api}/taxes`);
+    const result = await axios.get(`${values.aisha_v1_api}/taxes`);
     return result.data.data;
 };
 

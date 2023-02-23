@@ -2,7 +2,9 @@ import './env';
 
 export default class Values {
 
-    static aisha_api        = `${process.env.ENDPOINT}/aisha`;
+    static aisha_v1_api        = `${process.env.ENDPOINT}/v1/aisha`;
+    static aisha_v2_api        = `${process.env.ENDPOINT}/v2/aisha`;
+
     static divinitor_api    = 'https://reference.dn.divinitor.com/api/server/sea';
 
     static cat_apikey       = '17151c18-d9a3-4ada-9a1f-e7e5747cb8c2';

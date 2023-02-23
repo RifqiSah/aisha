@@ -16,7 +16,7 @@ const globalsvc = require('../database/services/globals.service');
 const externalDatas: Collection<string, any> = new Collection();
 
 async function getFileList(dir: string) {
-    const response = await axios.get(`${values.aisha_api}/data/${dir}`);
+    const response = await axios.get(`${values.aisha_v1_api}/data/${dir}`);
     return response.data.data;
 }
 
@@ -24,7 +24,7 @@ async function loadDataFiles(dirs: string) {
     const files: any = await getFileList(dirs);
 
     await Promise.all(files.map(async (file: string) => {
-        const response = await axios.get(`${values.aisha_api}/data/${dirs}/${file}`);
+        const response = await axios.get(`${values.aisha_v1_api}/data/${dirs}/${file}`);
         const data = response.data;
 
         const key = file.slice(0, -5);
