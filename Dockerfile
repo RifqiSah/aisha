@@ -1,5 +1,5 @@
 # 1
-FROM node:17 AS build-deps
+FROM node:lts AS build-deps
 
 RUN apt-get update && \
     apt-get -y install tree
@@ -14,7 +14,7 @@ WORKDIR /build
 RUN npm install
 
 # 2
-FROM node:17 AS compile-env
+FROM node:lts AS compile-env
 RUN mkdir /compile
 
 COPY --from=build-deps /build /compile
@@ -24,7 +24,7 @@ COPY . .
 RUN npm run build
 
 # 3
-FROM node:17 AS runtime-deps
+FROM node:lts AS runtime-deps
 
 COPY package*.json /build/
 COPY src/modules /build/modules
@@ -34,7 +34,7 @@ WORKDIR /build
 RUN npm install --production
 
 # final
-FROM node:17-alpine AS runtime-env
+FROM node:lts-alpine AS runtime-env
 WORKDIR /app
 
 ARG BOT_VERSION
