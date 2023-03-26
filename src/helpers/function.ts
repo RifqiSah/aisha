@@ -364,6 +364,12 @@ export function combineState(states: any, stateKey?: any) {
 }
 
 export function formatTitleCase(str: string) {
+    return str.replace(/\w\S*/g, function(txt: string) {
+        return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
+    });
+}
+
+export function formatTitleCaseOld(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 

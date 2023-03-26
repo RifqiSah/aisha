@@ -1,7 +1,7 @@
 import { ApplicationCommandOptionType, AutocompleteInteraction, CommandInteraction } from 'discord.js';
 
 import Command from '../../classes/command';
-import { formatNumber } from '../../helpers/function';
+import { formatNumber, formatTitleCase } from '../../helpers/function';
 import axios from '../../lib/axios';
 import { logger } from '../../lib/logger';
 import values from '../../lib/values';
@@ -59,13 +59,14 @@ const hitung = (taxes: any, type: string, nominal: number) => {
     const taxCost = tax * cost;
     const total = calc[op](cost, taxCost);
 
+    data.push(`Jenis: \`${formatTitleCase(type)}\``);
     data.push(`Nilai: \`${formatNumber(cost)}\``);
     data.push(`Pajak: \`${formatNumber(taxCost)} (${tax * 100}%)\``);
     if (type === 'th' && tax2) {
         data.push(`Tanpa tiket TH? Ditambah: \`${formatNumber(tax2 * cost)} (${tax2 * 100}%)\``);
     }
 
-    data.push('\n');
+    // data.push('\n');
 
     if (op === 'plus') {
         data.push(`Total yang dikeluarkan: \`${formatNumber(total)}\``);
