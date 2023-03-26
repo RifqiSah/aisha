@@ -66,7 +66,7 @@ const hitung = (taxes: any, type: string, nominal: number) => {
         data.push(`Tanpa tiket TH? Ditambah: \`${formatNumber(tax2 * cost)} (${tax2 * 100}%)\``);
     }
 
-    // data.push('\n');
+    data.push('');
 
     if (op === 'plus') {
         data.push(`Total yang dikeluarkan: \`${formatNumber(total)}\``);
