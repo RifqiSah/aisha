@@ -26,6 +26,6 @@ module.exports = (client: any) => {
     client.logger.info('  [V] Done!');
 };
 
-export const handle = cron.schedule('0 2 * * *', () => {
+export const handle = cron.schedule('0 3 * * *', () => {
     getData();
 });
