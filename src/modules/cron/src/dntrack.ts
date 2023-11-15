@@ -2,6 +2,8 @@ import cron from 'node-cron';
 
 import { sendTracker } from '../../../helpers/discord';
 import { getWebhookUrls, delay, humanFileSize } from '../../../helpers/function';
+
+import values from '../../../lib/values';
 import axios from '../lib/axios';
 
 let _client: any = null;
@@ -43,8 +45,8 @@ const getData = async () => {
         const DB_Version: any[] = [];
 
         // get version
-        const buffer = await axios.get('https://arcsat.divinitor.com/svc/rs/regions');
-        const data = buffer?.data;
+        const buffer = await axios.get(`${values.aisha_v1_api}/regionservices`);
+        const data = buffer?.data?.data;
 
         for (let i = 0; i < data.length; i++) {
             DN_Version.push({
