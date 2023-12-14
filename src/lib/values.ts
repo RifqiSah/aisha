@@ -16,7 +16,7 @@ export default class Values {
     static d_status_api     = 'https://status.discord.com/api/v2/summary.json';
 
     static mc_api           = 'https://api.exaroton.com/v1';
-    static mc_server_id     = 'iXXbNqR3t0dOcE0Q';
+    static mc_server_id     = '2sD92W96e5cuU1iu';
 
     static STATES = {
         STRENGTH: {
