@@ -1,8 +1,9 @@
-import { Message } from 'discord.js';
+/* eslint-disable no-case-declarations */
+
+import { ApplicationCommandOptionType, AutocompleteInteraction, CommandInteraction, Message } from 'discord.js';
 import { Client as Exaroton } from 'exaroton';
 
 import Command from '../../classes/command';
-import { sendAndDelete, editAndDelete } from '../../helpers/bot';
 import config from '../../lib/config';
 import { logger } from '../../lib/logger';
 import values from '../../lib/values';
@@ -27,88 +28,113 @@ export default class Mc extends Command {
             name: 'Control panel untuk Minecraft Server.',
             command: 'mc',
             roles: ['802718208180092939'],
-            usage: '[info/start/stop/restart]',
+            usage: '[cmd]',
             onlyInformate: true,
+            registerSlashCommand: true,
+            hasAutocomplete: true,
+            slashCommandOptions: [
+                {
+                    name: 'cmd',
+                    description: 'info / start / stop / restart',
+                    type: ApplicationCommandOptionType.String,
+                    autocomplete: true,
+                },
+            ],
         });
     }
 
-    async run(message: Message, args: string): Promise<void> {
-        message.delete();
-
-        if (!args.length) {
-            void sendAndDelete(message, 'Harap masukkan parameter!', 5000);
-            return;
-        }
-
-        const msgs = await message.channel.send('Mohon tunggu sebentar ...');
-
+    async interact(interaction: CommandInteraction): Promise<void> {
         try {
+            await interaction.deferReply();
+
+            const timeout = 1000;
             const mcClient = new Exaroton(config.MC_TOKEN || '');
             let server = mcClient.server(values.mc_server_id);
+            let refreshId: any = null;
 
-            if (args === 'info') {
-                server = await server.get();
+            const cmd = interaction.options.get('cmd')?.value;
+            switch (cmd) {
+                case 'start':
+                    await server.start();
 
-                const data = [
-                    `__**${server.name.toUpperCase()}**__`,
-                    `${server.motd}`,
+                    refreshId = setInterval(async () => {
+                        server = await server.get();
+                        if (server.hasStatus(server.STATUS.OFFLINE)) {
+                            await interaction.editReply({ content: 'Server telah dinyalakan! Selamat bermain 😃' });
+                            clearInterval(refreshId);
+                        }
+                    }, timeout);
 
-                    '\n__**Software**__',
-                    `Name: ${server.software.name}`,
-                    `Version: ${server.software.version}`,
+                    break;
 
-                    '\n__**Server**__',
-                    `Status: __**${status(server.status)}**__`,
-                    `Players: ${server.players.count}/${server.players.max}`,
-                ];
+                case 'stop':
+                    await server.stop();
 
-                void editAndDelete(msgs, data, 10000);
-                return;
-            } if (args === 'start') {
-                await server.start();
+                    refreshId = setInterval(async () => {
+                        server = await server.get();
+                        if (server.hasStatus(server.STATUS.OFFLINE)) {
+                            await interaction.editReply({ content: 'Server telah dimatikan! Terima kasih telah bermain 😃' });
+                            clearInterval(refreshId);
+                        }
+                    }, timeout);
 
-                const refreshId = setInterval(async () => {
+                    break;
+
+                case 'restart':
+                    await server.stop();
+
+                    refreshId = setInterval(async () => {
+                        server = await server.get();
+                        if (server.hasStatus(server.STATUS.ONLINE)) {
+                            await interaction.editReply({ content: 'Server telah direstart! Selamat melanjutkan permainan 😃' });
+                            clearInterval(refreshId);
+                        }
+                    }, timeout);
+
+                    break;
+
+                case 'info':
                     server = await server.get();
-                    if (server.hasStatus(server.STATUS.ONLINE)) {
-                        editAndDelete(msgs, 'Server telah dinyalakan! Selamat bermain 😃', 10000);
-                        clearInterval(refreshId);
-                    }
-                }, 5000);
 
-                return;
-            } if (args === 'restart') {
-                await server.restart();
+                    await interaction.editReply({ content: [
+                        `__**${server.name.toUpperCase()}**__`,
+                        `${server.motd}`,
 
-                const refreshId = setInterval(async () => {
-                    server = await server.get();
-                    if (server.hasStatus(server.STATUS.ONLINE)) {
-                        editAndDelete(msgs, 'Server telah di-restart!', 10000);
-                        clearInterval(refreshId);
-                    }
-                }, 5000);
+                        '\n__**Software**__',
+                        `Name: ${server.software.name}`,
+                        `Version: ${server.software.version}`,
 
-                return;
-            } if (args === 'stop') {
-                await server.stop();
+                        '\n__**Server**__',
+                        `Status: __**${status(server.status)}**__`,
+                        `Players: ${server.players.count}/${server.players.max}`,
+                    ].join('\n') });
 
-                const refreshId = setInterval(async () => {
-                    server = await server.get();
-                    if (server.hasStatus(server.STATUS.OFFLINE)) {
-                        editAndDelete(msgs, 'Server telah dimatikan! Terima kasih telah bermain 😃', 10000);
-                        clearInterval(refreshId);
-                    }
-                }, 5000);
+                    break;
 
-                return;
-            } else {
-                void sendAndDelete(message, `Pengaturan untuk \`${args}\` tidak ditemukan!`, 5000);
-                return;
+                default:
+                    await interaction.editReply({ content: 'Oh tidak!! Perintah itu tidak ditemukan!' });
+                    break;
             }
-        } catch (e: any) {
-            return msgs.edit(e.message).then((msg: any) => {
-                setTimeout(() => msg.delete(), 5000);
-                logger.error(e);
-            });
+        } catch (err: any) {
+            await interaction.editReply({ content: `${err?.message}!` });
+            logger.warn(err?.message);
         }
+    }
+
+    async autocomplete(interaction: AutocompleteInteraction): Promise<void> {
+        if (interaction.commandName !== this.command) return;
+
+        let result = [
+            'start',
+            'stop',
+            'restart',
+            'info',
+        ];
+
+        const cmd = interaction.options.get('cmd')?.value ?? '';
+        result = result.filter((val) => val.includes(cmd as string));
+        const resultObj = result.map((e: any) => ({ name: e, value: e }));
+
+        await interaction.respond(resultObj);
     }
 }
