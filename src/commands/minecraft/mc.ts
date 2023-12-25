@@ -47,7 +47,7 @@ export default class Mc extends Command {
         try {
             await interaction.deferReply();
 
-            const timeout = 1000;
+            const timeout = 2500;
             const mcClient = new Exaroton(config.MC_TOKEN || '');
             let server = mcClient.server(values.mc_server_id);
             let refreshId: any = null;
