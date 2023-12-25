@@ -47,7 +47,7 @@ export default class Mc extends Command {
         try {
             await interaction.deferReply();
 
-            const timeout = 2500;
+            const timeout = 1000;
             const mcClient = new Exaroton(config.MC_TOKEN || '');
             let server = mcClient.server(values.mc_server_id);
             let refreshId: any = null;
@@ -59,7 +59,7 @@ export default class Mc extends Command {
 
                     refreshId = setInterval(async () => {
                         server = await server.get();
-                        if (server.hasStatus(server.STATUS.OFFLINE)) {
+                        if (server.hasStatus(server.STATUS.ONLINE)) {
                             await interaction.editReply({ content: 'Server telah dinyalakan! Selamat bermain 😃' });
                             clearInterval(refreshId);
                         }
