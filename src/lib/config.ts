@@ -16,5 +16,7 @@ export default class Config {
     static BOT_WEBHOOK_LOG = process.env.BOT_WEBHOOK_LOG;
 
     static MC_TOKEN = process.env.MC_TOKEN;
+    static MC_SERVER_ID = process.env.MC_SERVER_ID;
+
     static ENDPOINT = process.env.ENDPOINT;
 }

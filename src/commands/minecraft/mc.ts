@@ -5,9 +5,7 @@ import { Client as Exaroton } from 'exaroton';
 
 import Command from '../../classes/command';
 import config from '../../lib/config';
-import globalConfig from '../../lib/config';
 import { logger } from '../../lib/logger';
-import values from '../../lib/values';
 
 const status = (id: any) => {
     if (id === 0) return 'OFFLINE';
@@ -49,11 +47,11 @@ export default class Mc extends Command {
             await interaction.deferReply();
 
             const timeout = 1000;
-            const client = new Exaroton(config.MC_TOKEN || '');
-
-            let server = client.server(values.mc_server_id);
-            const account = await client.getAccount();
             let refreshId: any = null;
+
+            const client = new Exaroton(config.MC_TOKEN || '');
+            const account = await client.getAccount();
+            let server = client.server(config.MC_SERVER_ID || '');
 
             const cmd = interaction.options.get('cmd')?.value;
             switch (cmd) {

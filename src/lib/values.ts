@@ -8,16 +8,6 @@ export default class Values {
 
     static divinitor_api    = 'https://reference.dn.divinitor.com/api/server/sea';
 
-    static cat_apikey       = '17151c18-d9a3-4ada-9a1f-e7e5747cb8c2';
-    static cat_api          = 'https://api.thecatapi.com/v1/images/search';
-
-    static yesno_api        = 'https://yesno.wtf/api/';
-
-    static d_status_api     = 'https://status.discord.com/api/v2/summary.json';
-
-    static mc_api           = 'https://api.exaroton.com/v1';
-    static mc_server_id     = '2sD92W96e5cuU1iu';
-
     static STATES = {
         STRENGTH: {
             name: 'Strength',
