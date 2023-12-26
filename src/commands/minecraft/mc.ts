@@ -5,6 +5,7 @@ import { Client as Exaroton } from 'exaroton';
 
 import Command from '../../classes/command';
 import config from '../../lib/config';
+import globalConfig from '../../lib/config';
 import { logger } from '../../lib/logger';
 import values from '../../lib/values';
 
@@ -48,8 +49,10 @@ export default class Mc extends Command {
             await interaction.deferReply();
 
             const timeout = 1000;
-            const mcClient = new Exaroton(config.MC_TOKEN || '');
-            let server = mcClient.server(values.mc_server_id);
+            const client = new Exaroton(config.MC_TOKEN || '');
+
+            let server = client.server(values.mc_server_id);
+            const account = await client.getAccount();
             let refreshId: any = null;
 
             const cmd = interaction.options.get('cmd')?.value;
@@ -107,6 +110,9 @@ export default class Mc extends Command {
                         '\n__**Server**__',
                         `Status: __**${status(server.status)}**__`,
                         `Players: ${server.players.count}/${server.players.max}`,
+
+                        '\n__**Credit Left**__',
+                        `${account.credits} credits`,
                     ].join('\n') });
 
                     break;
