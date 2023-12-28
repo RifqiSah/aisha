@@ -18,7 +18,7 @@ const vmOperate = async (status: string) => {
     return result?.data;
 };
 
-export default class Mc extends Command {
+export default class Mc2 extends Command {
     constructor() {
         super({
             name: 'Control panel untuk Minecraft Server Terbaru.',
