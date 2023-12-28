@@ -1,7 +1,6 @@
 /* eslint-disable no-case-declarations */
 
 import { ApplicationCommandOptionType, AutocompleteInteraction, CommandInteraction, Message } from 'discord.js';
-import { Client as Exaroton } from 'exaroton';
 
 import Command from '../../classes/command';
 import axios from '../../lib/axios';
@@ -18,11 +17,11 @@ const vmOperate = async (status: string) => {
     return result?.data;
 };
 
-export default class Mc2 extends Command {
+export default class McNew extends Command {
     constructor() {
         super({
             name: 'Control panel untuk Minecraft Server Terbaru.',
-            command: 'mc2',
+            command: 'mcnew',
             roles: ['802718208180092939'],
             usage: '[cmd]',
             onlyInformate: true,
