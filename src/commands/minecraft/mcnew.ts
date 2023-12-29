@@ -85,12 +85,12 @@ export default class McNew extends Command {
             switch (cmd) {
                 case 'start':
                     status = await vmStatus();
-                    // if (status) {
-                    //     await interaction.editReply({ content: 'VM sudah menyala!' });
-                    //     break;
-                    // }
+                    if (status) {
+                        await interaction.editReply({ content: 'VM sudah menyala!' });
+                        break;
+                    }
 
-                    // await vmOperate('start');
+                    await vmOperate('start');
 
                     refreshId = setInterval(async () => {
                         status = await vmStatus();
