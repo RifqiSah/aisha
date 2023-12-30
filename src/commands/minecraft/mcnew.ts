@@ -1,53 +1,10 @@
 /* eslint-disable no-case-declarations */
 
-import { ApplicationCommandOptionType, AutocompleteInteraction, CommandInteraction, Message } from 'discord.js';
+import { ApplicationCommandOptionType, AutocompleteInteraction, CommandInteraction } from 'discord.js';
 
 import Command from '../../classes/command';
-import axios from '../../lib/axios';
-import config from '../../lib/config';
+import { vmStatus, vmOperate, mcServerStatus } from '../../helpers/minecraft';
 import { logger } from '../../lib/logger';
-
-/**
- * Virtual Machine
- */
-const vmInfo = async () => {
-    const result = await axios.get(`${config.IDCLOUDHOST_API}/user-resource/vm?uuid=${config.IDCLOUDHOST_UUID}`, { headers: { apikey: `${config.IDCLOUDHOST_APIKEY}` } });
-    return result?.data;
-};
-
-const vmStatus = async () => {
-    const result = await vmInfo();
-    return result?.status === 'running';
-};
-
-const vmOperate = async (status: string) => {
-    const result = await axios.post(`${config.IDCLOUDHOST_API}/user-resource/vm/${status}`, { uuid: `${config.IDCLOUDHOST_UUID}` }, { headers: { apikey: `${config.IDCLOUDHOST_APIKEY}` } });
-    return result?.data;
-};
-
-/**
- * Assigned IP
- */
-const vmIp = async () => {
-    const result = await axios.get(`${config.IDCLOUDHOST_API}/network/ip_addresses?vm_uuid=${config.IDCLOUDHOST_UUID}`, { headers: { apikey: `${config.IDCLOUDHOST_APIKEY}` } });
-    return result?.data;
-};
-
-/**
- * Minecraft Server
- */
-const mcServerStatus = async () => {
-    const ip = await vmIp();
-
-    if (!ip?.length) {
-        throw new Error('Unable to get VM ip !');
-    }
-
-    const resultIp = ip[0].address;
-    const serverResult = await axios.get(`https://api.mcstatus.io/v2/status/java/${resultIp}`, { headers: { 'Accept-Encoding': '*' } });
-
-    return serverResult?.data?.online === true;
-};
 
 export default class McNew extends Command {
     constructor() {
@@ -80,13 +37,14 @@ export default class McNew extends Command {
             let refreshIdMc: any = null;
 
             let status = false;
+            let statusMc = false;
 
             const cmd = interaction.options.get('cmd')?.value;
             switch (cmd) {
                 case 'start':
                     status = await vmStatus();
                     if (status) {
-                        await interaction.editReply({ content: 'VM sudah menyala!' });
+                        await interaction.editReply({ content: 'VM sudah dalam keadaan menyala!' });
                         break;
                     }
 
@@ -100,23 +58,20 @@ export default class McNew extends Command {
                         }
                     }, timeout);
 
-                    // vm on?
-                    if (status) {
-                        refreshIdMc = setInterval(async () => {
-                            status = await mcServerStatus();
-                            if (status) {
-                                await interaction.editReply({ content: '2/2 - Server telah dinyalakan! Selamat bermain 😃' });
-                                clearInterval(refreshIdMc);
-                            }
-                        }, timeout);
-                    }
+                    refreshIdMc = setInterval(async () => {
+                        statusMc = await mcServerStatus();
+                        if (statusMc) {
+                            await interaction.editReply({ content: '2/2 - Server telah dinyalakan! Selamat bermain 😃' });
+                            clearInterval(refreshIdMc);
+                        }
+                    }, timeout);
 
                     break;
 
                 case 'stop':
                     status = await vmStatus();
                     if (!status) {
-                        await interaction.editReply({ content: 'VM sudah mati!' });
+                        await interaction.editReply({ content: 'VM sudah dalam keadaan mati!' });
                         break;
                     }
 
