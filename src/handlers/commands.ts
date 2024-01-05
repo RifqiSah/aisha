@@ -39,7 +39,7 @@ module.exports = (client: any) => {
         }
     };
 
-    getDirs('commands').forEach((x: string) => load(x));
+    getDirs('commands').filter((x) => x !== 'minecraft').forEach((x: string) => load(x));
 
     client.logger.info('  [V] Done!');
 };
