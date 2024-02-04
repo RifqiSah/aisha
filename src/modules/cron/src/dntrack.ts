@@ -90,6 +90,8 @@ const getData = async () => {
                 }, {
                     version: newver,
                 });
+            } {
+                _client.logger.debug(`[DN_TRACK] Dragon Nest ${DN_Version[i].longName} Version is up to date!`);
             }
 
             await delay(5000);
