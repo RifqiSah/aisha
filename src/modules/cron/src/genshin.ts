@@ -118,45 +118,48 @@ const getPreDownload = async () => {
         const buffer = await axios.get('https://sdk-os-static.mihoyo.com/hk4e_global/mdk/launcher/api/resource?channel_id=1&key=gcStgarh&launcher_id=10&sub_channel_id=0');
         const data = buffer?.data;
 
-        const gameFiles = data?.data?.game?.diffs?.[0];
+        const gameFiles = data?.data?.pre_download_game?.diffs?.[0];
+        if (gameFiles) {
+            // game_4.3.0_4.4.0_hdiff_7lGqkpy9saiZYfXS.zip
+            const latestFileName = gameFiles?.name?.split('_');
+            const latestGameVersion = Number(latestFileName[2].replaceAll('.', ''));
 
-        // game_4.3.0_4.4.0_hdiff_7lGqkpy9saiZYfXS.zip
-        const latestFileName = gameFiles?.name?.split('_');
-        const latestGameVersion = Number(latestFileName[2].replaceAll('.', ''));
+            if (latestGameVersion > Number(server.version)) {
+                const engLanguage = getLangObj(gameFiles?.voice_packs, 'en-us');
+                const jpLanguage = getLangObj(gameFiles?.voice_packs, 'ja-jp');
+                const krLanguage = getLangObj(gameFiles?.voice_packs, 'ko-kr');
+                const cnLanguage = getLangObj(gameFiles?.voice_packs, 'zh-cn');
 
-        if (latestGameVersion > Number(server.version)) {
-            const engLanguage = getLangObj(gameFiles?.voice_packs, 'en-us');
-            const jpLanguage = getLangObj(gameFiles?.voice_packs, 'ja-jp');
-            const krLanguage = getLangObj(gameFiles?.voice_packs, 'ko-kr');
-            const cnLanguage = getLangObj(gameFiles?.voice_packs, 'zh-cn');
+                const gameFilesMessage = [
+                    'Dear Travelers,\n',
+                    'The pre-installation function is now available on both PC and mobile platforms. It\'s recommended that Travelers complete any Domains or other challenges they wish to finish first before beginning the pre-installation process.\n',
+                    'Travelers on PC can still play the game while pre-installing game resources. Pre-installation will take up a certain amount of your network\'s bandwidth, so it\'s best to make sure you have a good network connection before beginning pre-installation.\n',
+                    'After pre-installation is complete, Travelers can update the game and experience new version content faster.\n',
+                    '__**Manual Download**__\n',
+                    'Below is the manual download (without using launcher), after download move downloaded files to Genshin Impact Directory (Genshin Impact Game folder), and **DONT EXTRACT !**\n',
+                    `**Base Game | ${await getPatchSize(gameFiles?.path ?? 0)}**`,
+                    `<${gameFiles?.path}>\n`,
+                    `**English Audio | ${await getPatchSize(engLanguage?.path ?? 0)}**`,
+                    `<${engLanguage?.path}>\n`,
+                    `**Japanese Audio | ${await getPatchSize(engLanguage?.path ?? 0)}**`,
+                    `<${jpLanguage?.path}>\n`,
+                    `**Korean Audio | ${await getPatchSize(jpLanguage?.path ?? 0)}**`,
+                    `<${krLanguage?.path}>\n`,
+                    `**Chinese Audio | ${await getPatchSize(cnLanguage?.path ?? 0)}**`,
+                    `<${cnLanguage?.path}>`,
+                ];
 
-            const gameFilesMessage = [
-                'Dear Travelers,\n',
-                'The pre-installation function is now available on both PC and mobile platforms. It\'s recommended that Travelers complete any Domains or other challenges they wish to finish first before beginning the pre-installation process.\n',
-                'Travelers on PC can still play the game while pre-installing game resources. Pre-installation will take up a certain amount of your network\'s bandwidth, so it\'s best to make sure you have a good network connection before beginning pre-installation.\n',
-                'After pre-installation is complete, Travelers can update the game and experience new version content faster.\n',
-                '__**Manual Download**__\n',
-                'Below is the manual download (without using launcher), after download move downloaded files to Genshin Impact Directory (Genshin Impact Game folder), and **DONT EXTRACT !**\n',
-                `**Base Game | ${await getPatchSize(gameFiles?.path ?? 0)}**`,
-                `<${gameFiles?.path}>\n`,
-                `**English Audio | ${await getPatchSize(engLanguage?.path ?? 0)}**`,
-                `<${engLanguage?.path}>\n`,
-                `**Japanese Audio | ${await getPatchSize(engLanguage?.path ?? 0)}**`,
-                `<${jpLanguage?.path}>\n`,
-                `**Korean Audio | ${await getPatchSize(jpLanguage?.path ?? 0)}**`,
-                `<${krLanguage?.path}>\n`,
-                `**Chinese Audio | ${await getPatchSize(cnLanguage?.path ?? 0)}**`,
-                `<${cnLanguage?.path}>`,
-            ];
+                const message = `__**[PATCH] Pre-Download version ${latestFileName[2]}:**__\n\n${gameFilesMessage.join('\n')}`;
+                await sendGeneral(await getWebhookUrls('webhook.genshin.news'), message);
 
-            const message = `__**[PATCH] Pre-Download version ${latestFileName[2]}:**__\n\n${gameFilesMessage.join('\n')}`;
-            await sendGeneral(await getWebhookUrls('webhook.genshin.news'), message);
-
-            await server.update({
-                version: latestGameVersion,
-            });
+                await server.update({
+                    version: latestGameVersion,
+                });
+            } else {
+                _client.logger.debug('[GENSHIN_PATCH] Genshin Impact version is up to date!');
+            }
         } else {
-            _client.logger.debug('[GENSHIN_PATCH] Genshin Impact version is up to date!');
+            _client.logger.debug('[GENSHIN_PATCH] Genshin Impact pre-download not found!');
         }
 
     } catch (err: any) {
