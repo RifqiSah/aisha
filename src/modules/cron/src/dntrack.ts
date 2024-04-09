@@ -45,7 +45,7 @@ const getData = async () => {
         const DB_Version: any[] = [];
 
         // get version
-        const buffer = await axios.get(`${values.aisha_v1_api}/regionservices`);
+        const buffer = await axios.get(`${values.aisha_v3_api}/regionservices`);
         const data = buffer?.data?.data;
 
         for (let i = 0; i < data.length; i++) {
