@@ -63,7 +63,7 @@ const login = async () => {
 const run = async () => {
     await init();
     await database();
-    await modules();
+    // await modules();
     await login();
 };
 
