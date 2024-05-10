@@ -47,12 +47,12 @@ const modules = async () => {
     });
     logger.info('[V] Done!');
 
-    logger.info('[-] Initialize external modules');
-    getDirs('modules').forEach((x) => {
-        logger.info(` [O] ${x} modules`);
-        require(`./modules/${x}/index.js`)(client);
-    });
-    logger.info('[V] Done!');
+    // logger.info('[-] Initialize external modules');
+    // getDirs('modules').forEach((x) => {
+    //     logger.info(` [O] ${x} modules`);
+    //     require(`./modules/${x}/index.js`)(client);
+    // });
+    // logger.info('[V] Done!');
 };
 
 const login = async () => {
@@ -63,7 +63,7 @@ const login = async () => {
 const run = async () => {
     await init();
     await database();
-    // await modules();
+    await modules();
     await login();
 };
 
