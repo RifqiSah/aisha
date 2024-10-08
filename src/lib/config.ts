@@ -19,8 +19,4 @@ export default class Config {
     static MC_SERVER_ID = process.env.MC_SERVER_ID;
 
     static ENDPOINT = process.env.ENDPOINT;
-
-    static IDCLOUDHOST_API = process.env.IDCLOUDHOST_API;
-    static IDCLOUDHOST_UUID = process.env.IDCLOUDHOST_UUID;
-    static IDCLOUDHOST_APIKEY = process.env.IDCLOUDHOST_APIKEY;
 }
