@@ -8,17 +8,17 @@ import config from '../../lib/config';
 import { logger } from '../../lib/logger';
 
 const status = (id: any) => {
-    if (id === 0) return 'OFFLINE';
-    else if (id === 1) return 'ONLINE';
-    else if (id === 2) return 'STARTING';
-    else if (id === 3) return 'STOPPING';
-    else if (id === 4) return 'RESTARTING';
-    else if (id === 5) return 'SAVING';
-    else if (id === 6) return 'LOADING';
-    else if (id === 7) return 'CRASHED';
-    else if (id === 8) return 'PENDING';
-    else if (id === 10) return 'PREPARING';
-    else return 'UNKNOWN';
+    if (id === 0) return 'Offline';
+    else if (id === 1) return 'Online';
+    else if (id === 2) return 'Starting';
+    else if (id === 3) return 'Stopping';
+    else if (id === 4) return 'Restarting';
+    else if (id === 5) return 'Saving';
+    else if (id === 6) return 'Loading';
+    else if (id === 7) return 'Crashed';
+    else if (id === 8) return 'Pending';
+    else if (id === 10) return 'Preparing';
+    else return 'Unknown';
 };
 
 export default class Mc extends Command {
