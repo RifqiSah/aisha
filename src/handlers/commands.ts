@@ -39,8 +39,12 @@ module.exports = (client: any) => {
         }
     };
 
-    // getDirs('commands').filter((x) => x !== 'minecraft').forEach((x: string) => load(x));
-    getDirs('commands').forEach((x: string) => load(x));
+    const excludeDirs = [
+        'dragonnest',
+        // 'minecraft',
+    ];
+
+    getDirs('commands').filter((x) => !excludeDirs.includes(x)).forEach((x: string) => load(x));
 
     client.logger.info('  [V] Done!');
 };
