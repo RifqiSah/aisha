@@ -26,7 +26,6 @@ export default class Mc extends Command {
         super({
             name: 'Control panel untuk Minecraft Server.',
             command: 'mc',
-            roles: ['802718208180092939'],
             usage: '[cmd]',
             onlyInformate: true,
             registerSlashCommand: true,
@@ -60,6 +59,8 @@ export default class Mc extends Command {
 
                     refreshId = setInterval(async () => {
                         server = await server.get();
+                        await interaction.editReply({ content: `Status sekarang: ${status(server.status)}` });
+
                         if (server.hasStatus(server.STATUS.ONLINE)) {
                             await interaction.editReply({ content: 'Server telah dinyalakan! Selamat bermain 😃' });
                             clearInterval(refreshId);
@@ -73,6 +74,8 @@ export default class Mc extends Command {
 
                     refreshId = setInterval(async () => {
                         server = await server.get();
+                        await interaction.editReply({ content: `Status sekarang: ${status(server.status)}` });
+
                         if (server.hasStatus(server.STATUS.OFFLINE)) {
                             await interaction.editReply({ content: 'Server telah dimatikan! Terima kasih telah bermain 😃' });
                             clearInterval(refreshId);
@@ -86,6 +89,8 @@ export default class Mc extends Command {
 
                     refreshId = setInterval(async () => {
                         server = await server.get();
+                        await interaction.editReply({ content: `Status sekarang: ${status(server.status)}` });
+
                         if (server.hasStatus(server.STATUS.ONLINE)) {
                             await interaction.editReply({ content: 'Server telah direstart! Selamat melanjutkan permainan 😃' });
                             clearInterval(refreshId);
