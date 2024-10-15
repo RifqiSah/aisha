@@ -59,10 +59,10 @@ export default class Mc extends Command {
 
                     refreshId = setInterval(async () => {
                         server = await server.get();
-                        await interaction.editReply({ content: `Status sekarang: ${status(server.status)}` });
+                        await interaction.editReply({ content: `Status sekarang: ${status(server.status)}` }).catch((err:any) => logger.warn(err?.message));
 
                         if (server.hasStatus(server.STATUS.ONLINE)) {
-                            await interaction.editReply({ content: 'Server telah dinyalakan! Selamat bermain 😃' });
+                            await interaction.editReply({ content: 'Server telah dinyalakan! Selamat bermain 😃' }).catch((err:any) => logger.warn(err?.message));
                             clearInterval(refreshId);
                         }
                     }, timeout);
@@ -74,10 +74,10 @@ export default class Mc extends Command {
 
                     refreshId = setInterval(async () => {
                         server = await server.get();
-                        await interaction.editReply({ content: `Status sekarang: ${status(server.status)}` });
+                        await interaction.editReply({ content: `Status sekarang: ${status(server.status)}` }).catch((err:any) => logger.warn(err?.message));
 
                         if (server.hasStatus(server.STATUS.OFFLINE)) {
-                            await interaction.editReply({ content: 'Server telah dimatikan! Terima kasih telah bermain 😃' });
+                            await interaction.editReply({ content: 'Server telah dimatikan! Terima kasih telah bermain 😃' }).catch((err:any) => logger.warn(err?.message));
                             clearInterval(refreshId);
                         }
                     }, timeout);
@@ -89,10 +89,10 @@ export default class Mc extends Command {
 
                     refreshId = setInterval(async () => {
                         server = await server.get();
-                        await interaction.editReply({ content: `Status sekarang: ${status(server.status)}` });
+                        await interaction.editReply({ content: `Status sekarang: ${status(server.status)}` }).catch((err:any) => logger.warn(err?.message));
 
                         if (server.hasStatus(server.STATUS.ONLINE)) {
-                            await interaction.editReply({ content: 'Server telah direstart! Selamat melanjutkan permainan 😃' });
+                            await interaction.editReply({ content: 'Server telah direstart! Selamat melanjutkan permainan 😃' }).catch((err:any) => logger.warn(err?.message));
                             clearInterval(refreshId);
                         }
                     }, timeout);
@@ -116,16 +116,16 @@ export default class Mc extends Command {
 
                         '\n__**Credit Left**__',
                         `${account.credits} credits`,
-                    ].join('\n') });
+                    ].join('\n') }).catch((err:any) => logger.warn(err?.message));
 
                     break;
 
                 default:
-                    await interaction.editReply({ content: 'Oh tidak!! Perintah itu tidak ditemukan!' });
+                    await interaction.editReply({ content: 'Oh tidak!! Perintah itu tidak ditemukan!' }).catch((err:any) => logger.warn(err?.message));
                     break;
             }
         } catch (err: any) {
-            await interaction.editReply({ content: `${err?.message}!` });
+            await interaction.editReply({ content: `${err?.message}!` }).catch((err:any) => logger.warn(err?.message));
             logger.warn(err?.message);
         }
     }
