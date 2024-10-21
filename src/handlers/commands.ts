@@ -41,7 +41,7 @@ module.exports = (client: any) => {
 
     const excludeDirs = [
         'dragonnest',
-        // 'minecraft',
+        'minecraft',
     ];
 
     getDirs('commands').filter((x) => !excludeDirs.includes(x)).forEach((x: string) => load(x));
